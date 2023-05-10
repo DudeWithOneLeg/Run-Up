@@ -10,7 +10,6 @@ const routes = require('./routes');
 const app = express();
 
 
-
 const { environment } = require('././config');
 const isProduction = environment === 'production';
 
