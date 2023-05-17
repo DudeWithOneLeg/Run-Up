@@ -4,26 +4,28 @@ const { Op } = require('sequelize');
 const bcrypt = require('bcryptjs');
 const { check } = require('express-validator');
 const { handleValidationErrors } = require('../../utils/validation');
-const { setTokenCookie, restoreUser } = require('../../utils/auth');
+const { setTokenCookie, restoreUser, requireAuth } = require('../../utils/auth');
 const { User } = require('../../db/models')
+// const cookieParser = require('cookie-parser');
+// router.use(cookieParser)
 
 const validateLogin = [
-    check('credential')
+    check('email')
       .exists({ checkFalsy: true })
       .notEmpty()
-      .withMessage('Please provide a valid email or username.'),
+      .withMessage('Email is required'),
     check('password')
       .exists({ checkFalsy: true })
-      .withMessage('Please provide a password.'),
+      .withMessage('Password is required'),
     handleValidationErrors
   ];
 
 // router.use(setTokenCookie)
 
-// router.use(restoreUser)
+ //router.use(restoreUser)
 
 router.get(
-    '/',
+    '/', requireAuth,
     (req, res) => {
       const { user } = req;
       if (user) {
@@ -32,7 +34,7 @@ router.get(
           firstName: user.firstName,
           lastName: user.lastName,
           email: user.email,
-          username: user.username
+          token: req.cookies.token
         };
         return res.json({
           user: safeUser
@@ -44,13 +46,12 @@ router.get(
 router.post(
     '/', validateLogin,
     async (req, res, next) => {
-        const { credential, password } = req.body;
+        const { email, password } = req.body;
 
         const user = await User.unscoped().findOne({
             where: {
                 [Op.or]: {
-                    username: credential,
-                    email: credential
+                    email: email
                 }
             }
         });
@@ -59,7 +60,7 @@ router.post(
             const err = new Error('Login failed');
             err.status = 401;
             err.title = 'Login failed';
-            err.errors = { credential: 'The provided credentials were invalid.' };
+            err.errors = { message: 'Invalid credentials' };
             return next(err);
         }
 
