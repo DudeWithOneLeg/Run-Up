@@ -12,6 +12,8 @@ const validateGroup = [
     check('about')
         .isLength({ min: 60 })
         .withMessage('About must be 50 characters or more'),
+    check('about')
+        .isIn(['Online', 'In person']),
     check('private')
         .isBoolean()
         .withMessage('Private must be a boolean'),
@@ -59,7 +61,7 @@ router.get('/', async (req, res) => {
 })
 
 router.post('/', [validateGroup, requireAuth], async (req, res) => {
-    
+
     const newGroup = await Group.create(req.body)
     res.json(newGroup)
 })
@@ -113,6 +115,8 @@ router.get('/:groupId', async (req, res) => {
     group.Organizer = organizer
     res.json(group)
 })
+
+
 
 
 module.exports = router
