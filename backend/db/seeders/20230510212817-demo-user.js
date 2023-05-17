@@ -4,6 +4,13 @@ const { query } = require('express');
 const bcrypt = require("bcryptjs");
 
 /** @type {import('sequelize-cli').Migration} */
+
+let options = {};
+    if (process.env.NODE_ENV === 'production') {
+      options.schema = process.env.SCHEMA; // define your schema in options object
+    }
+    options.tableName = 'Users'
+
 module.exports = {
   async up(queryInterface, Sequelize) {
     /**
@@ -38,11 +45,7 @@ module.exports = {
         hashedPassword: bcrypt.hashSync('password')
       }
     ]
-    let options = {};
-    if (process.env.NODE_ENV === 'production') {
-      options.schema = process.env.SCHEMA; // define your schema in options object
-    }
-    options.tableName = 'Users'
+
     queryInterface.bulkInsert(options, validUsers)
   },
 

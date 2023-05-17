@@ -1,6 +1,11 @@
 'use strict';
 
 /** @type {import('sequelize-cli').Migration} */
+let options = {};
+    if (process.env.NODE_ENV === 'production') {
+      options.schema = process.env.SCHEMA; // define your schema in options object
+    }
+    options.tableName = 'Events'
 module.exports = {
   async up (queryInterface, Sequelize) {
     /**
@@ -47,11 +52,7 @@ module.exports = {
       endDate: '2030-11-20'
     },
    ]
-   let options = {};
-    if (process.env.NODE_ENV === 'production') {
-      options.schema = process.env.SCHEMA; // define your schema in options object
-    }
-    options.tableName = 'Events'
+
    queryInterface.bulkInsert(options, validEvents)
   },
 

@@ -3,6 +3,11 @@
 const { query } = require('express-validator');
 
 /** @type {import('sequelize-cli').Migration} */
+let options = {};
+    if (process.env.NODE_ENV === 'production') {
+      options.schema = process.env.SCHEMA; // define your schema in options object
+    }
+    options.tableName = 'EventImages'
 module.exports = {
   async up (queryInterface, Sequelize) {
     /**
@@ -31,11 +36,7 @@ module.exports = {
       preview: true
     },
    ]
-   let options = {};
-    if (process.env.NODE_ENV === 'production') {
-      options.schema = process.env.SCHEMA; // define your schema in options object
-    }
-    options.tableName = 'EventImages'
+
    queryInterface.bulkInsert(options, validEventImages)
   },
 

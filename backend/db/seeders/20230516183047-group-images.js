@@ -1,6 +1,11 @@
 'use strict';
 
 /** @type {import('sequelize-cli').Migration} */
+let options = {};
+    if (process.env.NODE_ENV === 'production') {
+      options.schema = process.env.SCHEMA; // define your schema in options object
+    }
+    options.tableName = 'GroupImages'
 module.exports = {
   async up (queryInterface, Sequelize) {
     /**
@@ -29,11 +34,7 @@ module.exports = {
       preview: true
     },
    ]
-   let options = {};
-    if (process.env.NODE_ENV === 'production') {
-      options.schema = process.env.SCHEMA; // define your schema in options object
-    }
-    options.tableName = 'GroupImages'
+
    queryInterface.bulkInsert(options , validGroupImages)
   },
 
