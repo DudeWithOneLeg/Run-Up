@@ -31,7 +31,12 @@ module.exports = {
       preview: true
     },
    ]
-   queryInterface.bulkInsert('EventImages', validEventImages)
+   let options = {};
+    if (process.env.NODE_ENV === 'production') {
+      options.schema = process.env.SCHEMA; // define your schema in options object
+    }
+    options.tableName = 'EventImages'
+   queryInterface.bulkInsert(options, validEventImages)
   },
 
   async down (queryInterface, Sequelize) {

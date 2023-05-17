@@ -29,7 +29,12 @@ module.exports = {
       preview: true
     },
    ]
-   queryInterface.bulkInsert('GroupImages', validGroupImages)
+   let options = {};
+    if (process.env.NODE_ENV === 'production') {
+      options.schema = process.env.SCHEMA; // define your schema in options object
+    }
+    options.tableName = 'GroupImages'
+   queryInterface.bulkInsert(options , validGroupImages)
   },
 
   async down (queryInterface, Sequelize) {
