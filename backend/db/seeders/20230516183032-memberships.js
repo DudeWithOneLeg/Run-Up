@@ -37,7 +37,7 @@ module.exports = {
 
 
 
-   queryInterface.bulkInsert(options, validMemberships)
+   await queryInterface.bulkInsert(options, validMemberships)
 
   },
 
@@ -51,7 +51,7 @@ module.exports = {
     let options = {}
     options.tableName = 'Groups';
     const Op = Sequelize.Op;
-    return queryInterface.bulkDelete(options, {
+    await queryInterface.bulkDelete(options, {
       id: { [Op.in]: [1, 2, 3] }
     }, {})
   }

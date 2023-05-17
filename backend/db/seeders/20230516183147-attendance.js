@@ -35,7 +35,7 @@ module.exports = {
     }
    ]
 
-   queryInterface.bulkInsert(options, validAttendances)
+   await queryInterface.bulkInsert(options, validAttendances)
   },
 
   async down (queryInterface, Sequelize) {
@@ -48,7 +48,7 @@ module.exports = {
     const options = {}
     options.tableName = 'Attendances'
     const Op = Sequelize.Op
-    queryInterface.bulkDelete(options, {
+    await queryInterface.bulkDelete(options, {
       id: {
         [Op.in]: [1, 2, 3]
       }

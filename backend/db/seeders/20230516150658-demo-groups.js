@@ -47,8 +47,8 @@ module.exports = {
       state: 'Tx'
     },
    ]
-   
-   queryInterface.bulkInsert(options, validGroup)
+
+   await queryInterface.bulkInsert(options, validGroup)
   },
 
   async down (queryInterface, Sequelize) {
@@ -61,7 +61,7 @@ module.exports = {
     let options = {}
     options.tableName = 'Groups';
     const Op = Sequelize.Op;
-    return queryInterface.bulkDelete(options, {
+    await queryInterface.bulkDelete(options, {
       organizerId: { [Op.in]: [1, 2, 3] }
     }, {})
   }
