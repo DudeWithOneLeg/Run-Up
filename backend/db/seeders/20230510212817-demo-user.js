@@ -5,7 +5,7 @@ const bcrypt = require("bcryptjs");
 
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
-  async up (queryInterface, Sequelize) {
+  async up(queryInterface, Sequelize) {
     /**
      * Add seed commands here.
      *
@@ -38,11 +38,15 @@ module.exports = {
         hashedPassword: bcrypt.hashSync('password')
       }
     ]
-
-   queryInterface.bulkInsert('Users', validUsers)
+    let options = {};
+    if (process.env.NODE_ENV === 'production') {
+      options.schema = process.env.SCHEMA; // define your schema in options object
+    }
+    options.tableName = 'Users'
+    queryInterface.bulkInsert(options, validUsers)
   },
 
-  async down (queryInterface, Sequelize) {
+  async down(queryInterface, Sequelize) {
     /**
      * Add commands to revert seed here.
      *

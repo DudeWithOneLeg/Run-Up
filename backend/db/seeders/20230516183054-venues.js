@@ -22,7 +22,12 @@ module.exports = {
       lng: 30.2
     },
    ]
-   queryInterface.bulkInsert('Venues', validVenues)
+   let options = {};
+    if (process.env.NODE_ENV === 'production') {
+      options.schema = process.env.SCHEMA; // define your schema in options object
+    }
+    options.tableName = 'Venues'
+   queryInterface.bulkInsert(options, validVenues)
   },
 
   async down (queryInterface, Sequelize) {

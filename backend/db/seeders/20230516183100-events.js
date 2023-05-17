@@ -47,7 +47,12 @@ module.exports = {
       endDate: '2030-11-20'
     },
    ]
-   queryInterface.bulkInsert('Events', validEvents)
+   let options = {};
+    if (process.env.NODE_ENV === 'production') {
+      options.schema = process.env.SCHEMA; // define your schema in options object
+    }
+    options.tableName = 'Events'
+   queryInterface.bulkInsert(options, validEvents)
   },
 
   async down (queryInterface, Sequelize) {

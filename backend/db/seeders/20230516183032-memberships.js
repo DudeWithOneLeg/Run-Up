@@ -30,7 +30,13 @@ module.exports = {
     }
    ]
 
-   queryInterface.bulkInsert('Memberships', validMemberships)
+   let options = {};
+    if (process.env.NODE_ENV === 'production') {
+      options.schema = process.env.SCHEMA; // define your schema in options object
+    }
+    options.tableName = 'Memberships'
+
+   queryInterface.bulkInsert(options, validMemberships)
 
   },
 
