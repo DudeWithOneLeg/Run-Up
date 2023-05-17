@@ -23,7 +23,7 @@ module.exports = {
       organizerId: 1,
       name: 'somename',
       about: 'some text',
-      type: 'one thing',
+      type: 'Online',
       private: false,
       city: 'H-town',
       state: 'Tx'
@@ -32,7 +32,7 @@ module.exports = {
       organizerId: 2,
       name: 'somename',
       about: 'some text',
-      type: 'one thing',
+      type: 'Online',
       private: false,
       city: 'H-town',
       state: 'Tx'
@@ -41,7 +41,7 @@ module.exports = {
       organizerId: 3,
       name: 'somename',
       about: 'some text',
-      type: 'one thing',
+      type: 'Online',
       private: false,
       city: 'H-town',
       state: 'Tx'
