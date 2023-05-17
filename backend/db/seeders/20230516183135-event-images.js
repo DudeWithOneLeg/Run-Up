@@ -37,7 +37,7 @@ module.exports = {
     },
    ]
 
-   queryInterface.bulkInsert(options, validEventImages)
+   await queryInterface.bulkInsert(options, validEventImages)
   },
 
   async down (queryInterface, Sequelize) {
@@ -50,7 +50,7 @@ module.exports = {
     const options = {}
     options.tableName = 'EventImages'
     const Op = Sequelize.Op
-    queryInterface.bulkDelete(options, {
+    await queryInterface.bulkDelete(options, {
       id: {
         [Op.in]: [1, 2, 3]
       }
