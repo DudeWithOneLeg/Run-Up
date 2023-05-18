@@ -21,17 +21,17 @@ module.exports = {
     {
       userId: 1,
       groupId: 1,
-      status: 'one thing'
+      status: 'co-host'
     },
     {
       userId: 2,
       groupId: 2,
-      status: 'one thing'
+      status: 'pending'
     },
     {
       userId: 3,
       groupId: 3,
-      status: 'one thing'
+      status: 'member'
     }
    ]
 

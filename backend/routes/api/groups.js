@@ -26,13 +26,27 @@ const validateGroup = [
     handleValidationErrors
 ]
 
+const validateVenue = [
+    check('address')
+        .exists({ checkFalsey: true }),
+    check('city')
+        .exists({ checkFalsey: true }),
+    check('state')
+        .exists({ checkFalsey: true }),
+    check('lat')
+        .isDecimal(),
+    check('lng')
+        .isDecimal(),
+    handleValidationErrors
+]
+
 router.use(restoreUser)
 
 const groupExists = async (req, res, next) => {
     const group = await Group.findByPk(req.params.groupId, {
         raw: true
     })
-    if (!group.id) {
+    if (!group) {
         res.status(404)
         req.err = {
             message: "Group couldn't be found"
@@ -74,7 +88,7 @@ router.get('/', async (req, res) => {
         })
 
         element.numMembers = numMembs
-        if (previewImage[0]) {
+        if (previewImage[0].url) {
             element.previewImage = previewImage[0].url
         }
 
@@ -88,7 +102,7 @@ router.get('/', async (req, res) => {
 router.post('/', [validateGroup, requireAuth], async (req, res) => {
     req.body.organizerId = req.user.id
     const newGroup = await Group.create(req.body)
-    res.json(newGroup)
+    return res.json(newGroup)
 })
 
 router.get('/current', requireAuth, async (req, res) => {
@@ -141,20 +155,8 @@ router.get('/:groupId', async (req, res) => {
     return res.json(group)
 })
 
-router.post('/:groupId/images', requireAuth, async (req, res) => {
-    const group = await Group.findByPk(req.params.groupId)
-    if (!group) {
-        res.status(404)
-        return res.json({
-            "message": "Group couldn't be found"
-          })
-    }
-    if (group.organizerId !== req.user.id) {
-        res.status(403)
-        return res.json({
-            message: "Forbidden"
-        })
-    }
+router.post('/:groupId/images', [groupExists, requireAuth], async (req, res) => {
+
     req.body.groupId = req.params.groupId
     const img = await GroupImage.create(req.body)
     return res.json(img)
@@ -184,6 +186,54 @@ router.delete('/:groupId', [groupExists, requireAuth], async (req, res) => {
         message: "Successfully deleted"
     })
 })
+
+router.get('/:groupId/venues', [groupExists, requireAuth], async (req, res) => {
+    if (req.err) {
+        res.json(req.err)
+    }
+    const membership = await Membership.findOne({
+        where: {
+            groupId: req.group.id,
+            userId: req.user.id
+        }
+    })
+    if (!membership || membership.status !== 'co-host') {
+        res.status(403)
+        return res.json({
+            message: "Forbidden"
+        })
+    }
+    const venues = await Venue.findAll({
+        where: {
+            groupId: req.group.id
+        }
+    })
+    return res.json(venues)
+
+})
+
+router.post('/:groupId/venues', [validateVenue, groupExists, requireAuth], async (req, res) => {
+    if (req.err) {
+        return res.json(req.err)
+    }
+    const membership = await Membership.findOne({
+        where: {
+            groupId: req.group.id,
+            userId: req.user.id
+        }
+    })
+    if (!membership || membership.status !== 'co-host') {
+        res.status(403)
+        return res.json({
+            message: "Forbidden"
+        })
+    }
+    req.body.groupId = req.group.id
+    const venue = await Venue.create(req.body)
+    res.json(venue)
+})
+
+
 
 
 module.exports = router
