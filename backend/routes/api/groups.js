@@ -10,8 +10,10 @@ const validateGroup = [
         .isLength({ max: 60 })
         .withMessage('Name must be 60 characters or less'),
     check('about')
-        .isLength({ min: 60 })
+        .isLength({ min: 50 })
         .withMessage('About must be 50 characters or more'),
+    check('type')
+        .isIn(['Online', 'In person']),
     check('private')
         .isBoolean()
         .withMessage('Private must be a boolean'),
@@ -24,7 +26,43 @@ const validateGroup = [
     handleValidationErrors
 ]
 
+const validateVenue = [
+    check('address')
+        .exists({ checkFalsey: true }),
+    check('city')
+        .exists({ checkFalsey: true }),
+    check('state')
+        .exists({ checkFalsey: true }),
+    check('lat')
+        .isDecimal(),
+    check('lng')
+        .isDecimal(),
+    handleValidationErrors
+]
+
 router.use(restoreUser)
+
+const groupExists = async (req, res, next) => {
+    const group = await Group.findByPk(req.params.groupId, {
+        raw: true
+    })
+    if (!group) {
+        res.status(404)
+        req.err = {
+            message: "Group couldn't be found"
+        }
+        return next()
+    }
+    else if (req.user.id !== group.organizerId) {
+        res.status(403)
+        req.err = {
+            message: "Forbidden"
+        }
+        return next()
+    }
+    req.group = group
+    next()
+}
 
 router.get('/', async (req, res) => {
 
@@ -50,7 +88,10 @@ router.get('/', async (req, res) => {
         })
 
         element.numMembers = numMembs
-        element.previewImage = previewImage[0].url
+        if (previewImage[0].url) {
+            element.previewImage = previewImage[0].url
+        }
+
     }
 
     res.json({
@@ -59,9 +100,9 @@ router.get('/', async (req, res) => {
 })
 
 router.post('/', [validateGroup, requireAuth], async (req, res) => {
-    
+    req.body.organizerId = req.user.id
     const newGroup = await Group.create(req.body)
-    res.json(newGroup)
+    return res.json(newGroup)
 })
 
 router.get('/current', requireAuth, async (req, res) => {
@@ -111,8 +152,88 @@ router.get('/:groupId', async (req, res) => {
     })
 
     group.Organizer = organizer
-    res.json(group)
+    return res.json(group)
 })
+
+router.post('/:groupId/images', [groupExists, requireAuth], async (req, res) => {
+
+    req.body.groupId = req.params.groupId
+    const img = await GroupImage.create(req.body)
+    return res.json(img)
+})
+
+router.put('/:groupId', [validateGroup, groupExists, requireAuth], async (req, res, next) => {
+ if (req.err) {
+    return res.json(req.err)
+ }
+ const group = await Group.findByPk(req.params.groupId)
+ for (field of Object.keys(req.body)) {
+    group[field] = req.body[field]
+ }
+ await group.save()
+
+ return res.json(group)
+
+})
+
+router.delete('/:groupId', [groupExists, requireAuth], async (req, res) => {
+    if (req.err) {
+        res.json(req.err)
+    }
+    const group = await Group.findByPk(req.params.groupId)
+    await group.destroy()
+    res.json({
+        message: "Successfully deleted"
+    })
+})
+
+router.get('/:groupId/venues', [groupExists, requireAuth], async (req, res) => {
+    if (req.err) {
+        res.json(req.err)
+    }
+    const membership = await Membership.findOne({
+        where: {
+            groupId: req.group.id,
+            userId: req.user.id
+        }
+    })
+    if (!membership || membership.status !== 'co-host') {
+        res.status(403)
+        return res.json({
+            message: "Forbidden"
+        })
+    }
+    const venues = await Venue.findAll({
+        where: {
+            groupId: req.group.id
+        }
+    })
+    return res.json(venues)
+
+})
+
+router.post('/:groupId/venues', [validateVenue, groupExists, requireAuth], async (req, res) => {
+    if (req.err) {
+        return res.json(req.err)
+    }
+    const membership = await Membership.findOne({
+        where: {
+            groupId: req.group.id,
+            userId: req.user.id
+        }
+    })
+    if (!membership || membership.status !== 'co-host') {
+        res.status(403)
+        return res.json({
+            message: "Forbidden"
+        })
+    }
+    req.body.groupId = req.group.id
+    const venue = await Venue.create(req.body)
+    res.json(venue)
+})
+
+
 
 
 module.exports = router
