@@ -88,8 +88,10 @@ router.get('/', async (req, res) => {
         })
 
         element.numMembers = numMembs
-        if (previewImage[0].url) {
-            element.previewImage = previewImage[0].url
+        if (previewImage[0]) {
+            if (previewImage[0].url) {
+                element.previewImage = previewImage[0].url
+            }
         }
 
     }
