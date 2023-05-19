@@ -28,13 +28,13 @@ if (process.env.NODE_ENV === 'production') {
         type: Sequelize.TEXT
       },
       type: {
-        type: Sequelize.ENUM('one thing', 'other thing')
+        type: Sequelize.ENUM('Online', 'In person')
       },
       capacity: {
         type: Sequelize.INTEGER
       },
       price: {
-        type: Sequelize.INTEGER
+        type: Sequelize.DECIMAL
       },
       startDate: {
         type: Sequelize.DATE

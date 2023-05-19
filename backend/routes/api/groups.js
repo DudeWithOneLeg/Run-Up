@@ -223,7 +223,15 @@ router.get('/:groupId', groupExists, async (req, res) => {
 router.post('/:groupId/images', [groupExists, groupAuthorized, requireAuth], async (req, res) => {
 
     req.body.groupId = req.params.groupId
-    const img = await GroupImage.create(req.body)
+    let img = await GroupImage.create(req.body)
+
+    img = img.toJSON()
+
+    delete img.groupId
+    delete img.createdAt
+    delete img.updatedAt
+
+    console.log(img)
     return res.json(img)
 })
 
@@ -271,7 +279,8 @@ router.get('/:groupId/venues', [groupExists, groupAuthorized, requireAuth], asyn
     const venues = await Venue.findAll({
         where: {
             groupId: req.group.id
-        }
+        },
+        attributes: ['id', 'groupId', 'address', 'city', 'state', 'lat', 'lng']
     })
     return res.json(venues)
 
@@ -287,14 +296,23 @@ router.post('/:groupId/venues', [validateVenue, groupExists, groupAuthorized, re
             userId: req.user.id
         }
     })
+
     if (!membership || membership.status !== 'co-host') {
         res.status(403)
         return res.json({
             message: "Forbidden"
         })
     }
+
     req.body.groupId = req.group.id
-    const venue = await Venue.create(req.body)
+
+    let venue = await Venue.create(req.body)
+
+    venue = venue.toJSON()
+
+    delete venue.createdAt
+    delete venue.updatedAt
+
     res.json(venue)
 })
 
@@ -306,7 +324,14 @@ router.get('/:groupId/events', groupExists, async (req, res) => {
         where: {
             groupId: req.params.groupId
         },
-        include: [{model: Group}, {model: Venue}]
+        include: [{
+            model: Group,
+            attributes: ['id', 'name', 'city', 'state']
+        }, {
+            model: Venue,
+            attributes: ['id', 'city', 'state']
+        }],
+        attributes: ['id', 'groupId', 'name', 'type', 'startDate', 'endDate']
     })
     res.json(events)
 })
@@ -315,9 +340,58 @@ router.post('/:groupId/events', [ venueExists, eventDateBool, validateEvent, gro
     if (req.err) {
         res.json(req.err)
     }
+
     req.body.groupId = req.params.groupId
-    const event = await Event.create(req.body)
+
+    let event = await Event.create(req.body)
+
+    event = event.toJSON()
+
+    delete event.createdAt
+    delete event.updatedAt
+
     res.json(event)
+})
+
+router.get('/:groupId/members', [groupExists, groupAuthorized], async(req, res) => {
+    if (req.err) {
+        return res.json(req.err)
+    }
+    const members = await Group.findOne({
+        where: {
+            id: req.params.groupId
+        },
+        attributes: [],
+        include: [{
+            model: User,
+            attributes: ['id', 'firstName', 'lastName'],
+            include: {
+                model: Membership,
+                attributes: ['status'],
+                nested: true
+            }
+        }]
+      })
+
+    return res.json({
+        Members: members
+    })
+})
+
+router.delete('/:groupId/membership', [requireAuth, groupExists], async(req, res) => {
+
+    if (req.err) {
+        return res.json(req.err)
+    }
+
+    let member = await Membership.findOne({
+        where: {
+            id: req.body.memberId,
+            groupId: req.params.groupId
+        }
+    })
+
+    return res.json(member)
 })
 
 
