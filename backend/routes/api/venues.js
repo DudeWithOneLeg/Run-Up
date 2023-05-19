@@ -87,7 +87,7 @@ router.put('/:venueId',[validateVenue, venueExists, requireAuth], async (req, re
         })
     }
     req.body.groupId = req['Group.id']
-    const venue = await Venue.create(req.body)
+    const venue = await Venue.save(req.body)
     res.json(venue)
 });
 
