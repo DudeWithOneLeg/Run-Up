@@ -175,6 +175,10 @@ const groupExists = async (req, res, next) => {
 }
 
 const groupAuthorized = (req, res, next) => {
+    console.log(req.group)
+    if (!req.group) {
+        return next()
+    }
     if (req.user.id !== req.group.organizerId) {
         res.status(403)
         req.err = {
