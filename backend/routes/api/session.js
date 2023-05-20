@@ -34,7 +34,7 @@ router.get(
           firstName: user.firstName,
           lastName: user.lastName,
           email: user.email,
-          token: req.cookies.token
+          username: user.username
         };
         return res.json({
           user: safeUser
