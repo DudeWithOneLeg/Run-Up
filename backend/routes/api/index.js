@@ -9,6 +9,7 @@ const venueRouter = require('./venues.js');
 const eventRouter = require('./events.js');
 const membershipRouter = require('./memberships.js');
 const groupImageRouter = require('./group-images.js');
+const eventImageRouter = require('./event-images.js')
 
 router.use(restoreUser);
 
@@ -25,6 +26,8 @@ router.use('/events', eventRouter);
 router.use('/memberships', membershipRouter);
 
 router.use('/group-images', groupImageRouter);
+
+router.use('/event-images', eventImageRouter)
 
 // test-user-auth
 // router.post('/test', (req, res) => {

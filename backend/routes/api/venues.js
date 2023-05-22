@@ -46,17 +46,41 @@ const groupExists = async (req, res, next) => {
     next()
 }
 
-const venueExists = async (req, res, next) => {
-    const venue = await Venue.findByPk(req.params.venueId, {
-        include: [{model: Group,
-            include: [{model: Membership,
-            where: {
-                id: req.user.id
-            }}]
-        }],
-        raw: true
+const isGroupMember = async(req, res, next) => {
+    const member = await Membership.findOne({
+        groupId: req.params.groupId,
+        userId: req.user.id,
+        status: 'co-host'
     })
+    if (member) {
+        req.isMember = 'true'
+    }
+    return next()
+}
 
+const groupAuthorized = async(req, res, next) => {
+    const group = await Group.findByPk(req.params.groupId)
+    if (!group) {
+        return next()
+    }
+    if (req.user.id !== group.organizerId) {
+        res.status(403)
+        req.err = {
+            message: "Forbidden"
+        }
+        return next()
+    }
+    req.authorized = 'true'
+    return next()
+}
+
+const venueExists = async (req, res, next) => {
+    const venue = await Venue.findOne({
+        where: {
+            id: req.params.venueId
+        },
+        attributes: ['id', 'groupId', 'address', 'city', 'state', 'lat', 'lng']
+    })
 
     if (!venue) {
         res.status(404)
@@ -65,30 +89,36 @@ const venueExists = async (req, res, next) => {
         }
         return next()
     }
-    else if (req.user.id !== venue['Group.Memberships.id']) {
-        res.status(403)
-        req.err = {
-            message: "Forbidden"
-        }
-        return next()
-    }
+
+    req.params.groupId = venue.groupId
     req.venue = venue
+
     next()
 }
 
-router.put('/:venueId',[validateVenue, venueExists, requireAuth], async (req, res) => {
+router.put('/:venueId',[validateVenue, venueExists, isGroupMember, groupAuthorized, requireAuth], async (req, res) => {
     if (req.err) {
         return res.json(req.err)
     }
-    if (req.venue['Group.Memberships.status'] !== 'co-host') {
+
+    if (!req.isMember && !req.authorized) {
         res.status(403)
         return res.json({
             message: "Forbidden"
         })
     }
-    req.body.groupId = req['Group.id']
-    const venue = await Venue.save(req.body)
-    res.json(venue)
+
+    let venue1 = req.venue
+
+    await venue1.set(req.body)
+
+    let venue = await req.venue.save()
+
+    venue = venue.toJSON()
+
+    delete venue.updatedAt
+
+    return res.json(venue)
 });
 
 module.exports = router;
