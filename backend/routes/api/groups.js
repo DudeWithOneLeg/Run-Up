@@ -202,7 +202,7 @@ router.get('/current', requireAuth, async (req, res) => {
                     id: {
                         [Op.in]: sequelize.literal(`
                     (SELECT groupId
-                    FROM memberships
+                    FROM Memberships
                     WHERE userId = ${req.user.id}
                       AND status = 'member')
                   `),
