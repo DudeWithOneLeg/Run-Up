@@ -196,22 +196,21 @@ router.post('/', [validateGroup, requireAuth], async (req, res) => {
 router.get('/current', requireAuth, async (req, res) => {
     const myGroup = await Group.findAll({
         where: {
-            [Op.or]: [
-                { organizerId: req.user.id },
-                {
-                    id: {
-                        [Op.in]: sequelize.literal(`
-                    (SELECT groupId
-                    FROM Memberships
-                    WHERE userId = ${req.user.id}
-                      AND status = 'member')
-                  `),
-                    },
-                },
-            ],
+            organizerId: req.user.id
         },
         raw: true
     })
+
+    let groups = await Membership.findOne({
+        where: {
+            userId: req.user.id,
+            status: 'member'
+        },
+        include: Group
+    })
+    groups = groups.toJSON()
+    groups = groups.Group
+    console.log(myGroup.concat(groups))
 
 
     for (let group of myGroup) {
@@ -228,11 +227,12 @@ router.get('/current', requireAuth, async (req, res) => {
                 preview: true
             }
         })
-        if (previewImg) {
+        if (!previewImg) {
+            group.previewImage = null
+        }else {
             group.previewImage = previewImg.url
         }
 
-        console.log(group)
     }
 
     res.json({
