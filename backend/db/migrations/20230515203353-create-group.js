@@ -27,7 +27,7 @@ if (process.env.NODE_ENV === 'production') {
       },
       type: {
         allowNull: false,
-        type: Sequelize.ENUM('Online', 'In person')
+        type: Sequelize.STRING
       },
       private: {
         allowNull: false,

@@ -27,7 +27,7 @@ if (process.env.NODE_ENV === 'production') {
         type: Sequelize.TEXT
       },
       type: {
-        type: Sequelize.ENUM('Online', 'In person')
+        type: Sequelize.STRING
       },
       capacity: {
         type: Sequelize.INTEGER
