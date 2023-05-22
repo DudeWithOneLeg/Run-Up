@@ -81,12 +81,36 @@ const groupImageExist = async(req, res, next) => {
     return next()
 }
 
-router.delete('/:imageId', [requireAuth, groupImageExist, isMember, groupAuthorized], async(req, res) => {
+router.delete('/:imageId', [requireAuth], async(req, res) => {
     if (req.err) {
         return res.json(req.err)
     }
 
     const image = await GroupImage.findByPk(req.params.imageId)
+
+    if (!image) {
+        res.status(404)
+        return res.json({
+          message: "Group Image couldn't be found"
+        })
+    }
+
+    const member = await Membership.findOne({
+        where: {
+            groupId: image.groupId,
+            userId: req.user.id,
+            status: 'co-host'
+        }
+    })
+
+    const group = await Group.findByPk(image.groupId)
+
+    if (!member && req.user.id !== group.organizerId) {
+        res.status(403)
+        return res.json({
+            message: "Forbidden"
+        })
+    }
 
     await image.destroy()
 
