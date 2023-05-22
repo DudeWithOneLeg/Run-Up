@@ -14,7 +14,6 @@ if (process.env.NODE_ENV === 'production') {
         type: Sequelize.INTEGER
       },
       venueId: {
-        allowNull: false,
         type: Sequelize.INTEGER
       },
       groupId: {
