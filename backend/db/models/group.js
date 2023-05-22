@@ -44,7 +44,7 @@ module.exports = (sequelize, DataTypes) => {
         min: [50]
       }
     },
-    type: DataTypes.ENUM('Online', 'In person'),
+    type: DataTypes.STRING,
     private: {
       type: DataTypes.BOOLEAN
     },
