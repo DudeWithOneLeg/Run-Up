@@ -575,6 +575,20 @@ router.post('/:eventId/attendance', [eventExists, requireAuth, groupExists, isGr
         }
     })
 
+    if (!attendance) {
+        req.body.groupId = req.params.groupId
+    req.body.eventId = req.params.eventId
+
+    let attenddance = await Attendance.create(req.body)
+
+    attenddance = attenddance.toJSON()
+
+    delete attenddance.createdAt
+    delete attenddance.updatedAt
+
+    return res.json(attenddance)
+    }
+
     if (attendance.status === 'pending') {
         res.status(400)
         return res.json({
@@ -590,17 +604,7 @@ router.post('/:eventId/attendance', [eventExists, requireAuth, groupExists, isGr
     }
     console.log(req.body)
 
-    req.body.groupId = req.params.groupId
-    req.body.eventId = req.params.eventId
 
-    let attenddance = await Attendance.create(req.body)
-
-    attenddance = attenddance.toJSON()
-
-    delete attenddance.createdAt
-    delete attenddance.updatedAt
-
-    return res.json(attenddance)
 })
 
 router.put('/:eventId/attendance', [requireAuth, eventExists, groupExists, groupAuthorized], async (req, res) => {
