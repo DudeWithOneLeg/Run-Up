@@ -564,14 +564,30 @@ router.get('/:eventId/attendees', [eventExists], async (req, res) => {
     })
 })
 
-router.post('/:eventId/attendance', [eventExists, requireAuth, groupExists, isGroupMember], async (req, res) => {
+router.post('/:eventId/attendance', [eventExists, requireAuth], async (req, res) => {
     if (req.err) {
         return res.json(req.err)
     }
 
+    const member = await Membership.findOne({
+        where: {
+            userId: req.body.userId,
+            groupId: req.event.groupId,
+            status: 'member'
+        }
+    })
+
+    if (!member) {
+        res.status(403)
+        return res.json({
+            message: "Forbidden"
+        })
+    }
+
     let attendance = await Attendance.findOne({
         where: {
-            userId: req.body.userId
+            userId: req.body.userId,
+            eventId: req.params.eventId
         }
     })
 
@@ -602,7 +618,6 @@ router.post('/:eventId/attendance', [eventExists, requireAuth, groupExists, isGr
             message: "User is already an attendee of the event"
         })
     }
-    console.log(req.body)
 
 
 })
