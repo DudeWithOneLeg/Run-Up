@@ -208,9 +208,11 @@ router.get('/current', requireAuth, async (req, res) => {
         },
         include: Group
     })
+
     groups = groups.toJSON()
     groups = groups.Group
-    console.log(myGroup.concat(groups))
+
+    myGroup.concat(groups)
 
 
     for (let group of myGroup) {
