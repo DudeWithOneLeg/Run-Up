@@ -701,7 +701,7 @@ router.delete('/:eventId/attendance', [requireAuth, eventExists], async(req, res
     if (!member.Group) {
         res.status(403)
         return res.json({
-            message: "Group couldn't be found"
+            message: "For some reason we couldnt find a group associated with the provided user's membership"
         })
     }
 
