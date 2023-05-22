@@ -1,6 +1,6 @@
 const express = require('express')
 const router = express.Router()
-const { User, Group, GroupImage, Membership, Venue, Event, Attendance, EventImage } = require('../../db/models')
+const { User, Group, GroupImage, Membership, Venue, Event, Attendance, EventImage, sequelize } = require('../../db/models')
 const { restoreUser, requireAuth } = require('../../utils/auth');
 const { handleValidationErrors } = require('../../utils/validation');
 const { check } = require('express-validator');
@@ -222,14 +222,16 @@ router.get('/current', requireAuth, async (req, res) => {
         })
 
         group.numMembers = numMems
-        const previewImg = await GroupImage.findAll({
+        const previewImg = await GroupImage.findOne({
             where: {
                 groupId: group.id,
                 preview: true
             }
         })
+        if (previewImg) {
+            group.previewImage = previewImg.url
+        }
 
-        group.previewImage = previewImg[0].url
         console.log(group)
     }
 
