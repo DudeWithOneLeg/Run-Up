@@ -20,7 +20,7 @@ if (process.env.NODE_ENV === 'production') {
         type: Sequelize.INTEGER
       },
       status: {
-        type: Sequelize.ENUM('member', 'pending', 'co-host')
+        type: Sequelize.STRING
       },
       createdAt: {
         allowNull: false,

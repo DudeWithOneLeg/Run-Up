@@ -22,7 +22,7 @@ if (process.env.NODE_ENV === 'production') {
         type: Sequelize.INTEGER
       },
       status: {
-        type: Sequelize.ENUM('attending', 'waitlist', 'pending')
+        type: Sequelize.STRING
       },
       createdAt: {
         allowNull: false,
