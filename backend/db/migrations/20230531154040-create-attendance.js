@@ -10,7 +10,7 @@ module.exports = {
   async up(queryInterface, Sequelize) {
 
 
-    await queryInterface.createTable('Attendances', {
+    await queryInterface.createTable('Attendance', {
       id: {
         allowNull: false,
         autoIncrement: true,
@@ -39,7 +39,7 @@ module.exports = {
     }, options);
   },
   async down(queryInterface, Sequelize) {
-    options.tableName = 'Attendances'
+    options.tableName = 'Attendance'
     await queryInterface.dropTable(options);
   }
 };
