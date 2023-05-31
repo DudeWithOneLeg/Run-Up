@@ -29,33 +29,12 @@ module.exports = (sequelize, DataTypes) => {
     }
   }
   Group.init({
-    organizerId: {
-      type: DataTypes.INTEGER
-    },
-    name: {
-      type: DataTypes.STRING,
-      validate: {
-        max: [60]
-      }
-    },
-    about: {
-      type: DataTypes.TEXT,
-      validate: {
-        min: [50]
-      }
-    },
-    type: DataTypes.STRING,
-    private: {
-      type: DataTypes.BOOLEAN
-    },
-    city: {
-      type: DataTypes.STRING,
-      allowNull: false,
-    },
-    state: {
-      type: DataTypes.STRING,
-      allowNull: false,
-    }
+    organizerId: DataTypes.INTEGER,
+    name: DataTypes.STRING,
+    about: DataTypes.TEXT,
+    private: DataTypes.BOOLEAN,
+    city: DataTypes.STRING,
+    state: DataTypes.STRING
   }, {
     sequelize,
     modelName: 'Group',

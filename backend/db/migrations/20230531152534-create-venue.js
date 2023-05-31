@@ -6,7 +6,8 @@ module.exports = {
 if (process.env.NODE_ENV === 'production') {
   options.schema = process.env.SCHEMA;
 }
-    await queryInterface.createTable('GroupImages', {
+options.tableName = 'Venues'
+    await queryInterface.createTable('Venues', {
       id: {
         allowNull: false,
         autoIncrement: true,
@@ -16,11 +17,20 @@ if (process.env.NODE_ENV === 'production') {
       groupId: {
         type: Sequelize.INTEGER
       },
-      url: {
+      address: {
         type: Sequelize.STRING
       },
-      preview: {
-        type: Sequelize.BOOLEAN
+      city: {
+        type: Sequelize.STRING
+      },
+      state: {
+        type: Sequelize.STRING
+      },
+      lat: {
+        type: Sequelize.DECIMAL
+      },
+      lng: {
+        type: Sequelize.DECIMAL
       },
       createdAt: {
         allowNull: false,
@@ -35,6 +45,6 @@ if (process.env.NODE_ENV === 'production') {
     }, options);
   },
   async down(queryInterface, Sequelize) {
-    await queryInterface.dropTable('GroupImages');
+    await queryInterface.dropTable(options);
   }
 };

@@ -1,35 +1,39 @@
 'use strict';
 /** @type {import('sequelize-cli').Migration} */
-module.exports = {
-  async up(queryInterface, Sequelize) {
-    let options ={};
+
+let options ={};
 if (process.env.NODE_ENV === 'production') {
   options.schema = process.env.SCHEMA;
 }
-    await queryInterface.createTable('Venues', {
+options.tableName = 'Users'
+module.exports = {
+  async up(queryInterface, Sequelize) {
+    await queryInterface.createTable('Users', {
       id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      groupId: {
-        type: Sequelize.INTEGER
+      firstName: {
+        type: Sequelize.STRING,
       },
-      address: {
-        type: Sequelize.STRING
+      lastName: {
+        type: Sequelize.STRING,
       },
-      city: {
-        type: Sequelize.STRING
+      username: {
+        allowNull: false,
+        type: Sequelize.STRING,
+        unique: true
       },
-      state: {
-        type: Sequelize.STRING
+      email: {
+        allowNull: false,
+        type: Sequelize.STRING,
+        unique: true
       },
-      lat: {
-        type: Sequelize.DECIMAL
-      },
-      lng: {
-        type: Sequelize.DECIMAL
+      hashedPassword: {
+        allowNull: false,
+        type: Sequelize.STRING.BINARY
       },
       createdAt: {
         allowNull: false,
@@ -44,6 +48,6 @@ if (process.env.NODE_ENV === 'production') {
     }, options);
   },
   async down(queryInterface, Sequelize) {
-    await queryInterface.dropTable('Venues');
+    await queryInterface.dropTable(options);
   }
 };
