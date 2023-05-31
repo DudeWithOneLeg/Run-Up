@@ -6,7 +6,8 @@ module.exports = {
 if (process.env.NODE_ENV === 'production') {
   options.schema = process.env.SCHEMA;
 }
-    await queryInterface.createTable('EventImages', {
+options.tableName = 'Attendances'
+    await queryInterface.createTable('Attendances', {
       id: {
         allowNull: false,
         autoIncrement: true,
@@ -17,11 +18,12 @@ if (process.env.NODE_ENV === 'production') {
         allowNull: false,
         type: Sequelize.INTEGER
       },
-      url: {
-        type: Sequelize.STRING
+      userId: {
+        allowNull: false,
+        type: Sequelize.INTEGER
       },
-      preview: {
-        type: Sequelize.BOOLEAN
+      status: {
+        type: Sequelize.STRING
       },
       createdAt: {
         allowNull: false,
@@ -36,6 +38,6 @@ if (process.env.NODE_ENV === 'production') {
     }, options);
   },
   async down(queryInterface, Sequelize) {
-    await queryInterface.dropTable('EventImages');
+    await queryInterface.dropTable(options);
   }
 };
