@@ -19,7 +19,6 @@ module.exports = {
         type: Sequelize.INTEGER
       },
       groupId: {
-        allowNull: false,
         type: Sequelize.INTEGER
       },
       name: {

@@ -16,30 +16,24 @@ module.exports = {
         type: Sequelize.INTEGER
       },
       organizerId: {
-        allowNull: false,
         type: Sequelize.INTEGER
       },
       name: {
-        allowNull: false,
         type: Sequelize.STRING
       },
       about: {
-        allowNull: false,
         type: Sequelize.TEXT
       },
       type: {
-        allowNull: false,
         type: Sequelize.STRING
       },
       private: {
-        allowNull: false,
         type: Sequelize.BOOLEAN
       },
       city: {
-        allowNull: false,
         type: Sequelize.STRING
       },
-      state: {allowNull: false,
+      state: {
         type: Sequelize.STRING
       },
       createdAt: {

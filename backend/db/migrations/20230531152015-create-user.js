@@ -22,17 +22,14 @@ module.exports = {
         type: Sequelize.STRING,
       },
       username: {
-        allowNull: false,
         type: Sequelize.STRING,
         unique: true
       },
       email: {
-        allowNull: false,
         type: Sequelize.STRING,
         unique: true
       },
       hashedPassword: {
-        allowNull: false,
         type: Sequelize.STRING.BINARY
       },
       createdAt: {
