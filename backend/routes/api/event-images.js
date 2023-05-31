@@ -3,6 +3,8 @@ const router = express.Router()
 const { EventImage, Membership, Group, Event } = require('../../db/models')
 const { restoreUser, requireAuth } = require('../../utils/auth');
 
+
+
 const isMember = async (req, res, next) => {
     if (!req.eventImage) {
         res.status(404)
@@ -79,7 +81,7 @@ const isMember = async (req, res, next) => {
         }
 
 
-        
+
 
         req.params.groupId = image.Event.groupId
         req.eventImage = image
