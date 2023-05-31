@@ -1,12 +1,13 @@
 'use strict';
 /** @type {import('sequelize-cli').Migration} */
-module.exports = {
-  async up(queryInterface, Sequelize) {
-    let options ={};
+let options ={};
 if (process.env.NODE_ENV === 'production') {
   options.schema = process.env.SCHEMA;
 }
-otpions.tableName = 'Events'
+options.tableName = 'Events'
+module.exports = {
+  async up(queryInterface, Sequelize) {
+
     await queryInterface.createTable('Events', {
       id: {
         allowNull: false,
