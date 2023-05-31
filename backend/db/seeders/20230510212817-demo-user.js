@@ -1,6 +1,6 @@
 'use strict';
 
-const { query } = require('express');
+const { Op } = require("sequelize");
 const bcrypt = require("bcryptjs");
 
 /** @type {import('sequelize-cli').Migration} */
@@ -58,9 +58,8 @@ module.exports = {
      */
     let options = {}
     options.tableName = 'Users';
-    const Op = Sequelize.Op;
     await queryInterface.bulkDelete(options, {
-      username: { [Op.in]: ['JohnDoe1', 'JohnDoe2', 'JohnDoe3'] }
+      username: ['JohnDoe1', 'JohnDoe2', 'JohnDoe3']
     }, {});
   }
 };
