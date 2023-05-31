@@ -4,7 +4,7 @@ let options ={};
 if (process.env.NODE_ENV === 'production') {
   options.schema = process.env.SCHEMA;
 }
-options.tableName = 'Memberships'
+
 module.exports = {
   async up(queryInterface, Sequelize) {
 
@@ -37,6 +37,7 @@ module.exports = {
     }, options);
   },
   async down(queryInterface, Sequelize) {
+    options.tableName = 'Memberships'
     await queryInterface.dropTable(options);
   }
 };
