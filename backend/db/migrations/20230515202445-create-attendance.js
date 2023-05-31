@@ -1,37 +1,30 @@
 'use strict';
 /** @type {import('sequelize-cli').Migration} */
-let options ={};
+ let options ={};
 if (process.env.NODE_ENV === 'production') {
   options.schema = process.env.SCHEMA;
 }
 
 module.exports = {
+
   async up(queryInterface, Sequelize) {
 
-    await queryInterface.createTable('Venue', {
+
+    await queryInterface.createTable('Attendances', {
       id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      groupId: {
+      eventId: {
         type: Sequelize.INTEGER
       },
-      address: {
+      userId: {
+        type: Sequelize.INTEGER
+      },
+      status: {
         type: Sequelize.STRING
-      },
-      city: {
-        type: Sequelize.STRING
-      },
-      state: {
-        type: Sequelize.STRING
-      },
-      lat: {
-        type: Sequelize.DECIMAL
-      },
-      lng: {
-        type: Sequelize.DECIMAL
       },
       createdAt: {
         allowNull: false,
@@ -46,7 +39,7 @@ module.exports = {
     }, options);
   },
   async down(queryInterface, Sequelize) {
-    options.tableName = 'Venue'
+    options.tableName = 'Attendances'
     await queryInterface.dropTable(options);
   }
 };
