@@ -1,5 +1,5 @@
 'use strict';
-
+const { Op } = require("sequelize");
 const { query } = require('express-validator');
 
 /** @type {import('sequelize-cli').Migration} */
@@ -49,11 +49,8 @@ module.exports = {
      */
     const options = {}
     options.tableName = 'EventImages'
-    const Op = Sequelize.Op
     await queryInterface.bulkDelete(options, {
-      id: {
-        [Op.in]: [1, 2, 3]
-      }
+      id:  [1, 2, 3]
     })
   }
 };

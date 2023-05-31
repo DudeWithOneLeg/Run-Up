@@ -1,5 +1,5 @@
 'use strict';
-
+const { Op } = require("sequelize");
 /** @type {import('sequelize-cli').Migration} */
 let options = {};
     if (process.env.NODE_ENV === 'production') {
@@ -50,9 +50,8 @@ module.exports = {
      */
     let options = {}
     options.tableName = 'Groups';
-    const Op = Sequelize.Op;
     await queryInterface.bulkDelete(options, {
-      id: { [Op.in]: [1, 2, 3] }
+      id: [1, 2, 3]
     }, {})
   }
 };
