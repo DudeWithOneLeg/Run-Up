@@ -7,6 +7,7 @@ const { User } = require('../../db/models');
 const { check, cookie } = require('express-validator');
 const { handleValidationErrors } = require('../../utils/validation');
 
+
 const validateSignup = [
     check('email')
         .exists({ checkFalsy: true })
