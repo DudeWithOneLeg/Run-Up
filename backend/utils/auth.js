@@ -3,7 +3,7 @@ const { jwtConfig } = require('../config');
 const { User } = require('../db/models');
 require('dotenv').config()
 
-const { expiresIn } = jwtConfig;
+const { secretOrPrivateKey, expiresIn } = jwtConfig;
 
 // Sends a JWT Cookie
 const setTokenCookie = (res, user) => {
@@ -17,7 +17,7 @@ const setTokenCookie = (res, user) => {
     };
     const token = jwt.sign(
         { data: safeUser },
-        {secretOrPrivateKey: process.env.JWT_SECRET},
+        {secretOrPrivateKey},
         { expiresIn: parseInt(expiresIn) } // 604,800 seconds = 1 week
     );
 
@@ -39,7 +39,7 @@ const restoreUser = (req, res, next) => {
     const { token } = req.cookies;
     req.user = null;
 
-    return jwt.verify(token, secret, null, async (err, jwtPayload) => {
+    return jwt.verify(token, secretOrPrivateKey, null, async (err, jwtPayload) => {
         if (err) {
             return next();
         }
