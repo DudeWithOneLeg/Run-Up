@@ -1,8 +1,9 @@
 const jwt = require('jsonwebtoken');
 const { jwtConfig } = require('../config');
 const { User } = require('../db/models');
+require('dotenv').config()
 
-const { secret, expiresIn } = jwtConfig;
+const { expiresIn } = jwtConfig;
 
 // Sends a JWT Cookie
 const setTokenCookie = (res, user) => {
@@ -16,7 +17,7 @@ const setTokenCookie = (res, user) => {
     };
     const token = jwt.sign(
         { data: safeUser },
-        {secretOrPrivateKey: secret},
+        {secretOrPrivateKey: process.env.JWT_SECRET},
         { expiresIn: parseInt(expiresIn) } // 604,800 seconds = 1 week
     );
 
