@@ -6,6 +6,7 @@ require('dotenv').config()
 const secret = process.env.JWT_SECRET
 // Sends a JWT Cookie
 const setTokenCookie = (res, user) => {
+    console.log(process.env.JWT_SECRET)
     // Create the token.
     const safeUser = {
         id: user.id,
