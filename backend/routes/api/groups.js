@@ -208,10 +208,12 @@ router.get('/current', requireAuth, async (req, res) => {
         },
         include: Group
     })
-console.log(groups)
-    groups = groups.Groups
+    if (groups) {
+        groups = groups.Groups
 
     myGroup.concat(groups)
+    }
+
 
 
     for (let group of myGroup) {
