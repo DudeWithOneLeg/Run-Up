@@ -61,7 +61,7 @@ module.exports = {
     let options = {}
     options.tableName = 'Groups';
 
-    
+
     await queryInterface.bulkDelete(options, {
       organizerId: [1, 2, 3]
     }, {})

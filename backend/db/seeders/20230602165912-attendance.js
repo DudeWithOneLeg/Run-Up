@@ -49,7 +49,7 @@ module.exports = {
     options.tableName = 'Attendances'
     await queryInterface.bulkDelete(options, {
       id: [1, 2, 3]
-      
+
     })
   }
 };
