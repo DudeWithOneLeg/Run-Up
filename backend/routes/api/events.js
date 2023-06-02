@@ -404,7 +404,13 @@ router.post('/:eventId/images', [eventExists, requireAuth], async(req, res) => {
         }
     })
 
-    if (!attend && event.Group.organizerId !== req.user.id && member.status !== 'co-host' && member.status !== 'host') {
+    if (event.Group.organizerId) {
+        if (event.Group.organizerId !== req.user.id) {
+            req.err = true
+        }
+    }
+
+    if (!attend && req.err && member.status !== 'co-host' && member.status !== 'host') {
         res.status(403)
         return res.json({
             message: "Forbidden"

@@ -350,7 +350,9 @@ router.get('/:groupId/venues', [groupExists, groupAuthorized, isGroupMember, req
         },
         attributes: ['id', 'groupId', 'address', 'city', 'state', 'lat', 'lng']
     })
-    return res.json(venues)
+    return res.json({
+        Venues: venues
+    })
 
 })
 
