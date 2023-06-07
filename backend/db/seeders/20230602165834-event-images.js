@@ -37,7 +37,7 @@ module.exports = {
     },
    ]
 
-   await queryInterface.bulkInsert(options, validEventImages)
+   await queryInterface.bulkInsert(options, validEventImages, {})
   },
 
   async down (queryInterface, Sequelize) {
