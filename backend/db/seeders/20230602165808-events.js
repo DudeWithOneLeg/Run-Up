@@ -53,7 +53,7 @@ module.exports = {
     },
    ]
 
-   await queryInterface.bulkInsert(options, validEvents)
+   await queryInterface.bulkInsert(options, validEvents, {})
   },
 
   async down (queryInterface, Sequelize) {

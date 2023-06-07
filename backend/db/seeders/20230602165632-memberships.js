@@ -37,7 +37,7 @@ module.exports = {
 
 
 
-   await queryInterface.bulkInsert(options, validMemberships)
+   await queryInterface.bulkInsert(options, validMemberships, {})
 
   },
 

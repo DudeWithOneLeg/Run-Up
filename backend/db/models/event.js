@@ -2,6 +2,7 @@
 const {
   Model
 } = require('sequelize');
+
 module.exports = (sequelize, DataTypes) => {
   class Event extends Model {
     /**
@@ -14,8 +15,10 @@ module.exports = (sequelize, DataTypes) => {
       Event.hasMany(models.EventImage, {
         foreignKey: 'eventId'
       })
-      Event.hasMany(models.Attendance, {
-        foreignKey: 'eventId'
+      Event.belongsToMany(models.User, {
+        through: 'Attendances',
+        foreignKey: 'eventId',
+        otherKey: 'userId'
       })
       Event.belongsTo(models.Venue, {
         foreignKey: 'venueId'
