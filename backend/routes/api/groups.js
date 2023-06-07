@@ -69,8 +69,6 @@ const venueExists = async (req, res, next) => {
             id: req.body.venueId
         }
     })
-
-    
     console.log(venue)
     if (!venue) {
         req.params.venueId2 = 'false'
