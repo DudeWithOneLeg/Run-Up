@@ -47,8 +47,6 @@ module.exports = {
      * Example:
      * await queryInterface.bulkDelete('People', null, {});
      */
-    const options = {}
-    options.tableName = 'EventImages'
     await queryInterface.bulkDelete(options, {
       id:  [1, 2, 3]
     })

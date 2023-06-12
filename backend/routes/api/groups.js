@@ -571,6 +571,8 @@ router.post('/:groupId/membership', [groupExists, requireAuth], async (req, res)
         status: 'pending'
     })
 
+    await newMember.save()
+
     return res.json({
         memberId: newMember.id,
         status: 'pending'
