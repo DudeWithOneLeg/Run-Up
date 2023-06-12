@@ -2,7 +2,6 @@ const jwt = require('jsonwebtoken');
 const { jwtConfig } = require('../config');
 const { User } = require('../db/models');
 const { expiresIn } = jwtConfig;
-require('dotenv').config()
 const secret = process.env.JWT_SECRET
 // Sends a JWT Cookie
 const setTokenCookie = (res, user) => {
