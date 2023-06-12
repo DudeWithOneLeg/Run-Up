@@ -34,7 +34,8 @@ module.exports = (sequelize, DataTypes) => {
     about: DataTypes.TEXT,
     private: DataTypes.BOOLEAN,
     city: DataTypes.STRING,
-    state: DataTypes.STRING
+    state: DataTypes.STRING,
+    type: DataTypes.STRING
   }, {
     sequelize,
     modelName: 'Group',
