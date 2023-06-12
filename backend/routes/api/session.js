@@ -10,7 +10,7 @@ const { User } = require('../../db/models')
 // router.use(cookieParser)
 
 const validateLogin = [
-    check('email')
+    check('credential')
       .exists({ checkFalsy: true })
       .notEmpty()
       .withMessage('Email is required'),
