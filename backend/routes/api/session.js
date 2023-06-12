@@ -46,12 +46,12 @@ router.get(
 router.post(
     '/', validateLogin,
     async (req, res, next) => {
-        const { email, password } = req.body;
+        const { credential, password } = req.body;
 
         const user = await User.unscoped().findOne({
             where: {
                 [Op.or]: {
-                    email: email
+                    email: credential
                 }
             }
         });

@@ -35,7 +35,7 @@ module.exports = {
     }
    ]
 
-   await queryInterface.bulkCreate(options, validAttendances, {validate: true})
+   await queryInterface.bulkInsert(options, validAttendances)
   },
 
   async down (queryInterface, Sequelize) {
