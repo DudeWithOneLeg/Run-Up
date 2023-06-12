@@ -277,8 +277,7 @@ router.get('/:groupId', groupExists, async (req, res) => {
     const numMembers = await Membership.count({
         where: {
             groupId: req.params.groupId
-        },
-        attributes: ['id', 'firstName', 'lastName']
+        }
     })
     groups.numMmbers = numMembers
 
@@ -286,6 +285,7 @@ router.get('/:groupId', groupExists, async (req, res) => {
 
 
     const organizer = await User.findByPk(groups.organizerId, {
+        attributes: ['id', 'firstName', 'lastName'],
         raw: true
     })
 
