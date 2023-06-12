@@ -397,7 +397,7 @@ router.get('/:groupId/events', groupExists, async (req, res) => {
             model: Venue,
             attributes: ['id', 'city', 'state']
         }],
-        attributes: ['id', 'groupId', 'name', 'type', 'startDate', 'endDate']
+        attributes: ['id', 'groupId', 'venueId', 'name', 'type', 'startDate', 'endDate']
     })
 
     if (!events[0]) {
@@ -465,7 +465,7 @@ router.get('/:groupId/members', [groupExists, groupAuthorized, isGroupMember], a
         return res.json(req.err)
     }
 
-    const options = {
+    const groupOptions = {
         where: {
             id: req.params.groupId
         },
@@ -479,12 +479,16 @@ router.get('/:groupId/members', [groupExists, groupAuthorized, isGroupMember], a
             }
         }]
     }
-
-    if (!req.authorized && !req.isMember) {
-        options.include[0].include.where.status[Op.or] = ['co-host', 'member']
+    const memberOptions = {
     }
 
-    const members = await Group.findOne(options)
+    if (!req.authorized && !req.isMember) {
+        memberOptions.include[0].include.where.status[Op.or] = ['co-host', 'member']
+    }
+
+
+
+    const members = await Group.findOne(groupOptions)
 
     return res.json({
         Members: members
@@ -556,14 +560,14 @@ router.post('/:groupId/membership', [groupExists, requireAuth], async (req, res)
     const member = await Membership.findOne({
         where: {
             groupId: req.params.groupId,
-            userId: req.body.memberId
+            userId: req.user.id
         }
     })
 
     if (!member) {
         const newMember = await Membership.create({
         groupId: req.params.groupId,
-        userId: req.body.memberId,
+        userId: req.user.id,
         status: 'pending'
     })
 
@@ -596,7 +600,16 @@ router.put('/:groupId/membership', [requireAuth, groupExists], async(req, res) =
         return res.json(req.err)
     }
 
-const user = await User.findByPk(req.body.memberId)
+
+
+    let member = await Membership.findOne({
+        where: {
+            id: req.body.memberId,
+            groupId: req.params.groupId
+        }
+    })
+
+const user = await User.findByPk(req.member.userId)
 
     if (!user) {
         res.status(400)
@@ -607,22 +620,6 @@ const user = await User.findByPk(req.body.memberId)
           }
         })
     }
-
-    let member = await Membership.findOne({
-        where: {
-            userId: req.body.memberId,
-            groupId: req.params.groupId
-        }
-    })
-
-    if (!member) {
-        res.status(404)
-        return res.json({
-          message: "Membership between the user and the group does not exist"
-        })
-    }
-
-
 
     if (req.body.status === 'pending') {
         res.status(400)
