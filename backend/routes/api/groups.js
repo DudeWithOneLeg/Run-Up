@@ -461,11 +461,9 @@ router.post('/:groupId/events', [venueExists, eventDateBool, validateEvent, grou
 })
 
 router.get('/:groupId/members', [groupExists, groupAuthorized, isGroupMember], async (req, res) => {
-    if (req.err) {
-        return res.json(req.err)
-    }
 
-    const groupOptions = {
+
+    const options = {
         where: {
             id: req.params.groupId
         },
@@ -479,16 +477,15 @@ router.get('/:groupId/members', [groupExists, groupAuthorized, isGroupMember], a
             }
         }]
     }
-    const memberOptions = {
-    }
+
 
     if (!req.authorized && !req.isMember) {
-        memberOptions.include[0].include.where.status[Op.or] = ['co-host', 'member']
+        options.include[0].include.where.status[Op.or] = ['co-host', 'member']
     }
 
 
 
-    const members = await Group.findOne(groupOptions)
+    const members = await Group.findOne(options)
 
     return res.json({
         Members: members
