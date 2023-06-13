@@ -608,7 +608,7 @@ router.put('/:groupId/membership', [requireAuth, groupExists], async(req, res) =
         }
     })
 
-const user = await User.findByPk(req.member.userId)
+const user = await User.findByPk(member.userId)
 
     if (!user) {
         res.status(400)
