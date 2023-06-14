@@ -92,7 +92,7 @@ const isMember = async (req, res, next) => {
 router.delete('/:imageId', [requireAuth, eventImageExist, isMember, groupAuthorized], async(req, res) => {
 
     if (req.err) {
-        res.json(req.err)
+        return res.json(req.err)
     }
 
     const image = await EventImage.findByPk(req.params.imageId)
