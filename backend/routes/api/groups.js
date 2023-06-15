@@ -183,7 +183,7 @@ router.get('/', async (req, res) => {
     }
 
     return res.json({
-        Groups: [groups]
+        Groups: [...groups]
     })
 })
 
