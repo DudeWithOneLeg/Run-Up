@@ -183,7 +183,7 @@ router.get('/', async (req, res) => {
     }
 
     return res.json({
-        Groups: [groups]
+        Groups: [...groups]
     })
 })
 
@@ -448,11 +448,19 @@ router.post('/:groupId/events', [venueExists, eventDateBool, validateEvent, grou
         return res.json(req.err)
     }
 
+
+
     req.body.groupId = req.params.groupId
 
     let event = await Event.create(req.body)
 
     event = event.toJSON()
+
+    await Attendance.create({
+        eventId: event.id,
+        userId: req.user.id,
+        status: 'host'
+    })
 
     delete event.createdAt
     delete event.updatedAt
@@ -628,11 +636,9 @@ router.put('/:groupId/membership', [requireAuth, groupExists], async (req, res) 
         return res.json(req.err)
     }
 
-
-
     let member = await Membership.findOne({
         where: {
-            id: req.body.memberId,
+            userId: req.body.memberId,
             groupId: req.params.groupId
         }
     })

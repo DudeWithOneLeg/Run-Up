@@ -7,7 +7,6 @@ const usersRouter = require('./users.js');
 const groupRouter = require('./groups.js');
 const venueRouter = require('./venues.js');
 const eventRouter = require('./events.js');
-const membershipRouter = require('./memberships.js');
 const groupImageRouter = require('./group-images.js');
 const eventImageRouter = require('./event-images.js')
 
@@ -22,8 +21,6 @@ router.use('/groups', groupRouter);
 router.use('/venues', venueRouter);
 
 router.use('/events', eventRouter);
-
-router.use('/memberships', membershipRouter);
 
 router.use('/group-images', groupImageRouter);
 
