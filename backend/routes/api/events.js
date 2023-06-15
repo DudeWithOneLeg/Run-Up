@@ -545,16 +545,19 @@ router.get('/:eventId/attendees', [eventExists], async (req, res) => {
 
     const member = await Membership.findOne({
         where: {
+            userId: req.user.id,
             groupId: req.event.groupId,
             status: 'co-host'
         }
     })
 
     if (group) {
-        if (group.organizerId !== req.userId && !member) {
+        if (group.organizerId !== req.user.id && !member) {
         options.include.where.status = { [Op.or]: ['attending', 'waitlist'] }
         }
     }
+
+    console.log(group.organizerId !== req.user.id, !member)
 
     if (!group) {
         res.status(404)
@@ -577,13 +580,17 @@ router.post('/:eventId/attendance', [eventExists, requireAuth], async (req, res)
 
     const member = await Membership.findOne({
         where: {
-            userId: req.body.userId,
+            userId: req.user.id,
             groupId: req.event.groupId,
-            status: 'member'
+            status: {
+                [Op.or]: ['member', 'co-host']
+            }
         }
     })
 
-    if (!member) {
+    const group = await Group.findByPk(req.event.groupId)
+
+    if (!member && group.organizerId !== req.user.id) {
         res.status(403)
         return res.json({
             message: "Forbidden"
@@ -592,16 +599,21 @@ router.post('/:eventId/attendance', [eventExists, requireAuth], async (req, res)
 
     let attendance = await Attendance.findOne({
         where: {
-            userId: req.body.userId,
+            userId: req.user.id,
             eventId: req.params.eventId
         }
     })
 
     if (!attendance) {
-        req.body.groupId = req.params.groupId
-    req.body.eventId = req.params.eventId
+        const newAtt = {
+            userId: req.user.id,
+            groupId: req.event.groupId,
+            eventId: req.params.eventId,
+            status: 'pending'
+        }
 
-    let attenddance = await Attendance.create(req.body)
+
+    let attenddance = await Attendance.create(newAtt)
 
     attenddance = attenddance.toJSON()
 
