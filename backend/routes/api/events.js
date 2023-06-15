@@ -383,34 +383,15 @@ router.post('/:eventId/images', [eventExists, requireAuth], async(req, res) => {
     const attend = await Attendance.findOne({
         where: {
             eventId: req.params.eventId,
-            status: 'attending'
-        }
-    })
-
-    const event = await Event.findOne({
-        where: {
-            id: req.params.eventId
-        },
-        include: [
-            {
-                model: Group
+            userId: req.user.id,
+            status: {
+                [Op.or]: ['attending', 'host', 'co-host']
             }
-        ]
-    })
-
-    const member = await Membership.findOne({
-        where: {
-            userId: req.user.id
         }
     })
 
-    if (event.Group.organizerId) {
-        if (event.Group.organizerId !== req.user.id) {
-            req.err = true
-        }
-    }
 
-    if (!attend && req.err && member.status !== 'co-host' && member.status !== 'host') {
+    if (!attend) {
         res.status(403)
         return res.json({
             message: "Forbidden"
