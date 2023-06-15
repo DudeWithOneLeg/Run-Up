@@ -571,6 +571,8 @@ router.post('/:eventId/attendance', [eventExists, requireAuth], async (req, res)
 
     const group = await Group.findByPk(req.event.groupId)
 
+    console.log(member, group)
+
     if (!member && group.organizerId !== req.user.id) {
         res.status(403)
         return res.json({
