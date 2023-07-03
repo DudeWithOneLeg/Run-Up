@@ -17,7 +17,7 @@ export default function LoginFormModal() {
 
         e.preventDefault();
     setValidations({});
-    return dispatch(sessionActions.login({ credential, password })).then(closeModal).catch(
+     dispatch(sessionActions.login({ credential, password })).then(closeModal).catch(
       async (res) => {
         const data = await res.json();
         if (data && data.errors) setValidations(data.errors);
@@ -25,8 +25,21 @@ export default function LoginFormModal() {
     );
     }
 
+    const demoUser = () => {
+
+    setValidations({});
+     dispatch(sessionActions.login({ credential: 'john1@doe.com', password: 'password' })).then(closeModal).catch(
+      async (res) => {
+        const data = await res.json();
+        if (data && data.errors) setValidations(data.errors);
+      }
+    );
+
+
+    }
+
     return (
-        <>
+        <div>
             <h1>Log In</h1>
             <form onSubmit={handleSubmit}>
                 <label>Username or E-mail:
@@ -48,8 +61,9 @@ export default function LoginFormModal() {
                 </label>
                 {validations.credential && <p>{validations.credential}</p>}
                 <button type="submit">Log In</button>
+                <button onClick={() => demoUser()}>Demo-User</button>
             </form>
 
-        </>
+        </div>
     )
 }
