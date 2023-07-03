@@ -55,7 +55,6 @@ router.post(
                 }
             }
         });
-
         if (!user || !bcrypt.compareSync(password, user.hashedPassword.toString())) {
 
             res.status(401)
