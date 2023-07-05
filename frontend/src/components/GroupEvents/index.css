@@ -1,0 +1,9 @@
+.card {
+    display: flex;
+    flex-direction: row;
+}
+
+#card-info {
+    display: flex;
+    flex-direction: column;
+}

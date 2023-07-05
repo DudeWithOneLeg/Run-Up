@@ -9,34 +9,33 @@ export default function LoginFormModal() {
     const dispatch = useDispatch();
     const [credential, setCredential] = useState("")
     const [password, setPassword] = useState("")
-    const [validations, setValidations] = useState({})
+    const [validations, setValidations] = useState({errors: []})
     const { closeModal } = useModal();
 
+
+//  useEffect(() => {
+//     if ()
+//  }[credential, password])
 
     const handleSubmit = (e) => {
 
         e.preventDefault();
-    setValidations({});
      dispatch(sessionActions.login({ credential, password })).then(closeModal).catch(
       async (res) => {
         const data = await res.json();
-        if (data && data.errors) setValidations(data.errors);
+        console.log(data)
+        if (data && data.message) {
+            const errors = []
+            for (let error of Object.values(data)) {
+                errors.push(error)
+            }
+            setValidations({errors: [...errors]})
+        };
       }
     );
     }
 
-    const demoUser = () => {
-
-    setValidations({});
-     dispatch(sessionActions.login({ credential: 'john1@doe.com', password: 'password' })).then(closeModal).catch(
-      async (res) => {
-        const data = await res.json();
-        if (data && data.errors) setValidations(data.errors);
-      }
-    );
-
-
-    }
+    
 
     return (
         <div>
@@ -59,9 +58,11 @@ export default function LoginFormModal() {
                     required
                 ></input>
                 </label>
-                {validations.credential && <p>{validations.credential}</p>}
+                {validations.errors && validations.errors.map((error) => {
+                    console.log(validations)
+                return <p>{error}</p>
+                })}
                 <button type="submit">Log In</button>
-                <button onClick={() => demoUser()}>Demo-User</button>
             </form>
 
         </div>
