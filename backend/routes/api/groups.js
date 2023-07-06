@@ -397,7 +397,7 @@ router.get('/:groupId/events', groupExists, async (req, res) => {
             model: Venue,
             attributes: ['id', 'city', 'state']
         }],
-        attributes: ['id', 'groupId', 'venueId', 'name', 'type', 'startDate', 'endDate']
+        attributes: ['id', 'groupId', 'venueId', 'name', 'type', 'description', 'startDate', 'endDate']
     })
 
     if (!events[0]) {
