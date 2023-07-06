@@ -14,7 +14,6 @@ export default function GroupEvents() {
        dispatch(groupEventsActions.loadGroupEvents(id))
     },[dispatch, id])
 
-console.log(Object.values(events))
     return (
         <>
             {
