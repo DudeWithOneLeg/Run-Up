@@ -2,9 +2,11 @@ import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import * as sessionActions from "../../store/session";
 import { useModal } from "../../context/Modal";
+import { useHistory } from "react-router-dom";
 
 export default function SignupFormModal() {
   const dispatch = useDispatch();
+  const history = useHistory()
   const [email, setEmail] = useState("");
   const [username, setUsername] = useState("");
   const [firstName, setFirstName] = useState("");
@@ -29,8 +31,10 @@ const { closeModal } = useModal();
       ).then(closeModal).catch(async (res) => {
         const data = await res.json();
         if (data && data.errors) {
-          setErrors(data.errors);
+          console.log(data)
+          return setErrors(data.errors);
         }
+        history.push('/')
       });
     }
     return setErrors({
@@ -50,6 +54,7 @@ const { closeModal } = useModal();
             onChange={(e) => setEmail(e.target.value)}
             required
           />
+
         </label>
         {errors.email && <p>{errors.email}</p>}
         <label>

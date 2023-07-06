@@ -1,4 +1,4 @@
-import {NavLink} from 'react-router-dom'
+import {NavLink, Link} from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
 import ProfileButton from './ProfileButton';
 import OpenModalButton from "../OpenModalButton";
@@ -16,6 +16,9 @@ export default function Navigation({ isLoaded }){
         <>
           <li>
             <ProfileButton user={sessionUser} />
+          </li>
+          <li>
+            <Link to='/groups/new'>Start a new group</Link>
           </li>
         </>
 

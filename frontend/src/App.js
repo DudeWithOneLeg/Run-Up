@@ -7,6 +7,7 @@ import Navigation from "./components/Navigation";
 import GroupInfo from "./components/GroupInfo";
 import GroupEventsToggle from "./components/GroupEventsToggle";
 import GroupEvents from "./components/GroupEvents";
+import GroupForm from "./components/GroupForm/GroupForm";
 
 function App() {
   const dispatch = useDispatch();
@@ -39,10 +40,14 @@ function App() {
         <Route exact path='/groups'>
           <GroupEventsToggle />
         </Route>
+        <Route exact path='/groups/new'>
+          <GroupForm />
+        </Route>
         <Route exact path='/groups/:id'>
           <GroupInfo />
           <GroupEvents />
         </Route>
+
       </Switch>
 
 

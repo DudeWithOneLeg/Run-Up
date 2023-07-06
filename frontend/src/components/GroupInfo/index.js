@@ -1,7 +1,7 @@
 import { useParams } from "react-router-dom"
 import { useDispatch, useSelector } from "react-redux"
 import { useEffect } from 'react'
-import * as groupEventsActions from '../../store/groupEvents'
+import * as groupActions from '../../store/groups'
 import GroupEvents from "../GroupEvents"
 
 
@@ -10,10 +10,10 @@ export default function GroupInfo() {
     const dispatch = useDispatch()
 
     useEffect(() => {
-        dispatch(groupEventsActions.loadGroup(params.id))
+        dispatch(groupActions.loadGroup(params.id))
 
     }, [dispatch, params.id])
-    const group = useSelector(state => state.groupEvents.group)
+    const group = useSelector(state => state.group.group)
     return (
         <>
             {
@@ -22,8 +22,9 @@ export default function GroupInfo() {
                         <div>
                             {group.GroupImages.map((img) => {
                                 if (img.preview) {
-                                    return <img  alt='placeholder'></img>
+                                    return <img alt='placeholder'></img>
                                 }
+                                return 
                             })}
                             <h1>{group.name}</h1>
                             <p>{group.city + "," + group.state}</p>
@@ -34,7 +35,7 @@ export default function GroupInfo() {
                             <p>{group.previewImage}</p>
                             <h1>Upcoming Events</h1>
                         </div>
-                        <GroupEvents id={params.id}/>
+                        <GroupEvents />
                     </div>
 
                 )

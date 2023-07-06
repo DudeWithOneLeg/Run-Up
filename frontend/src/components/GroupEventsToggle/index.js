@@ -1,34 +1,36 @@
 import { NavLink } from 'react-router-dom';
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import * as groupEventsActions  from '../../store/groupEvents';
+import * as groupActions  from '../../store/groups';
+import * as eventActions  from '../../store/events';
 
 export default function GroupEventsToggle() {
   const dispatch = useDispatch();
 
-  const groups = useSelector((state) => state.groupEvents.groups);
+  const groups = useSelector((state) => state.group.groups);
 
-  const events = useSelector((state) => state.groupEvents.events);
+  const events = useSelector((state) => state.event.events);
 
   const handleGroups = () => {
-    dispatch(groupEventsActions.loadGroups());
+    dispatch(groupActions.loadGroups());
   };
 useSelector(state => console.log(state.groupEvents))
   const handleEvents = () => {
-    dispatch(groupEventsActions.loadEvents());
+    dispatch(eventActions.loadEvents());
 
   };
 
   useEffect(() => {
     if (window.location.pathname === '/groups')  {
       console.log("DISPATCHING GROUPS")
-      dispatch(groupEventsActions.loadGroups())
+      dispatch(groupActions.loadGroups())
     }
     if (window.location.pathname === '/events')   {
       console.log("DISPATCHING EVENTS")
-      dispatch(groupEventsActions.loadEvents())
+      dispatch(eventActions.loadEvents())
     }
   },[dispatch])
+
 
   return (
     <>
@@ -40,17 +42,19 @@ useSelector(state => console.log(state.groupEvents))
           Groups
         </NavLink>
       </div>
-      {events && window.location.pathname === '/events' && events.map((event) => (
+
+      {events && window.location.pathname === '/events' && Object.values(events).map((event) => (
         <NavLink key={event.id} to={`/events/${event.id}`}>
           <div>
             <h1>{event.name}</h1>
-            <p>{event.city + ',' + event.state}</p>
+            {event.Venue && <p>{event.Venue.city + ',' + event.Venue.state}</p>}
             <p>{event.about}</p>
             <p>{event.previewImage}</p>
           </div>
         </NavLink>
       ))}
-      {groups && window.location.pathname === '/groups' && groups.map((group) => (
+
+      {groups && window.location.pathname === '/groups' && Object.values(groups).map((group) => (
         <NavLink key={group.id} to={`/groups/${group.id}`}>
           <div>
             <h1>{group.name}</h1>
@@ -60,6 +64,7 @@ useSelector(state => console.log(state.groupEvents))
           </div>
         </NavLink>
       ))}
+
     </>
   );
 }

@@ -1,9 +1,11 @@
 .card {
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
+    border: solid red
 }
 
 #card-info {
     display: flex;
     flex-direction: column;
+    border: solid green
 }

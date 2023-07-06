@@ -42,7 +42,7 @@ export const login = (user) => async (dispatch) => {
 export const signup = (user) => async (dispatch) => {
   console.log("SIGN UP INITIATED")
   const {username, firstName, lastName, email, password} = user
-  const res = await fetch('/api/users', {
+  const res = await csrfFetch('/api/users', {
     method: "POST",
     body: JSON.stringify({
       username,

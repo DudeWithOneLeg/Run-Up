@@ -1,23 +1,25 @@
 import { useDispatch, useSelector } from "react-redux"
-import * as groupEventsActions from '../../store/groupEvents';
+import * as groupEventsActions from '../../store/events';
 import { useEffect } from "react";
 import './index.css'
+import { useParams } from "react-router-dom";
 
-export default function GroupEvents({ id }) {
+export default function GroupEvents() {
     const dispatch = useDispatch()
+    const id = useParams().id
 
-    const events = useSelector(state => state.groupEvents.groupEvents)
-    console.log(events)
+    const events = useSelector(state => state.event.groupEvents)
+    console.log("YO THESE R EVENTS", events)
     useEffect(() => {
        dispatch(groupEventsActions.loadGroupEvents(id))
     },[dispatch, id])
 
-
+console.log(Object.values(events))
     return (
         <>
             {
-                events && events.map((event) => {
-                    <div className='card'>
+                events && Object.values(events).map((event) => {
+                    return (<div className='card'>
                         <div id='img'>
                             <img src={event.previewImage} alt=''></img>
                         </div>
@@ -25,10 +27,10 @@ export default function GroupEvents({ id }) {
                             <h2>{event.startDate}</h2>
                             <h1>{event.name}</h1>
                         </div>
-                        <div>
+                        <div className='about'>
                             <p>{event.description}</p>
                         </div>
-                    </div>
+                    </div>)
 
                 })
             }
