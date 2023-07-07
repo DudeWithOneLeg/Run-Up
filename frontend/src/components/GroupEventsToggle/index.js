@@ -3,6 +3,7 @@ import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import * as groupActions  from '../../store/groups';
 import * as eventActions  from '../../store/events';
+import './index.css'
 
 export default function GroupEventsToggle() {
   const dispatch = useDispatch();
@@ -57,10 +58,10 @@ useSelector(state => console.log(state.groupEvents))
       {groups && window.location.pathname === '/groups' && Object.values(groups).map((group) => (
         <NavLink key={group.id} to={`/groups/${group.id}`}>
           <div>
+            <img src={group.previewImage} alt='group-rview-image'></img>
             <h1>{group.name}</h1>
             <p>{group.city + ',' + group.state}</p>
             <p>{group.about}</p>
-            <p>{group.previewImage}</p>
           </div>
         </NavLink>
       ))}

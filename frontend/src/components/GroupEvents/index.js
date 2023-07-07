@@ -1,26 +1,28 @@
-import { useDispatch, useSelector } from "react-redux"
-import * as groupEventsActions from '../../store/events';
-import { useEffect } from "react";
+import { useSelector } from "react-redux"
 import './index.css'
-import { useParams } from "react-router-dom";
 
-export default function GroupEvents() {
-    const dispatch = useDispatch()
-    const id = useParams().id
 
-    const events = useSelector(state => state.event.groupEvents)
-    console.log("YO THESE R EVENTS", events)
-    useEffect(() => {
-       dispatch(groupEventsActions.loadGroupEvents(id))
-    },[dispatch, id])
+export default function GroupEvents({events}) {
 
+    //const events = useSelector(state => state.event.groupEvents)
+    console.log("YO THESE R EVENTS FROM GROUP EVENTS", events)
+    // useEffect(() => {
+    //    dispatch(groupEventsActions.loadGroupEvents(id)).catch( async (res) => {
+    //     const data = await res.json()
+    //     if (data && data.errors) {
+    //         console.log(data)
+    //     }
+    //    })
+    // },[dispatch, id])
+
+//console.log("GROUP EVENTS OBJECT VALUES LENGTH", Object.values(events).length)
     return (
         <>
             {
                 events && Object.values(events).map((event) => {
                     return (<div className='card'>
                         <div id='img'>
-                            <img src={event.previewImage} alt=''></img>
+                            {/* <img src={event.previewImage} alt=''></img> */}
                         </div>
                         <div id='card-info'>
                             <h2>{event.startDate}</h2>

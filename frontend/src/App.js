@@ -8,6 +8,7 @@ import GroupInfo from "./components/GroupInfo";
 import GroupEventsToggle from "./components/GroupEventsToggle";
 import GroupEvents from "./components/GroupEvents";
 import GroupForm from "./components/GroupForm/GroupForm";
+import UpdateGroupForm from "./components/UpdateGroupForm";
 
 function App() {
   const dispatch = useDispatch();
@@ -47,7 +48,9 @@ function App() {
           <GroupInfo />
           <GroupEvents />
         </Route>
-
+        <Route exact path='/groups/:id/edit'>
+          <UpdateGroupForm />
+        </Route>
       </Switch>
 
 

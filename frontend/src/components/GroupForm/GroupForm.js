@@ -1,14 +1,23 @@
 import { useState, useEffect } from "react"
-import { useDispatch } from "react-redux"
+import { useDispatch, useSelector } from "react-redux"
 import * as groupActions from '../../store/groups'
+import { useHistory } from "react-router-dom"
+import './index.css'
 
 export default function GroupForm() {
+    console.log("HELLOO")
+
+    const history = useHistory()
 
     const [name, setName] = useState("")
     const [location, setLocation] = useState("")
     const [about, setAbout] = useState("")
-    const [onlineOrInperson, setOnlineOrInperson] = useState("(choose one)")
-    const [publicOrPrivate, setPublicOrPrivate] = useState("(choose one)")
+    const [onlineOrInperson, setOnlineOrInperson] = useState("In person")
+    const [publicOrPrivate, setPublicOrPrivate] = useState("Public")
+    const [imgUrl, setImgUrl] = useState("")
+    const [errors, setErrors] = useState({})
+
+    const groupState = useSelector((state) => state.group.newGroup)
 
     const dispatch = useDispatch()
 
@@ -19,9 +28,47 @@ export default function GroupForm() {
     },[name, location, about, onlineOrInperson, publicOrPrivate])
 
     const handleSumbit = (e) => {
-        const group = {name, location, about, onlineOrInperson, publicOrPrivate}
+
         e.preventDefault()
-        dispatch(groupActions.requestNewGroup(group))
+
+        if (publicOrPrivate === 'Private') {
+            setPublicOrPrivate(true)
+        }
+        else {
+            setPublicOrPrivate(false)
+        }
+
+        console.log(publicOrPrivate)
+        const [city, state] = location.split(', ')
+        publicOrPrivate === 'Private' ? setPublicOrPrivate(true) : setPublicOrPrivate(false)
+
+        const group = {name, city, state, about, type: onlineOrInperson, private: publicOrPrivate, }
+
+        console.log("FINAL GROUP PARSE", group)
+
+        dispatch(groupActions.requestNewGroup(group)).catch(async (res) => {
+
+        const data = await res.json()
+        if (data && data.errors) {
+          console.log("DATA", data)
+          return setErrors(data.errors);
+        }
+
+        console.log(groupState)
+
+        })
+            const image = {
+            url: imgUrl,
+            preview: true
+        }
+
+        if (groupState) {
+
+            const id = groupState.id
+            dispatch(groupActions.postImage(id, image))
+            history.push(`/groups/${groupState.id}`)
+        }
+
     }
 
     return (
@@ -32,7 +79,7 @@ export default function GroupForm() {
             <h2>
                 We'll walk you through a few steps to build your local community
             </h2>
-            <form>
+            <form onSubmit={handleSumbit}>
                 <h1>
                     First, set your group's location.
                 </h1>
@@ -47,6 +94,9 @@ export default function GroupForm() {
                 }}
                 >
                 </input>
+                {
+                    (errors.city || errors.state) && <p className="errors">{errors.city} {errors.state}</p>
+                }
                 <h1>
                     What will your group's name be?
                 </h1>
@@ -61,6 +111,10 @@ export default function GroupForm() {
                 }}
                 >
                 </input>
+
+                {
+                    errors.name && <p className="errors">{errors.name}</p>
+                }
                 <h1>
                     Now describe what your group will be about
                 </h1>
@@ -86,8 +140,11 @@ export default function GroupForm() {
                     e.target.value = about
                 }}
                 >
-                Please write at least 30 characters
+                Please write at least 50 characters
                 </textarea>
+                {
+                    errors.about && <p className="errors">{errors.about}</p>
+                }
                 <h1>Final steps...</h1>
                 <p>
                 is this an in person or online group?
@@ -101,20 +158,52 @@ export default function GroupForm() {
                     <option>In person</option>
                     <option>Online</option>
                 </select>
+                {
+                    errors.type && <p className="errors">{errors.type}</p>
+                }
                 <p>
-                Is this group private or public?
+                Is this group private or public? hellloooo
                 </p>
                 <select
-                value={publicOrPrivate}
+                value='(choose one)'
                 onChange={(e) => {
                     setPublicOrPrivate(e.target.value)
                 }}
                 >
+                    <option value="" selected disabled hidden>Choose here</option>
                     <option>Public</option>
                     <option>Private</option>
                 </select>
+                {
+                    errors.private && <p className="errors">{errors.private}</p>
+                }
+                <p>
+                    Please add an image url for your group below:
+                </p>
+                <input
+                onChange={(e) => {
+                    const extensions = ['png', 'jpg', 'jpeg']
+                    let urlExtension = e.target.value.split('.')
+                    urlExtension = urlExtension[urlExtension.length - 1]
+                    console.log(urlExtension)
+
+                    if (!extensions.includes(urlExtension)) {
+                        console.log(!extensions.includes(urlExtension))
+                        return setErrors({imgUrl: "Image URL must end in .png, .jpg, or .jpeg"})
+                    }
+                    else {
+                        setErrors({})
+                    }
+                    setImgUrl(e.target.value)
+                }}
+                >
+                </input>
+                {
+                    errors.imgUrl && <p className='errors'>{errors.imgUrl}</p>
+                }
                 <button
-                onSubmit={(e) => handleSumbit}
+                type='submit'
+
                 >Create group</button>
             </form>
         </>

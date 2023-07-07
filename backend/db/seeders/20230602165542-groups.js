@@ -21,30 +21,30 @@ module.exports = {
    const validGroup = [
     {
       organizerId: 1,
-      name: 'somename',
-      about: 'some text',
+      name: 'Group Name',
+      about: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
       type: 'Online',
       private: false,
-      city: 'H-town',
-      state: 'Tx'
+      city: 'Houston',
+      state: 'Texas'
     },
     {
       organizerId: 2,
-      name: 'somename',
-      about: 'some text',
+      name: 'Group Name',
+      about: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
       type: 'Online',
       private: false,
-      city: 'H-town',
-      state: 'Tx'
+      city: 'Houston',
+      state: 'Texas'
     },
     {
       organizerId: 3,
-      name: 'somename',
-      about: 'some text',
+      name: 'Group Name',
+      about: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
       type: 'Online',
       private: false,
-      city: 'H-town',
-      state: 'Tx'
+      city: 'Houston',
+      state: 'Texas'
     },
    ]
 

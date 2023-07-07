@@ -4,11 +4,11 @@ import ProfileButton from './ProfileButton';
 import OpenModalButton from "../OpenModalButton";
 import LoginFormModal from "../LoginFormModal";
 import SignupFormModal from "../SignupFormModal";
-import * as sessionActions from '../../store/session'
+import './index.css'
 
 export default function Navigation({ isLoaded }){
     const sessionUser = useSelector(state => state.session.user);
-    const dispatch = useDispatch()
+    //const dispatch = useDispatch()
 
     let sessionLinks;
     if (sessionUser) {
@@ -25,7 +25,7 @@ export default function Navigation({ isLoaded }){
       );
     } else {
       sessionLinks = (
-        <li>
+        <div id='login-signup'>
           <OpenModalButton
           buttonText="Log In"
           modalComponent={<LoginFormModal />}
@@ -34,19 +34,17 @@ export default function Navigation({ isLoaded }){
           buttonText="Sign up"
           modalComponent={<SignupFormModal />}
         />
-        <button
-        onClick={() => {dispatch(sessionActions.login({ credential: 'john1@doe.com', password: 'password' }))}}
-        >Demo-User</button>
-        </li>
+        </div>
       );
     }
 
     return (
-      <ul>
-        <li>
+      <div id='nav'>
+        <li id= 'home'>
           <NavLink exact to="/">Home</NavLink>
         </li>
-        {isLoaded && sessionLinks}
-      </ul>
+          {isLoaded && sessionLinks}
+
+      </div>
     );
   }
