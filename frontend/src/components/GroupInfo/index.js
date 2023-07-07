@@ -27,7 +27,7 @@ export default function GroupInfo() {
     const group = useSelector(state => state.group.group)
     const events = useSelector(state => state.event.groupEvents)
 
-    console.log(group)
+    console.log("CURRENT GROUP" ,group)
 
     let numEvents = 0
 
@@ -59,19 +59,24 @@ export default function GroupInfo() {
                             {group.private ? <p>{numEvents} · Private</p> : <p>{numEvents} · Public</p>}
                             <p>Ogranized by </p>
                             <button
-                            hidden={!currentUser || currentUser.id === group.Organizer.id}
+                            hidden={!currentUser || currentUser.id === group.organizerId}
                             >Join this group</button>
                             <div
-                            hidden={!currentUser && currentUser.id !== group.Organizer.id}
+                            hidden={currentUser && currentUser.id !== group.organizerId}
                             >
-                                <button>Create Event</button>
-                            <button
-                            onClick={() => history.push(`/groups/${group.id}/edit`)}
-                            >Update</button>
-                            <button onClick={() => {
-                                dispatch(groupActions.removeGroup(group.id))
-                                history.push('/groups')
-                            }}>Delete</button>
+                                <button
+                                hidden={!currentUser || currentUser.id !== group.organizerId}
+                                >Create Event</button>
+                                <button
+                                hidden={!currentUser || currentUser.id !== group.organizerId}
+                                onClick={() => history.push(`/groups/${group.id}/edit`)}
+                                >Update</button>
+                                <button
+                                hidden={!currentUser || currentUser.id !== group.organizerId}
+                                onClick={() => {
+                                    dispatch(groupActions.removeGroup(group.id))
+                                    history.push('/groups')
+                                }}>Delete</button>
                             </div>
                             <h1>What we're about</h1>
                             <p>{group.about}</p>

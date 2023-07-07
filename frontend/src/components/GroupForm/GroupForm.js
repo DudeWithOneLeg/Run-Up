@@ -88,7 +88,7 @@ export default function GroupForm() {
                     in your area, and more can join you online
                 </p>
                 <input
-                value={location}
+                defaultValue="City, STATE"
                 onChange={(e) => {
                     setLocation(e.target.value)
                 }}
@@ -105,7 +105,7 @@ export default function GroupForm() {
                     Feel free to get creative! You can edit this later if you change your mind.
                 </p>
                 <input
-                value={name}
+                defaultValue="What is your group name?"
                 onChange={(e) => {
                     setName(e.target.value)
                 }}
