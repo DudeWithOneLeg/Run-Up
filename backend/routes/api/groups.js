@@ -244,6 +244,7 @@ router.get('/current', requireAuth, async (req, res) => {
 })
 
 router.get('/:groupId', groupExists, async (req, res) => {
+    console.log("=============================", req.params.groupId)
     if (req.err) {
         return res.json(req.err)
     }

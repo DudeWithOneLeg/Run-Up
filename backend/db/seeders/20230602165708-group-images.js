@@ -20,17 +20,17 @@ module.exports = {
    const validGroupImages = [
     {
       groupId: 1,
-      url: 'something',
+      url: 'https://sunriserunco.com/wp-content/uploads/2021/04/4-Different-Types-of-Runners-1200x600.jpg',
       preview: true
     },
     {
       groupId: 2,
-      url: 'something',
+      url: 'https://cdn.womensrunning.com/wp-content/uploads/2020/07/JoinRunningGroup.jpg',
       preview: true
     },
     {
       groupId: 3,
-      url: 'something',
+      url: 'https://hips.hearstapps.com/hmg-prod/images/group-of-runners-in-a-cross-country-race-royalty-free-image-1653336803.jpg',
       preview: true
     },
    ]
