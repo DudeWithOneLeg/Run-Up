@@ -1,4 +1,35 @@
-div {
+
+
+#log-in {
+    border-radius: 20px;
     display: flex;
     flex-direction: column;
+    width: 400px;
+    text-align: center;
+}
+
+#login-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+label {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.login-input {
+    width: 290px;
+}
+
+#login-form > button {
+    background-color: red;
+    color: white;
+    height: 50px;
+    width: 300px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    font-size: 15px;
 }

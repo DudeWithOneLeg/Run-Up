@@ -3,6 +3,7 @@ import { useDispatch } from "react-redux";
 import * as sessionActions from "../../store/session";
 import { useModal } from "../../context/Modal";
 import { useHistory } from "react-router-dom";
+import './index.css'
 
 export default function SignupFormModal() {
   const dispatch = useDispatch();
@@ -43,12 +44,13 @@ const { closeModal } = useModal();
   };
 
   return (
-    <>
+    <div id='sign-up-form'>
       <h1>Sign Up</h1>
       <form onSubmit={handleSubmit}>
         <label>
           Email
           <input
+          className='signup-input'
             type="text"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
@@ -60,6 +62,7 @@ const { closeModal } = useModal();
         <label>
           Username
           <input
+          className='signup-input'
             type="text"
             value={username}
             onChange={(e) => setUsername(e.target.value)}
@@ -70,6 +73,7 @@ const { closeModal } = useModal();
         <label>
           First Name
           <input
+          className='signup-input'
             type="text"
             value={firstName}
             onChange={(e) => setFirstName(e.target.value)}
@@ -80,6 +84,7 @@ const { closeModal } = useModal();
         <label>
           Last Name
           <input
+          className='signup-input'
             type="text"
             value={lastName}
             onChange={(e) => setLastName(e.target.value)}
@@ -90,6 +95,7 @@ const { closeModal } = useModal();
         <label>
           Password
           <input
+          className='signup-input'
             type="password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
@@ -100,6 +106,7 @@ const { closeModal } = useModal();
         <label>
           Confirm Password
           <input
+          className='signup-input'
             type="password"
             value={confirmPassword}
             onChange={(e) => setConfirmPassword(e.target.value)}
@@ -107,8 +114,10 @@ const { closeModal } = useModal();
           />
         </label>
         {errors.confirmPassword && <p>{errors.confirmPassword}</p>}
-        <button type="submit">Sign Up</button>
+        <button
+        id='signup-button'
+        type="submit">Sign Up</button>
       </form>
-    </>
+    </div>
   );
 }

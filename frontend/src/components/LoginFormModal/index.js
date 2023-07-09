@@ -41,11 +41,14 @@ export default function LoginFormModal() {
 
 
     return (
-        <div>
+        <div id='log-in'>
             <h1>Log In</h1>
-            <form onSubmit={handleSubmit}>
+            <form
+            id='login-form'
+            onSubmit={handleSubmit}>
                 <label>Username or E-mail:
                     <input
+                    className="login-input"
                         type="text"
                         value={credential}
                         onChange={(e) => setCredential(e.target.value)}
@@ -55,6 +58,7 @@ export default function LoginFormModal() {
 
                 <label>Password:
                     <input
+                        className="login-input"
                         type="password"
                         value={password}
                         onChange={(e) => setPassword(e.target.value)}
@@ -65,15 +69,17 @@ export default function LoginFormModal() {
                     console.log(validations)
                     return <p>{error}</p>
                 })}
-                <button type="submit">Log In</button>
-            </form>
-            <button
+                <button
+                type="submit">Log In</button>
+                <button
                 onClick={() => {
                     dispatch(sessionActions.login({ credential: 'john1@doe.com', password: 'password'
 
                 })).then(closeModal)
             }}
             >Log in as Demo User</button>
+            </form>
+
         </div>
     )
 }

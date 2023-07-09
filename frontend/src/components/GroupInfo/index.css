@@ -1,3 +1,32 @@
-#organizerButtons {
-    height: 100px;
+#organizerButtons, #delete {
+    display: flex;
+    flex-direction: row;
+    height: 30px;
+    width: 250px;
+    margin-bottom: 0px;
 }
+
+#top-card {
+    display: flex;
+    flex-direction: row;
+}
+
+#top-right-card {
+    margin-left: 5%;
+}
+
+#group-info-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
+
+#group-info {
+    display: flex;
+    justify-content: center;
+    padding-left: 30%;
+    padding-right: 30%;
+}
+
+

@@ -1,20 +1,33 @@
 #nav {
     display: flex;
-    border: solid red;
+    flex-direction: row;
+    border-bottom: solid gray;
     justify-content: space-between;
 }
 
 #login-signup {
     display: flex;
     flex-direction: row;
-    width: 100px;
+    width: 200px;
     justify-content: flex-start;
     align-self: flex-end;
-    border: solid green
+    font-size: 15px;
 }
 
 #home {
-    border: solid pink;
+    text-align: center;
     display: flex;
-    width: 50px;
+    width: 200px;
+    font-size: 40px;
+}
+
+#login {
+    border-radius: 10px;
+}
+
+.profile-dropdown {
+    position: absolute;
+    top: 30px;
+    right: 30px;
+    border: solid black;
 }
