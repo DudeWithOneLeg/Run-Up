@@ -191,7 +191,7 @@ export default function GroupForm() {
                 </p>
                 <select
                 className="group-form-select"
-                    value='(choose one)'
+                    defaultValue='(choose one)'
                     onChange={(e) => {
                         setPublicOrPrivate(e.target.value)
                     }}

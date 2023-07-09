@@ -440,6 +440,7 @@ router.get('/:groupId/events', groupExists, async (req, res) => {
         event.numAttending = numAttending
         events[index] = event
     }
+    console.log(events)
 
     res.json(events)
 })

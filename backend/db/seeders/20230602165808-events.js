@@ -21,8 +21,8 @@ module.exports = {
     {
       venueId: 1,
       groupId: 1,
-      name: 'Yo',
-      description: 'yo',
+      name: 'Event Name',
+      description: '    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
       type: 'Online',
       capacity: 9000,
       price: 9000,
@@ -32,8 +32,8 @@ module.exports = {
     {
       venueId: 2,
       groupId: 2,
-      name: 'Yo',
-      description: 'yo',
+      name: 'Event Name',
+      description: '    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
       type: 'In person',
       capacity: 9000,
       price: 9000,
@@ -43,8 +43,8 @@ module.exports = {
     {
       venueId: 3,
       groupId: 3,
-      name: 'Yo',
-      description: 'yo',
+      name: 'Event Name',
+      description: '    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
       type: 'Online',
       capacity: 9000,
       price: 9000,

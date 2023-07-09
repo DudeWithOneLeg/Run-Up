@@ -39,5 +39,8 @@
     margin-top: 5%;
     background-color: red;
     color: white;
+}
 
+* {
+    font-family: 'Varela Round';
 }

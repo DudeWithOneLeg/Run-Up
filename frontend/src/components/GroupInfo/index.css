@@ -4,29 +4,59 @@
     height: 30px;
     width: 250px;
     margin-bottom: 0px;
+    border: solid blue
 }
 
 #top-card {
     display: flex;
     flex-direction: row;
+    border: solid purple;
+    width: 100%
 }
 
 #top-right-card {
     margin-left: 5%;
+    border: solid green;
+    width: 100%;
 }
 
 #group-info-container {
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 100%;
+    width: 90%;
+    border: solid orange
 }
 
 #group-info {
     display: flex;
-    justify-content: center;
-    padding-left: 30%;
-    padding-right: 30%;
+    flex-direction: column;
+    width: 100%;
+    border: solid purple;
+    width: 70%;
 }
 
+#group-image {
+    width: 300px;
+    border: solid yellow
+}
 
+.more-info {
+    background-color: rgb(218, 214, 214);
+    width: auto;
+    padding: 15px;
+}
+
+#top-right-card-info {
+    font-size: 15px;
+    border: solid black
+}
+
+* {
+    font-family: 'Varela Round';
+}
+
+#group-info-div {
+    width: 100%;
+    color: black;
+}

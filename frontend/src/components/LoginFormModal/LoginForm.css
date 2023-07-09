@@ -17,14 +17,14 @@
 label {
     display: flex;
     flex-direction: column;
-    align-items: center;
+    align-items: flex-start;
 }
 
 .login-input {
     width: 290px;
 }
 
-#login-form > button {
+.login-button {
     background-color: red;
     color: white;
     height: 50px;
@@ -32,4 +32,32 @@ label {
     margin-top: 10px;
     margin-bottom: 10px;
     font-size: 15px;
+}
+
+.demo-button {
+    background-color: red;
+    color: white;
+    height: 50px;
+    width: 300px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    font-size: 15px;
+}
+
+.disabled {
+    background-color: gray;
+    color: white;
+    height: 50px;
+    width: 300px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    font-size: 15px;
+}
+
+.errors {
+    color: red
+}
+
+* {
+    font-family: 'Varela Round';
 }

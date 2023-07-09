@@ -13,10 +13,13 @@ export default function Navigation({ isLoaded }) {
   let sessionLinks;
   if (sessionUser) {
     sessionLinks = (
-      <>
+      <div id='profile-new-group'>
+        <div id='start-new-group'>
           <Link to='/groups/new'>Start a new group</Link>
+        </div>
+
           <ProfileButton user={sessionUser} />
-      </>
+      </div>
 
     );
   } else {

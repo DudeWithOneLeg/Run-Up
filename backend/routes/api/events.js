@@ -278,7 +278,7 @@ router.get('/', [queryValidator], async (req, res) => {
             model: Venue,
             attributes: ['id', 'city', 'state']
         }],
-        attributes: ['id', 'groupId', 'venueId', 'name', 'type', 'startDate', 'endDate']
+        attributes: ['id', 'groupId', 'venueId', 'name', 'type', 'startDate', 'endDate', 'description']
     }
 
     if (!req.query.page) {

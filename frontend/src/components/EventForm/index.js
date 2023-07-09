@@ -18,6 +18,7 @@ export default function EventForm() {
     const [startDate, setStartDate] = useState("")
     const [endDate, setEndDate] = useState("")
     const [errors, setErrors] = useState({})
+    const [capacity, setCapacity] = useState(0)
     const [imgUrl, setImgUrl] = useState('')
 
     const params = useParams()
@@ -40,15 +41,16 @@ export default function EventForm() {
     const handleSumbit = (e) => {
         e.preventDefault()
 
-        const event = { name, price, about, type: onlineOrInperson, private: publicOrPrivate, startDate, endDate }
+        const event = { name, price, description: about, type: onlineOrInperson, private: publicOrPrivate, startDate, endDate, capacity }
         console.log(event)
         dispatch(eventActions.requestNewEvent(event, params.groupId)).catch(async (res) => {
             const data = await res.json()
             if (data && data.errors) {
                 console.log(data)
-                setErrors(data.errors)
+                return setErrors(data.errors)
             }
         })
+        history.push('/events')
     }
     if (!group) {
         return null
@@ -113,6 +115,11 @@ export default function EventForm() {
                     {
                         errors.private && <p className="errors">{errors.private}</p>
                     }
+                    <p>How many people are you expecting?</p>
+                    <input
+                    onChange={(e) => setCapacity(e.target.value)}
+                    >
+                    </input>
                     <p>
                         What is the price for your event?
                     </p>

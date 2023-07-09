@@ -39,14 +39,18 @@ export default function ProfileButton({ user }) {
     <>
       <img id='profile-img' src={'/images/profile-icon.png'} onClick={openMenu} />
       {showMenu && <>
+
+      <div className={ulClassName}>
         <p>Hello, {user.firstName}</p>
-      <ul className={ulClassName}>
         <Link to='/groups'>View groups</Link>
         <p>{ showMenu && user.username}</p>
         <p>{showMenu && user.firstName} {showMenu && user.lastName}</p>
         <p>{showMenu && user.email}</p>
+        <div id='logout-div'>
           <Link onClick={logout}>Log Out</Link>
-      </ul>
+        </div>
+
+      </div>
       </>}
 
     </>

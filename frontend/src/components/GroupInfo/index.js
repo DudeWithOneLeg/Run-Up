@@ -46,19 +46,19 @@ export default function GroupInfo() {
             <div id='group-info'>
                 {
                     group && (
-                        <div>
+                        <div id='group-info-div'>
                             <p>&lt;<Link to='/groups'>Groups</Link></p>
                             <div id='top-card'>
                                 {group.GroupImages && group.GroupImages.map((img) => {
                                     if (img.preview) {
                                         return (
-                                            <img src={img.url} alt='placeholder'></img>
+                                            <img src={img.url} alt='placeholder' id='group-image'></img>
                                         )
                                     }
                                     return
                                 })}
                                 <div id="top-right-card">
-                                    <div>
+                                    <div id='top-right-card-info'>
                                         <h1>{group.name}</h1>
                                         <p>{group.city + "," + group.state}</p>
                                         {group.private ? <p>{'(' + numEvents + ') events'} · Private</p> : <p>{numEvents} · Public</p>}
@@ -68,7 +68,7 @@ export default function GroupInfo() {
                                         hidden={!currentUser || currentUser.id === group.organizerId}
                                     >Join this group</button>
                                     <div
-                                        hidden={!currentUser | currentUser.id !== group.organizerId}
+                                        hidden={!currentUser || currentUser.id !== group.organizerId}
                                         id='organizerButtons'
                                     >
 
@@ -108,17 +108,19 @@ export default function GroupInfo() {
 
 
                             </div>
-                            <div>
+                            <div className="more-info">
+                                <h1>Organizer</h1>
+                                <p>{group.Organizer.firstName} {group.Organizer.lastName}</p>
                                 <h1>What we're about</h1>
                                 <p>{group.about}</p>
                                 <p>{group.previewImage}</p>
                                 <h1>Upcoming Events</h1>
                             </div>
-                            <GroupEvents events={events} />
-                        </div>
 
+                        </div>
                     )
                 }
+                <GroupEvents events={events} />
             </div>
 
 

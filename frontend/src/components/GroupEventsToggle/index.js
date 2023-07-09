@@ -20,7 +20,7 @@ export default function GroupEventsToggle() {
     dispatch(eventActions.loadEvents());
 
   };
-const events = useSelector((state) => state.event.events);
+  const events = useSelector((state) => state.event.events);
   useEffect(() => {
     if (window.location.pathname === '/groups') {
       console.log("DISPATCHING GROUPS")
@@ -36,13 +36,14 @@ const events = useSelector((state) => state.event.events);
     if (!about) {
       return
     }
-    const slice = about.split('').slice(0, 60).join('')
+    const slice = about.split('').slice(0, 150).join('')
+    console.log(slice.length)
     return slice + '...'
   }
 
 
 
-const path = window.location.pathname
+  const path = window.location.pathname
 
 
 
@@ -59,11 +60,17 @@ const path = window.location.pathname
       <div id='list'>
         {events && window.location.pathname === '/events' && Object.values(events).map((event) => (
           <NavLink key={event.id} to={`/events/${event.id}`}>
-            <div className='card'>
-              <h1 className='name'>{event.name}</h1>
-              {event.Venue && <p>{event.Venue.city + ',' + event.Venue.state}</p>}
-              <p>{event.description && sliceAbout(event.description)}</p>
-              <p>{event.previewImage}</p>
+            <div className='card-container'>
+              <div className='card'>
+                <img src={event.previewImage} alt='event-preview'></img>
+                <div className='info-card'>
+                  <p>YYYY-MM-DD · time</p>
+                  <h1 className='name'>{event.name}</h1>
+                  {event.Venue && <p className='gray-text'>{event.Venue.city + ',' + event.Venue.state}</p>}
+                  <p>{sliceAbout(event.description)}</p>
+                </div>
+
+              </div>
             </div>
           </NavLink>
         ))}
@@ -72,7 +79,7 @@ const path = window.location.pathname
           <NavLink key={group.id} to={`/groups/${group.id}`}>
             <div className='card-container'>
               <div className='card'>
-                <img src={group.previewImage} alt='group-rview-image' ></img>
+                <img src={group.previewImage} alt='group-preview-image' ></img>
                 <div className='info-card'>
                   <h1 className='name'>{group.name}</h1>
                   <p className='gray-text'>{group.city + ',' + group.state}</p>

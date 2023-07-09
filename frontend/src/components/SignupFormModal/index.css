@@ -8,15 +8,37 @@
     font-size: 16px;
 }
 
+#disabled-signup-button {
+    background-color: gray;
+    color: white;
+    height: 50px;
+    width: 300px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    font-size: 16px;
+
+}
+
 #sign-up-form {
     text-align: center;
     width: 500px;
+}
+
+#sign-up-form-form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
 
 .signup-input {
     width: 300px;
 }
 
-form > label {
+.label {
     text-align: left;
+}
+
+* {
+    font-family: 'Varela Round';
 }

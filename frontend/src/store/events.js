@@ -3,6 +3,14 @@ import { csrfFetch } from "./csrf"
 const GET_ALL_EVENTS = 'groups/getAllEvents'
 const GET_GROUP_EVENTS = 'group/getGroupEvents'
 const CREATE_EVENT = 'events/createEvent'
+const GET_ONE_EVENT = 'events/getOneEvent'
+
+export const loadEvent = (event) => {
+    return {
+        type: GET_ONE_EVENT,
+        payload: event
+    }
+}
 
 export const createEvent = (event) => {
     return {

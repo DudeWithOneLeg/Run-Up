@@ -38,7 +38,7 @@ export default function LoginFormModal() {
         );
     }
 
-
+const disabled = credential.length < 4 || password.length < 6
 
     return (
         <div id='log-in'>
@@ -46,17 +46,26 @@ export default function LoginFormModal() {
             <form
             id='login-form'
             onSubmit={handleSubmit}>
-                <label>Username or E-mail:
+                {validations.errors && validations.errors.map((error) => {
+                    console.log(validations)
+                    return <p className='errors'>The provided credentials were invalid.</p>
+                })}
+                <label
+                className="login-label"
+                >Username or E-mail:
                     <input
                     className="login-input"
                         type="text"
                         value={credential}
-                        onChange={(e) => setCredential(e.target.value)}
+                        onChange={(e) => {
+                            setCredential(e.target.value)
+                        }}
                         required
                     ></input>
                 </label>
 
-                <label>Password:
+                <label
+                className="login-label">Password:
                     <input
                         className="login-input"
                         type="password"
@@ -65,13 +74,13 @@ export default function LoginFormModal() {
                         required
                     ></input>
                 </label>
-                {validations.errors && validations.errors.map((error) => {
-                    console.log(validations)
-                    return <p>{error}</p>
-                })}
+
                 <button
+                disabled={credential.length < 4 || password.length < 6}
+                className={credential.length < 4 || password.length < 6 ? 'disabled' : 'login-button'}
                 type="submit">Log In</button>
                 <button
+                className='demo-button'
                 onClick={() => {
                     dispatch(sessionActions.login({ credential: 'john1@doe.com', password: 'password'
 

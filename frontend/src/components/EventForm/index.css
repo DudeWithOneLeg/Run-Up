@@ -62,3 +62,7 @@ form > .event-div {
 .calendar {
     width: 20%;
 }
+
+* {
+    font-family: 'Varela Round';
+}

@@ -29,12 +29,13 @@ const { closeModal } = useModal();
           lastName,
           password,
         })
-      ).then(closeModal).catch(async (res) => {
+      ).then(() => dispatch(sessionActions.login({ email, password }))).then(closeModal).catch(async (res) => {
         const data = await res.json();
         if (data && data.errors) {
           console.log(data)
           return setErrors(data.errors);
         }
+
         history.push('/')
       });
     }
@@ -46,8 +47,10 @@ const { closeModal } = useModal();
   return (
     <div id='sign-up-form'>
       <h1>Sign Up</h1>
-      <form onSubmit={handleSubmit}>
-        <label>
+      <form
+      id='sign-up-form-form'
+      onSubmit={handleSubmit}>
+        <label className="label">
           Email
           <input
           className='signup-input'
@@ -58,8 +61,8 @@ const { closeModal } = useModal();
           />
 
         </label>
-        {errors.email && <p>{errors.email}</p>}
-        <label>
+        {errors.email && <p className="errors">{errors.email}</p>}
+        <label className="label">
           Username
           <input
           className='signup-input'
@@ -69,8 +72,8 @@ const { closeModal } = useModal();
             required
           />
         </label>
-        {errors.username && <p>{errors.username}</p>}
-        <label>
+        {errors.username && <p className="errors">{errors.username}</p>}
+        <label className="label">
           First Name
           <input
           className='signup-input'
@@ -80,8 +83,8 @@ const { closeModal } = useModal();
             required
           />
         </label>
-        {errors.firstName && <p>{errors.firstName}</p>}
-        <label>
+        {errors.firstName && <p className="errors">{errors.firstName}</p>}
+        <label className="label">
           Last Name
           <input
           className='signup-input'
@@ -91,8 +94,8 @@ const { closeModal } = useModal();
             required
           />
         </label>
-        {errors.lastName && <p>{errors.lastName}</p>}
-        <label>
+        {errors.lastName && <p className="errors">{errors.lastName}</p>}
+        <label className="label">
           Password
           <input
           className='signup-input'
@@ -102,8 +105,8 @@ const { closeModal } = useModal();
             required
           />
         </label>
-        {errors.password && <p>{errors.password}</p>}
-        <label>
+        {errors.password && <p className="errors">{errors.password}</p>}
+        <label className="label">
           Confirm Password
           <input
           className='signup-input'
@@ -113,9 +116,10 @@ const { closeModal } = useModal();
             required
           />
         </label>
-        {errors.confirmPassword && <p>{errors.confirmPassword}</p>}
+        {errors.confirmPassword && <p className="errors">{errors.confirmPassword}</p>}
         <button
-        id='signup-button'
+        disabled={!email || !username || !firstName || !lastName || !password || !confirmPassword}
+        id={!email || !username || !firstName || !lastName || !password || !confirmPassword || username.length < 4 || password.length < 6 ? 'disabled-signup-button' : 'signup-button'}
         type="submit">Sign Up</button>
       </form>
     </div>
