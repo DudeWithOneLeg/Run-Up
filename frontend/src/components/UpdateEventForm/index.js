@@ -210,7 +210,7 @@ useEffect(() => {
                 }
                 </div>
 
-                <div className='event-div'>
+                {/* <div className='event-div'>
                    <p>
                     Please add in image url for your event below:
                 </p>
@@ -237,7 +237,7 @@ useEffect(() => {
                 {
                     errors.imgUrl && <p className='errors'>{errors.imgUrl}</p>
                 }
-                </div>
+                </div> */}
 
 
                 <p>
