@@ -65,12 +65,11 @@ export default function GroupForm() {
             preview: true
         }
 
-        if (groupState) {
 
             const id = groupState.id
             dispatch(groupActions.postImage(id, image))
             history.push(`/groups/${groupState.id}`)
-        }
+        
 
     }
 
@@ -176,7 +175,7 @@ export default function GroupForm() {
                 <select
                     className="group-form-select"
                     defaultValue="(choose one)"
-                    onSelect={(e) => {
+                    onChange={(e) => {
                         setOnlineOrInperson(e.target.value)
                     }}
                 >
@@ -194,7 +193,9 @@ export default function GroupForm() {
                 className="group-form-select"
                     defaultValue='(choose one)'
                     onChange={(e) => {
-                        setPublicOrPrivate(e.target.value)
+                        if (e.target.value ==='Private') setPublicOrPrivate(true)
+                        else setPublicOrPrivate(false)
+
                     }}
                 >
                     <option value="(choose one)" disabled selected>	&#40;choose one	&#41;</option>

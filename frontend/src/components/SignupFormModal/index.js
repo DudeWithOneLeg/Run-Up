@@ -18,6 +18,13 @@ export default function SignupFormModal() {
 const { closeModal } = useModal();
 
   const handleSubmit = (e) => {
+    console.log({
+      email,
+      username,
+      firstName,
+      lastName,
+      password,
+    })
     e.preventDefault();
     if (password === confirmPassword) {
       setErrors({});
@@ -29,7 +36,7 @@ const { closeModal } = useModal();
           lastName,
           password,
         })
-      ).then(() => dispatch(sessionActions.login({ email, password }))).then(closeModal).catch(async (res) => {
+      ).then(() => dispatch(sessionActions.login({ credential: email, password }))).then(closeModal).catch(async (res) => {
         const data = await res.json();
         if (data && data.errors) {
           console.log(data)

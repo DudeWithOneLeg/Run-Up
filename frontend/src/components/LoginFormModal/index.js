@@ -21,8 +21,11 @@ export default function LoginFormModal() {
     //  }[credential, password])
 
     const handleSubmit = (e) => {
-
         e.preventDefault();
+        if (credential.length < 4 || password.length < 6) {
+            return
+        }
+
         dispatch(sessionActions.login({ credential, password })).then(closeModal).catch(
             async (res) => {
                 const data = await res.json();
