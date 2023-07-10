@@ -1,3 +1,61 @@
 #organizerButtons {
-    height: 100px;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: flex-end;
+    height: 30px;
+    margin-bottom: 0px;
+}
+
+#top-card {
+    display: flex;
+    flex-direction: row;
+    width: 100%
+}
+
+#top-right-card {
+    margin-left: 5%;
+    width: 60%;
+}
+
+#group-info-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 90%;
+}
+
+#group-info {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    width: 70%;
+}
+
+#group-image {
+    width: 300px;
+}
+
+.more-info {
+    width: auto;
+    padding: 15px;
+}
+
+#top-right-card-info {
+    font-size: 13px;
+}
+
+* {
+    font-family: 'Varela Round';
+}
+
+#group-info-div {
+    width: 100%;
+}
+
+.group-buttons {
+    background-color: gray;
+    color: white;
+    height: 30px;
+    margin-right: 10px;
 }

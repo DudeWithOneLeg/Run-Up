@@ -22,17 +22,52 @@ module.exports = {
    const validEventImages = [
     {
       eventId: 1,
-      url: 'url',
+      url: 'https://www.shutterstock.com/shutterstock/photos/730017625/display_1500/stock-photo-evening-stadium-arena-soccer-field-defocus-background-730017625.jpg',
       preview: true
     },
     {
       eventId: 2,
-      url: 'url',
+      url: 'https://www.shutterstock.com/shutterstock/photos/299796638/display_1500/stock-photo-athletics-stadium-with-track-and-grass-field-at-corner-view-sport-theme-render-illustration-299796638.jpg',
       preview: true
     },
     {
       eventId: 3,
-      url: 'url',
+      url: 'https://www.shutterstock.com/shutterstock/photos/306123788/display_1500/stock-photo-athlete-track-or-running-track-with-nice-scenic-306123788.jpg',
+      preview: true
+    },
+    {
+      eventId: 4,
+      url: 'https://www.shutterstock.com/shutterstock/photos/306123788/display_1500/stock-photo-athlete-track-or-running-track-with-nice-scenic-306123788.jpg',
+      preview: true
+    },
+    {
+      eventId: 5,
+      url: 'https://www.shutterstock.com/shutterstock/photos/306123788/display_1500/stock-photo-athlete-track-or-running-track-with-nice-scenic-306123788.jpg',
+      preview: true
+    },
+    {
+      eventId: 6,
+      url: 'https://www.shutterstock.com/shutterstock/photos/306123788/display_1500/stock-photo-athlete-track-or-running-track-with-nice-scenic-306123788.jpg',
+      preview: true
+    },
+    {
+      eventId: 7,
+      url: 'https://www.shutterstock.com/shutterstock/photos/306123788/display_1500/stock-photo-athlete-track-or-running-track-with-nice-scenic-306123788.jpg',
+      preview: true
+    },
+    {
+      eventId: 8,
+      url: 'https://www.shutterstock.com/shutterstock/photos/306123788/display_1500/stock-photo-athlete-track-or-running-track-with-nice-scenic-306123788.jpg',
+      preview: true
+    },
+    {
+      eventId: 9,
+      url: 'https://www.shutterstock.com/shutterstock/photos/306123788/display_1500/stock-photo-athlete-track-or-running-track-with-nice-scenic-306123788.jpg',
+      preview: true
+    },
+    {
+      eventId: 10,
+      url: 'https://www.shutterstock.com/shutterstock/photos/306123788/display_1500/stock-photo-athlete-track-or-running-track-with-nice-scenic-306123788.jpg',
       preview: true
     },
    ]

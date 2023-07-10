@@ -1,0 +1,18 @@
+#confirm {
+    background-color: red;
+    color: white;
+}
+
+#deny {
+    background-color: gray;
+    color: white;
+}
+
+#delete-confirm {
+    text-align: center;
+    padding: 20px;
+}
+
+* {
+    font-family: 'Varela Round';
+}

@@ -38,42 +38,57 @@ export default function LoginFormModal() {
         );
     }
 
-
+const disabled = credential.length < 4 || password.length < 6
 
     return (
-        <div>
+        <div id='log-in'>
             <h1>Log In</h1>
-            <form onSubmit={handleSubmit}>
-                <label>Username or E-mail:
+            <form
+            id='login-form'
+            onSubmit={handleSubmit}>
+                {validations.errors && validations.errors.map((error) => {
+                    console.log(validations)
+                    return <p className='errors'>The provided credentials were invalid.</p>
+                })}
+                <label
+                className="login-label"
+                >Username or E-mail:
                     <input
+                    className="login-input"
                         type="text"
                         value={credential}
-                        onChange={(e) => setCredential(e.target.value)}
+                        onChange={(e) => {
+                            setCredential(e.target.value)
+                        }}
                         required
                     ></input>
                 </label>
 
-                <label>Password:
+                <label
+                className="login-label">Password:
                     <input
+                        className="login-input"
                         type="password"
                         value={password}
                         onChange={(e) => setPassword(e.target.value)}
                         required
                     ></input>
                 </label>
-                {validations.errors && validations.errors.map((error) => {
-                    console.log(validations)
-                    return <p>{error}</p>
-                })}
-                <button type="submit">Log In</button>
-            </form>
-            <button
+
+                <button
+                disabled={credential.length < 4 || password.length < 6}
+                className={credential.length < 4 || password.length < 6 ? 'disabled' : 'login-button'}
+                type="submit">Log In</button>
+                <button
+                className='demo-button'
                 onClick={() => {
                     dispatch(sessionActions.login({ credential: 'john1@doe.com', password: 'password'
 
                 })).then(closeModal)
             }}
             >Log in as Demo User</button>
+            </form>
+
         </div>
     )
 }

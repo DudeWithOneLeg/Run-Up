@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useDispatch } from 'react-redux';
 import * as sessionActions from '../../store/session';
 import { useHistory, Link } from "react-router-dom";
+import './profileButton.css'
 
 export default function ProfileButton({ user }) {
   const history = useHistory()
@@ -36,20 +37,21 @@ export default function ProfileButton({ user }) {
 
   return (
     <>
-      <button onClick={openMenu}>
-        <i className="fas fa-user-circle" />
-      </button>
+      <img id='profile-img' src={'/images/profile-icon.png'} onClick={openMenu} />
       {showMenu && <>
+
+      <div className={ulClassName}>
         <p>Hello, {user.firstName}</p>
-      <ul className={ulClassName}>
         <Link to='/groups'>View groups</Link>
-        <li>{ showMenu && user.username}</li>
-        <li>{showMenu && user.firstName} {showMenu && user.lastName}</li>
-        <li>{showMenu && user.email}</li>
-        <li>
-          <button onClick={logout}>Log Out</button>
-        </li>
-      </ul>
+        <Link to='/events'>View events</Link>
+        <p>{ showMenu && user.username}</p>
+        <p>{showMenu && user.firstName} {showMenu && user.lastName}</p>
+        <p>{showMenu && user.email}</p>
+        <div id='logout-div'>
+          <Link onClick={logout}>Log Out</Link>
+        </div>
+
+      </div>
       </>}
 
     </>

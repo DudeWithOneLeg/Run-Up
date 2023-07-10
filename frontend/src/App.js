@@ -6,9 +6,12 @@ import * as sessionActions from "./store/session";
 import Navigation from "./components/Navigation";
 import GroupInfo from "./components/GroupInfo";
 import GroupEventsToggle from "./components/GroupEventsToggle";
-import GroupEvents from "./components/GroupEvents";
 import GroupForm from "./components/GroupForm/GroupForm";
 import UpdateGroupForm from "./components/UpdateGroupForm";
+import EventForm from "./components/EventForm";
+import LandingPage from "./components/LandingPage";
+import EventInfo from "./components/EventInfo";
+import UpdateEventForm from "./components/UpdateEventForm";
 
 function App() {
   const dispatch = useDispatch();
@@ -33,7 +36,7 @@ function App() {
 
       <Switch>
         <Route exact path='/'>
-        <Link to='/groups'>See all groups</Link>
+          <LandingPage />
         </Route>
         <Route exact path='/events'>
           <GroupEventsToggle />
@@ -41,15 +44,23 @@ function App() {
         <Route exact path='/groups'>
           <GroupEventsToggle />
         </Route>
+        <Route exact path='/groups/:groupId/events/new'>
+          <EventForm />
+        </Route>
         <Route exact path='/groups/new'>
           <GroupForm />
         </Route>
         <Route exact path='/groups/:id'>
           <GroupInfo />
-          <GroupEvents />
         </Route>
         <Route exact path='/groups/:id/edit'>
           <UpdateGroupForm />
+        </Route>
+        <Route exact path='/events/:eventId'>
+          <EventInfo />
+        </Route>
+        <Route exact path='/events/:eventId/edit'>
+          <UpdateEventForm />
         </Route>
       </Switch>
 

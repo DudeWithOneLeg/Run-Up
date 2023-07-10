@@ -398,7 +398,8 @@ router.get('/:groupId/events', groupExists, async (req, res) => {
             model: Venue,
             attributes: ['id', 'city', 'state']
         }],
-        attributes: ['id', 'groupId', 'venueId', 'name', 'type', 'description', 'startDate', 'endDate']
+        attributes: ['id', 'groupId', 'venueId', 'name', 'type', 'description', 'startDate', 'endDate'],
+        order: [['startDate', 'ASC']]
     })
 
     if (!events[0]) {
@@ -440,6 +441,7 @@ router.get('/:groupId/events', groupExists, async (req, res) => {
         event.numAttending = numAttending
         events[index] = event
     }
+    console.log(events)
 
     res.json(events)
 })
@@ -448,8 +450,6 @@ router.post('/:groupId/events', [venueExists, eventDateBool, validateEvent, grou
     if (req.err) {
         return res.json(req.err)
     }
-
-
 
     req.body.groupId = req.params.groupId
 

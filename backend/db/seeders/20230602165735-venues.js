@@ -21,8 +21,24 @@ module.exports = {
     {
       groupId: 1,
       address: 'yo',
-      city: 'H-Town',
-      state: 'Tx',
+      city: 'Houston',
+      state: 'Texas',
+      lat: 30.2,
+      lng: 30.2
+    },
+    {
+      groupId: 2,
+      address: 'yo',
+      city: 'Houston',
+      state: 'Texas',
+      lat: 30.2,
+      lng: 30.2
+    },
+    {
+      groupId: 3,
+      address: 'yo',
+      city: 'Houston',
+      state: 'Texas',
       lat: 30.2,
       lng: 30.2
     },

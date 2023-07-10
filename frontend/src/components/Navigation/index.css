@@ -1,20 +1,68 @@
 #nav {
     display: flex;
-    border: solid red;
+    flex-direction: row;
+    border-bottom: solid gray;
     justify-content: space-between;
+    align-items: center;
+    width: 100%;
 }
 
 #login-signup {
     display: flex;
     flex-direction: row;
-    width: 100px;
+    width: 200px;
     justify-content: flex-start;
     align-self: flex-end;
-    border: solid green
+    font-size: 15px;
+}
+
+#login-signup > * {
+    padding-right: 20px;
 }
 
 #home {
-    border: solid pink;
+    text-align: center;
     display: flex;
-    width: 50px;
+    width: 200px;
+    font-size: 40px;
+}
+
+#login {
+    border-radius: 10px;
+}
+
+#logout-div {
+    border-top: solid black;
+}
+
+.profile-dropdown {
+    position: absolute;
+    top: 55px;
+    right: 30px;
+    border: solid black;
+    padding: 5px;
+    display: flex;
+    flex-direction: column;
+}
+
+#profile-new-group {
+    display: flex;
+    flex-direction: row;
+}
+
+#start-new-group {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    width: 200px;
+}
+
+* {
+    font-family: 'Varela Round';
+}
+
+#profile-img {
+    cursor: pointer;
 }

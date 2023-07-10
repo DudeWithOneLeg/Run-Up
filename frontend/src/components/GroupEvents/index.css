@@ -1,11 +1,44 @@
-.card {
+.group-events-card {
     display: flex;
     flex-direction: column;
-    border: solid red
+    width: 50%;
+    width: 100%;
 }
 
-#card-info {
+#group-events-card-info {
     display: flex;
     flex-direction: column;
-    border: solid green
+    font-size: 10px;
+}
+
+#group-events-card-inner-info {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+}
+
+* {
+    font-family: 'Varela Round';
+}
+
+#group-events {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+.group-events-about {
+    overflow-wrap: break-word;
+    text-align: left;
+    font-size: 12px;
+    width: 100%;
+}
+
+.group-events-card-more-info {
+    width: 100%;
+}
+
+Link {
+    display: flex;
+    flex-direction: row;
 }
