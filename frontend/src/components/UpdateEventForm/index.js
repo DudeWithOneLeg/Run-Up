@@ -23,29 +23,29 @@ export default function UpdateEventForm() {
 
     const params = useParams()
     const dispatch = useDispatch()
-const oldEvent = useSelector(state => state.event.event )
 
+const oldEvent = useSelector(state => state.event.eventInfo)
 const group = useSelector(state => state.group.group)
-useEffect(() => {
-    dispatch(eventActions.loadEvent(params.eventId));
-  }, [dispatch, params.eventId]);
 
+console.log(params)
+useEffect(() => {
+    console.log(params.eventId)
+    dispatch(eventActions.loadEvent(params.eventId));
+    dispatch(groupActions.loadGroup(oldEvent.groupId))
+  }, [dispatch]);
   useEffect(() => {
     if (oldEvent) {
-      dispatch(groupActions.loadGroup(group.groupId));
+       dispatch(groupActions.loadGroup(oldEvent.groupId))
     }
+
   }, [dispatch, oldEvent]);
-
-
-    console.log(group)
-
-    const host = useSelector(state => state.event.eventAttend)
-
 
     useEffect(() => {
         console.log({ name, price, about, onlineOrInperson, publicOrPrivate, startDate, endDate })
         console.log("Errors:", errors)
     }, [name, price, about, onlineOrInperson, publicOrPrivate, startDate, endDate, errors])
+
+
 
     const handleSumbit = (e) => {
         e.preventDefault()
@@ -89,9 +89,13 @@ useEffect(() => {
 
         history.push(`/events/${oldEvent.id}`)
     }
-    if (!oldEvent) {
+
+    if (!oldEvent || !group) {
         return null
     }
+
+    console.log('old event', oldEvent)
+
     return (
         <div className="event-form-container">
 
@@ -153,6 +157,7 @@ useEffect(() => {
                     }
                     <p>How many people are you expecting?</p>
                     <input
+                    defaultValue={oldEvent.capacity}
                     onChange={(e) => setCapacity(e.target.value)}
                     >
                     </input>

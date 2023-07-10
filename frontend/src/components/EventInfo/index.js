@@ -4,6 +4,7 @@ import { useEffect } from "react"
 import { Link, useParams, useHistory } from "react-router-dom"
 import OpenModalButton from "../OpenModalButton"
 import DeleteEventModal from "../DeleteEventModal"
+import * as groupActions from '../../store/groups'
 import './index.css'
 
 
@@ -80,7 +81,8 @@ export default function EventInfo() {
                             {!user || user.id !== attendees[0].id && <div>
                                 <button className='group-buttons'
                                 onClick={() => {
-                                    history.push(`/events/${event.id}/edit`)
+                                    dispatch(groupActions.loadGroup(event.groupId)).then(() => history.push(`/events/${event.id}/edit`))
+
                                 }}
                                 >Update</button>
                                 <OpenModalButton
