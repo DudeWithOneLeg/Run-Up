@@ -5,7 +5,6 @@ import { useHistory } from "react-router-dom"
 import './index.css'
 
 export default function GroupForm() {
-    console.log("HELLOO")
 
     const history = useHistory()
 
@@ -26,6 +25,8 @@ export default function GroupForm() {
             name, location, about, onlineOrInperson, publicOrPrivate
         })
     }, [name, location, about, onlineOrInperson, publicOrPrivate])
+
+
 
     const handleSumbit = (e) => {
 
@@ -82,7 +83,7 @@ export default function GroupForm() {
                 <p>
                 BECOME AN ORGNIZER
             </p>
-            <h2>
+            <h2 className='group-h2'>
                 We'll walk you through a few steps to build your local community
             </h2>
                 <div className='group-div'>
@@ -153,6 +154,7 @@ export default function GroupForm() {
                     </li>
                 </ol>
                 <textarea
+                defaultValue='Please write at least 50 characters'
                 className='group-input'
                     onChange={(e) => {
                         setAbout(e.target.value)
@@ -161,7 +163,6 @@ export default function GroupForm() {
                         e.target.value = about
                     }}
                 >
-                    Please write at least 50 characters
                 </textarea>
                 {
                     errors.about && <p className="errors">{errors.about}</p>

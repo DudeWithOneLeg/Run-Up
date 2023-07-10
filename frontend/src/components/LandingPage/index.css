@@ -1,25 +1,70 @@
 #landing-about-div {
     display: flex;
     flex-direction: column;
+    font-size: 12px;
 }
+
+
 
 #landing-inner-div {
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     width: 70%;
-    border: solid red;
+    justify-content: center;
+    align-items: flex-end;
+    margin-top: 50px;
+    margin-bottom: 50px;
 }
 
 #landing-div {
     width: 100%;
     display: flex;
     flex-direction: column;
-    border: solid red;
+    justify-content: center;
+    align-items: center;
 }
 
 #landing-outer-div {
-    width: 100%;
-    border: solid green;
+    width: 80%;
     display: flex;
+    flex-direction: column;
     justify-content: center;
+    align-items: center;
+}
+
+.link-cards {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#landing-cards {
+    display: flex;
+    flex-direction: row;
+    margin-top: 50px;
+    margin-bottom: 50px;
+    text-align: center;
+}
+
+#how-legup-works {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 50px;
+    margin-bottom: 50px;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+.disabled-link:hover, .disabled-link:active, .disabled-link {
+    text-decoration: none;
+    cursor: default;
+    color: gray;
+}
+
+#landing-main {
+    width: 400px;
+    height: 200px;
 }

@@ -5,7 +5,7 @@ import * as groupActions from '../../store/groups'
 import { useHistory, useParams } from "react-router-dom"
 import './index.css'
 
-export default function EventForm() {
+export default function UpdateEventForm() {
     console.log("HELLOO")
 
     const history = useHistory()
@@ -23,15 +23,23 @@ export default function EventForm() {
 
     const params = useParams()
     const dispatch = useDispatch()
+const oldEvent = useSelector(state => state.event.event )
 
-    useEffect(() => {
-        dispatch(groupActions.loadGroup(params.groupId))
+const group = useSelector(state => state.group.group)
+useEffect(() => {
+    dispatch(eventActions.loadEvent(params.eventId));
+  }, [dispatch, params.eventId]);
+
+  useEffect(() => {
+    if (oldEvent) {
+      dispatch(groupActions.loadGroup(group.groupId));
+    }
+  }, [dispatch, oldEvent]);
 
 
-    }, [dispatch])
+    console.log(group)
 
-    const group = useSelector(state => state.group.group)
-    const newEvent = useSelector(state => state.event.event )
+    const host = useSelector(state => state.event.eventAttend)
 
 
     useEffect(() => {
@@ -42,27 +50,46 @@ export default function EventForm() {
     const handleSumbit = (e) => {
         e.preventDefault()
 
-        const event = { name, price, description: about, type: onlineOrInperson, private: publicOrPrivate, startDate, endDate, capacity }
-        console.log(event)
-        dispatch(eventActions.requestNewEvent(event, params.groupId)).catch(async (res) => {
+        const newEvent = {}
+
+        if (name) {
+            newEvent.name = name
+        }
+        if (price) {
+            newEvent.price = price
+        }
+        if (about) {
+            newEvent.description = about
+        }
+        if (onlineOrInperson) {
+            newEvent.onlineOrInperson = onlineOrInperson
+        }
+        if (publicOrPrivate) {
+            newEvent.publicOrPrivate = publicOrPrivate
+        }
+        if (capacity) {
+            newEvent.capacity = capacity
+        }
+        if (startDate) {
+            newEvent.startDate = startDate
+        }
+        if (endDate) {
+            newEvent.endDate = endDate
+        }
+
+        console.log(newEvent)
+        dispatch(eventActions.requestNewEvent(newEvent, oldEvent.groupId)).catch(async (res) => {
             const data = await res.json()
             if (data && data.errors) {
                 console.log(data)
                 return setErrors(data.errors)
             }
         })
-
-        const image = {
-            url: imgUrl,
-            preview: true
-        }
-
         dispatch(eventActions.loadEvents())
-        dispatch(eventActions.postEventImg(newEvent.id, image))
 
-        history.push(`/events/${newEvent.id}`)
+        history.push(`/events/${oldEvent.id}`)
     }
-    if (!group) {
+    if (!oldEvent) {
         return null
     }
     return (
@@ -80,6 +107,7 @@ export default function EventForm() {
                         What is the name of your event?
                     </p>
                     <input
+                    defaultValue={oldEvent.name}
                     className='event-input'
                         required
                         onChange={(e) => setName(e.target.value)}
@@ -99,13 +127,12 @@ export default function EventForm() {
                         className="event-select"
                         onChange={(e) => setOnlineOrInperson(e.target.value)}
                     >
-                        <option disabled selected>	&#40;choose one	&#41;</option>
-                        <option>In person</option>
-                        <option>Online</option>
+                        <option selected={oldEvent.type === 'In person'}>In person</option>
+                        <option selected={oldEvent.type === 'Online'}>Online</option>
                     </select>
 
                     {
-                        errors.type && <p className="errors">Event type is required</p>
+                        errors.type && <p className="errors">{errors.type}</p>
                     }
 
                     <p>
@@ -118,12 +145,11 @@ export default function EventForm() {
                             if (e.target.value === 'Public') setPublicOrPrivate(false)
                         }}
                     >
-                        <option disabled selected>	&#40;choose one	&#41;</option>
-                        <option>Public</option>
-                        <option>Private</option>
+                        <option selected={oldEvent.private === false}>Public</option>
+                        <option selected={oldEvent.private === false}>Private</option>
                     </select>
                     {
-                        errors.private && <p className="errors">Visibility is required</p>
+                        errors.private && <p className="errors">{errors.private}</p>
                     }
                     <p>How many people are you expecting?</p>
                     <input
@@ -135,6 +161,7 @@ export default function EventForm() {
                     </p>
                     <div>
                         <input
+                        defaultValue={oldEvent.price}
                         className='event-input'
                             onClick={(e) => e.preventDefault()}
                             placeholder="$"
@@ -156,6 +183,7 @@ export default function EventForm() {
                     When does your event start?
                 </p>
                 <input
+                defaultValue={oldEvent.startDate}
                 className="calendar"
                     onChange={(e) => setStartDate(e.target.value)}
                     type='datetime-local' />
@@ -166,6 +194,7 @@ export default function EventForm() {
                     When does your event end?
                 </p>
                 <input
+                defaultValue={oldEvent.endDate}
                 className="calendar"
                     onChange={(e) => setEndDate(e.target.value)}
                     type='datetime-local'
@@ -210,6 +239,7 @@ export default function EventForm() {
                     Please describe your event:
                 </p>
                 <textarea
+                defaultValue={oldEvent.description}
                 className='event-input'
                 placeholder='Please include art least 30 characters'
                     onChange={(e) => setAbout(e.target.value)}

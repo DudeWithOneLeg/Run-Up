@@ -10,7 +10,7 @@ export default function GroupEventsToggle() {
 
   const groups = useSelector((state) => state.group.groups);
 
-
+const path = window.location.pathname
 
   const handleGroups = () => {
     dispatch(groupActions.loadGroups());
@@ -43,7 +43,7 @@ export default function GroupEventsToggle() {
 
 
 
-  const path = window.location.pathname
+
 
 
 
@@ -56,24 +56,38 @@ export default function GroupEventsToggle() {
         <NavLink className={path === '/groups' ? 'toggle-active' : 'toggle'} to="/groups" onClick={handleGroups}>
           Groups
         </NavLink>
+
+      </div>
+      <div className='toggle-subhead'>
+{path === '/groups' && <p >Groups in Leg Up</p>}
+      {path === '/events' && <p className='toggle-subhead'>Events in Leg Up</p>}
       </div>
       <div id='list'>
-        {events && window.location.pathname === '/events' && Object.values(events).map((event) => (
+        {events && window.location.pathname === '/events' && Object.values(events).map((event) =>
+        {
+          event.startDate = event.startDate.split('T').join(' · ')
+        event.endDate = event.endDate.split('T').join(' · ')
+
+        return (
           <NavLink key={event.id} to={`/events/${event.id}`}>
             <div className='card-container'>
               <div className='card'>
                 <img src={event.previewImage} alt='event-preview'></img>
                 <div className='info-card'>
-                  <p>YYYY-MM-DD · time</p>
+                  <p>{event.startDate}</p>
                   <h1 className='name'>{event.name}</h1>
                   {event.Venue && <p className='gray-text'>{event.Venue.city + ',' + event.Venue.state}</p>}
-                  <p>{sliceAbout(event.description)}</p>
+
                 </div>
 
               </div>
+              <p>{sliceAbout(event.description)}</p>
             </div>
           </NavLink>
-        ))}
+        )
+        }
+
+        )}
 
         {groups && window.location.pathname === '/groups' && Object.values(groups).map((group) => (
           <NavLink key={group.id} to={`/groups/${group.id}`}>

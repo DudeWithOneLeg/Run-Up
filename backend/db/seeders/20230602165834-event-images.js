@@ -35,6 +35,41 @@ module.exports = {
       url: 'https://www.shutterstock.com/shutterstock/photos/306123788/display_1500/stock-photo-athlete-track-or-running-track-with-nice-scenic-306123788.jpg',
       preview: true
     },
+    {
+      eventId: 4,
+      url: 'https://www.shutterstock.com/shutterstock/photos/306123788/display_1500/stock-photo-athlete-track-or-running-track-with-nice-scenic-306123788.jpg',
+      preview: true
+    },
+    {
+      eventId: 5,
+      url: 'https://www.shutterstock.com/shutterstock/photos/306123788/display_1500/stock-photo-athlete-track-or-running-track-with-nice-scenic-306123788.jpg',
+      preview: true
+    },
+    {
+      eventId: 6,
+      url: 'https://www.shutterstock.com/shutterstock/photos/306123788/display_1500/stock-photo-athlete-track-or-running-track-with-nice-scenic-306123788.jpg',
+      preview: true
+    },
+    {
+      eventId: 7,
+      url: 'https://www.shutterstock.com/shutterstock/photos/306123788/display_1500/stock-photo-athlete-track-or-running-track-with-nice-scenic-306123788.jpg',
+      preview: true
+    },
+    {
+      eventId: 8,
+      url: 'https://www.shutterstock.com/shutterstock/photos/306123788/display_1500/stock-photo-athlete-track-or-running-track-with-nice-scenic-306123788.jpg',
+      preview: true
+    },
+    {
+      eventId: 9,
+      url: 'https://www.shutterstock.com/shutterstock/photos/306123788/display_1500/stock-photo-athlete-track-or-running-track-with-nice-scenic-306123788.jpg',
+      preview: true
+    },
+    {
+      eventId: 10,
+      url: 'https://www.shutterstock.com/shutterstock/photos/306123788/display_1500/stock-photo-athlete-track-or-running-track-with-nice-scenic-306123788.jpg',
+      preview: true
+    },
    ]
 
    await queryInterface.bulkInsert(options, validEventImages, {})

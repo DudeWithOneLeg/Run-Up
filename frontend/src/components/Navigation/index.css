@@ -5,7 +5,6 @@
     justify-content: space-between;
     align-items: center;
     width: 100%;
-    border: solid red
 }
 
 #login-signup {
@@ -42,6 +41,8 @@
     right: 30px;
     border: solid black;
     padding: 5px;
+    display: flex;
+    flex-direction: column;
 }
 
 #profile-new-group {
@@ -60,4 +61,8 @@
 
 * {
     font-family: 'Varela Round';
+}
+
+#profile-img {
+    cursor: pointer;
 }

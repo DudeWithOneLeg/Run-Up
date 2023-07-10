@@ -1,23 +1,21 @@
-#organizerButtons, #delete {
+#organizerButtons {
     display: flex;
     flex-direction: row;
+    justify-content: flex-start;
+    align-items: flex-end;
     height: 30px;
-    width: 250px;
     margin-bottom: 0px;
-    border: solid blue
 }
 
 #top-card {
     display: flex;
     flex-direction: row;
-    border: solid purple;
     width: 100%
 }
 
 #top-right-card {
     margin-left: 5%;
-    border: solid green;
-    width: 100%;
+    width: 60%;
 }
 
 #group-info-container {
@@ -25,31 +23,26 @@
     justify-content: center;
     align-items: center;
     width: 90%;
-    border: solid orange
 }
 
 #group-info {
     display: flex;
     flex-direction: column;
     width: 100%;
-    border: solid purple;
     width: 70%;
 }
 
 #group-image {
     width: 300px;
-    border: solid yellow
 }
 
 .more-info {
-    background-color: rgb(218, 214, 214);
     width: auto;
     padding: 15px;
 }
 
 #top-right-card-info {
-    font-size: 15px;
-    border: solid black
+    font-size: 13px;
 }
 
 * {
@@ -58,5 +51,11 @@
 
 #group-info-div {
     width: 100%;
-    color: black;
+}
+
+.group-buttons {
+    background-color: gray;
+    color: white;
+    height: 30px;
+    margin-right: 10px;
 }

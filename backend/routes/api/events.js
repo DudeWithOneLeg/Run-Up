@@ -147,7 +147,7 @@ const eventExists = async (req, res, next) => {
             attributes: ['id', 'url', 'preview']
         },
         ],
-        attributes: ['id', 'groupId', 'venueId', 'name', 'type', 'capacity', 'price', 'startDate', 'endDate']
+        attributes: ['id', 'groupId', 'venueId', 'name', 'type', 'capacity', 'price', 'startDate', 'endDate', 'description']
     })
 
     if (!event) {
@@ -370,6 +370,14 @@ router.get('/:eventId', eventExists, async (req, res) => {
         return res.json(req.err)
     }
 
+    const attend = await Attendance.findOne({
+        where: {
+            eventId: req.params.eventId,
+            status: 'host'
+        }
+    })
+
+    req.event.host = attend
 
     return res.json(req.event)
 
@@ -523,22 +531,20 @@ router.get('/:eventId/attendees', [eventExists], async (req, res) => {
             id: req.event.groupId
         }
     })
-
     const member = await Membership.findOne({
         where: {
-            userId: req.user.id,
             groupId: req.event.groupId,
-            status: 'co-host'
+            status: 'host'
         }
     })
 
-    if (group) {
-        if (group.organizerId !== req.user.id && !member) {
-        options.include.where.status = { [Op.or]: ['attending', 'waitlist'] }
-        }
-    }
+    // if (group) {
+    //     if (!member) {
+    //     options.include.where.status = { [Op.or]: ['attending', 'waitlist'] }
+    //     }
+    // }
 
-    console.log(group.organizerId !== req.user.id, !member)
+    //console.log(group.organizerId !== req.user.id, !member)
 
     if (!group) {
         res.status(404)

@@ -2,21 +2,18 @@
     display: flex;
     flex-direction: column;
     width: 50%;
-    border: solid red;
     width: 100%;
 }
 
 #group-events-card-info {
     display: flex;
     flex-direction: column;
-    border: solid green;
     font-size: 10px;
 }
 
 #group-events-card-inner-info {
     display: flex;
     flex-direction: row;
-    border: solid red;
     width: 100%;
 }
 
@@ -28,17 +25,20 @@
     display: flex;
     flex-direction: column;
     width: 100%;
-    border: solid purple
 }
 
 .group-events-about {
     overflow-wrap: break-word;
     text-align: left;
-    border: solid red;
+    font-size: 12px;
     width: 100%;
 }
 
 .group-events-card-more-info {
-    border: solid red;
     width: 100%;
+}
+
+Link {
+    display: flex;
+    flex-direction: row;
 }

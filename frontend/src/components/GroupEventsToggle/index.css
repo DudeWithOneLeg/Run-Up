@@ -78,3 +78,9 @@ img {
 * {
     font-family: 'Varela Round';
 }
+
+.toggle-subhead {
+    text-align: left;
+    font-size: 17px;
+    justify-self: flex-start;
+}

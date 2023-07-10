@@ -61,10 +61,12 @@ export default function GroupInfo() {
                                     <div id='top-right-card-info'>
                                         <h1>{group.name}</h1>
                                         <p>{group.city + "," + group.state}</p>
-                                        {group.private ? <p>{'(' + numEvents + ') events'} · Private</p> : <p>{numEvents} · Public</p>}
+                                        {group.private ? <p>{'(' + numEvents + ') Events'} · Private</p> : <p>{'(' + numEvents + ') Events'} · Public</p>}
                                         <p>Ogranized by {group.Organizer.firstName} {group.Organizer.lastName}</p>
                                     </div>
                                     <button
+                                    className="group-buttons"
+                                    onClick={(e) => window.alert("Feature coming soon!")}
                                         hidden={!currentUser || currentUser.id === group.organizerId}
                                     >Join this group</button>
                                     <div
@@ -73,10 +75,12 @@ export default function GroupInfo() {
                                     >
 
                                         <button
+                                        className="group-buttons"
                                             hidden={!currentUser || currentUser.id !== group.organizerId}
                                             onClick={() => history.push(`/groups/${group.id}/events/new`)}
                                         >Create Event</button>
                                         <button
+                                        className="group-buttons"
                                             hidden={!currentUser || currentUser.id !== group.organizerId}
                                             onClick={() => history.push(`/groups/${group.id}/edit`)}
                                         >Update</button>
@@ -94,6 +98,8 @@ export default function GroupInfo() {
                                         id='delete'
                                         >
                                             <OpenModalButton
+
+                                        className="group-buttons"
                                                 buttonText="Delete"
                                                 modalComponent={<DeleteGroupModal />}
                                             />
@@ -114,7 +120,7 @@ export default function GroupInfo() {
                                 <h1>What we're about</h1>
                                 <p>{group.about}</p>
                                 <p>{group.previewImage}</p>
-                                <h1>Upcoming Events</h1>
+                                <h1>Events </h1>
                             </div>
 
                         </div>
