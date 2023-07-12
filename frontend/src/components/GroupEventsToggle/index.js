@@ -15,7 +15,6 @@ const path = window.location.pathname
   const handleGroups = () => {
     dispatch(groupActions.loadGroups());
   };
-  useSelector(state => console.log(state.groupEvents))
   const handleEvents = () => {
     dispatch(eventActions.loadEvents());
 

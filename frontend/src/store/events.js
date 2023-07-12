@@ -56,11 +56,15 @@ export const getGroupEvents = (events) => {
 }
 
 export const postEventImg = (eventId, image) => async (dispatch) => {
-    const res = await csrfFetch(`/api/${eventId}/images`, {
+
+    const res = await csrfFetch(`/api/events/${eventId}/images`, {
         method: 'POST',
-        body: image
+        body: JSON.stringify(image)
     })
+
     const data = await res.json()
+    console.log('EVENT IMAGE',data)
+    dispatch(addEventImg(data))
     return res
 }
 
@@ -105,6 +109,7 @@ export const requestNewEvent = (event, groupId) => async (dispatch) => {
     })
     const data = await res.json()
     if (res.ok) {
+        console.log(data)
         dispatch(createEvent(data))
     }
 
@@ -158,11 +163,15 @@ export const eventReducer = (state = initialState, action) => {
             return newState
         case CREATE_EVENT:
             newState = {...state, event: action.payload}
+            return newState
         case GET_ONE_EVENT:
             newState = {...state, eventInfo: action.payload}
             return newState
         case GET_EVENT_HOST:
             newState = {...state, eventAttend: {...Object.values(action.payload)}}
+            return newState
+        case POST_EVENT_IMAGE:
+            newState = {...state, eventImg: action.payload}
             return newState
         default:
             return state

@@ -26,8 +26,6 @@ export default function EventForm() {
 
     useEffect(() => {
         dispatch(groupActions.loadGroup(params.groupId))
-
-
     }, [dispatch])
 
     const group = useSelector(state => state.group.group)
@@ -35,11 +33,33 @@ export default function EventForm() {
 
 
     useEffect(() => {
-        console.log({ name, price, about, onlineOrInperson, publicOrPrivate, startDate, endDate })
+        console.log({ name, price, about, onlineOrInperson, publicOrPrivate, capacity, startDate, endDate })
         console.log("Errors:", errors)
-    }, [name, price, about, onlineOrInperson, publicOrPrivate, startDate, endDate, errors])
+    }, [name, price, about, onlineOrInperson, publicOrPrivate, startDate, endDate, capacity, errors])
+
+    useEffect(() => {
+        if (newEvent) {
+            const image = {
+                url: imgUrl,
+                preview: true
+            }
+            dispatch(eventActions.loadEvents()).then(() => {
+               dispatch(eventActions.postEventImg(newEvent.id, image)).catch(async (res) => {
+                const data = await res.json()
+                if (data.errors || data.message) {
+                    console.log(data)
+                }
+            })
+            }).then(() => {
+               history.push(`/events/${newEvent.id}`)
+            })
+
+
+        }
+    }, [newEvent, dispatch, history, imgUrl])
 
     const handleSumbit = (e) => {
+
         e.preventDefault()
 
         const event = { name, price, description: about, type: onlineOrInperson, private: publicOrPrivate, startDate, endDate, capacity }
@@ -47,20 +67,13 @@ export default function EventForm() {
         dispatch(eventActions.requestNewEvent(event, params.groupId)).catch(async (res) => {
             const data = await res.json()
             if (data && data.errors) {
-                console.log(data)
+                console.log('YO THERES ERRORS',data)
                 return setErrors(data.errors)
             }
+            console.log('event???????',data)
         })
+        console.log("NEW EVENT",newEvent)
 
-        const image = {
-            url: imgUrl,
-            preview: true
-        }
-
-        dispatch(eventActions.loadEvents())
-        dispatch(eventActions.postEventImg(newEvent.id, image))
-
-        history.push(`/events/${newEvent.id}`)
     }
     if (!group) {
         return null
@@ -172,7 +185,7 @@ export default function EventForm() {
                 >
                 </input>
                 {
-                    errors.endDate && <p className='errors'>{errors.endDate}</p>
+                    errors.endDateBool && <p className='errors'>{errors.endDateBool}</p>
                 }
                 </div>
 
@@ -220,7 +233,6 @@ export default function EventForm() {
                 <button
                 id='event-button'
                     type='submit'
-                    disabled={Object.values(errors).length}
                 >Create Event</button>
             </form>
         </div>
