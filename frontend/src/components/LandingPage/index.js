@@ -24,7 +24,7 @@ export default function LandingPage() {
                     </div>
                 </div>
                 <div id='how-legup-works'>
-                    <h1>How Leg Up works</h1>
+                    <h1>How Run Up works</h1>
                     <p>    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
                     </p>
                 </div>
