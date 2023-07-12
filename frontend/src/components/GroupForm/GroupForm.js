@@ -17,6 +17,7 @@ export default function GroupForm() {
     const [errors, setErrors] = useState({})
 
     const groupState = useSelector((state) => state.group.newGroup)
+    const group = groupState
 
     const dispatch = useDispatch()
 
@@ -25,6 +26,8 @@ export default function GroupForm() {
             name, location, about, onlineOrInperson, publicOrPrivate
         })
     }, [name, location, about, onlineOrInperson, publicOrPrivate])
+
+
 
 
 
@@ -38,8 +41,6 @@ export default function GroupForm() {
         else {
             setPublicOrPrivate(false)
         }
-
-
 
         console.log(publicOrPrivate)
         const [city, state] = location.split(', ')
@@ -57,10 +58,10 @@ export default function GroupForm() {
                 return setErrors(data.errors);
             }
 
-            console.log(groupState)
+            console.log('NEW GROUP',groupState)
 
-        })
-        const image = {
+        }).then(() => {
+            const image = {
             url: imgUrl,
             preview: true
         }
@@ -69,7 +70,9 @@ export default function GroupForm() {
             const id = groupState.id
             dispatch(groupActions.postImage(id, image))
             history.push(`/groups/${groupState.id}`)
-        
+        })
+
+
 
     }
 

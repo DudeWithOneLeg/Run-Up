@@ -457,7 +457,7 @@ router.post('/:groupId/events', [venueExists, eventDateBool, validateEvent, grou
 
     event = event.toJSON()
 
-    await Attendance.create({
+    const host = await Attendance.create({
         eventId: event.id,
         userId: req.user.id,
         status: 'host'
@@ -465,6 +465,9 @@ router.post('/:groupId/events', [venueExists, eventDateBool, validateEvent, grou
 
     delete event.createdAt
     delete event.updatedAt
+
+    console.log('EVENT HOSTT=======================================',host)
+
 
     return res.json(event)
 })

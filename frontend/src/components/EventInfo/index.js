@@ -19,16 +19,19 @@ export default function EventInfo() {
         dispatch(eventActions.getAttendances(params.eventId))
     }, [dispatch])
 
-    const event = useSelector(state => state.event.eventInfo)
-    const attendees = useSelector(state => state.event.eventAttend)
-    const user = useSelector(state => state.session.user)
+    const oldEvent = useSelector(state => state.event.eventInfo)
+    const oldAttendees = useSelector(state => state.event.eventAttend)
+    const oldUser = useSelector(state => state.session.user)
+
+    const event = oldEvent
+    const attendees = oldAttendees
+    const user = oldUser
+    console.log('YO THESE ARE ATTEDANCES',attendees)
     //const img = useSelector(state => state.event.EventImages)[0].url
 
-    if (!event || !attendees) {
+    if (!event || !attendees || !user) {
         return null
     }
-
-    console.log(" yo", attendees[0], user)
 
     Object.values(attendees).map((attend) => {
         let newHost
@@ -39,7 +42,7 @@ export default function EventInfo() {
     event.startDate = event.startDate.split('T').join(' · ')
     event.endDate = event.endDate.split('T').join(' · ')
 
-    console.log(event)
+    console.log('event info',attendees)
 
 
     return (
