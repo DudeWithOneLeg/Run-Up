@@ -97,7 +97,9 @@ const path = window.location.pathname
                   <h1 className='name'>{group.name}</h1>
                   <p className='gray-text'>{group.city + ',' + group.state}</p>
                   <p>{sliceAbout(group.about)}</p>
-                  <p className='gray-text'># events, public or private</p>
+                  {
+                    group.private ? <p className='gray-text'># events, Private</p> : <p className='gray-text'># events, Public</p>
+                  }
                 </div>
               </div>
             </div>
