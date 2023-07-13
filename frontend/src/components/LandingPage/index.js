@@ -5,7 +5,7 @@ import SignupFormModal from "../SignupFormModal";
 
 export default function LandingPage() {
     const user = useSelector(state => state.session.user)
-  
+
 
     return (
         <div id='landing-div'>
@@ -67,7 +67,7 @@ export default function LandingPage() {
 
                 </div>
                 {!user && <div>
-                    <OpenModalText
+                      <OpenModalText
                         id='login'
                         buttonText="Join Run Up"
                         modalComponent={<SignupFormModal />}
