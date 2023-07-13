@@ -23,7 +23,7 @@ export default function EventInfo() {
     const oldAttendees = useSelector(state => state.event.eventAttend)
     const oldUser = useSelector(state => state.session.user)
 
-    const event = oldEvent
+    const event = {...oldEvent}
     const attendees = oldAttendees
     const user = oldUser
     console.log('YO THESE ARE ATTEDANCES',attendees)
