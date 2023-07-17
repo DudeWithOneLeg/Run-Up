@@ -36,7 +36,7 @@ export default function LandingPage() {
                         <img src='/images/groups.png' alt='view groups' />
                         <a
                             className='link'
-                            href='/groups'>See all groups</a>
+                            href='/groups/1/10'>See all groups</a>
                         <p>
                             Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
                         </p>

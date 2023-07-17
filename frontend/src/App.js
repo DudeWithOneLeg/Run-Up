@@ -41,7 +41,7 @@ function App() {
         <Route exact path='/events'>
           <GroupEventsToggle />
         </Route>
-        <Route exact path='/groups'>
+        <Route exact path='/groups/:page/:size'>
           <GroupEventsToggle />
         </Route>
         <Route exact path='/groups/:groupId/events/new'>

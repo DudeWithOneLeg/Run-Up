@@ -42,7 +42,7 @@ export default function ProfileButton({ user }) {
 
       <div className={ulClassName}>
         <p>Hello, {user.firstName}</p>
-        <Link to='/groups'>View groups</Link>
+        <Link to='/groups/1/10'>View groups</Link>
         <Link to='/events'>View events</Link>
         <p>{ showMenu && user.username}</p>
         <p>{showMenu && user.firstName} {showMenu && user.lastName}</p>
