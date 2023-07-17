@@ -5,8 +5,12 @@ import { useHistory } from "react-router-dom"
 import './index.css'
 
 export default function GroupForm() {
-
     const history = useHistory()
+    const user = useSelector(state => state.session.user)
+
+    if (!user) {
+        history.push('/')
+    }
 
     const [name, setName] = useState("")
     const [location, setLocation] = useState("")
