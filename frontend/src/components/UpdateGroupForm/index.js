@@ -232,7 +232,6 @@ export default function UpdateGroupForm() {
                         onChange={(e) => {
                             setAbout(e.target.value)
                         }}
-                        onClick={(e) => e.target.value = about}
                     >
                     </textarea>
                     {
