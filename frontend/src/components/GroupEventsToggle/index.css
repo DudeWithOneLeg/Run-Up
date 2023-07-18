@@ -56,20 +56,22 @@ img {
     display: flex;
     flex-direction: row;
     align-items: center;
-    font-size: 70%;
+    font-size: 60%;
     height: 140px;
 }
 
 .info-card {
     display: flex;
     flex-direction: column;
-    font-size: 110%;
+    justify-content: space-between;
     width: 100%;
     height: 100%
 }
 
 .info-card > * {
-    margin-top: 0px;
+    margin-top: 1%;
+    margin-bottom: 0px;
+    height: 100%;
 }
 
 .gray-text {
@@ -81,7 +83,44 @@ img {
 }
 
 .toggle-subhead {
-    text-align: left;
+    height: 10%;
+    width: 50%;
     font-size: 17px;
-    justify-self: flex-start;
+    justify-content: flex-start;
+}
+
+#pages {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+.activePage {
+    color: gray;
+    text-decoration: none;
+    font-size: 24px;
+}
+
+.activePage:hover {
+    text-decoration: none;
+}
+
+.notActive {
+    color: black;
+    text-decoration: none;
+    font-size: 24px;
+}
+
+.group-about-text {
+    font-size: 15px;
+    overflow-wrap: break-word;
+}
+
+.navlink:hover {
+    text-decoration: none;
+}
+
+#size-select {
+    margin-left: 10px;
 }

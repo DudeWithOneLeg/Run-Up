@@ -6,9 +6,12 @@ import { useHistory, useParams } from "react-router-dom"
 import './index.css'
 
 export default function UpdateEventForm() {
-    console.log("HELLOO")
-
     const history = useHistory()
+    const user = useSelector(state => state.session.user)
+
+    if (!user) {
+        history.push('/')
+    }
 
     const [name, setName] = useState("")
     const [price, setPrice] = useState(0)

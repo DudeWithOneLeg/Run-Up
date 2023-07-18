@@ -9,6 +9,11 @@ export default function UpdateGroupForm() {
     const history = useHistory()
     const dispatch = useDispatch()
     const params = useParams()
+    const user = useSelector(state => state.session.user)
+
+    if (!user) {
+        history.push('/')
+    }
 
     //dispatch old group
     useEffect(() => {
@@ -16,11 +21,7 @@ export default function UpdateGroupForm() {
     }, [dispatch])
 
     const group = useSelector(state => state.group.group)
-    const user = useSelector(state => state.session.user)
 
-    if (!user) {
-        history.push('/')
-    }
 
     const [name, setName] = useState('')
     const [location, setLocation] = useState('')

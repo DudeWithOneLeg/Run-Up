@@ -38,10 +38,10 @@ function App() {
         <Route exact path='/'>
           <LandingPage />
         </Route>
-        <Route exact path='/events'>
+        <Route exact path='/events/:page/:size'>
           <GroupEventsToggle />
         </Route>
-        <Route exact path='/groups'>
+        <Route exact path='/groups/:page/:size'>
           <GroupEventsToggle />
         </Route>
         <Route exact path='/groups/:groupId/events/new'>
