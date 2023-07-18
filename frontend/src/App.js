@@ -38,15 +38,6 @@ function App() {
         <Route exact path='/'>
           <LandingPage />
         </Route>
-        <Route exact path='/events/:page/:size'>
-          <GroupEventsToggle />
-        </Route>
-        <Route exact path='/groups/:page/:size'>
-          <GroupEventsToggle />
-        </Route>
-        <Route exact path='/groups/:groupId/events/new'>
-          <EventForm />
-        </Route>
         <Route exact path='/groups/new'>
           <GroupForm />
         </Route>
@@ -61,6 +52,15 @@ function App() {
         </Route>
         <Route exact path='/events/:eventId/edit'>
           <UpdateEventForm />
+        </Route>
+        <Route exact path='/groups/:groupId/events/new'>
+          <EventForm />
+        </Route>
+        <Route exact path='/events/:page/:size'>
+          <GroupEventsToggle />
+        </Route>
+        <Route exact path='/groups/:page/:size'>
+          <GroupEventsToggle />
         </Route>
       </Switch>
 
