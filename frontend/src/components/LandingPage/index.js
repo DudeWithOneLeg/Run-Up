@@ -45,7 +45,7 @@ export default function LandingPage() {
                         <img src='/images/events.png' alt='view events' />
                         <a
                             className='link'
-                            href='/events'>Find an event</a>
+                            href='/events/1/10'>Find an event</a>
                         <p>
                             Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
                         </p>

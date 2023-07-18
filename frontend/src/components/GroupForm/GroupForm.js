@@ -21,7 +21,7 @@ export default function GroupForm() {
     const [errors, setErrors] = useState({})
 
     const groupState = useSelector((state) => state.group.newGroup)
-    const group = groupState
+    const newGroup = {...groupState}
 
     const dispatch = useDispatch()
 
@@ -62,7 +62,7 @@ export default function GroupForm() {
                 return setErrors(data.errors);
             }
 
-            console.log('NEW GROUP',groupState)
+            console.log('NEW GROUP',newGroup)
 
         }).then(() => {
             const image = {
@@ -71,7 +71,7 @@ export default function GroupForm() {
         }
 
 
-            const id = groupState.id
+            const id = newGroup.id
             dispatch(groupActions.postImage(id, image))
             history.push(`/groups/${groupState.id}`)
         })
