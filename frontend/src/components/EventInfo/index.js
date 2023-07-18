@@ -29,7 +29,7 @@ export default function EventInfo() {
     console.log('YO THESE ARE ATTEDANCES',attendees)
     //const img = useSelector(state => state.event.EventImages)[0].url
 
-    if (!event || !attendees || !user) {
+    if (!event || !attendees) {
         return null
     }
 
@@ -48,7 +48,7 @@ export default function EventInfo() {
     return (
         <div id='event-component'>
             <div id='event-info'>
-                <p>&lt;<Link to='/events'>Events</Link></p>
+                <p>&lt;<Link to='/events/1/10'>Events</Link></p>
                 <h1>{event.name}</h1>
                 <p>Hosted by {attendees[0].firstName} {attendees[0].lastName}</p>
             </div>
@@ -70,7 +70,7 @@ export default function EventInfo() {
                             </div>
                             <div className='time-price'>
                                 <img src='/images/money.png'/>
-                                {event.price == 0 && <h3>FEE</h3>}
+                                {event.price == 0 && <h3>FREE</h3>}
                                 {event.price > 0 && <h3>{event.price}</h3>}
                             </div>
                             <div className='time-price'>
