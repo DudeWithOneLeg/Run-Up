@@ -165,6 +165,14 @@ router.get('/', async (req, res) => {
             }
         })
 
+        const numEvents = await Event.count({
+            where: {
+                groupId: element.id
+            }
+        })
+
+        element.numEvents = numEvents
+
         previewImage = await GroupImage.findOne({
             where: {
                 groupId: element.id,
