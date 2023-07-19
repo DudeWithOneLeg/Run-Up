@@ -81,8 +81,8 @@ module.exports = {
       type: 'Online',
       capacity: 9000,
       price: 9000,
-      startDate: '2023-07-11T22:34',
-      endDate: '2023-07-16T22:34'
+      startDate: '2023-09-20T04:16',
+      endDate: '2023-09-21T04:16'
     },
     {
       venueId: 1,
@@ -92,8 +92,8 @@ module.exports = {
       type: 'Online',
       capacity: 9000,
       price: 9000,
-      startDate: '2023-07-11T22:34',
-      endDate: '2023-07-16T22:34'
+      startDate: '2023-09-20T04:16',
+      endDate: '2023-09-21T04:16'
     },
     {
       venueId: 1,
@@ -103,8 +103,8 @@ module.exports = {
       type: 'Online',
       capacity: 9000,
       price: 9000,
-      startDate: '2023-07-11T22:34',
-      endDate: '2023-07-16T22:34'
+      startDate: '2023-09-20T04:16',
+      endDate: '2023-09-21T04:16'
     },
     {
       venueId: 1,
@@ -114,8 +114,8 @@ module.exports = {
       type: 'Online',
       capacity: 9000,
       price: 9000,
-      startDate: '2023-07-11T22:34',
-      endDate: '2023-07-16T22:34'
+      startDate: '2023-09-20T04:16',
+      endDate: '2023-09-21T04:16'
     },
     {
       venueId: 2,
@@ -180,8 +180,8 @@ module.exports = {
       type: 'In person',
       capacity: 9000,
       price: 9000,
-      startDate: '2023-07-11T22:34',
-      endDate: '2023-07-16T22:34'
+      startDate: '2023-09-20T04:16',
+      endDate: '2023-09-21T04:16'
     },
     {
       venueId: 2,
@@ -191,8 +191,8 @@ module.exports = {
       type: 'In person',
       capacity: 9000,
       price: 9000,
-      startDate: '2023-07-11T22:34',
-      endDate: '2023-07-16T22:34'
+      startDate: '2023-09-20T04:16',
+      endDate: '2023-09-21T04:16'
     },
     {
       venueId: 2,
@@ -202,8 +202,8 @@ module.exports = {
       type: 'In person',
       capacity: 9000,
       price: 9000,
-      startDate: '2023-07-11T22:34',
-      endDate: '2023-07-16T22:34'
+      startDate: '2023-09-20T04:16',
+      endDate: '2023-09-21T04:16'
     },
     {
       venueId: 2,
@@ -213,8 +213,8 @@ module.exports = {
       type: 'In person',
       capacity: 9000,
       price: 9000,
-      startDate: '2023-07-11T22:34',
-      endDate: '2023-07-16T22:34'
+      startDate: '2023-09-20T04:16',
+      endDate: '2023-09-21T04:16'
     },
     {
       venueId: 2,
@@ -224,8 +224,8 @@ module.exports = {
       type: 'In person',
       capacity: 9000,
       price: 9000,
-      startDate: '2023-07-11T22:34',
-      endDate: '2023-07-16T22:34'
+      startDate: '2023-09-20T04:16',
+      endDate: '2023-09-21T04:16'
     },
     {
       venueId: 3,
@@ -290,8 +290,8 @@ module.exports = {
       type: 'Online',
       capacity: 9000,
       price: 9000,
-      startDate: '2023-07-11T22:34',
-      endDate: '2023-07-16T22:34'
+      startDate: '2023-09-20T04:16',
+      endDate: '2023-09-21T04:16'
     },
     {
       venueId: 3,
@@ -301,8 +301,8 @@ module.exports = {
       type: 'Online',
       capacity: 9000,
       price: 9000,
-      startDate: '2023-07-11T22:34',
-      endDate: '2023-07-16T22:34'
+      startDate: '2023-09-20T04:16',
+      endDate: '2023-09-21T04:16'
     },
     {
       venueId: 3,
@@ -312,8 +312,8 @@ module.exports = {
       type: 'Online',
       capacity: 9000,
       price: 9000,
-      startDate: '2023-07-11T22:34',
-      endDate: '2023-07-16T22:34'
+      startDate: '2023-09-20T04:16',
+      endDate: '2023-09-21T04:16'
     },
     {
       venueId: 3,
@@ -323,8 +323,8 @@ module.exports = {
       type: 'Online',
       capacity: 9000,
       price: 9000,
-      startDate: '2023-07-11T22:34',
-      endDate: '2023-07-16T22:34'
+      startDate: '2023-09-20T04:16',
+      endDate: '2023-09-21T04:16'
     },
     {
       venueId: 3,
@@ -334,8 +334,8 @@ module.exports = {
       type: 'Online',
       capacity: 9000,
       price: 9000,
-      startDate: '2023-07-11T22:34',
-      endDate: '2023-07-16T22:34'
+      startDate: '2023-09-20T04:16',
+      endDate: '2023-09-21T04:16'
     },
     {
       venueId: 3,
@@ -345,8 +345,8 @@ module.exports = {
       type: 'Online',
       capacity: 9000,
       price: 9000,
-      startDate: '2023-07-11T22:34',
-      endDate: '2023-07-16T22:34'
+      startDate: '2023-09-20T04:16',
+      endDate: '2023-09-21T04:16'
     }
    ]
 

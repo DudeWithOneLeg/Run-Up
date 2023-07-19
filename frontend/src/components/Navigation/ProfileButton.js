@@ -41,14 +41,14 @@ export default function ProfileButton({ user }) {
       {showMenu && <>
 
       <div className={ulClassName}>
-        <p>Hello, {user.firstName}</p>
-        <Link to='/groups/1/10'>View groups</Link>
-        <Link to='/events/1/10'>View events</Link>
-        <p>{ showMenu && user.username}</p>
-        <p>{showMenu && user.firstName} {showMenu && user.lastName}</p>
-        <p>{showMenu && user.email}</p>
+        <p className="profile-info">Hello, {user.firstName}</p>
+        <a className="profile-info" href='/groups/1/10'>View groups</a>
+        <a className="profile-info" href='/events/1/10'>View events</a>
+        <p className="profile-info">{ showMenu && user.username}</p>
+        <p className="profile-info">{showMenu && user.firstName} {showMenu && user.lastName}</p>
+        <p className="profile-info">{showMenu && user.email}</p>
         <div id='logout-div'>
-          <Link onClick={logout}>Log Out</Link>
+          <a onClick={logout}>Log Out</a>
         </div>
 
       </div>

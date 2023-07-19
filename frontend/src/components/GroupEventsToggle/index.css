@@ -45,11 +45,23 @@ img {
     width: 50%;
 }
 
+
+
 .card-container {
     padding-top: 15px;
     padding-bottom: 15px;
     border-top: solid gray;
     color: black;
+    border-radius: 20px;
+}
+
+.card-container:hover, .card:hover {
+    background-color: gray;
+    color: white;
+}
+
+.gray-text {
+    color: gray;
 }
 
 .card {
@@ -72,10 +84,6 @@ img {
     margin-top: 1%;
     margin-bottom: 0px;
     height: 100%;
-}
-
-.gray-text {
-    color: gray;
 }
 
 * {

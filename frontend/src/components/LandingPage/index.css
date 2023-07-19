@@ -38,6 +38,17 @@
     align-items: center;
 }
 
+.link-cards:hover {
+    cursor: pointer;
+    border-radius: 20px;
+    color: white;
+    background-color: black;
+}
+
+.link-cards > img {
+    border-radius: 25px;
+}
+
 #landing-cards {
     display: flex;
     flex-direction: row;

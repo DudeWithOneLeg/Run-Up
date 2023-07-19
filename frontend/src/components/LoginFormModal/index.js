@@ -3,7 +3,7 @@ import * as sessionActions from "../../store/session";
 import { useDispatch } from "react-redux";
 import "./LoginForm.css";
 import { useModal } from "../../context/Modal";
-import {useHistory} from 'react-router-dom'
+import { useHistory } from 'react-router-dom'
 
 export default function LoginFormModal() {
 
@@ -41,23 +41,23 @@ export default function LoginFormModal() {
         );
     }
 
-const disabled = credential.length < 4 || password.length < 6
+    const disabled = credential.length < 4 || password.length < 6
 
     return (
         <div id='log-in'>
             <h1>Log In</h1>
             <form
-            id='login-form'
-            onSubmit={handleSubmit}>
+                id='login-form'
+                onSubmit={handleSubmit}>
                 {validations.errors && validations.errors.map((error) => {
                     console.log(validations)
                     return <p className='errors'>The provided credentials were invalid.</p>
                 })}
                 <label
-                className="login-label"
+                    className="login-label"
                 >Username or E-mail:
                     <input
-                    className="login-input"
+                        className="login-input"
                         type="text"
                         value={credential}
                         onChange={(e) => {
@@ -68,7 +68,7 @@ const disabled = credential.length < 4 || password.length < 6
                 </label>
 
                 <label
-                className="login-label">Password:
+                    className="login-label">Password:
                     <input
                         className="login-input"
                         type="password"
@@ -79,19 +79,20 @@ const disabled = credential.length < 4 || password.length < 6
                 </label>
 
                 <button
-                disabled={credential.length < 4 || password.length < 6}
-                className={credential.length < 4 || password.length < 6 ? 'disabled' : 'login-button'}
-                type="submit">Log In</button>
-                <button
+                    disabled={credential.length < 4 || password.length < 6}
+                    className={credential.length < 4 || password.length < 6 ? 'disabled' : 'login-button'}
+                    type="submit">Log In</button>
+
+            </form>
+            <button
                 className='demo-button'
                 onClick={() => {
-                    dispatch(sessionActions.login({ credential: 'john1@doe.com', password: 'password'
+                    dispatch(sessionActions.login({
+                        credential: 'john1@doe.com', password: 'password'
 
-                })).then(closeModal)
-            }}
+                    })).then(closeModal)
+                }}
             >Log in as Demo User</button>
-            </form>
-
         </div>
     )
 }

@@ -4,6 +4,7 @@
     border-radius: 20px;
     display: flex;
     flex-direction: column;
+    justify-content: center;
     width: 400px;
     text-align: center;
 }
@@ -32,16 +33,19 @@ label {
     margin-top: 10px;
     margin-bottom: 10px;
     font-size: 15px;
+    cursor: pointer;
 }
 
 .demo-button {
     background-color: red;
+    justify-self: center;
     color: white;
     height: 50px;
     width: 300px;
     margin-top: 10px;
     margin-bottom: 10px;
     font-size: 15px;
+    cursor: pointer;
 }
 
 .disabled {
