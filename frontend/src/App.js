@@ -12,6 +12,8 @@ import EventForm from "./components/EventForm";
 import LandingPage from "./components/LandingPage";
 import EventInfo from "./components/EventInfo";
 import UpdateEventForm from "./components/UpdateEventForm";
+import Footer from "./components/Footer";
+
 
 function App() {
   const dispatch = useDispatch();
@@ -37,6 +39,7 @@ function App() {
       <Switch>
         <Route exact path='/'>
           <LandingPage />
+          <Footer />
         </Route>
         <Route exact path='/groups/new'>
           <GroupForm />

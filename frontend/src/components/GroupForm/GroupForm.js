@@ -93,14 +93,15 @@ export default function GroupForm() {
                 We'll walk you through a few steps to build your local community
             </h2>
                 <div className='group-div'>
-                    <h1>
+                    <h2>
                         First, set your group's location.
-                    </h1>
+                    </h2>
                     <p>
                         Meetup groups meet locally, in person and online. We'll connect you with people
                         in your area, and more can join you online
                     </p>
                     <input
+                    id='group-location'
                     className='group-input'
                         required
                         defaultValue="City, STATE"
@@ -120,14 +121,15 @@ export default function GroupForm() {
                     }
                 </div>
                 <div className='group-div'>
-                    <h1>
+                    <h2>
                     What will your group's name be?
-                </h1>
+                </h2>
                 <p>
                     Choose a name that will give people a clear idea of what the group is about.
                     Feel free to get creative! You can edit this later if you change your mind.
                 </p>
                 <input
+                id='group-name'
                 className='group-input'
                     defaultValue="What is your group name?"
                     onChange={(e) => {
@@ -142,9 +144,9 @@ export default function GroupForm() {
                 }
                 </div>
                 <div className='group-div'>
-                    <h1>
+                    <h2>
                     Now describe what your group will be about
-                </h1>
+                </h2>
                 <p>
                     People will see this when we promote your group, but you'll be able to add to it later, too.
                 </p>
@@ -160,6 +162,7 @@ export default function GroupForm() {
                     </li>
                 </ol>
                 <textarea
+                id='group-about'
                 defaultValue='Please write at least 50 characters'
                 className='group-input'
                     onChange={(e) => {
@@ -180,7 +183,7 @@ export default function GroupForm() {
                     Is this an in person or online group?
                 </p>
                 <select
-                    className="group-form-select"
+                    className="group-form-select group-input"
                     defaultValue="(choose one)"
                     onChange={(e) => {
                         setOnlineOrInperson(e.target.value)
@@ -197,7 +200,7 @@ export default function GroupForm() {
                     Is this group private or public?
                 </p>
                 <select
-                className="group-form-select"
+                className="group-form-select group-input"
                     defaultValue='(choose one)'
                     onChange={(e) => {
                         if (e.target.value ==='Private') setPublicOrPrivate(true)

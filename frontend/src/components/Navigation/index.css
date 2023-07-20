@@ -37,12 +37,28 @@
 
 .profile-dropdown {
     position: absolute;
-    top: 55px;
+    top: 59px;
     right: 30px;
     border: solid black;
-    padding: 5px;
+    color: white;
+    padding: 10px;
     display: flex;
     flex-direction: column;
+    border-top: none;
+    border-radius: 0px 0px 20px 20px;
+    background-color: gray;
+}
+
+.profile-info {
+    color: white;
+    margin-top: 10px;
+    margin-bottom: 0px;
+}
+
+.profile-dropdown > a:hover {
+    background-color: black;
+    border-radius: 5px;
+    cursor: pointer;
 }
 
 #profile-new-group {

@@ -35,6 +35,7 @@ export default function GroupInfo() {
 
     if (events) {
         numEvents = Object.values(events).length
+
     }
 
     if (!group) {
@@ -75,6 +76,7 @@ export default function GroupInfo() {
                                     >
 
                                         <button
+                                        id='group-create-event-button'
                                         className="group-buttons"
                                             hidden={!currentUser || currentUser.id !== group.organizerId}
                                             onClick={() => history.push(`/groups/${group.id}/events/new`)}
@@ -120,13 +122,13 @@ export default function GroupInfo() {
                                 <h1>What we're about</h1>
                                 <p>{group.about}</p>
                                 <p>{group.previewImage}</p>
-                                <h1>Events </h1>
+                                <GroupEvents events={events} />
                             </div>
 
                         </div>
                     )
                 }
-                <GroupEvents events={events} />
+
             </div>
 
 

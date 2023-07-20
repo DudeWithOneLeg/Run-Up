@@ -1,0 +1,28 @@
+#footer {
+    height: 260px;
+    margin-top: 0px;
+}
+
+#technologies {
+    display: flex;
+    justify-content: center;
+}
+
+#footer-images {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}
+
+#footer-images > a  {
+    width: 5%;
+    cursor: pointer;
+}
+
+#footer-images > a > img {
+    width: 100%;
+}
+
+body {
+    margin: 0px;
+}

@@ -1,11 +1,15 @@
 import './index.css'
 import { useSelector } from 'react-redux'
+import { useHistory } from 'react-router-dom';
 import OpenModalText from "../OpenModalText";
 import SignupFormModal from "../SignupFormModal";
-
 export default function LandingPage() {
-    const user = useSelector(state => state.session.user)
+    const history = useHistory()
 
+window.addEventListener('mousemove', (event) => {
+
+});
+    const user = useSelector(state => state.session.user)
 
     return (
         <div id='landing-div'>
@@ -32,7 +36,7 @@ export default function LandingPage() {
                 </div>
 
                 <div id='landing-cards'>
-                    <div className='link-cards'>
+                    <div className='link-cards' onClick={() => history.push('/groups/1/10')}>
                         <img src='/images/groups.png' alt='view groups' />
                         <a
                             className='link'
@@ -41,7 +45,7 @@ export default function LandingPage() {
                             Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
                         </p>
                     </div>
-                    <div className='link-cards'>
+                    <div className='link-cards' onClick={() => history.push('/events/1/10')}>
                         <img src='/images/events.png' alt='view events' />
                         <a
                             className='link'
@@ -66,14 +70,14 @@ export default function LandingPage() {
                     </div>
 
                 </div>
-                {!user && <div>
+                {!user && <div id='join'>
                       <OpenModalText
-                        id='login'
                         buttonText="Join Run Up"
                         modalComponent={<SignupFormModal />}
                     />
                 </div>}
             </div>
+
         </div>
 
     )
