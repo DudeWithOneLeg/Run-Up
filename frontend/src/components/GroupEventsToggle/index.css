@@ -45,23 +45,26 @@ img {
     width: 50%;
 }
 
+#pages {
+    border-top: solid gray;
+}
 
+/* .gray-text {
+    color: gray;
+} */
 
 .card-container {
     padding-top: 15px;
     padding-bottom: 15px;
+    padding-left: 15px;
     border-top: solid gray;
     color: black;
-    border-radius: 20px;
 }
 
-.card-container:hover, .card:hover {
+.card-container:hover {
     background-color: gray;
     color: white;
-}
-
-.gray-text {
-    color: gray;
+    border-radius: 20px;
 }
 
 .card {
@@ -131,8 +134,15 @@ img {
 
 #size-select {
     margin-left: 10px;
+    cursor: pointer;
 }
 
 .results {
     margin-left: 5%;
+}
+
+.card > img {
+    border-radius: 20px;
+    padding-right: 0px;
+    margin-right: 10px;
 }

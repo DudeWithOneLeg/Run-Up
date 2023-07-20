@@ -4,8 +4,6 @@
     font-size: 12px;
 }
 
-
-
 #landing-inner-div {
     display: flex;
     flex-direction: row;
@@ -38,16 +36,21 @@
     align-items: center;
 }
 
+.link {
+    text-decoration: underline;
+}
+
 .link-cards:hover {
     cursor: pointer;
     border-radius: 20px;
     color: white;
-    background-color: black;
+    background-color: gray;
 }
 
 .link-cards > img {
-    border-radius: 25px;
+    border-radius: 125px;
 }
+
 
 #landing-cards {
     display: flex;
@@ -65,9 +68,6 @@
     margin-bottom: 50px;
 }
 
-a:hover {
-    text-decoration: underline;
-}
 
 .disabled-link:hover, .disabled-link:active, .disabled-link {
     text-decoration: none;
@@ -78,4 +78,8 @@ a:hover {
 #landing-main {
     width: 400px;
     height: 200px;
+}
+
+.background-img {
+    z-index: auto;
 }

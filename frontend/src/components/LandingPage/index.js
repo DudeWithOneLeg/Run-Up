@@ -2,10 +2,13 @@ import './index.css'
 import { useSelector } from 'react-redux'
 import OpenModalText from "../OpenModalText";
 import SignupFormModal from "../SignupFormModal";
-
+import Footer from '../Footer';
 export default function LandingPage() {
-    const user = useSelector(state => state.session.user)
 
+window.addEventListener('mousemove', (event) => {
+
+});
+    const user = useSelector(state => state.session.user)
 
     return (
         <div id='landing-div'>
@@ -74,6 +77,7 @@ export default function LandingPage() {
                     />
                 </div>}
             </div>
+
         </div>
 
     )

@@ -226,7 +226,7 @@ export default function GroupEventsToggle() {
                   <p className='gray-text group-about-text'>{group.city + ',' + group.state}</p>
                   <p className='group-about-text'>{sliceAbout(group.about)}</p>
                   {
-                    group.private ? <p className='gray-text group-about-text'>{group.numEvents} Events, Private</p> : <p className='gray-text group-about-text'>{group.numEvents} Events, Public</p>
+                    group.private ? <p className='gray-text group-about-text'>{group.numEvents} Events · Private</p> : <p className='gray-text group-about-text'>{group.numEvents} Events · Public</p>
                   }
                 </div>
               </div>
