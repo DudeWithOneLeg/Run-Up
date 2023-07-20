@@ -27,21 +27,19 @@ export default function UpdateEventForm() {
     const params = useParams()
     const dispatch = useDispatch()
 
-const oldEvent = useSelector(state => state.event.eventInfo)
-const group = useSelector(state => state.group.group)
+    const event = useSelector(state => state.event.eventInfo)
+    const oldEvent = { ...event }
+    const oldGroup = useSelector(state => state.group.group)
+    const group = { ...oldGroup }
 
-console.log(params)
-useEffect(() => {
-    console.log(params.eventId)
-    dispatch(eventActions.loadEvent(params.eventId));
-    dispatch(groupActions.loadGroup(oldEvent.groupId))
-  }, [dispatch]);
-  useEffect(() => {
-    if (oldEvent) {
-       dispatch(groupActions.loadGroup(oldEvent.groupId))
-    }
+    useEffect(() => {
+        dispatch(eventActions.loadEvent(params.eventId));
+        if (oldEvent.groupId) {
+            console.log('IS THIS THE LINE?')
+            dispatch(groupActions.loadGroup(oldEvent.groupId))
+        }
 
-  }, [dispatch, oldEvent]);
+    }, [dispatch]);
 
     useEffect(() => {
         console.log({ name, price, about, onlineOrInperson, publicOrPrivate, startDate, endDate })
@@ -96,8 +94,11 @@ useEffect(() => {
     if (!oldEvent || !group) {
         return null
     }
+    if (oldEvent.startDate) {
+        console.log(oldEvent.startDate.split('Z').join('').split('T').join(' ').split('-').join('/'))
+    }
 
-    console.log('old event', oldEvent)
+
 
     return (
         <div className="event-form-container">
@@ -114,8 +115,9 @@ useEffect(() => {
                         What is the name of your event?
                     </p>
                     <input
-                    defaultValue={oldEvent.name}
-                    className='event-input'
+                        id='event-name'
+                        defaultValue={oldEvent.name}
+                        className='event-input'
                         required
                         onChange={(e) => setName(e.target.value)}
                     >
@@ -146,7 +148,7 @@ useEffect(() => {
                         Is this event private or public?
                     </p>
                     <select
-                    className="event-select"
+                        className="event-select"
                         onChange={(e) => {
                             if (e.target.value === 'Private') setPublicOrPrivate(true)
                             if (e.target.value === 'Public') setPublicOrPrivate(false)
@@ -160,8 +162,10 @@ useEffect(() => {
                     }
                     <p>How many people are you expecting?</p>
                     <input
-                    defaultValue={oldEvent.capacity}
-                    onChange={(e) => setCapacity(e.target.value)}
+                        id='capacity'
+                        className='event-input'
+                        defaultValue={oldEvent.capacity}
+                        onChange={(e) => setCapacity(e.target.value)}
                     >
                     </input>
                     <p>
@@ -169,8 +173,8 @@ useEffect(() => {
                     </p>
                     <div>
                         <input
-                        defaultValue={oldEvent.price}
-                        className='event-input'
+                            defaultValue={oldEvent.price}
+                            className='event-input'
                             onClick={(e) => e.preventDefault()}
                             placeholder="$"
 
@@ -188,29 +192,31 @@ useEffect(() => {
 
                 <div className='event-div'>
                     <p>
-                    When does your event start?
-                </p>
-                <input
-                defaultValue={oldEvent.startDate}
-                className="calendar"
-                    onChange={(e) => setStartDate(e.target.value)}
-                    type='datetime-local' />
-                {
-                    errors.startDate && <p className="errors">{errors.startDate}</p>
-                }
-                <p>
-                    When does your event end?
-                </p>
-                <input
-                defaultValue={oldEvent.endDate}
-                className="calendar"
-                    onChange={(e) => setEndDate(e.target.value)}
-                    type='datetime-local'
-                >
-                </input>
-                {
-                    errors.endDate && <p className='errors'>{errors.endDate}</p>
-                }
+                        When does your event start?
+                    </p>
+                    <input
+                        defaultValue={oldEvent.startDate}
+                        className="calendar event-input"
+                        onChange={(e) => setStartDate(e.target.value)}
+                        type='datetime-local' />
+                    {
+                        errors.startDate && <p className="errors">{errors.startDate}</p>
+                    }
+                    <p>
+                        When does your event end?
+                    </p>
+                    <input
+                        value={oldEvent.endDate}
+                        className="calendar event-input"
+                        onChange={(e) => setEndDate(e.target.value)}
+                        type='datetime-local'
+                    >
+
+                    </input>
+                    {oldEvent && <p>{oldEvent.endDate}</p>}
+                    {
+                        errors.endDate && <p className='errors'>{errors.endDate}</p>
+                    }
                 </div>
 
                 {/* <div className='event-div'>
@@ -242,21 +248,24 @@ useEffect(() => {
                 }
                 </div> */}
 
+                <div className='event-div'>
+                    <p>
+                        Please describe your event:
+                    </p>
+                    <textarea
+                        defaultValue={oldEvent.description}
+                        id='event-form-textarea'
+                        className='event-input'
+                        placeholder='Please include art least 30 characters'
+                        onChange={(e) => setAbout(e.target.value)}
+                    />
+                    {
+                        errors.description && <p className="errors">{errors.description}</p>
+                    }
+                </div>
 
-                <p>
-                    Please describe your event:
-                </p>
-                <textarea
-                defaultValue={oldEvent.description}
-                className='event-input'
-                placeholder='Please include art least 30 characters'
-                    onChange={(e) => setAbout(e.target.value)}
-                />
-                {
-                    errors.description && <p className="errors">{errors.description}</p>
-                }
                 <button
-                id='event-button'
+                    id='event-button'
                     type='submit'
                     disabled={Object.values(errors).length}
                 >Create Event</button>

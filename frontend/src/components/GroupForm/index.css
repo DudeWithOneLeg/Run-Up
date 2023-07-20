@@ -20,11 +20,12 @@
 .group-input {
     border-radius: 5px;
     border: solid grey 1px;
+    border-radius: 20px;
     width: 40%;
 }
 
 .group-form-select {
-    width: 13%;
+    width: 20%;
     margin-bottom: 5%;
 }
 
@@ -35,9 +36,11 @@
 
 #group-button {
     width: 15%;
-    height: 20px;
+    height: 40px;
     margin-top: 5%;
     background-color: red;
+    border-radius: 10px;
+    margin-bottom: 40px;
     color: white;
 }
 
@@ -47,4 +50,18 @@
 
 .group-h2 {
     border-bottom: solid gray;
+}
+
+#group-location {
+    width: 150px;
+}
+
+#group-name {
+    width: 200px;
+}
+
+#group-about {
+    width: 50%;
+    height: 100px;
+    border-radius: 10px;
 }

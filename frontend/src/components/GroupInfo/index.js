@@ -76,6 +76,7 @@ export default function GroupInfo() {
                                     >
 
                                         <button
+                                        id='group-create-event-button'
                                         className="group-buttons"
                                             hidden={!currentUser || currentUser.id !== group.organizerId}
                                             onClick={() => history.push(`/groups/${group.id}/events/new`)}

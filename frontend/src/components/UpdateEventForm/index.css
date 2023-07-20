@@ -18,8 +18,8 @@
     width: 80%;
 }
 
-.event-input{
-    border-radius: 6px;
+.event-input, .event-select{
+    border-radius: 10px;
     border: solid grey 1px;
     width: 40%;
 }
@@ -36,9 +36,11 @@ form > .event-div {
 
 #event-button {
     width: 15%;
-    height: 20px;
+    height: 40px;
     margin-top: 5%;
+    margin-bottom: 50px;
     background-color: red;
+    border-radius: 10px;
     color: white;
 }
 
@@ -64,4 +66,17 @@ form > .event-div {
 
 * {
     font-family: 'Varela Round';
+}
+
+#event-form-textarea {
+    height: 100px;
+    width: 60%;
+}
+
+#capacity {
+    width: 100px;
+}
+
+#event-name {
+    width: auto;
 }

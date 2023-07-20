@@ -34,6 +34,8 @@
 
 #group-image {
     width: 300px;
+    border-radius: 10px;
+    padding-right: 0px;
 }
 
 .more-info {
@@ -58,5 +60,11 @@
     color: white;
     height: 30px;
     margin-right: 10px;
+    border-radius: 10px;
     cursor: pointer;
+    border: solid 1px;
+}
+
+#group-create-event-button {
+    width: 100px;
 }

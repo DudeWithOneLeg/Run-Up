@@ -1,9 +1,10 @@
 import './index.css'
 import { useSelector } from 'react-redux'
+import { useHistory } from 'react-router-dom';
 import OpenModalText from "../OpenModalText";
 import SignupFormModal from "../SignupFormModal";
-import Footer from '../Footer';
 export default function LandingPage() {
+    const history = useHistory()
 
 window.addEventListener('mousemove', (event) => {
 
@@ -35,7 +36,7 @@ window.addEventListener('mousemove', (event) => {
                 </div>
 
                 <div id='landing-cards'>
-                    <div className='link-cards'>
+                    <div className='link-cards' onClick={() => history.push('/groups/1/10')}>
                         <img src='/images/groups.png' alt='view groups' />
                         <a
                             className='link'
@@ -44,7 +45,7 @@ window.addEventListener('mousemove', (event) => {
                             Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
                         </p>
                     </div>
-                    <div className='link-cards'>
+                    <div className='link-cards' onClick={() => history.push('/events/1/10')}>
                         <img src='/images/events.png' alt='view events' />
                         <a
                             className='link'
@@ -69,9 +70,8 @@ window.addEventListener('mousemove', (event) => {
                     </div>
 
                 </div>
-                {!user && <div>
+                {!user && <div id='join'>
                       <OpenModalText
-                        id='login'
                         buttonText="Join Run Up"
                         modalComponent={<SignupFormModal />}
                     />

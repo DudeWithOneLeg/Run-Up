@@ -81,7 +81,7 @@ export default function EventInfo() {
 
 
 
-                            {!user || user.id !== attendees[0].id && <div>
+                            {!user || user.id === attendees[0].id && <div>
                                 <button className='group-buttons'
                                 onClick={() => {
                                     dispatch(groupActions.loadGroup(event.groupId)).then(() => history.push(`/events/${event.id}/edit`))
