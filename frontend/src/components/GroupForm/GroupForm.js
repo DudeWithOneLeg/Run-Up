@@ -178,11 +178,12 @@ export default function GroupForm() {
                 }
                 </div>
                 <div className='group-div'>
-                    <h1>Final steps...</h1>
+                    <h2>Final steps...</h2>
                 <p>
                     Is this an in person or online group?
                 </p>
                 <select
+                id='group-form-select'
                     className="group-form-select group-input"
                     defaultValue="(choose one)"
                     onChange={(e) => {
@@ -200,6 +201,7 @@ export default function GroupForm() {
                     Is this group private or public?
                 </p>
                 <select
+                id='group-form-select'
                 className="group-form-select group-input"
                     defaultValue='(choose one)'
                     onChange={(e) => {

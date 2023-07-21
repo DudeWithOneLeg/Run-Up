@@ -14,12 +14,20 @@
     justify-content: space-around;
 }
 
-#footer-images > a  {
-    width: 5%;
+.footer-link  {
+    width: 7%;
     cursor: pointer;
 }
 
-#footer-images > a > img {
+.footer-link > img {
+    width: 100%;
+}
+
+#sqlite-link {
+    width: 10%;
+}
+
+#sqlite-img {
     width: 100%;
 }
 

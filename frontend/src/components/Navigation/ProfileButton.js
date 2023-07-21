@@ -48,7 +48,7 @@ export default function ProfileButton({ user }) {
         <p className="profile-info">{showMenu && user.firstName} {showMenu && user.lastName}</p>
         <p className="profile-info">{showMenu && user.email}</p>
         <div id='logout-div'>
-          <a onClick={logout}>Log Out</a>
+          <a id='logout-link'onClick={logout}>Log Out</a>
         </div>
 
       </div>

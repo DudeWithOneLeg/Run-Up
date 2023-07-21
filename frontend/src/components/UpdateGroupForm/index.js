@@ -2,9 +2,9 @@ import { useState, useEffect } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import * as groupActions from '../../store/groups'
 import { useHistory, useParams } from "react-router-dom"
+import './index.css'
 
 export default function UpdateGroupForm() {
-    console.log("HELLOOO")
 
     const history = useHistory()
     const dispatch = useDispatch()
@@ -59,7 +59,7 @@ export default function UpdateGroupForm() {
 
 
     //parse old group info public or private
-    console.log("BEFORE RETURN PRIVATE", oldGroup)
+    console.log("BEFORE RETURN ", oldGroup)
     //oldGroup.private ? setPublicOrPrivate("Private") : setPublicOrPrivate("Public")
 
     //const [imgUrl, setImgUrl] = useState("")
@@ -117,7 +117,6 @@ export default function UpdateGroupForm() {
         }
 
         console.log("GROUP", group)
-        console.log("OLDGROUP", oldGroup)
 
         console.log("FINAL GROUP PARSE", oldGroup)
 
@@ -132,7 +131,6 @@ export default function UpdateGroupForm() {
             }
         })
 
-        console.log("GROUP ID", group.id)
         //group.organizerId =
         history.push(`/groups/${group.id}`)
 
@@ -156,8 +154,6 @@ export default function UpdateGroupForm() {
     if (!oldGroup || !user) {
         return null
     }
-
-    const value = oldGroup.about
     return (
         <div className="group-form-container">
 
@@ -171,9 +167,9 @@ export default function UpdateGroupForm() {
                 We'll walk you through a few steps to build your local community
             </h2>
                 <div className='group-div'>
-                    <h1>
+                    <h2>
                         First, set your group's location.
-                    </h1>
+                    </h2>
                     <p>
                         Meetup groups meet locally, in person and online. We'll connect you with people
                         in your area, and more can join you online
@@ -189,9 +185,9 @@ export default function UpdateGroupForm() {
                     </input>
                 </div>
                 <div className="group-div">
-                    <h1>
+                    <h2>
                         What will your group's name be?
-                    </h1>
+                    </h2>
                     <p>
                         Choose a name that will give people a clear idea of what the group is about.
                         Feel free to get creative! You can edit this later if you change your mind.
@@ -209,9 +205,9 @@ export default function UpdateGroupForm() {
                     }
                 </div>
                 <div className="group-div">
-                    <h1>
+                    <h2>
                         Now describe what your group will be about
-                    </h1>
+                    </h2>
                     <p>
                         People will see this when we promote your group, but you'll be able to add to it later, too.
                     </p>
@@ -227,7 +223,7 @@ export default function UpdateGroupForm() {
                         </li>
                     </ol>
                     <textarea
-                        className='group-input'
+                        id='group-form-textarea'
                         defaultValue={oldGroup.about}
                         onChange={(e) => {
                             setAbout(e.target.value)
@@ -242,12 +238,12 @@ export default function UpdateGroupForm() {
 
 
                 <div className='group-div'>
-                    <h1>Final steps...</h1>
+                    <h2>Final steps...</h2>
                     <p>
                         is this an in person or online group?
                     </p>
                     <select
-                        className="group-form-select"
+                        className="group-form-select group-input"
                         onSelect={(e) => {
                             setOnlineOrInperson(e.target.value)
                         }}
@@ -263,7 +259,7 @@ export default function UpdateGroupForm() {
                         Is this group private or public?
                     </p>
                     <select
-                    className="group-form-select"
+                    className="group-form-select group-input"
                         onChange={(e) => {
                             if (e.target.value === 'Private') {
                                 setPublicOrPrivate(true)

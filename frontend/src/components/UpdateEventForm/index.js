@@ -94,8 +94,9 @@ export default function UpdateEventForm() {
     if (!oldEvent || !group) {
         return null
     }
-    if (oldEvent.startDate) {
-        console.log(oldEvent.startDate.split('Z').join('').split('T').join(' ').split('-').join('/'))
+    if (oldEvent.id) {
+        oldEvent.startDate = oldEvent.startDate.split(':00.000Z').join('')
+        oldEvent.endDate = oldEvent.endDate.split(':00.000Z').join('')
     }
 
 
@@ -104,7 +105,7 @@ export default function UpdateEventForm() {
         <div className="event-form-container">
 
             <h1>
-                Create an event for {group.name}
+                Update your event for {group.name}
             </h1>
             <form
                 id='event-form'
@@ -213,7 +214,6 @@ export default function UpdateEventForm() {
                     >
 
                     </input>
-                    {oldEvent && <p>{oldEvent.endDate}</p>}
                     {
                         errors.endDate && <p className='errors'>{errors.endDate}</p>
                     }
@@ -268,7 +268,7 @@ export default function UpdateEventForm() {
                     id='event-button'
                     type='submit'
                     disabled={Object.values(errors).length}
-                >Create Event</button>
+                >Update Event</button>
             </form>
         </div>
     )
