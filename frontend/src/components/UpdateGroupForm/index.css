@@ -2,6 +2,12 @@
     color: red
 }
 
+#group-form-textarea {
+    height: 100px;
+    width: 60%;
+    border-radius: 10px;
+}
+
 .group-form-container {
     display: flex;
     justify-content: center;
@@ -35,9 +41,11 @@
 
 #group-button {
     width: 15%;
-    height: 20px;
+    height: 40px;
     margin-top: 5%;
+    margin-bottom: 50px;
     background-color: red;
+    border-radius: 10px;
     color: white;
 }
 
