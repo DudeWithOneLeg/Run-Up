@@ -189,8 +189,26 @@ export default function GroupEventsToggle() {
       <div id='list'>
         {events && path.startsWith('/events') && paginateEvents(Object.values(events), Number(params.page), Number(params.size))}
         {events && path.startsWith('/events') && currentEvents.map((event) => {
-          event.startDate = event.startDate.split('T').join(' · ')
-          event.endDate = event.endDate.split('T').join(' · ')
+
+          event.startDate = event.startDate.split('T').join(' · ').split(':00.000Z').join('')
+
+          let hour = event.startDate.split(' · ')[1].split(':')[0]
+
+          if (hour > 12 && !event.startDate.includes('PM') && !event.startDate.includes('AM')) {
+
+            const oldHour = hour
+            hour -= 12
+            event.startDate = event.startDate.replace(oldHour, hour)
+            event.startDate += ' PM'
+            console.log(hour)
+          }
+          else if (hour < 12 && !event.startDate.includes('AM') && !event.startDate.includes('PM')) {
+            console.log(hour, hour > 12)
+            console.log(event.startDate)
+            event.startDate += ' AM'
+          }
+
+
 
           return (
             <NavLink className='navlink' key={event.id} to={`/events/${event.id}`}>
@@ -222,11 +240,21 @@ export default function GroupEventsToggle() {
               <div className='card'>
                 <img src={group.previewImage} alt='group-preview-image' ></img>
                 <div className='info-card'>
-                  <h1 className='name'>{group.name}</h1>
-                  <p className='gray-text group-about-text'>{group.city + ',' + group.state}</p>
-                  <p className='group-about-text'>{sliceAbout(group.about)}</p>
+                  <div>
+<h1 className='name'>{group.name}</h1>
+                  </div>
+                  <div>
+<p className='gray-text group-about-text'>{group.city + ',' + group.state}</p>
+                  </div>
+                  <div>
+<p className='group-about-text'>{sliceAbout(group.about)}</p>
+                  </div>
+
+
+
                   {
-                    group.private ? <p className='gray-text group-about-text'>{group.numEvents} Events · Private</p> : <p className='gray-text group-about-text'>{group.numEvents} Events · Public</p>
+
+                    group.private ? <div><p className='gray-text group-about-text'>{group.numEvents} Events · Private</p></div> : <div><p className='gray-text group-about-text'>{group.numEvents} Events · Public</p></div>
                   }
                 </div>
               </div>

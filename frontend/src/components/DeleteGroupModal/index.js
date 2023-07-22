@@ -23,7 +23,7 @@ export default function DeleteGroupModal() {
                 onClick={(e) => {
                     e.preventDefault()
                     dispatch(groupActions.removeGroup(group.id)).then(closeModal)
-                    history.push('/groups')
+                    history.push('/groups/1/10')
 
                 }}
             >Yes &#40;Delete Group&#41;

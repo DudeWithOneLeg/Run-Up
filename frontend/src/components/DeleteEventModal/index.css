@@ -1,11 +1,15 @@
 #confirm {
     background-color: red;
     color: white;
+    cursor: pointer;
+    border-radius: 10px;
 }
 
 #deny {
     background-color: gray;
     color: white;
+    cursor: pointer;
+    border-radius: 10px;
 }
 
 #delete-confirm {
