@@ -54,7 +54,15 @@ window.addEventListener('mousemove', (event) => {
                             Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
                         </p>
                     </div>
-                    <div className='link-cards'>
+                    <div
+                    className={user ? 'link-cards' : 'disabled-card'}
+                    onClick={(e) => {
+                        if (!user) {
+                            return e.preventDefault()
+                        }
+                        return history.push('/groups/new')
+                    }}
+                    >
                         <img src='/images/create-group.png' alt='create a group' />
                         <a
                             className={user ? 'link' : 'disabled-link'}

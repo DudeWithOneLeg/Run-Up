@@ -23,7 +23,7 @@ export default function DeleteEventModal() {
                 onClick={(e) => {
                     e.preventDefault()
                     dispatch(eventActions.removeEvent(event.id)).then(closeModal)
-                    history.push('/events')
+                    history.push('/events/1/10')
 
                 }}
             >Yes &#40;Delete Event&#41;
