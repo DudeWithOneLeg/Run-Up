@@ -1,5 +1,5 @@
 import { NavLink, useParams, Link, useHistory } from 'react-router-dom';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import * as groupActions from '../../store/groups';
 import * as eventActions from '../../store/events';
@@ -9,6 +9,7 @@ export default function GroupEventsToggle() {
   const params = useParams()
   const dispatch = useDispatch();
   const history = useHistory()
+  const [search, setSearch] = useState('')
 
   let groups = useSelector((state) => state.group.groups);
 
@@ -170,6 +171,10 @@ export default function GroupEventsToggle() {
 
   }
 
+  // const search = (data) => {
+
+  // }
+
 
   return (
     <div id='module'>
@@ -187,7 +192,21 @@ export default function GroupEventsToggle() {
         {path.startsWith('/events') && <p className='toggle-subhead'>Events in Run Up</p>}
       </div>
       <div id='list'>
+        {/* <input
+        defaultValue='Search name, location, description'
+        onChange={(e) => {
+          setSearch(e.target.value)
+          const data = events ? events : groups
+          const results = Object.values(data).filter((result) => {
+            console.log(result)
+            const text = result.name.split(' ').concat(result.location.split(' ')).concat(events ? result.description.split(' ') : result.about.split(' '))
+            text.contains(search)
+          })
+          events ? currentEvents = results : currentGroups = results
+        }}
+        /> */}
         {events && path.startsWith('/events') && paginateEvents(Object.values(events), Number(params.page), Number(params.size))}
+
         {events && path.startsWith('/events') && currentEvents.map((event) => {
 
           event.startDate = event.startDate.split('T').join(' · ').split(':00.000Z').join('')
