@@ -13,6 +13,7 @@ import LandingPage from "./components/LandingPage";
 import EventInfo from "./components/EventInfo";
 import UpdateEventForm from "./components/UpdateEventForm";
 import Footer from "./components/Footer";
+import PageNotFound from "./components/404";
 
 
 function App() {
@@ -64,6 +65,9 @@ function App() {
         </Route>
         <Route exact path='/groups/:page/:size'>
           <GroupEventsToggle />
+        </Route>
+        <Route>
+          <PageNotFound />
         </Route>
       </Switch>
 
