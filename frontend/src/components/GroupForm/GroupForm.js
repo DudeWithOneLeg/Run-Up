@@ -65,13 +65,14 @@ export default function GroupForm() {
             console.log('NEW GROUP',newGroup)
 
         }).then(() => {
+            if (!groupState.id) return
             const image = {
             url: imgUrl,
             preview: true
         }
 
 
-            const id = newGroup.id
+            const id = groupState.id
             dispatch(groupActions.postImage(id, image))
             history.push(`/groups/${groupState.id}`)
         })
@@ -247,9 +248,9 @@ export default function GroupForm() {
 
 
                 <button
-                    id='group-button'
+                    className={!name || !location || !about || !onlineOrInperson || (publicOrPrivate !== false && publicOrPrivate !== true) || !imgUrl ? 'disabled-group-submit-button' : 'group-submit-button' }
                     type='submit'
-                    disabled={Object.values(errors).length}
+                    disabled={!name || !location || !about || !onlineOrInperson || (publicOrPrivate !== false && publicOrPrivate !== true) || !imgUrl }
                 >Create group</button>
             </form>
         </div>
