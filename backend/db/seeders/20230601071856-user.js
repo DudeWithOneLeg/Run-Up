@@ -23,10 +23,10 @@ module.exports = {
     */
     const validUsers = [
       {
-        firstName: 'John1',
-        lastName: 'Doe1',
+        firstName: 'Michael',
+        lastName: 'Jackson',
         username: 'JohnDoe1',
-        email: 'john1@doe.com',
+        email: 'SmoothCriminal',
         hashedPassword: bcrypt.hashSync('password')
       },
       {
