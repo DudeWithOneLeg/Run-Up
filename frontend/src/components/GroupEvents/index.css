@@ -17,7 +17,7 @@
 #group-events-card-info {
     display: flex;
     flex-direction: column;
-    font-size: 10px;
+    font-size: 15px;
 
 }
 
@@ -40,7 +40,7 @@
 .group-events-about {
     overflow-wrap: break-word;
     text-align: left;
-    font-size: 12px;
+    font-size: 16px;
     width: 100%;
 }
 
@@ -54,6 +54,7 @@ Link {
 }
 
 .group-events-img {
+    width: 25%;
     border-radius: 20px;
     padding-right: 0px;
     margin-right: 20px;
