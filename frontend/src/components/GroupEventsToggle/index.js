@@ -235,9 +235,9 @@ export default function GroupEventsToggle() {
                 <div className='card'>
                   <img src={event.previewImage} alt='event-preview'></img>
                   <div className='info-card'>
-                    <p className='group-about-text'>{event.startDate}</p>
-                    <h1 className='name group-about-text'>{event.name}</h1>
-                    {event.Venue && <p className='gray-text group-about-text'>{event.Venue.city + ',' + event.Venue.state}</p>}
+                    <p id='info-about' className='group-about-text'>{event.startDate}</p>
+                    <h1 id='info-name' className='name group-about-text'>{event.name}</h1>
+                    {event.Venue && <p id='info-location' className='gray-text group-about-text'>{event.Venue.city + ',' + event.Venue.state}</p>}
 
                   </div>
 
@@ -260,13 +260,13 @@ export default function GroupEventsToggle() {
                 <img src={group.previewImage} alt='group-preview-image' ></img>
                 <div className='info-card'>
                   <div>
-<h1 className='name'>{group.name}</h1>
+                    <h1 className='name'>{group.name}</h1>
                   </div>
                   <div>
-<p className='gray-text group-about-text'>{group.city + ',' + group.state}</p>
+                    <p className='gray-text group-about-text'>{group.city + ',' + group.state}</p>
                   </div>
                   <div>
-<p className='group-about-text'>{sliceAbout(group.about)}</p>
+                    <p className='group-about-text'>{sliceAbout(group.about)}</p>
                   </div>
 
 

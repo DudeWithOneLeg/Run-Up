@@ -4,7 +4,7 @@
     border-bottom: solid gray;
     justify-content: space-between;
     align-items: center;
-    height: 5%;
+    height: 70px;
 }
 
 #login-signup {
@@ -82,5 +82,3 @@
 #profile-img {
     cursor: pointer;
 }
-
-

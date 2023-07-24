@@ -2,7 +2,7 @@
     text-decoration: none;
 }
 
-img {
+.card > img {
     width: 200px;
     height: 100%;
     padding-right: 2%;
@@ -163,4 +163,38 @@ img {
     border-radius: 20px;
     padding-right: 0px;
     margin-right: 10px;
+}
+
+@media screen and (max-width: 800px) {
+    .card {
+        height: 100%;
+        flex-direction: column;
+        justify-content: center;
+    }
+
+    .info-card {
+        justify-content: center;
+        align-items: center;
+    }
+
+    #info-name, #info-location, #info-about {
+        padding-top: 10px;
+    }
+
+    .info-card > div {
+        padding-top: 10px;
+    }
+
+    #module {
+        width: 100%;
+    }
+
+    #toggle, .toggle-subhead, #list {
+        width: 100%;
+    }
+
+    .card > img {
+        width: 70%;
+    }
+
 }
