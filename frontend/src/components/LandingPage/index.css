@@ -15,7 +15,6 @@
 }
 
 #landing-div {
-    width: 100%;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -112,4 +111,17 @@
 
 .background-img {
     z-index: auto;
+}
+
+@media screen and (max-width: 700px) {
+    #landing-inner-div {
+        flex-direction: column;
+    }
+    #landing-cards {
+        flex-direction: column;
+    }
+    .link-cards {
+        margin: 0px
+    }
+    
 }
