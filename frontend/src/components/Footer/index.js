@@ -25,6 +25,9 @@ export default function Footer() {
                 <a className='footer-link' id='sqlite-link' href='https://www.sqlite.org/docs.html' target="_blank">
                     <img id='sqlite-img' src='/images/sqlite.png'/>
                 </a>
+                <a className='footer-link' id='sqlite-link' href='https://analytics.google.com/analytics/web/' target="_blank">
+                    <img id='analytics-img' src='/images/analytics.png'/>
+                </a>
             </div>
         </div>
     )
