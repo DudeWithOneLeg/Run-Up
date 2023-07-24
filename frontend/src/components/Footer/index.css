@@ -8,6 +8,7 @@
 #technologies {
     display: flex;
     justify-content: center;
+    width: 100%;
 }
 
 #footer-images {
@@ -43,4 +44,44 @@ body {
 #analytics-img {
     height: 80%;
     width: 130%;
+}
+
+@media screen and (max-width: 700px) {
+    #footer-images {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        margin: 0px;
+    }
+
+    #footer-images > * {
+        margin-bottom: 50px;
+    }
+
+    .footer-link {
+        display: flex;
+        justify-content: center;
+        width: 25%;
+    }
+
+    #analytics-img, #sqlite-img {
+        width: 500%;
+        height: 100%;
+        justify-self: center;
+    }
+
+    #root {
+        display: flex;
+        flex-direction: column;
+    }
+
+    body {
+        display: flex;
+    }
+
+    html {
+        display: flex;
+    }
+
 }

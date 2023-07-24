@@ -4,7 +4,6 @@
     border-bottom: solid gray;
     justify-content: space-between;
     align-items: center;
-    width: 100%;
     height: 5%;
 }
 
@@ -83,3 +82,5 @@
 #profile-img {
     cursor: pointer;
 }
+
+
