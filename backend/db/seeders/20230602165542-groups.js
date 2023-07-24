@@ -21,8 +21,8 @@ module.exports = {
    const validGroup = [
     {
       organizerId: 1,
-      name: 'Group Name1',
-      about: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
+      name: 'Moonwalkers United',
+      about: 'A group of runners who glide effortlessly through their routes, mimicking the iconic moonwalk move popularized by Michael Jackson. Their smooth and graceful running style sets them apart as they create an illusion of dancing on the pavement.',
       type: 'Online',
       private: false,
       city: 'Houston',
@@ -30,8 +30,17 @@ module.exports = {
     },
     {
       organizerId: 1,
-      name: 'Group Name2',
-      about: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
+      name: 'Thriller Runners',
+      about: "Join this spine-tingling running group if you're up for an exhilarating and suspenseful workout experience. With thrilling challenges and mysterious routes, they'll keep you on the edge of your running shoes, just like the excitement of watching MJ's 'Thriller' music video.",
+      type: 'In person',
+      private: false,
+      city: 'Houston',
+      state: 'Texas'
+    },
+    {
+      organizerId: 1,
+      name: 'Smooth Criminal Striders',
+      about: 'A suave and sophisticated running crew, the Smooth Criminal Striders boast impeccable form and seamless strides. Their aim is to master the art of running with criminal precision while looking sharp and stylish.',
       type: 'Online',
       private: false,
       city: 'Houston',
@@ -39,8 +48,17 @@ module.exports = {
     },
     {
       organizerId: 1,
-      name: 'Group Name3',
-      about: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
+      name: 'Beat It Pacers',
+      about: "This group knows how to set the pace and leave their competition in the dust. Channeling the energy and rhythm of Michael Jackson's 'Beat It,' they lead the way, motivating others to step up their running game.",
+      type: 'In person',
+      private: false,
+      city: 'Houston',
+      state: 'Texas'
+    },
+    {
+      organizerId: 1,
+      name: 'Billie Jean Sprinters',
+      about: 'For those who believe in giving their all during sprints, the Billie Jean Sprinters group is the place to be. With dedication and passion, they light up the track like the famous illuminated floor in the "Billie Jean" music video.',
       type: 'Online',
       private: false,
       city: 'Houston',
@@ -48,8 +66,17 @@ module.exports = {
     },
     {
       organizerId: 1,
-      name: 'Group Name4',
-      about: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
+      name: "Don't Stop 'til You Drop Joggernauts",
+      about: "This enthusiastic bunch takes Michael Jackson's 'Don't Stop 'Til You Get Enough' as their mantra, pushing themselves to the limit with relentless energy and determination. They thrive on long-distance challenges and embrace the joy of running non-stop.",
+      type: 'In person',
+      private: false,
+      city: 'Houston',
+      state: 'Texas'
+    },
+    {
+      organizerId: 1,
+      name: 'Rock with You Racers',
+      about: "Energetic and full of life, the Rock with You Racers group creates a running party atmosphere. They believe that running should be enjoyable and aim to bring people together through the love of fitness and Michael Jackson's timeless tunes.",
       type: 'Online',
       private: false,
       city: 'Houston',
@@ -57,8 +84,17 @@ module.exports = {
     },
     {
       organizerId: 1,
-      name: 'Group Name5',
-      about: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
+      name: 'Bad to the Finish Line',
+      about: "This group is all about defying the odds and overcoming obstacles. Emulating the rebellious spirit of MJ's 'Bad' music video, they encourage each other to conquer tough terrains and reach the finish line with confidence.",
+      type: 'In person',
+      private: false,
+      city: 'Houston',
+      state: 'Texas'
+    },
+    {
+      organizerId: 1,
+      name: 'Wanna Be Starting Racers',
+      about: "For those new to running or looking to start fresh, the Wanna Be Starting Racers offer a supportive and encouraging community. Inspired by the enthusiasm of Michael Jackson's 'Wanna Be Startin' Somethin','' they motivate each other to begin their running journey and never give up.",
       type: 'Online',
       private: false,
       city: 'Houston',
@@ -66,44 +102,8 @@ module.exports = {
     },
     {
       organizerId: 1,
-      name: 'Group Name6',
-      about: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
-      type: 'Online',
-      private: false,
-      city: 'Houston',
-      state: 'Texas'
-    },
-    {
-      organizerId: 1,
-      name: 'Group Name7',
-      about: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
-      type: 'Online',
-      private: false,
-      city: 'Houston',
-      state: 'Texas'
-    },
-    {
-      organizerId: 1,
-      name: 'Group Name8',
-      about: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
-      type: 'Online',
-      private: false,
-      city: 'Houston',
-      state: 'Texas'
-    },
-    {
-      organizerId: 1,
-      name: 'Group Name9',
-      about: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
-      type: 'Online',
-      private: false,
-      city: 'Houston',
-      state: 'Texas'
-    },
-    {
-      organizerId: 1,
-      name: 'Group Name10',
-      about: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
+      name: 'P.Y.T. (Pretty Young Tracksters)',
+      about: "Whether you're a seasoned marathoner or a beginner taking your first strides, the P.Y.T. Tracksters embrace everyone with open arms. They believe in nurturing a supportive and inclusive environment, where each member is encouraged to unleash their inner P.Y.T. and push their limits while having fun.",
       type: 'Online',
       private: false,
       city: 'Houston',

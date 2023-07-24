@@ -35,52 +35,52 @@ module.exports = {
     },
     {
       groupId: 4,
-      url: 'https://hips.hearstapps.com/hmg-prod/images/group-of-runners-in-a-cross-country-race-royalty-free-image-1653336803.jpg',
+      url: 'https://st2.depositphotos.com/3343629/12151/i/450/depositphotos_121510712-stock-photo-competition-of-five-runners-athletes.jpg',
       preview: true
     },
     {
       groupId: 5,
-      url: 'https://hips.hearstapps.com/hmg-prod/images/group-of-runners-in-a-cross-country-race-royalty-free-image-1653336803.jpg',
+      url: 'https://static8.depositphotos.com/1002111/990/i/450/depositphotos_9900072-stock-photo-group-of-runners.jpg',
       preview: true
     },
     {
       groupId: 6,
-      url: 'https://hips.hearstapps.com/hmg-prod/images/group-of-runners-in-a-cross-country-race-royalty-free-image-1653336803.jpg',
+      url: 'https://st3.depositphotos.com/8214686/37541/i/450/depositphotos_375412616-stock-photo-a-group-of-young-people.jpg',
       preview: true
     },
     {
       groupId: 7,
-      url: 'https://hips.hearstapps.com/hmg-prod/images/group-of-runners-in-a-cross-country-race-royalty-free-image-1653336803.jpg',
+      url: 'https://st4.depositphotos.com/13193658/28215/i/450/depositphotos_282151322-stock-photo-happy-multicultural-retired-men-women.jpg',
       preview: true
     },
     {
       groupId: 8,
-      url: 'https://hips.hearstapps.com/hmg-prod/images/group-of-runners-in-a-cross-country-race-royalty-free-image-1653336803.jpg',
+      url: 'https://st.depositphotos.com/1518767/4293/i/450/depositphotos_42939389-stock-photo-marathon-athletes-running.jpg',
       preview: true
     },
     {
       groupId: 9,
-      url: 'https://hips.hearstapps.com/hmg-prod/images/group-of-runners-in-a-cross-country-race-royalty-free-image-1653336803.jpg',
+      url: 'https://st.depositphotos.com/1037987/2755/i/450/depositphotos_27555239-stock-photo-group-of-runners-on-suburban.jpg',
       preview: true
     },
     {
       groupId: 10,
-      url: 'https://hips.hearstapps.com/hmg-prod/images/group-of-runners-in-a-cross-country-race-royalty-free-image-1653336803.jpg',
+      url: 'https://st.depositphotos.com/1518767/4292/i/450/depositphotos_42925551-stock-photo-marathon-runners-cheering-in-park.jpg',
       preview: true
     },
     {
       groupId: 11,
-      url: 'https://hips.hearstapps.com/hmg-prod/images/group-of-runners-in-a-cross-country-race-royalty-free-image-1653336803.jpg',
+      url: 'https://st2.depositphotos.com/1518767/10233/i/450/depositphotos_102336062-stock-photo-marathon-athletes-posing.jpg',
       preview: true
     },
     {
       groupId: 12,
-      url: 'https://hips.hearstapps.com/hmg-prod/images/group-of-runners-in-a-cross-country-race-royalty-free-image-1653336803.jpg',
+      url: 'https://st4.depositphotos.com/2853475/24696/i/450/depositphotos_246962086-stock-photo-multi-ethnic-group-runners-training.jpg',
       preview: true
     },
     {
       groupId: 13,
-      url: 'https://hips.hearstapps.com/hmg-prod/images/group-of-runners-in-a-cross-country-race-royalty-free-image-1653336803.jpg',
+      url: 'https://st2.depositphotos.com/1037987/10276/i/450/depositphotos_102762872-stock-photo-runners-gesturing-thumbs-up-sign.jpg',
       preview: true
     },
     {
