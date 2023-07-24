@@ -88,7 +88,7 @@ export default function LoginFormModal() {
                 className='demo-button'
                 onClick={() => {
                     dispatch(sessionActions.login({
-                        credential: 'john1@doe.com', password: 'password'
+                        credential: 'smooth@criminal.com', password: 'password'
 
                     })).then(closeModal)
                 }}

@@ -6,9 +6,9 @@ import SignupFormModal from "../SignupFormModal";
 export default function LandingPage() {
     const history = useHistory()
 
-window.addEventListener('mousemove', (event) => {
+    window.addEventListener('mousemove', (event) => {
 
-});
+    });
     const user = useSelector(state => state.session.user)
 
     return (
@@ -22,7 +22,7 @@ window.addEventListener('mousemove', (event) => {
                             become friendships
                         </h1>
                         <p>
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. 
+                            StrideTogether: Where Runners Unite! Lace up your running shoes and join our vibrant online community dedicated to bringing runners from all walks of life together. Whether you're a seasoned athlete or a novice jogger, StrideTogether offers a supportive and motivating space to connect with like-minded individuals who share your passion for running.
                         </p>
                     </div>
                     <div>
@@ -31,7 +31,7 @@ window.addEventListener('mousemove', (event) => {
                 </div>
                 <div id='how-legup-works'>
                     <h1>How Run Up works</h1>
-                    <p>    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                    <p>Run Up is an interactive website designed to facilitate the formation of running groups and the organization of exciting events, bringing together runners of all levels to share their passion, train collectively, and conquer new milestones.
                     </p>
                 </div>
 
@@ -42,7 +42,7 @@ window.addEventListener('mousemove', (event) => {
                             className='link'
                             href='/groups/1/10'>See all groups</a>
                         <p>
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                            Discover your tribe, lace up, and conquer the roads together! 🏃‍♂️🏃‍♀️ Join the community of passionate runners, united by their love for the sport and camaraderie.
                         </p>
                     </div>
                     <div className='link-cards' onClick={() => history.push('/events/1/10')}>
@@ -51,17 +51,17 @@ window.addEventListener('mousemove', (event) => {
                             className='link'
                             href='/events/1/10'>Find an event</a>
                         <p>
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                            Explore the latest events, set your sights on new challenges, and let the adrenaline-fueled adventures begin!
                         </p>
                     </div>
                     <div
-                    className={user ? 'link-cards' : 'disabled-card'}
-                    onClick={(e) => {
-                        if (!user) {
-                            return e.preventDefault()
-                        }
-                        return history.push('/groups/new')
-                    }}
+                        className={user ? 'link-cards' : 'disabled-card link-cards'}
+                        onClick={(e) => {
+                            if (!user) {
+                                return e.preventDefault()
+                            }
+                            return history.push('/groups/new')
+                        }}
                     >
                         <img src='/images/create-group.png' alt='create a group' />
                         <a
@@ -73,13 +73,13 @@ window.addEventListener('mousemove', (event) => {
                             }}
                             href='/groups/new'>Start a new group</a>
                         <p>
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                        Start your own running group on our platform, gather fellow enthusiasts, and create a community that runs together and supports each other.
                         </p>
                     </div>
 
                 </div>
                 {!user && <div id='join'>
-                      <OpenModalText
+                    <OpenModalText
                         buttonText="Join Run Up"
                         modalComponent={<SignupFormModal />}
                     />
