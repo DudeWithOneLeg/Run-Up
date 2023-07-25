@@ -48,7 +48,9 @@ export default function GroupInfo() {
                 {
                     group && (
                         <div id='group-info-div'>
-                            <p>&lt;<Link to='/groups/1/10'>Groups</Link></p>
+                            <p className="back-button">&lt;
+                                <Link to='/groups/1/10'>Groups</Link>
+                            </p>
                             <div id='top-card'>
                                 {group.GroupImages && group.GroupImages.map((img) => {
                                     if (img.preview) {
