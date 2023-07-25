@@ -48,7 +48,11 @@ export default function EventInfo() {
     return (
         <div id='event-component'>
             <div id='event-info'>
-                <p>&lt;<Link to='/events/1/10'>Events</Link></p>
+                <p className="back-button">&lt;
+                    <Link to='/events/1/10'>
+                        Events
+                    </Link>
+                    </p>
                 <h1>{event.name}</h1>
                 <p>Hosted by {attendees[0].firstName} {attendees[0].lastName}</p>
             </div>

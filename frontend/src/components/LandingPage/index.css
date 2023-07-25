@@ -116,7 +116,7 @@
     z-index: auto;
 }
 
-@media screen and (max-width: 700px) {
+@media screen and (max-width: 800px) {
     #landing-inner-div {
         flex-direction: column;
     }
