@@ -44,6 +44,11 @@ form > .event-div {
     color: white;
 }
 
+#event-button:hover {
+    cursor: pointer;
+    background-color: rgb(196, 15, 15);
+}
+
 #money-sign {
     position: aboslute;
     margin-top: 5%;

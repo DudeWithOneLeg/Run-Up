@@ -7,6 +7,7 @@
     justify-content: center;
     align-items: center;
     width: 100%;
+    padding-top: 70px;
 }
 
 #group-form {
@@ -74,4 +75,13 @@
     width: 50%;
     height: 100px;
     border-radius: 5px;
+}
+
+@media screen and (max-width: 900px) {
+    #group-form-select {
+        width: 110px;
+    }
+    .group-submit-button, .disabled-group-submit-button {
+        width: 100px;
+    }
 }

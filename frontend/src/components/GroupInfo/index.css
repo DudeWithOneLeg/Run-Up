@@ -23,6 +23,7 @@
     justify-content: center;
     align-items: center;
     width: 90%;
+    padding-top: 70px;
 }
 
 #group-info {
@@ -88,10 +89,10 @@
 
     #organizerButtons {
         display: flex;
+        flex-direction: column;
         justify-content: space-between;
-        align-items: center;
-        height: 40px;
-        width: 450px;
+        align-items: flex-start;
+        height: 100%;
     }
 
     #group-info-container, #group-info-div {
@@ -103,10 +104,11 @@
     }
 
     .group-buttons {
-        width: 130px;
+        width: 100px;
         height: 40px;
         padding: 0px;
         margin: 0px;
+        margin-top: 10px;
         font-size: 18px;
     }
 

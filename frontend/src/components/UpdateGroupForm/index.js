@@ -161,7 +161,7 @@ export default function UpdateGroupForm() {
                 id="group-form"
                 onSubmit={handleSumbit}>
                      <p>
-                Update your Group
+                     UPDATE YOUR GROUP'S INFORMATION
             </p>
             <h2 id="group-h2">
                 We'll walk you through a few steps to build your local community
