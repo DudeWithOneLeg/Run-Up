@@ -49,6 +49,11 @@
     color: white;
 }
 
+#group-button:hover {
+    cursor: pointer;
+    background-color: rgb(196, 15, 15);
+}
+
 * {
     font-family: 'Varela Round';
 }
