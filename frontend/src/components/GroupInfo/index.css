@@ -33,7 +33,7 @@
 }
 
 #group-image {
-    width: 300px;
+    width: 500px;
     border-radius: 10px;
     padding-right: 0px;
 }
@@ -67,4 +67,70 @@
 
 #group-create-event-button {
     width: 100px;
+}
+
+@media screen and (max-width: 900px) {
+    #top-card {
+        flex-direction: column;
+    }
+
+    #group-info-container {
+        width: 80%;
+    }
+
+    #group-events-card-inner-info {
+        flex-direction: column;
+    }
+
+    #group-events-card-inner-info > img {
+        width: 100%;
+    }
+
+    #organizerButtons {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        height: 40px;
+        width: 450px;
+    }
+
+    #group-info-container, #group-info-div {
+        width: 100%;
+    }
+
+    #top-card > img {
+        width: 100%;
+    }
+
+    .group-buttons {
+        width: 130px;
+        height: 40px;
+        padding: 0px;
+        margin: 0px;
+        font-size: 18px;
+    }
+
+    #group-create-event-button {
+        width: 150px;
+    }
+
+    #top-right-card {
+        width: 100%;
+        margin: 0px;
+    }
+
+    .more-info {
+        padding: 0px;
+        margin: 0px;
+    }
+
+    #group-events-card-info, .group-events-about {
+        padding-left: 15px;
+        padding-right: 15px;
+    }
+
+    .group-events-about {
+        width: 95%;
+    }
+
 }

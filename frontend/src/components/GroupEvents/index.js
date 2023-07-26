@@ -55,7 +55,21 @@ const date = new Date()
             <h1> {sortedEvents[0].length} Upcoming Events</h1>
             {
                 sortedEvents[0] && sortedEvents[0].map((event) => {
-                    const startDate = event.startDate.split('T').join(' · ')
+                    event.startDate = event.startDate.split('T').join(' · ').split(':00.000Z').join('')
+
+          let hour = event.startDate.split(' · ')[1].split(':')[0]
+
+          if (hour > 12 && !event.startDate.includes('PM') && !event.startDate.includes('AM')) {
+
+            const oldHour = hour
+            hour -= 12
+            event.startDate = event.startDate.replace(oldHour, hour)
+            event.startDate += ' PM'
+          }
+          else if (hour < 12 && !event.startDate.includes('AM') && !event.startDate.includes('PM')) {
+
+            event.startDate += ' AM'
+          }
                     return (<div
                         onClick={() => {
                             history.push(`/events/${event.id}`)
@@ -64,7 +78,7 @@ const date = new Date()
                         <div id='group-events-card-inner-info'>
                             <img className='group-events-img' src={event.previewImage} alt=''></img>
                             <div id='group-events-card-info'>
-                                <p>{startDate}</p>
+                                <p>{event.startDate}</p>
                                 <h1>{event.name}</h1>
                                 {event.Venue && <p>{event.Venue.city}, {event.Venue.state}</p>}
 
@@ -78,7 +92,21 @@ const date = new Date()
             <h1> {sortedEvents[1].length} Past Events</h1>
             {
                 sortedEvents[1] && sortedEvents[1].map((event) => {
-                    const startDate = event.startDate.split('T').join(' · ')
+                    event.startDate = event.startDate.split('T').join(' · ').split(':00.000Z').join('')
+
+          let hour = event.startDate.split(' · ')[1].split(':')[0]
+
+          if (hour > 12 && !event.startDate.includes('PM') && !event.startDate.includes('AM')) {
+
+            const oldHour = hour
+            hour -= 12
+            event.startDate = event.startDate.replace(oldHour, hour)
+            event.startDate += ' PM'
+          }
+          else if (hour < 12 && !event.startDate.includes('AM') && !event.startDate.includes('PM')) {
+
+            event.startDate += ' AM'
+          }
                     return (<div
                         onClick={() => {
                             history.push(`/events/${event.id}`)
@@ -87,7 +115,7 @@ const date = new Date()
                         <div id='group-events-card-inner-info'>
                             <img className='group-events-img' src={event.previewImage} alt=''></img>
                             <div id='group-events-card-info'>
-                                <p>{startDate}</p>
+                                <p>{event.startDate}</p>
                                 <h1>{event.name}</h1>
                                 {event.Venue && <p>{event.Venue.city}, {event.Venue.state}</p>}
 

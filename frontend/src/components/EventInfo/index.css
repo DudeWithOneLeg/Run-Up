@@ -18,12 +18,17 @@
 
 #event-comp-top > img {
     width: 50%;
+    border-radius: 10px;
 }
 
 #event-comp-top {
     display: flex;
     flex-direction: row;
     width: 70%;
+}
+
+#event-comp-top > div {
+    padding-left: 20px;
 }
 
 #event-comp-details {
@@ -42,4 +47,15 @@
 
 .back-button {
     font-size: 24px;
+}
+
+@media screen and (max-width: 800px) {
+    #event-comp-top {
+        flex-direction: column;
+    }
+
+    #event-comp-top > img {
+        width: 100%;
+    }
+
 }
