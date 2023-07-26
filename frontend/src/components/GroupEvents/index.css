@@ -54,8 +54,10 @@ Link {
 }
 
 .group-events-img {
-    width: 25%;
+    width: 300px;
     border-radius: 20px;
     padding-right: 0px;
     margin-right: 20px;
 }
+
+
