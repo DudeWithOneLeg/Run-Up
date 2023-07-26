@@ -219,11 +219,9 @@ export default function GroupEventsToggle() {
             hour -= 12
             event.startDate = event.startDate.replace(oldHour, hour)
             event.startDate += ' PM'
-            console.log(hour)
           }
           else if (hour < 12 && !event.startDate.includes('AM') && !event.startDate.includes('PM')) {
-            console.log(hour, hour > 12)
-            console.log(event.startDate)
+
             event.startDate += ' AM'
           }
 
