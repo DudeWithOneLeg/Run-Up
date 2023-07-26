@@ -46,7 +46,7 @@ body {
     width: 130%;
 }
 
-@media screen and (max-width: 800px) {
+@media screen and (max-width: 900px) {
     #footer-images {
         display: flex;
         flex-direction: column;
