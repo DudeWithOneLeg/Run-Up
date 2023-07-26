@@ -176,7 +176,7 @@ export default function UpdateGroupForm() {
                     </p>
                     <input
 
-                        className='group-input'
+                        className='update-group-input'
                         defaultValue={`${oldGroup.city}, ${oldGroup.state}`}
                         onChange={(e) => {
                             setLocation(e.target.value)
@@ -193,7 +193,7 @@ export default function UpdateGroupForm() {
                         Feel free to get creative! You can edit this later if you change your mind.
                     </p>
                     <input
-                        className='group-input'
+                        className='update-group-input'
                         defaultValue={oldGroup.name}
                         onChange={(e) => {
                             setName(e.target.value)
@@ -243,7 +243,7 @@ export default function UpdateGroupForm() {
                         is this an in person or online group?
                     </p>
                     <select
-                        className="group-form-select group-input"
+                        className="group-form-select update-group-input"
                         onSelect={(e) => {
                             setOnlineOrInperson(e.target.value)
                         }}
@@ -259,7 +259,7 @@ export default function UpdateGroupForm() {
                         Is this group private or public?
                     </p>
                     <select
-                    className="group-form-select group-input"
+                    className="group-form-select update-group-input"
                         onChange={(e) => {
                             if (e.target.value === 'Private') {
                                 setPublicOrPrivate(true)

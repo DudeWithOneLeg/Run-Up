@@ -112,7 +112,7 @@ export default function EventForm() {
                         Is this an in person or online event?
                     </p>
                     <select
-                        className="event-select"
+                        className="event-select-choose"
                         onChange={(e) => setOnlineOrInperson(e.target.value)}
                     >
                         <option disabled selected>	&#40;choose one	&#41;</option>
@@ -128,7 +128,7 @@ export default function EventForm() {
                         Is this event private or public?
                     </p>
                     <select
-                    className="event-select"
+                    className="event-select-choose"
                         onChange={(e) => {
                             if (e.target.value === 'Private') setPublicOrPrivate(true)
                             if (e.target.value === 'Public') setPublicOrPrivate(false)
@@ -143,6 +143,8 @@ export default function EventForm() {
                     }
                     <p>How many people are you expecting?</p>
                     <input
+                    className="event-input"
+                    id='event-capacity'
                     onChange={(e) => setCapacity(e.target.value)}
                     >
                     </input>
@@ -227,6 +229,7 @@ export default function EventForm() {
                 </p>
                 <textarea
                 className='event-input'
+                id='event-form-about'
                 placeholder='Please include art least 30 characters'
                     onChange={(e) => setAbout(e.target.value)}
                 />

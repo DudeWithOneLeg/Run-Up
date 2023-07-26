@@ -24,14 +24,15 @@
     width: 40%;
 }
 
-.event-select {
-    width: 13%;
-    margin-bottom: 5%;
+.update-event-select {
+    width: 100px;
+    margin-bottom: 20px;
+    border-radius: 5px;
 }
 
 form > .event-div {
     border-bottom: solid gray;
-    padding-bottom: 5%;
+    padding-bottom: 50px;
 }
 
 #event-button {
@@ -65,8 +66,8 @@ form > .event-div {
     color: black;
 }
 
-.calendar {
-    width: 23%;
+.update-calendar {
+    width: 190px;
 }
 
 * {
@@ -75,7 +76,7 @@ form > .event-div {
 
 #event-form-textarea {
     height: 100px;
-    width: 60%;
+    width: 50%;
 }
 
 #capacity {
@@ -84,4 +85,18 @@ form > .event-div {
 
 #event-name {
     width: auto;
+}
+
+@media screen and (max-width: 900px) {
+    #event-form-textarea {
+        width: 100%;
+    }
+
+    body {
+        width: 100%;
+    }
+
+    #root {
+        width: 100%;
+    }
 }

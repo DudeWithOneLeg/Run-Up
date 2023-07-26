@@ -19,14 +19,13 @@
 }
 
 .group-input {
-    border-radius: 5px;
     border: solid grey 1px;
-    border-radius: 20px;
+    border-radius: 5px;
     width: 40%;
 }
 
 #group-form-select {
-    width: 18%;
+    width: 110px;
     margin-bottom: 5%;
 }
 
@@ -45,12 +44,17 @@
     color: white;
 }
 
+.group-submit-button:hover {
+    cursor: pointer;
+    background-color: rgb(196, 15, 15);
+}
+
 .disabled-group-submit-button {
     width: 15%;
     height: 40px;
     margin-top: 5%;
     background-color: gray;
-    border-radius: 10px;
+    border-radius: 5px;
     margin-bottom: 40px;
     color: white;
 }

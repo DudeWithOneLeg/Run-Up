@@ -24,20 +24,20 @@
     width: 70%;
 }
 
-.group-input {
+.update-group-input {
     border-radius: 5px;
     border: solid grey 1px;
-    width: 40%;
+    width: 150px;
 }
 
 .group-form-select {
-    width: 13%;
-    margin-bottom: 5%;
+    width: 100px;
+    margin-bottom: 20px;
 }
 
 .group-div {
     border-bottom: solid gray;
-    padding-bottom: 5%;
+    padding-bottom: 20px;
 }
 
 #group-button {
