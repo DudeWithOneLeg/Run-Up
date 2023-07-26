@@ -126,5 +126,8 @@
     .link-cards {
         margin: 0px
     }
+    #landing-inner-div {
+        width: 100%;
+    }
 
 }

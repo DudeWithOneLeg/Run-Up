@@ -5,6 +5,9 @@
     justify-content: space-between;
     align-items: center;
     height: 70px;
+    position: fixed;
+    background-color: white;
+    width: 100%;
 }
 
 #login-signup {
@@ -35,8 +38,6 @@
     border-top: solid black;
     height: 100%;
     display: flex;
-    align-items: center;
-    justify-content: center;
 }
 
 #logout-link {
@@ -56,17 +57,17 @@
     border-top: none;
     border-radius: 0px 0px 15px 15px;
     background-color: gray;
+    width: 200px;
 }
 
 .profile-dropdown > p, .profile-dropdown > a {
     display: flex;
     align-items: center;
-    height: 100%;
-    width: 150px;
+    width: 180px;
     padding-left: 10px;
     padding-right: 10px;
-    padding-top: 0px;
-    padding-bottom: 0px;
+    padding-top: 10px;
+    padding-bottom: 15px;
 
 }
 
@@ -101,4 +102,37 @@
 
 #profile-img {
     cursor: pointer;
+}
+
+@media screen and (max-width: 900px) {
+    .profile-dropdown {
+        position: fixed;
+        width: 100%;
+        right: 0px;
+        top: 50px;
+        left: 0px;
+        border-radius: 0px;
+        border: solid black 1px;
+    }
+
+    .profile-dropdown > a, .profile-dropdown > p {
+        border-top: solid white 1px;
+        width: 100%;
+        text-align: center;
+        justify-content: center;
+        margin-right: 0px;
+    }
+
+    #logout-div {
+        width: 100%;
+    }
+
+    #logout-link {
+        width: 100%;
+    }
+
+    #nav {
+        height: 50px;
+    }
+
 }
