@@ -42,6 +42,39 @@ export default function EventInfo() {
     event.startDate = event.startDate.split('T').join(' · ')
     event.endDate = event.endDate.split('T').join(' · ')
 
+
+    event.startDate = event.startDate.split('T').join(' · ').split(':00.000Z').join('')
+
+          let hour = event.startDate.split(' · ')[1].split(':')[0]
+
+          if (hour > 12 && !event.startDate.includes('PM') && !event.startDate.includes('AM')) {
+
+            const oldHour = hour
+            hour -= 12
+            event.startDate = event.startDate.replace(oldHour, hour)
+            event.startDate += ' PM'
+          }
+          else if (hour < 12 && !event.startDate.includes('AM') && !event.startDate.includes('PM')) {
+
+            event.startDate += ' AM'
+          }
+          event.endDate = event.endDate.split('T').join(' · ').split(':00.000Z').join('')
+
+          let hour2 = event.endDate.split(' · ')[1].split(':')[0]
+
+          if (hour2 > 12 && !event.endDate.includes('PM') && !event.endDate.includes('AM')) {
+
+            const oldHour = hour2
+            hour2 -= 12
+            event.endDate = event.endDate.replace(oldHour, hour2)
+            event.endDate += ' PM'
+          }
+          else if (hour2 < 12 && !event.endDate.includes('AM') && !event.endDate.includes('PM')) {
+
+            event.endDate += ' AM'
+          }
+
+
     console.log('event info',attendees)
 
 
