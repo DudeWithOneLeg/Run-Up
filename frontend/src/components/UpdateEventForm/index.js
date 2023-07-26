@@ -99,8 +99,6 @@ export default function UpdateEventForm() {
         oldEvent.endDate = oldEvent.endDate.split(':00.000Z').join('')
     }
 
-
-
     return (
         <div className="event-form-container">
 
@@ -134,7 +132,7 @@ export default function UpdateEventForm() {
                         Is this an in person or online event?
                     </p>
                     <select
-                        className="event-select"
+                        className="update-event-select"
                         onChange={(e) => setOnlineOrInperson(e.target.value)}
                     >
                         <option selected={oldEvent.type === 'In person'}>In person</option>
@@ -149,7 +147,7 @@ export default function UpdateEventForm() {
                         Is this event private or public?
                     </p>
                     <select
-                        className="event-select"
+                        className="update-event-select"
                         onChange={(e) => {
                             if (e.target.value === 'Private') setPublicOrPrivate(true)
                             if (e.target.value === 'Public') setPublicOrPrivate(false)
@@ -197,7 +195,7 @@ export default function UpdateEventForm() {
                     </p>
                     <input
                         defaultValue={oldEvent.startDate}
-                        className="calendar event-input"
+                        className="update-calendar event-input"
                         onChange={(e) => setStartDate(e.target.value)}
                         type='datetime-local' />
                     {
@@ -208,7 +206,7 @@ export default function UpdateEventForm() {
                     </p>
                     <input
                         value={oldEvent.endDate}
-                        className="calendar event-input"
+                        className="update-calendar event-input"
                         onChange={(e) => setEndDate(e.target.value)}
                         type='datetime-local'
                     >
