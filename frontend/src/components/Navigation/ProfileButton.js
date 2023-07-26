@@ -41,7 +41,7 @@ export default function ProfileButton({ user }) {
       {showMenu && <>
 
       <div className={ulClassName}>
-        <p className="profile-info">Hello, {user.firstName}</p>
+        <p className="profile-info">Hello, {user.firstName}!</p>
         <a className="profile-info" href='/groups/1/10'>View groups</a>
         <a className="profile-info" href='/events/1/10'>View events</a>
         <p className="profile-info">{ showMenu && user.username}</p>
