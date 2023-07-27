@@ -29,7 +29,7 @@ export default function EventForm() {
 
     useEffect(() => {
         dispatch(groupActions.loadGroup(params.groupId))
-    }, [dispatch])
+    }, [dispatch, params.groupId])
 
     const group = useSelector(state => state.group.group)
     const newEvent = useSelector(state => state.event.event)
