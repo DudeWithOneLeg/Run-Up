@@ -14,8 +14,8 @@
     display: flex;
     flex-direction: row;
     width: 200px;
-    justify-content: flex-start;
-    align-self: flex-end;
+    justify-content: center;
+    align-items: center;
     font-size: 15px;
 }
 
@@ -26,6 +26,7 @@
 #home {
     text-align: center;
     display: flex;
+    padding-left: 10px;
     width: 200px;
     font-size: 40px;
 }
@@ -105,6 +106,17 @@
     cursor: pointer;
 }
 
+#github, #linkedin {
+    width: 50px;
+    justify-self: center;
+}
+
+#socials {
+    display: flex;
+    justify-content: space-between;
+    width: 150px;
+}
+
 @media screen and (max-width: 900px) {
     .profile-dropdown {
         position: fixed;
@@ -138,6 +150,10 @@
 
     #home {
         font-size: 24px;
+    }
+
+    #github, #linkedin {
+        width: 40px;
     }
 
 }

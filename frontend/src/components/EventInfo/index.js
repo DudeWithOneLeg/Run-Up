@@ -17,7 +17,7 @@ export default function EventInfo() {
     useEffect(() => {
         dispatch(eventActions.loadEvent(params.eventId))
         dispatch(eventActions.getAttendances(params.eventId))
-    }, [dispatch])
+    }, [dispatch, params.eventId])
 
     const oldEvent = useSelector(state => state.event.eventInfo)
     const oldAttendees = useSelector(state => state.event.eventAttend)
@@ -33,12 +33,7 @@ export default function EventInfo() {
         return null
     }
 
-    Object.values(attendees).map((attend) => {
-        let newHost
-        if (attend.Attendances.status === 'host') {
-            newHost = attend
-        }
-    })
+
     event.startDate = event.startDate.split('T').join(' · ')
     event.endDate = event.endDate.split('T').join(' · ')
 
@@ -91,14 +86,14 @@ export default function EventInfo() {
             </div>
             <div id='event-comp-second'>
                 <div id='event-comp-top'>
-                    <img src={event.EventImages[0].url}></img>
+                    <img src={event.EventImages[0].url} alt='event'></img>
                     <div>
                         <div id='event-comp-group'>
                             <h1>{event.Group.name}</h1>
                         </div>
                         <div id='event-comp-top-info'>
                             <div className='time-price'>
-                                <img src='/images/clock.png' />
+                                <img src='/images/clock.png' alt='clock'/>
                                 <div>
                                   <h3>START DATE {event.startDate}</h3>
                                   <h3>END DATE {event.endDate}</h3>
@@ -106,19 +101,19 @@ export default function EventInfo() {
 
                             </div>
                             <div className='time-price'>
-                                <img src='/images/money.png'/>
+                                <img src='/images/money.png' alt='dollar sign'/>
                                 {event.price == 0 && <h3>FREE</h3>}
                                 {event.price > 0 && <h3>{event.price}</h3>}
                             </div>
                             <div className='time-price'>
-                                <img src='/images/map.png' />
+                                <img src='/images/map.png' alt='map-pin'/>
                                 <h3>{event.type}</h3>
                             </div>
 
 
 
 
-                            {!user || user.id === attendees[0].id && <div>
+                            {(!user || user.id === attendees[0].id) && <div>
                                 <button className='group-buttons'
                                 onClick={() => {
                                     dispatch(groupActions.loadGroup(event.groupId)).then(() => history.push(`/events/${event.id}/edit`))

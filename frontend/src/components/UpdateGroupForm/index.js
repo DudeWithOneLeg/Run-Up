@@ -18,7 +18,7 @@ export default function UpdateGroupForm() {
     //dispatch old group
     useEffect(() => {
         dispatch(groupActions.loadGroup(params.id))
-    }, [dispatch])
+    }, [dispatch, params.id])
 
     const group = useSelector(state => state.group.group)
 

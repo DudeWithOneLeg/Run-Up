@@ -18,7 +18,7 @@ export default function Navigation({ isLoaded }) {
           <Link to='/groups/new'>Start a new group</Link>
         </div>
 
-          <ProfileButton user={sessionUser} />
+        <ProfileButton user={sessionUser} />
       </div>
 
     );
@@ -42,6 +42,11 @@ export default function Navigation({ isLoaded }) {
     <div id='nav'>
 
       <NavLink id='home' exact to="/">Run Up</NavLink>
+      <div id='socials'>
+        <a href='https://github.com/DudeWithOneLeg' target="_blank"> <img id='github' src='/images/github-mark.png' alt='github' /></a>
+        <a href='https://www.linkedin.com/in/romeo-galvan-9418b6225/' target="_blank"> <img id='linkedin' src='/images/linkedin.png' alt='linkedin' /></a>
+      </div>
+
 
       {isLoaded && sessionLinks}
 

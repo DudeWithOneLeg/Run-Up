@@ -22,7 +22,7 @@ export default function UpdateEventForm() {
     const [endDate, setEndDate] = useState("")
     const [errors, setErrors] = useState({})
     const [capacity, setCapacity] = useState(0)
-    const [imgUrl, setImgUrl] = useState('')
+    // const [imgUrl, setImgUrl] = useState('')
 
     const params = useParams()
     const dispatch = useDispatch()
@@ -39,7 +39,7 @@ export default function UpdateEventForm() {
             dispatch(groupActions.loadGroup(oldEvent.groupId))
         }
 
-    }, [dispatch]);
+    }, [dispatch, oldEvent.groupId, params.eventId]);
 
     useEffect(() => {
         console.log({ name, price, about, onlineOrInperson, publicOrPrivate, startDate, endDate })
