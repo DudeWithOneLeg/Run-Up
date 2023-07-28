@@ -55,7 +55,7 @@ export default function LandingPage() {
                         </p>
                     </div>
                     <div
-                        className={user ? 'link-cards' : 'disabled-card link-cards'}
+                        className={user ? 'link-cards' : 'disabled-card'}
                         onClick={(e) => {
                             if (!user) {
                                 return e.preventDefault()

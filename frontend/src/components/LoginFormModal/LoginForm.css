@@ -38,6 +38,11 @@ label {
     cursor: pointer;
 }
 
+.login-button:hover {
+    cursor: pointer;
+    background-color: rgb(196, 15, 15);
+}
+
 .demo-button {
     background-color: red;
     justify-self: center;
@@ -48,8 +53,12 @@ label {
     margin-bottom: 10px;
     font-size: 15px;
     cursor: pointer;
-    border: solid red;
     border-radius: 10px;
+}
+
+.demo-button:hover {
+    cursor: pointer;
+    background-color: rgb(196, 15, 15);
 }
 
 .disabled {

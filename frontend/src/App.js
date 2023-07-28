@@ -12,8 +12,10 @@ import EventForm from "./components/EventForm";
 import LandingPage from "./components/LandingPage";
 import EventInfo from "./components/EventInfo";
 import UpdateEventForm from "./components/UpdateEventForm";
+import VenueFormModal from "./components/VenueFormModal";
 import Footer from "./components/Footer";
 import PageNotFound from "./components/404";
+
 
 
 function App() {
@@ -44,6 +46,9 @@ function App() {
         </Route>
         <Route exact path='/groups/new'>
           <GroupForm />
+        </Route>
+        <Route exact path='/venues/new'>
+          <VenueFormModal />
         </Route>
         <Route exact path='/groups/:id'>
           <GroupInfo />
