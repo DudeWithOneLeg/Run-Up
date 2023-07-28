@@ -78,7 +78,6 @@ export const postImage = (groupId, image) => async (dispatch) => {
 }
 
 export const requestNewGroup = (group) => async (dispatch) => {
-    console.log("SENDING FETCH FOR NEW GROUP")
 
     const res = await csrfFetch('/api/groups', {
         method: 'POST',
@@ -93,7 +92,6 @@ export const requestNewGroup = (group) => async (dispatch) => {
 
 export const loadGroups = () => async (dispatch) => {
 
-    console.log("FETCHING GROUPS");
     const res = await csrfFetch('/api/groups');
     let data;
     if (res.ok) {
@@ -111,7 +109,6 @@ export const loadGroups = () => async (dispatch) => {
 }
 
 export const loadGroup = (id) => async (dispatch) => {
-    console.log("FETCHING GROUP THUNK", id)
     const res = await csrfFetch(`/api/groups/${id}`)
     const data = await res.json()
     dispatch(getOneGroup(data))

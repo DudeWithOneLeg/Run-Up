@@ -10,6 +10,11 @@
     border-radius: 10px;
 }
 
+#signup-button:hover {
+    cursor: pointer;
+    background-color: rgb(196, 15, 15);
+}
+
 #disabled-signup-button {
     background-color: gray;
     border-radius: 10px;

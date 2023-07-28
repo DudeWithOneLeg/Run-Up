@@ -63,13 +63,11 @@ export const postEventImg = (eventId, image) => async (dispatch) => {
     })
 
     const data = await res.json()
-    console.log('EVENT IMAGE',data)
     dispatch(addEventImg(data))
     return res
 }
 
 export const removeEvent = (eventId) => async (dispatch) => {
-    console.log('REQUESTING DELETE EVENT')
     const res = await csrfFetch(`/api/events/${eventId}`, {
         method: 'DELETE'
     })
@@ -77,7 +75,6 @@ export const removeEvent = (eventId) => async (dispatch) => {
 }
 
 export const getAttendances = (eventId) => async (dispatch) => {
-    console.log('FETCHING EVENT ATTENDANCES')
     const res = await csrfFetch(`/api/events/${eventId}/attendees`)
     const data = await res.json()
     let normal = {}
@@ -90,7 +87,6 @@ export const getAttendances = (eventId) => async (dispatch) => {
 }
 
 export const loadEvent = (eventId) => async (dispatch) => {
-    console.log("FETCHING ONE EVENT")
     const res = await csrfFetch(`/api/events/${eventId}`)
     const data = await res.json()
     console.log(data)
@@ -102,7 +98,6 @@ export const loadEvent = (eventId) => async (dispatch) => {
 }
 
 export const requestNewEvent = (event, groupId) => async (dispatch) => {
-    console.log("SENDING FETCH FOR NEW EVENT")
     const res = await csrfFetch(`/api/groups/${groupId}/events`, {
         method: 'POST',
         body: JSON.stringify(event)
@@ -118,7 +113,6 @@ export const requestNewEvent = (event, groupId) => async (dispatch) => {
 
 export const loadEvents = () => async (dispatch) => {
 
-    console.log("FETCHING EVENTS");
     const res = await csrfFetch('/api/events');
     const data = await res.json();
     if (res.ok) {
@@ -126,7 +120,6 @@ export const loadEvents = () => async (dispatch) => {
         data.map((event) => {
             return normal[event.id] = event
         })
-        console.log("LOAD EVENTS DATA", normal);
         dispatch(getAllEvents(normal));
     }
 
@@ -135,7 +128,6 @@ export const loadEvents = () => async (dispatch) => {
 }
 
 export const loadGroupEvents = (id) => async (dispatch) => {
-    console.log("FETCHING GROUP EVENTS")
     const res = await csrfFetch(`/api/groups/${id}/events`)
     const data = await res.json()
     if (res.ok) {
@@ -143,7 +135,6 @@ export const loadGroupEvents = (id) => async (dispatch) => {
         data.map((event) => {
             return normal[event.id] = event
         })
-        console.log("LOAD GROUP EVENTS", normal)
         dispatch(getGroupEvents(normal))
     }
     return data

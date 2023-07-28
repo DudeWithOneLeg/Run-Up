@@ -6,6 +6,7 @@ import GroupEvents from "../GroupEvents"
 import * as eventActions from '../../store/events';
 import OpenModalButton from "../OpenModalButton";
 import DeleteGroupModal from "../DeleteGroupModal"
+import VenueFormModal from '../VenueFormModal'
 import './index.css'
 
 
@@ -29,7 +30,6 @@ export default function GroupInfo() {
     const group = useSelector(state => state.group.group)
     const events = useSelector(state => state.event.groupEvents)
 
-    console.log("CURRENT GROUP", group)
 
     let numEvents = 0
 
@@ -68,8 +68,8 @@ export default function GroupInfo() {
                                         <p>Ogranized by {group.Organizer.firstName} {group.Organizer.lastName}</p>
                                     </div>
                                     <button
-                                    className="group-buttons"
-                                    onClick={(e) => window.alert("Feature coming soon!")}
+                                        className="group-buttons"
+                                        onClick={(e) => window.alert("Feature coming soon!")}
                                         hidden={!currentUser || currentUser.id === group.organizerId}
                                     >Join this group</button>
                                     <div
@@ -78,16 +78,17 @@ export default function GroupInfo() {
                                     >
 
                                         <button
-                                        id='group-create-event-button'
-                                        className="group-buttons"
+                                            id='group-create-event-button'
+                                            className="group-buttons"
                                             hidden={!currentUser || currentUser.id !== group.organizerId}
                                             onClick={() => history.push(`/groups/${group.id}/events/new`)}
                                         >Create Event</button>
                                         <button
-                                        className="group-buttons"
+                                            className="group-buttons"
                                             hidden={!currentUser || currentUser.id !== group.organizerId}
                                             onClick={() => history.push(`/groups/${group.id}/edit`)}
                                         >Update</button>
+
                                         {/* <button
                                             hidden={!currentUser || currentUser.id !== group.organizerId}
                                             onClick={() => {
@@ -99,15 +100,21 @@ export default function GroupInfo() {
                                             }}>Delete</button> */}
                                         {
                                             currentUser && currentUser.id === group.organizerId && <div
-                                        id='delete'
-                                        >
-                                            <OpenModalButton
+                                                id='delete'
+                                            >
+                                                <OpenModalButton
 
-                                        className="group-buttons"
-                                                buttonText="Delete"
-                                                modalComponent={<DeleteGroupModal />}
-                                            />
-                                        </div>
+                                                    className="group-buttons"
+                                                    buttonText="Delete"
+                                                    modalComponent={<DeleteGroupModal />}
+                                                />
+                                                <OpenModalButton
+
+                                                    className="group-buttons"
+                                                    buttonText="Creat Venue"
+                                                    modalComponent={<VenueFormModal />}
+                                                />
+                                            </div>
                                         }
 
 
