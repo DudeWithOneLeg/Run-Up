@@ -17,15 +17,17 @@ const removeUser = () => {
 };
 
 export const restoreUser = () => async (dispatch) => {
-  console.log("RESTORE USER INITIATED")
   const response = await csrfFetch("/api/session");
   const data = await response.json();
+  if (data.errors) {
+    return console.log(data.errors)
+}
   dispatch(setUser(data.user));
+
   return response;
 };
 
 export const login = (user) => async (dispatch) => {
-  console.log("LOGIN INITIATED")
   const { credential, password } = user;
   const response = await csrfFetch("/api/session", {
     method: "POST",
@@ -35,12 +37,14 @@ export const login = (user) => async (dispatch) => {
     }),
   });
   const data = await response.json();
+  if (data.errors) {
+    return console.log(data.errors)
+}
   dispatch(setUser(data.user));
   return response;
 };
 
 export const signup = (user) => async (dispatch) => {
-  console.log("SIGN UP INITIATED")
   const {username, firstName, lastName, email, password} = user
   const res = await csrfFetch('/api/users', {
     method: "POST",
@@ -53,12 +57,14 @@ export const signup = (user) => async (dispatch) => {
     })
   })
   const data = await res.json()
+  if (data.errors) {
+    return console.log(data.errors)
+}
   dispatch(setUser(data.User))
   return res
 }
 
 export const logout = () => async (dispatch) => {
-  console.log("LOGOUT INITIATED ")
   const response = await csrfFetch('/api/session', {
     method: 'DELETE',
   });
@@ -69,7 +75,6 @@ export const logout = () => async (dispatch) => {
 const initialState = { user: null };
 
 const sessionReducer = (state = initialState, action) => {
-  console.log("SESSION REDUCER INITIATED")
   let newState;
   switch (action.type) {
     case SET_USER:

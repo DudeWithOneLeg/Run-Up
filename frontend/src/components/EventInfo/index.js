@@ -70,9 +70,6 @@ export default function EventInfo() {
           }
 
 
-    console.log('event info',attendees)
-
-
     return (
         <div id='event-component'>
             <div id='event-info'>
@@ -134,6 +131,7 @@ export default function EventInfo() {
                 <h1>Details</h1>
                 <p>{event.description}</p>
             </div>
+            <img id='background-img' src={event.EventImages[0].url}/>
         </div>
     )
 }

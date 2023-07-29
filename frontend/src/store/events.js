@@ -63,6 +63,9 @@ export const postEventImg = (eventId, image) => async (dispatch) => {
     })
 
     const data = await res.json()
+    if (data.errors) {
+        return console.log(data.errors)
+    }
     dispatch(addEventImg(data))
     return res
 }
@@ -78,7 +81,9 @@ export const getAttendances = (eventId) => async (dispatch) => {
     const res = await csrfFetch(`/api/events/${eventId}/attendees`)
     const data = await res.json()
     let normal = {}
-    console.log(data)
+    if (data.errors) {
+        return console.log(data.errors)
+    }
         data.Attendees.map((attend) => {
             return normal[attend.id] = attend
         })
@@ -89,7 +94,9 @@ export const getAttendances = (eventId) => async (dispatch) => {
 export const loadEvent = (eventId) => async (dispatch) => {
     const res = await csrfFetch(`/api/events/${eventId}`)
     const data = await res.json()
-    console.log(data)
+    if (data.errors) {
+        return console.log(data.errors)
+    }
     if (res.ok) {
 
         dispatch(getOneEvent(data))
@@ -103,10 +110,12 @@ export const requestNewEvent = (event, groupId) => async (dispatch) => {
         body: JSON.stringify(event)
     })
     const data = await res.json()
-    if (res.ok) {
-        console.log(data)
-        dispatch(createEvent(data))
+    if (data.errors) {
+        return console.log(data.errors)
     }
+
+        dispatch(createEvent(data))
+    
 
     return res
 }
