@@ -63,33 +63,34 @@ export default function GroupInfo() {
                                 <div id="top-right-card">
                                     <div id='top-right-card-info'>
                                         <h1>{group.name}</h1>
-                                        <p>{group.city + "," + group.state}</p>
-                                        {group.private ? <p>{'(' + numEvents + ') Events'} · Private</p> : <p>{'(' + numEvents + ') Events'} · Public</p>}
-                                        <p>Ogranized by {group.Organizer.firstName} {group.Organizer.lastName}</p>
+                                        <p className='bold'>{group.city + "," + group.state}</p>
+                                        {group.private ? <p className='bold'>{'(' + numEvents + ') Events'} · Private</p> : <p className='bold'>{'(' + numEvents + ') Events'} · Public</p>}
+                                        <p className='bold'>Ogranized by {group.Organizer.firstName} {group.Organizer.lastName}</p>
                                     </div>
-                                    <button
-                                        className="group-buttons"
-                                        onClick={(e) => window.alert("Feature coming soon!")}
-                                        hidden={!currentUser || currentUser.id === group.organizerId}
-                                    >Join this group</button>
-                                    <div
-                                        hidden={!currentUser || currentUser.id !== group.organizerId}
-                                        id='organizerButtons'
-                                    >
-
-                                        <button
-                                            id='group-create-event-button'
-                                            className="group-buttons"
-                                            hidden={!currentUser || currentUser.id !== group.organizerId}
-                                            onClick={() => history.push(`/groups/${group.id}/events/new`)}
-                                        >Create Event</button>
+                                    <div id='organizer-buttons-container'>
                                         <button
                                             className="group-buttons"
+                                            onClick={(e) => window.alert("Feature coming soon!")}
+                                            hidden={!currentUser || currentUser.id === group.organizerId}
+                                        >Join this group</button>
+                                        <div
                                             hidden={!currentUser || currentUser.id !== group.organizerId}
-                                            onClick={() => history.push(`/groups/${group.id}/edit`)}
-                                        >Update</button>
+                                            id='organizerButtons'
+                                        >
 
-                                        {/* <button
+                                            <button
+                                                id='group-create-event-button'
+                                                className="group-buttons"
+                                                hidden={!currentUser || currentUser.id !== group.organizerId}
+                                                onClick={() => history.push(`/groups/${group.id}/events/new`)}
+                                            >Create Event</button>
+                                            <button
+                                                className="group-buttons"
+                                                hidden={!currentUser || currentUser.id !== group.organizerId}
+                                                onClick={() => history.push(`/groups/${group.id}/edit`)}
+                                            >Update</button>
+
+                                            {/* <button
                                             hidden={!currentUser || currentUser.id !== group.organizerId}
                                             onClick={() => {
 
@@ -98,25 +99,26 @@ export default function GroupInfo() {
 
 
                                             }}>Delete</button> */}
-                                        {
-                                            currentUser && currentUser.id === group.organizerId && <div
-                                                id='delete'
-                                            >
-                                                <OpenModalButton
+                                            {
+                                                currentUser && currentUser.id === group.organizerId && <div
+                                                    id='delete'
+                                                >
+                                                    <OpenModalButton
 
-                                                    className="group-buttons"
-                                                    buttonText="Delete"
-                                                    modalComponent={<DeleteGroupModal />}
-                                                />
-                                                <OpenModalButton
+                                                        className="group-buttons"
+                                                        buttonText="Delete"
+                                                        modalComponent={<DeleteGroupModal />}
+                                                    />
+                                                    <OpenModalButton
 
-                                                    className="group-buttons"
-                                                    buttonText="Creat Venue"
-                                                    modalComponent={<VenueFormModal />}
-                                                />
-                                            </div>
-                                        }
+                                                        className="group-buttons"
+                                                        buttonText="Creat Venue"
+                                                        modalComponent={<VenueFormModal />}
+                                                    />
 
+                                                </div>
+                                            }
+                                        </div>
 
                                     </div>
 
@@ -127,10 +129,9 @@ export default function GroupInfo() {
                             </div>
                             <div className="more-info">
                                 <h1>Organizer</h1>
-                                <p>{group.Organizer.firstName} {group.Organizer.lastName}</p>
+                                <p className='bold'>{group.Organizer.firstName} {group.Organizer.lastName}</p>
                                 <h1>What we're about</h1>
-                                <p>{group.about}</p>
-                                <p>{group.previewImage}</p>
+                                <p className='bold'>{group.about}</p>
                                 <GroupEvents events={events} />
                             </div>
 
@@ -140,7 +141,7 @@ export default function GroupInfo() {
 
             </div>
 
-
+            <img id='group-background-image' src={group.GroupImages[0].url} />
         </div>
     )
 }

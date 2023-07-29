@@ -21,13 +21,10 @@ import PageNotFound from "./components/404";
 function App() {
   const dispatch = useDispatch();
   const [isLoaded, setIsLoaded] = useState(false);
-  console.log("APP COMPONENT INITIATED")
 
   useEffect(() => {
-    console.log("APP COMPONENT USEEFFECT")
     dispatch(sessionActions.restoreUser())
       .catch((error) => {
-        console.log("THERES NO USER", error);
       })
       .finally(() => {
         setIsLoaded(true);
@@ -47,9 +44,9 @@ function App() {
         <Route exact path='/groups/new'>
           <GroupForm />
         </Route>
-        <Route exact path='/venues/new'>
+        {/* <Route exact path='/venues/new'>
           <VenueFormModal />
-        </Route>
+        </Route> */}
         <Route exact path='/groups/:id'>
           <GroupInfo />
         </Route>
