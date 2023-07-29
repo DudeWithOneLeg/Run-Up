@@ -3,7 +3,6 @@
     flex-direction: row;
     width: 100%;
     margin-bottom: 0px;
-    border: solid red;
     height:fit-content;
 }
 
@@ -23,16 +22,15 @@
     display: flex;
     justify-content: space-between;
     flex-direction: column;
-    border: solid red;
 }
 
 #group-info-container {
     display: flex;
     justify-content: center;
     align-items: center;
-
+    color: white;
     padding-top: 70px;
-    background-color: rgb(255, 255, 255, .5);
+    background-color: rgb(0, 0, 0, .5);
 }
 
 #group-info {
