@@ -17,11 +17,12 @@
 }
 
 #top-right-card {
-    margin-left: 5%;
+    margin-left: 20px;
     width: 100%;
     display: flex;
     justify-content: space-between;
     flex-direction: column;
+    border: solid ;
 }
 
 #group-info-container {
@@ -66,6 +67,7 @@
 .group-buttons {
     background-color: gray;
     color: white;
+    justify-content: space-between;
     height: 30px;
     margin-right: 10px;
     border-radius: 10px;

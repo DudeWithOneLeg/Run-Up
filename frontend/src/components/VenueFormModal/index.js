@@ -161,15 +161,11 @@ export default function VenueFormModal() {
 
                         <input
                         defaultValue='Address'
+                        value={address}
                             className='opacity'
                             id='address-input'
                             onChange={(e) => {
-                                if (e.target.value.length) {
                                     setAddress(e.target.value)
-                                }
-                                else {
-                                    e.target.value = 'Address'
-                                }
 
                                 setValue(e.target.value)
                             }}
