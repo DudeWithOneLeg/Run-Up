@@ -261,7 +261,8 @@ export default function VenueFormModal() {
                                     if (address === 'Address') setAddress('')
                                 }}
                             />
-                            <img src='/images/location.svg' onClick={() => {
+                            <div
+                            onClick={() => {
                                 if (navigator.geolocation) {
                                     navigator.geolocation.getCurrentPosition(
                                         (position) => {
@@ -279,7 +280,12 @@ export default function VenueFormModal() {
                                         },
                                    );
                                 }
-                            }} />
+                            }}
+                            >Current Locaion
+                                <img src='/images/location.svg'  />
+
+                            </div>
+
                         </div>
                         {
                             errors.location && <p className='errors'>{errors.location}</p>

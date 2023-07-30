@@ -28,6 +28,24 @@
   align-items: center;
 }
 
+#location-div > div {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding-left: 10px;
+  cursor: pointer;
+  color: rgb(98, 197, 230);
+}
+
+#location-div > div:hover {
+  color: rgb(140, 207, 229);
+}
+
+#location-div > div > img {
+  padding-left: 10px;
+
+}
+
 #location-div > img:hover {
   cursor: pointer;
 }
