@@ -74,6 +74,7 @@
   align-items: center;
   border-radius: 10px 10px 0px 0px;
   border-bottom:solid white 1px;
+  padding-left: 10px;
 
 }
 
@@ -82,11 +83,22 @@
 }
 
 #venue-submit-button {
-  background-color: red;
+  background-color: black;
   color: white;
   border-radius: 5px;
-  border: solid gray 2px;
+  border: solid white 1px;
   margin-top: 20px;
+  height: 30px;
+}
+
+#venue-submit-button:hover {
+  background-color: white;
+  color: rgb(0, 0, 0);
+  cursor: pointer;
+}
+
+.venue-form-input {
+  border-radius: 7px;
 }
 
 #map {
@@ -102,6 +114,17 @@
   }
   #venue-form {
     width: 100%;
+    height: 600px;
+    border: solid black;
+  }
+
+  #location-div {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  #location-div > div {
+    padding: 5px 0px 0px ;
   }
 
   #map {
