@@ -21,7 +21,7 @@ export default function VenueFormModal() {
 
     const [address, setAddress] = useState('Address')
     const [city, setCity] = useState('City')
-    const [state, setState] = useState('')
+    const [state, setState] = useState('State')
     const [errors, setErrors] = useState({})
     const mapRef = useRef(null);
 
