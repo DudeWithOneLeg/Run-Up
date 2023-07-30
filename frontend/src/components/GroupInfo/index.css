@@ -22,7 +22,6 @@
     display: flex;
     justify-content: space-between;
     flex-direction: column;
-    border: solid ;
 }
 
 #group-info-container {
