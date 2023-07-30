@@ -101,24 +101,25 @@ export default function GroupInfo() {
 
                                             }}>Delete</button> */}
                                             {
-                                                currentUser && currentUser.id === group.organizerId && <div
-                                                    id='delete'
-                                                >
-                                                    <OpenModalButton
-
+                                                currentUser && currentUser.id === group.organizerId && <OpenModalButton
+                                                        hidden={!currentUser || currentUser.id !== group.organizerId}
                                                         className="group-buttons"
                                                         buttonText="Delete"
                                                         modalComponent={<DeleteGroupModal />}
                                                     />
-                                                    <OpenModalButton
-
+                                            }
+                                            {
+                                                currentUser && currentUser.id === group.organizerId && <OpenModalButton
+                                                        hidden={!currentUser || currentUser.id !== group.organizerId}
                                                         className="group-buttons"
                                                         buttonText="Create Venue"
                                                         modalComponent={<VenueFormModal />}
                                                     />
-
-                                                </div>
                                             }
+
+
+
+
                                         </div>
 
                                     </div>

@@ -1,9 +1,8 @@
 #organizerButtons {
     display: flex;
     flex-direction: row;
-    width: 100%;
+    width: fit-content;
     margin-bottom: 0px;
-    height:fit-content;
 }
 
 .organizer-buttons-container {
@@ -77,6 +76,13 @@
     cursor: pointer;
     border: solid 1px;
     background-color: rgb(0, 0, 0, .6);
+}
+
+.group-buttons:hover {
+    border: solid black;
+    color: black;
+
+    background-color: white;
 }
 
 #group-create-event-button {
@@ -158,6 +164,10 @@
 
     .group-events-about {
         width: 95%;
+    }
+
+    #organizer-buttons-container {
+        height: 100%;
     }
 
 }
