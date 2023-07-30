@@ -263,7 +263,14 @@ export default function VenueFormModal() {
                                     if (address === 'Address') setAddress('')
                                 }}
                             />
+
+                            {
+                                status === 'OK' && <div id='results'>
+                                {handleResults()}</div>
+                            }
+
                             <div
+                            id='position'
                             onClick={() => {
                                 if (navigator.geolocation) {
                                     navigator.geolocation.getCurrentPosition(
@@ -283,7 +290,7 @@ export default function VenueFormModal() {
                                    );
                                 }
                             }}
-                            >Current Locaion
+                            >Current Location
                                 <img src='/images/location.svg'  />
 
                             </div>
@@ -292,11 +299,7 @@ export default function VenueFormModal() {
                         {
                             errors.location && <p className='errors'>{errors.location}</p>
                         }
-                        <div id='results'>
-                            {
-                                status === 'OK' && handleResults()
-                            }
-                        </div>
+
 
                     </div>
                     <div>
