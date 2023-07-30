@@ -33,7 +33,7 @@ export const fetchDetails = (placeId) => async (dispatch)  =>{
 
 let res
 
-    const url = `https://maps.googleapis.com/maps/api/place/details/json?place_id=${placeId}&key=${process.env.REACT_APP_GOOGLE_API_KEY}`;
+    const url = `https://maps.googleapis.com/maps/api/place/details/json?place_id=${placeId}&key=AIzaSyBiC-knCF8B1sha04loDyGfM3sM_yaC93U`;
 
 fetch(`https://proxy.cors.sh/${url}`, {
     headers: {
