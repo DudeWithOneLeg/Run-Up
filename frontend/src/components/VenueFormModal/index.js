@@ -319,6 +319,13 @@ export default function VenueFormModal() {
                                 onChange={(e) => {
                                     setState(e.target.value)
                                 }}
+                                onBlur={() => {
+                                    if (!state)
+                                        setState('State')
+                                }}
+                                onClick={() => {
+                                    if (state === 'State') setState('')
+                                }}
                             />
                         </div>
                         <button
