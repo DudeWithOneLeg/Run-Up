@@ -149,13 +149,41 @@
     }
 
     #home {
-        font-size: 24px;
+        font-size: 20px;
+        padding-left: 5px;
+        width: 100%;
+    }
+
+    #socials {
+        width: 100%;
+        justify-content: center;
+        margin: 0px;
+        align-items: center;
+        border: solid red;
     }
 
     #github, #linkedin {
-        width: 40px;
+        margin: 0px;
+        padding: 0px;
+        height: 100%;
+        width: 100%;
+
+        align-self: center;
+        border: solid red;
     }
 
-   
+   #github, #linkedin {
+    width: 30px;
+   }
+
+   #start-new-group {
+    padding: 0px;
+    margin: 0px;
+    width: 140px;
+   }
+
+   #profile-img {
+    margin-right: 0px;
+   }
 
 }
