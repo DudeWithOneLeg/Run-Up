@@ -16,6 +16,7 @@ export default function GroupInfo() {
     const history = useHistory()
 
     const currentUser = useSelector(state => state.session.user)
+
     useEffect(() => {
         dispatch(groupActions.loadGroup(params.id))
         dispatch(eventActions.loadGroupEvents(params.id)).catch(async (res) => {
@@ -112,7 +113,7 @@ export default function GroupInfo() {
                                                     <OpenModalButton
 
                                                         className="group-buttons"
-                                                        buttonText="Creat Venue"
+                                                        buttonText="Create Venue"
                                                         modalComponent={<VenueFormModal />}
                                                     />
 
@@ -141,7 +142,7 @@ export default function GroupInfo() {
 
             </div>
 
-            <img id='group-background-image' src={group.GroupImages[0].url} />
+            <img id='group-background-image' hidden={true}src={group.GroupImages[0].url} />
         </div>
     )
 }

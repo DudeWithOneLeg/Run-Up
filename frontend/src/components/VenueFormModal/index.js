@@ -1,5 +1,4 @@
 import React, { useState, useEffect, useRef } from 'react'
-import {useParams} from 'react-router-dom'
 import { GoogleMap, Marker, useLoadScript } from '@react-google-maps/api';
 import usePlacesAutocomplete, { getGeocode, getLatLng } from "use-places-autocomplete";
 import * as placeActions from '../../store/venue';
@@ -9,7 +8,9 @@ import './index.css'
 const libraries = ['places']
 
 export default function VenueFormModal() {
-    const params = useParams()
+    const currentUser = useSelector(state => state.session.user)
+    const group = useSelector(state => state.group.group)
+
     let groupId = window.location.pathname.split('/')
     groupId = Number(groupId[groupId.length - 1])
 
@@ -18,9 +19,10 @@ export default function VenueFormModal() {
     const placeDetails = useSelector(state => state.venue.place)
 
 
-    const [address, setAddress] = useState('')
-    const [city, setCity] = useState('')
+    const [address, setAddress] = useState('Address')
+    const [city, setCity] = useState('City')
     const [state, setState] = useState('')
+    const [errors, setErrors] = useState({})
     const mapRef = useRef(null);
 
     const [position, setPosition] = useState({
@@ -77,7 +79,8 @@ export default function VenueFormModal() {
                     info += details.long_name + ', '
                 }
             })
-            setAddress(newAddress)
+            if (newAddress) setAddress(newAddress)
+
         }
     }, [placeDetails])
 
@@ -102,7 +105,7 @@ export default function VenueFormModal() {
 
     const geocoder = new window.google.maps.Geocoder();
 
-    const handleClick = (e) => {
+    const handleMapClick = (e) => {
         setPosition({
             lat: e.latLng.lat(),
             lng: e.latLng.lng()
@@ -131,7 +134,7 @@ export default function VenueFormModal() {
 
     const handleSubmit = (e) => {
         e.preventDefault()
-        const {lat, lng} = position
+        const { lat, lng } = position
         console.log({
             groupId: groupId, address, city, state, lat, lng
         })
@@ -140,7 +143,86 @@ export default function VenueFormModal() {
         }, groupId))
     }
 
-    // console.log(document.getElementsByTagName('html'))
+    const handleResults = () => {
+        console.log(status, data)
+        return data.map(location => {
+
+            return (<p onClick={(e) => {
+                setAddress(e.target.value)
+                clearSuggestions()
+                const service = new window.google.maps.places.PlacesService(mapRef.current);
+                service.getDetails({ placeId: location.place_id }, (result, status) => {
+                    if (status === window.google.maps.places.PlacesServiceStatus.OK) {
+                        const location = result.geometry.location;
+                        const lat = location.lat();
+                        const lng = location.lng();
+                        let i = mapRef.current.getZoom()
+                        let time = 150
+                        if (i < 4) {
+
+                            let id = setInterval(() => {
+                                if (i >= 4) {
+
+                                    setPosition({ lat: lat, lng: lng })
+                                    let newId = setInterval(() => {
+                                        if (i >= 19) {
+                                            clearInterval(newId)
+                                        }
+                                        setZoom(i++)
+                                    }, time)
+                                    clearInterval(id)
+                                }
+                                setZoom(i++)
+                            }, time)
+
+
+                            return
+
+                        }
+
+                        if (i > 4) {
+
+                            let id = setInterval(() => {
+                                if (i <= 4) {
+
+                                    console.log(i)
+                                    setPosition({ lat: lat, lng: lng })
+                                    let newId = setInterval(() => {
+                                        if (i >= 19) {
+                                            clearInterval(newId)
+                                        }
+                                        setZoom(i++)
+                                    }, time)
+                                    clearInterval(id)
+                                }
+                                setZoom(i--)
+                            }, time)
+
+
+                            return
+                        }
+
+                        if (i === 4) {
+                            setPosition({ lat: lat, lng: lng })
+                            let newId = setInterval(() => {
+                                if (i >= 19) {
+                                    clearInterval(newId)
+                                }
+                                setZoom(i++)
+                            }, time)
+                            return
+                        }
+                    } else {
+                        console.error('Place details request failed:', status);
+                    }
+                });
+            }}
+                value={location.description}
+                tabIndex={1}
+            >{location.description}</p>)
+        })
+    }
+
 
 
     return (
@@ -158,117 +240,72 @@ export default function VenueFormModal() {
                         className='opacity'
                     >Enter the address of your Venue</h2>
                     <div>
+                        <p>
+                            Address
+                        </p>
+                        <div id='location-div'>
 
-                        <input
-                        defaultValue='Address'
-                            className='opacity'
-                            id='address-input'
-                            onChange={(e) => {
-                                if (e.target.value.length) {
+                            <input
+                                value={address}
+                                className='opacity'
+                                id='address-input'
+                                onChange={(e) => {
                                     setAddress(e.target.value)
+                                    setValue(e.target.value)
+                                }}
+                                onBlur={() => {
+                                    if (!address)
+                                        setAddress('Address')
+                                }}
+                                onClick={() => {
+                                    if (address === 'Address') setAddress('')
+                                }}
+                            />
+                            <img src='/images/location.svg' onClick={() => {
+                                if (navigator.geolocation) {
+                                    navigator.geolocation.getCurrentPosition(
+                                        (position) => {
+                                            setPosition({
+                                                lat: position.coords.latitude,
+                                                lng: position.coords.longitude,
+                                            });
+                                            setZoom(19)
+                                            setErrors({})
+                                        },
+                                        () => {
+                                           const errors = {location: 'We couldnt get your current location'}
+                                           setErrors(errors)
+                                           ;
+                                        },
+                                   );
                                 }
-                                else {
-                                    e.target.value = 'Address'
-                                }
-
-                                setValue(e.target.value)
-                            }}
-                            onClick={(e) => e.target.value = address}
-                        />
+                            }} />
+                        </div>
+                        {
+                            errors.location && <p className='errors'>{errors.location}</p>
+                        }
                         <div id='results'>
                             {
-                                status === 'OK' && data.map(location => {
-
-                                    return <p onClick={(e) => {
-                                        setAddress(e.target.value)
-                                        clearSuggestions()
-                                        const service = new window.google.maps.places.PlacesService(mapRef.current);
-                                        service.getDetails({ placeId: location.place_id }, (result, status) => {
-                                            if (status === window.google.maps.places.PlacesServiceStatus.OK) {
-                                                const location = result.geometry.location;
-                                                const lat = location.lat();
-                                                const lng = location.lng();
-                                                let i = mapRef.current.getZoom()
-                                                let time = 150
-                                                console.log(time, i)
-                                                if (i < 4) {
-                                                    console.log(time, i)
-
-                                                    let id = setInterval(() => {
-                                                        if (i >= 4) {
-
-                                                            console.log(i)
-                                                            setPosition({ lat: lat, lng: lng })
-                                                            let newId = setInterval(() => {
-                                                                if (i >= 19) {
-                                                                    clearInterval(newId)
-                                                                }
-                                                                setZoom(i++)
-                                                            }, time)
-                                                            clearInterval(id)
-                                                        }
-                                                        setZoom(i++)
-                                                    }, time)
-
-
-                                                    return
-
-                                                }
-
-                                                if (i > 4) {
-                                                    console.log(time, i)
-
-                                                    let id = setInterval(() => {
-                                                        if (i <= 4) {
-
-                                                            console.log(i)
-                                                            setPosition({ lat: lat, lng: lng })
-                                                            let newId = setInterval(() => {
-                                                                if (i >= 19) {
-                                                                    clearInterval(newId)
-                                                                }
-                                                                setZoom(i++)
-                                                            }, time)
-                                                            clearInterval(id)
-                                                        }
-                                                        setZoom(i--)
-                                                    }, time)
-
-
-                                                    return
-                                                }
-
-                                                if (i === 4) {
-                                                    setPosition({ lat: lat, lng: lng })
-                                                    let newId = setInterval(() => {
-                                                        if (i >= 19) {
-                                                            clearInterval(newId)
-                                                        }
-                                                        setZoom(i++)
-                                                    }, time)
-                                                    return
-                                                }
-                                            } else {
-                                                console.error('Place details request failed:', status);
-                                            }
-                                        });
-                                    }}
-                                        value={location.description}
-                                    >{location.description}</p>
-                                })
+                                status === 'OK' && handleResults()
                             }
                         </div>
 
                     </div>
                     <div>
                         <div>
-                            <p
-                                className='opacity'
-                            >City</p>
+                            <p>
+                                City
+                            </p>
                             <input
                                 value={city}
                                 onChange={(e) => {
                                     setCity(e.target.value)
+                                }}
+                                onBlur={() => {
+                                    if (!city) setCity('City')
+                                }}
+                                onClick={() => {
+                                    if (city === 'City') setCity('')
                                 }}
 
                             />
@@ -315,12 +352,14 @@ export default function VenueFormModal() {
                                     position: window.google.maps.ControlPosition.RIGHT_TOP,
                                 }
                             }}
-                            onClick={(e) => handleClick(e)}
-                            onLoad={(map) => mapRef.current = map}
+                            onClick={(e) => handleMapClick(e)}
+                            onLoad={(map) => mapRef.current = map
+
+                            }
                         >
                             { /* Child components, such as markers, info windows, etc. */}
                             {
-                                position.lat && marker()
+                                position.lat !== 40.299493 && marker()
                             }
                         </GoogleMap>
 

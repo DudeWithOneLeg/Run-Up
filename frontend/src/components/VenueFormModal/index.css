@@ -1,5 +1,5 @@
 #results {
-  width: 300px;
+  width: fit-content;
   position: absolute;
   background-color: white;
   border: solid gray 1px;
@@ -8,7 +8,7 @@
 }
 
 #results > p {
-  padding: 0px;
+  padding: 5px;
   margin: 0px;
   width: 300px;
   border-top: solid gray 1px;
@@ -17,6 +17,19 @@
 #results > p:hover {
   cursor: pointer;
   background-color: aliceblue;
+}
+.errors {
+  color: red;
+}
+
+#location-div {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+#location-div > img:hover {
+  cursor: pointer;
 }
 
 #venue-form-container {
