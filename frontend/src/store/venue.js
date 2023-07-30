@@ -37,7 +37,7 @@ let res
 
 fetch(`https://proxy.cors.sh/${url}`, {
     headers: {
-        'x-cors-api-key': 'temp_8594bdb8f6cc0c8f36fbb3e15a3f8134'
+        'x-cors-api-key': process.env.REACT_APP_CORS_API_KEY
     }
 })
 

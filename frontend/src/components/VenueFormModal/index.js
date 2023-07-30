@@ -249,7 +249,7 @@ export default function VenueFormModal() {
 
                             <input
                                 value={address}
-                                className='opacity'
+                                className='venue-form-input'
                                 id='address-input'
                                 onChange={(e) => {
                                     setAddress(e.target.value)
@@ -305,6 +305,7 @@ export default function VenueFormModal() {
                                 City
                             </p>
                             <input
+                            className='venue-form-input'
                                 value={city}
                                 onChange={(e) => {
                                     setCity(e.target.value)
@@ -323,6 +324,7 @@ export default function VenueFormModal() {
                                 className='opacity'
                             >State</p>
                             <input
+                            className='venue-form-input'
                                 value={state}
                                 onChange={(e) => {
                                     setState(e.target.value)
