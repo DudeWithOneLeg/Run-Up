@@ -49,8 +49,8 @@ export default function GroupInfo() {
                 {
                     group && (
                         <div id='group-info-div'>
-                            <p className="back-button">&lt;
-                                <Link to='/groups/1/10'>Groups</Link>
+                            <p id="back-button">&lt;
+                                <a href='/groups/1/10'>Groups</a>
                             </p>
                             <div id='top-card'>
                                 {group.GroupImages && group.GroupImages.map((img) => {
