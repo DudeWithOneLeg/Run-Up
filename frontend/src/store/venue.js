@@ -44,6 +44,7 @@ fetch(`https://proxy.cors.sh/${url}`, {
   .then((response) => response.json())
   .then((data) => {
     let string = ''
+    console.log(data)
     data.result.address_components.map(locate => {
         return string += locate.long_name + ', '
     }); // Now you can access the data

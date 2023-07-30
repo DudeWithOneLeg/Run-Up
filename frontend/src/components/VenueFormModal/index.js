@@ -34,13 +34,12 @@ export default function VenueFormModal() {
 
     })
     useEffect(() => {
-
+        console.log('hello')
         geocoder.geocode({ location: position }, (results, status) => {
             if (status === "OK") {
                 if (results[0]) {
                     const placeID = results[0].place_id;
                     dispatch(placeActions.fetchDetails(placeID))
-                    // You can use the street address as needed.
                 } else {
                     console.error("No results found");
                 }
@@ -55,6 +54,7 @@ export default function VenueFormModal() {
     }, [position])
 
     useEffect(() => {
+        console.log(placeDetails)
         if (placeDetails) {
             let info = ''
             let newAddress = ''
@@ -63,6 +63,7 @@ export default function VenueFormModal() {
                     const newState = details.long_name
                     info += details.long_name + ', '
                     setState(newState)
+                    console.log(state)
                 }
                 if (details.types.includes('locality')) {
                     const newCity = details.long_name
@@ -80,6 +81,7 @@ export default function VenueFormModal() {
                 }
             })
             if (newAddress) setAddress(newAddress)
+            console.log(address)
 
         }
     }, [placeDetails])
@@ -254,7 +256,7 @@ export default function VenueFormModal() {
                                     setValue(e.target.value)
                                 }}
                                 onBlur={() => {
-                                    if (!address)
+                                    if (!value)
                                         setAddress('Address')
                                 }}
                                 onClick={() => {
