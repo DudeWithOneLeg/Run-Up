@@ -93,7 +93,7 @@ export default function VenueFormModal() {
 
     const { isLoaded } = useLoadScript({
         id: 'google-map-script',
-        googleMapsApiKey: process.env.REACT_APP_GOOGLE_API_KEY,
+        googleMapsApiKey: 'AIzaSyBiC-knCF8B1sha04loDyGfM3sM_yaC93U',
         libraries: libraries,
     })
 
