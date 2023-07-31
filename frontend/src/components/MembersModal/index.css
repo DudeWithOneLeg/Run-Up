@@ -1,0 +1,32 @@
+.member-div {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.member-status-div {
+    display: flex;
+    flex-direction: row;
+    height: fit-content;
+    border: solid red;
+    align-items: center;
+}
+
+.member-status {
+    display: flex;
+    flex-direction: row;
+}
+
+.member-edit {
+    color:rgb(34, 101, 189);
+    margin-right: 10px;
+    cursor: pointer;
+}
+
+#member-component {
+    width: 600px;
+}
+
+#status-select {
+    height: fit-content;
+}

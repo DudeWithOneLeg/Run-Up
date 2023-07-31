@@ -131,7 +131,7 @@ export default function EventInfo() {
                 <h1>Details</h1>
                 <p>{event.description}</p>
             </div>
-            <img id='background-img' src={event.EventImages[0].url}/>
+            <img id='background-img' src={event.EventImages[0].url} hidden={true}/>
         </div>
     )
 }

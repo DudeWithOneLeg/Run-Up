@@ -474,7 +474,7 @@ router.post('/:groupId/events', [venueExists, eventDateBool, validateEvent, grou
     delete event.createdAt
     delete event.updatedAt
 
-    console.log('EVENT HOSTT=======================================',host)
+    console.log('EVENT HOSTT=======================================', host)
 
 
     return res.json(event)
@@ -486,15 +486,21 @@ router.get('/:groupId/members', [groupExists], async (req, res) => {
         return res.json(req.err)
     }
 
-    const auth = await Membership.findOne({
-        where: {
-            userId: req.user.id,
-            groupId: req.params.groupId,
-            status: {
-                [Op.or]: ['co-host']
+    let auth;
+
+    if (req.user) {
+        auth = await Membership.findOne({
+            where: {
+                userId: req.user.id,
+                groupId: req.params.groupId,
+                status: {
+                    [Op.or]: ['co-host']
+                }
             }
-        }
-    })
+        })
+    }
+
+
 
     const options = {
         where: {
@@ -503,11 +509,19 @@ router.get('/:groupId/members', [groupExists], async (req, res) => {
         attributes: ['userId', 'status']
     }
 
-    if (!auth && req.group.organizerId !== req.user.id) {
+    if (req.user) {
+        if (!auth && req.group.organizerId !== req.user.id) {
         options.where.status = {
-                [Op.or]: ['co-host', 'member']
-            }
+            [Op.or]: ['co-host', 'member']
+        }
     }
+    }
+    else {
+        options.where.status = {
+            [Op.or]: ['co-host', 'member']
+        }
+    }
+
 
     let members = await Membership.findAll(options)
 

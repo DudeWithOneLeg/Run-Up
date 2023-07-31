@@ -79,7 +79,7 @@
 }
 
 .group-buttons:hover {
-    border: solid black;
+    border: solid black 1px;
     color: black;
 
     background-color: white;
@@ -168,6 +168,10 @@
 
     #organizer-buttons-container {
         height: 100%;
+    }
+
+    .create-venue-button, .group-buttons {
+        width: 150px;
     }
 
 }

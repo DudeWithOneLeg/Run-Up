@@ -189,7 +189,7 @@ export default function GroupEventsToggle() {
       </div>
       <div className='toggle-subhead'>
         {path.startsWith('/groups') && <p >Groups in Run Up</p>}
-        {path.startsWith('/events') && <p className='toggle-subhead'>Events in Run Up</p>}
+        {path.startsWith('/events') && <p >Events in Run Up</p>}
       </div>
       <div id='list'>
         {/* <input

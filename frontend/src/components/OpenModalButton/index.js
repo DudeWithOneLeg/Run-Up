@@ -15,7 +15,7 @@ function OpenModalButton({
     setModalContent(modalComponent);
   };
 
-  return <button className='group-buttons' onClick={onClick}>{buttonText}</button>;
+  return <button className='group-buttons create-venue-button' onClick={onClick}>{buttonText}</button>;
 }
 
 export default OpenModalButton;
