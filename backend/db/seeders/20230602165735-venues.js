@@ -20,11 +20,11 @@ module.exports = {
    const validVenues = [
     {
       groupId: 1,
-      address: 'yo',
+      address: '8927 Wheatland Dr',
       city: 'Houston',
       state: 'Texas',
-      lat: 30.2,
-      lng: 30.2
+      lat: 29.971993083620358,
+      lng: -95.57256843589263
     },
     {
       groupId: 2,

@@ -1,0 +1,89 @@
+
+
+#location-div {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+#position {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding-left: 10px;
+  cursor: pointer;
+  color: rgb(98, 197, 230);
+}
+
+#position:hover {
+  color: rgb(140, 207, 229);
+}
+
+#position > img {
+  padding-left: 10px;
+
+}
+
+#location-div > img:hover {
+  cursor: pointer;
+}
+
+#event-venue-component {
+  width: 70%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  color: white;
+  border-radius: 10px;
+}
+
+
+
+
+
+.event-location-info {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+#map {
+  width: 600px;
+  height: 300px;
+}
+
+@media screen and (max-width: 900px) {
+  /* #venue-form-container {
+    position: relative;
+    width: 100vw;
+    height: 100vh;
+    top: 50px
+  } */
+  /* #venue-form {
+    width: 100%;
+    height: 600px;
+    border: solid black;
+    padding: 10px;
+  } */
+
+  #location-div {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  #position {
+    padding: 5px 0px 0px ;
+  }
+
+  #map {
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+  }
+
+}
+
+@media screen and (max-width: 365px) {
+  
+
+}

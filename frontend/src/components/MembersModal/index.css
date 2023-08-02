@@ -2,14 +2,30 @@
     display: flex;
     flex-direction: row;
     justify-content: space-between;
+    align-items: center;
+    border-bottom: solid white;
+    background-color: rgb(0, 0, 0, .5);
+    color: white;
 }
 
 .member-status-div {
     display: flex;
     flex-direction: row;
     height: fit-content;
-    border: solid red;
     align-items: center;
+    margin-right: 10px;
+    height: 40px;
+}
+
+.status-select {
+    margin-left: 20px;
+    cursor: pointer;
+    height: 30px;
+    border-radius: 5px;
+}
+
+.member-name {
+    padding-left: 10px;
 }
 
 .member-status {
@@ -18,15 +34,30 @@
 }
 
 .member-edit {
-    color:rgb(34, 101, 189);
+    color:rgb(143, 186, 243);
     margin-right: 10px;
     cursor: pointer;
+    height: 100%;
 }
 
 #member-component {
     width: 600px;
+    background-color: rgb(0, 0, 0, .5);
 }
 
-#status-select {
-    height: fit-content;
+.save-status-button {
+    border: solid white 1px;
+    background-color: rgb(0, 0, 0, .5);
+    color: white;
+    border-radius: 5px;
+    cursor: pointer;
+    height: 30px;
+    width: 60px;
+    margin-right: 10px;
+}
+
+.save-status-button:hover {
+    background-color: white;
+    color: black;
+    border: solid black1px;
 }

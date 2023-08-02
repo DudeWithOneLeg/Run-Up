@@ -79,7 +79,7 @@ export default function GroupInfo() {
                                         <button
                                             className="group-buttons"
                                             onClick={(e) => window.alert("Feature coming soon!")}
-                                            hidden={!currentUser || currentUser.id === group.organizerId}
+                                            hidden={!currentUser || members[currentUser.id]}
                                         >Join this group</button>
                                         <div
                                             hidden={!currentUser || currentUser.id !== group.organizerId}
@@ -115,23 +115,14 @@ export default function GroupInfo() {
                                                         modalComponent={<DeleteGroupModal />}
                                                     />
                                             }
-                                            {
-                                                currentUser && members[currentUser.id] && (currentUser.id === group.organizerId || members[currentUser.id].Membership.status === 'co-host' || members[currentUser.id].Membership.status === 'member') && <OpenModalButton
 
-                                                        hidden={!currentUser || currentUser.id !== group.organizerId}
-                                                        className=""
-                                                        buttonText="Create Venue"
-                                                        modalComponent={<VenueFormModal />}
-                                                    />
-
-                                            }
-                                            { (currentUser && members[currentUser.id] && members[currentUser.id].status === 'co-host') || (currentUser.id === group.organizerId) &&
+                                            { ((currentUser && members[currentUser.id] ) || currentUser.id === group.organizerId) &&
                                                 <OpenModalButton
 
-                                                hidden={!currentUser || currentUser.id !== group.organizerId}
+
                                                 className=""
                                                 buttonText="Members"
-                                                modalComponent={<MembersModal members={members} currentUser={currentUser} organizerId={group.organizerId}/>}
+                                                modalComponent={<MembersModal members={members} currentUser={currentUser} organizerId={group.organizerId} groupId={params.id}/>}
                                             />
                                             }
 
@@ -161,7 +152,7 @@ export default function GroupInfo() {
 
             </div>
 
-            <img id='group-background-image' hidden={true}src={group.GroupImages[0].url} />
+            
         </div>
     )
 }

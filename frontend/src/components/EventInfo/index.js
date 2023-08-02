@@ -5,6 +5,7 @@ import { Link, useParams, useHistory } from "react-router-dom"
 import OpenModalButton from "../OpenModalButton"
 import DeleteEventModal from "../DeleteEventModal"
 import * as groupActions from '../../store/groups'
+import Venue from "../Venue"
 import './index.css'
 
 
@@ -90,7 +91,7 @@ export default function EventInfo() {
                         </div>
                         <div id='event-comp-top-info'>
                             <div className='time-price'>
-                                <img src='/images/clock.png' alt='clock'/>
+                                <img src='/images/clock.svg' alt='clock'/>
                                 <div>
                                   <h3>START DATE {event.startDate}</h3>
                                   <h3>END DATE {event.endDate}</h3>
@@ -98,12 +99,12 @@ export default function EventInfo() {
 
                             </div>
                             <div className='time-price'>
-                                <img src='/images/money.png' alt='dollar sign'/>
+                                <img src='/images/money.svg' alt='dollar sign'/>
                                 {event.price == 0 && <h3>FREE</h3>}
                                 {event.price > 0 && <h3>{event.price}</h3>}
                             </div>
                             <div className='time-price'>
-                                <img src='/images/map.png' alt='map-pin'/>
+                                <img src='/images/map.svg' alt='map-pin'/>
                                 <h3>{event.type}</h3>
                             </div>
 
@@ -131,7 +132,9 @@ export default function EventInfo() {
                 <h1>Details</h1>
                 <p>{event.description}</p>
             </div>
-            <img id='background-img' src={event.EventImages[0].url} hidden={true}/>
+            {
+                event.Venue.id && <Venue address={event.Venue.address} city={event.Venue.city} state={event.Venue.state} coord={{lat: event.Venue.lat, lng: event.Venue.lng}}/>
+            }
         </div>
     )
 }

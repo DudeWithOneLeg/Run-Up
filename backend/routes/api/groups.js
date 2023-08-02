@@ -662,6 +662,8 @@ router.put('/:groupId/membership', [requireAuth, groupExists], async (req, res) 
         return res.json(req.err)
     }
 
+    console.log(req.body)
+
     let member = await Membership.findOne({
         where: {
             userId: req.body.memberId,
@@ -715,7 +717,7 @@ router.put('/:groupId/membership', [requireAuth, groupExists], async (req, res) 
     }
 
     await member.set({
-        status: 'member'
+        status: req.body.status
     })
 
     await member.save()

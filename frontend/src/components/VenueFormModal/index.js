@@ -1,34 +1,21 @@
 import React, { useState, useEffect, useRef } from 'react'
 import { GoogleMap, Marker, useLoadScript } from '@react-google-maps/api';
-import usePlacesAutocomplete, { getGeocode, getLatLng } from "use-places-autocomplete";
+import usePlacesAutocomplete from "use-places-autocomplete";
 import * as placeActions from '../../store/venue';
 import { useDispatch, useSelector } from 'react-redux';
 import './index.css'
 
 const libraries = ['places']
 
-export default function VenueFormModal() {
-    const currentUser = useSelector(state => state.session.user)
-    const group = useSelector(state => state.group.group)
+export default function VenueFormModal({address, setAddress, city, setCity, state, setState, position, setPosition, errors, setErrors}) {
 
-    let groupId = window.location.pathname.split('/')
-    groupId = Number(groupId[groupId.length - 1])
 
     const dispatch = useDispatch()
 
     const placeDetails = useSelector(state => state.venue.place)
 
-
-    const [address, setAddress] = useState('Address')
-    const [city, setCity] = useState('City')
-    const [state, setState] = useState('State')
-    const [errors, setErrors] = useState({})
     const mapRef = useRef(null);
 
-    const [position, setPosition] = useState({
-        lat: 40.299493,
-        lng: -101.950516
-    })
     const [zoom, setZoom] = useState(3)
     const { ready, value, setValue, suggestions: { status, data }, clearSuggestions } = usePlacesAutocomplete({
 
@@ -90,7 +77,7 @@ export default function VenueFormModal() {
         width: '100%',
         height: '100%',
         borderRadius: '0px 0px 10px 10px',
-        marginBottom: '0px'
+        //marginTop: '0px'
     };
 
     const { isLoaded } = useLoadScript({
@@ -134,17 +121,6 @@ export default function VenueFormModal() {
 
     }
 
-    const handleSubmit = (e) => {
-        e.preventDefault()
-        const { lat, lng } = position
-        console.log({
-            groupId: groupId, address, city, state, lat, lng
-        })
-        dispatch(placeActions.sendVenue({
-            groupId: groupId, address, city, state, lat, lng
-        }, groupId))
-    }
-
     const handleResults = () => {
         console.log(status, data)
         return data.map(location => {
@@ -167,7 +143,7 @@ export default function VenueFormModal() {
 
                                     setPosition({ lat: lat, lng: lng })
                                     let newId = setInterval(() => {
-                                        if (i >= 19) {
+                                        if (i >= 17) {
                                             clearInterval(newId)
                                         }
                                         setZoom(i++)
@@ -190,7 +166,7 @@ export default function VenueFormModal() {
                                     console.log(i)
                                     setPosition({ lat: lat, lng: lng })
                                     let newId = setInterval(() => {
-                                        if (i >= 19) {
+                                        if (i >= 17) {
                                             clearInterval(newId)
                                         }
                                         setZoom(i++)
@@ -207,7 +183,7 @@ export default function VenueFormModal() {
                         if (i === 4) {
                             setPosition({ lat: lat, lng: lng })
                             let newId = setInterval(() => {
-                                if (i >= 19) {
+                                if (i >= 17) {
                                     clearInterval(newId)
                                 }
                                 setZoom(i++)
@@ -235,7 +211,6 @@ export default function VenueFormModal() {
             ></script>
             <form
                 id='venue-form'
-                onSubmit={handleSubmit}
             >
                 <div>
                     <h2
@@ -246,8 +221,8 @@ export default function VenueFormModal() {
                             Address
                         </p>
                         <div id='location-div'>
-
-                            <input
+                            <div>
+                                <input
                                 value={address}
                                 className='venue-form-input'
                                 id='address-input'
@@ -263,6 +238,12 @@ export default function VenueFormModal() {
                                     if (address === 'Address') setAddress('')
                                 }}
                             />
+                            {
+                                errors.address && <p className='errors'>{errors.address}</p>
+                            }
+                            </div>
+
+
 
                             {
                                 status === 'OK' && <div id='results'>
@@ -321,6 +302,9 @@ export default function VenueFormModal() {
                                 }}
 
                             />
+                            {
+                                errors.city && <p className='errors'>{errors.city}</p>
+                            }
                         </div>
                         <div>
                             <p
@@ -340,14 +324,10 @@ export default function VenueFormModal() {
                                     if (state === 'State') setState('')
                                 }}
                             />
+                            {
+                                errors.state && <p className='errors'>{errors.state}</p>
+                            }
                         </div>
-                        <button
-                            className='opacity'
-                            id='venue-submit-button'
-                            type='submit'>Create Venue</button>
-
-
-
                     </div>
                 </div>
 

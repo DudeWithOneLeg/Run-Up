@@ -1,66 +1,122 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
+import * as memberActions from '../../store/members'
+import {useDispatch} from 'react-redux'
+import OpenModalImage from '../OpenModalImage'
+import DeleteMemberModal from '../DeleteMemberModal'
 
-export default function Member({member, currentUser, members, organizerId}) {
+export default function Member({member, currentUser, groupId, organizerId, members}) {
     const [edit, setEdit] = useState(false)
-    const [status, setStatus] = useState('')
+    const [status, setStatus] = useState(member.Membership.status)
+    const dispatch = useDispatch()
+
+    console.log(member)
+
+    const handleUpdate = () => {
+        const newMember = {
+            memberId: member.id,
+            status
+        }
+        console.log(newMember)
+        dispatch(memberActions.sendUpdate(newMember, groupId))
+        setEdit(false)
+    }
 
     return (
         <div className='member-div'>
-                        <p className="member-name">{member.firstName} {member.lastName}</p>
+                        <h3 className="member-name">{member.firstName} {member.lastName}</h3>
                         <div className='member-status-div'>
                             {
                                 (!currentUser ||
                                     members[currentUser.id].Membership.status === 'co-host' ||
                                     currentUser.id === organizerId) &&
-                                <div>
+                                <div hidden={member.id === organizerId}>
                                     <p
                                         className='member-edit'
-                                        onClick={() => setEdit(!edit)}
+                                        onClick={() => {
+                                            setEdit(!edit)
+                                            if (member.Membership.status === 'pending') {
+                                                setStatus('member')
+                                            }
+                                            }
+                                        }
                                         hidden={edit}
                                     >
                                         Edit
                                     </p>
                                     <button
+                                    className='save-status-button'
                                     hidden={!edit}
-
+                                    onClick={handleUpdate}
                                     >
                                         Save
+                                    </button>
+                                    <button
+                                    className='save-status-button'
+                                    hidden={!edit}
+                                    onClick={() => setEdit(false)}
+                                    >
+                                        Cancel
                                     </button>
                                 </div>
 
                             }
-
-
-                            {
-                                !edit && member.Membership.status === 'member' && <p>
+                            <div hidden={member.id === organizerId}>
+                                {
+                                !edit && status === 'member' && <p>
                                     Member
 
                                 </p>
                             }
                             {
-                                !edit && member.Membership.status === 'co-host' && <p>
+                                !edit && status === 'co-host' && <p>
                                     Co-host
 
                                 </p>
                             }
                             {
-                                !edit && member.Membership.status === 'pending' && <p>
+                                !edit && status === 'pending' && <p>
                                     Pending
 
                                 </p>
                             }
+                            </div>
+
+                            {
+                                member.id === organizerId && <p>Organizer</p>
+                            }
+
+
                             {
                                 edit && <select
-                                    id='status-select'
-                                    onSelect={(e) => {
-                                        if (e.target.value === 'Member') setStatus('member')
-                                        if (e.target.value === 'Co-host') setStatus('co-host')
+                                    className='status-select'
+                                    onChange={(e) => {
+                                        if (e.target.value === 'Member') {
+                                            setStatus('member')
+                                        }
+                                        if (e.target.value === 'Co-host') {
+                                            setStatus('co-host')
+                                        }
 
                                     }}
                                 >
-                                    <option selected={member.Membership.status === 'member'}>Member</option>
-                                    <option selected={member.Membership.status === 'co-host'}>Co-host</option>
+                                    <option
+                                    selected={member.Membership.status === 'member'}
+                                    value='Member'
+                                    >Member</option>
+                                    <option
+                                    value='Co-host'
+                                    selected={member.Membership.status === 'co-host'}
+                                    >Co-host</option>
                                 </select>
+
+                            }
+                            {
+                                edit && <OpenModalImage
+                                className="group-buttons"
+                                buttonText="Delete"
+                                imgsrc='/images/trash.png'
+                                modalComponent={<DeleteMemberModal memberId={member.id}/>}
+                            />
                             }
                         </div>
                     </div>
