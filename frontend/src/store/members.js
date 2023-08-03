@@ -3,6 +3,14 @@ import { csrfFetch } from "./csrf"
 const GET_ALL_MEMBERS = 'mambers/getAll'
 const UPDATE_MEMBERSHIP = 'members/update'
 const DELETE_MEMBER = '/member/delete'
+const REQUEST_MEMBERSHIP = 'member/request'
+
+const requestMember = (member) => {
+    return {
+        type: REQUEST_MEMBERSHIP,
+        payload: member
+    }
+}
 
 const removeMember = (memberId) => {
     return {
@@ -23,6 +31,16 @@ const updateMember = (newMember) => {
         type: UPDATE_MEMBERSHIP,
         payload: newMember
     }
+}
+
+export const requestMembership = () => async (dispatch) => {
+    const res = await csrfFetch(`/api/groups/membership`, {
+        method: 'POST'
+    })
+    const data = await res.json()
+    if (data && data.errors) return console.log(data)
+    dispatch(requestMember(data))
+    return res
 }
 
 export const deleteMember = (groupId, memberId) => async(dispatch) => {
@@ -93,6 +111,8 @@ export const memberReducer = (state = initialState, action) => {
                 delete newMembers[action.payload.memberId]
                 newState = {...state, members: {...newMembers}}
                 return newState
+        case REQUEST_MEMBERSHIP:
+            newState = {...state, requestedMember: action.paylod}
         default:
             return state
     }

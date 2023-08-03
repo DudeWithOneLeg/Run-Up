@@ -6,9 +6,9 @@ import GroupEvents from "../GroupEvents"
 import * as eventActions from '../../store/events';
 import OpenModalButton from "../OpenModalButton";
 import DeleteGroupModal from "../DeleteGroupModal"
-import VenueFormModal from '../VenueFormModal'
 import * as memberActions from '../../store/members'
 import MembersModal from '../MembersModal'
+import VenueListModal from "../VenueListModal"
 import './index.css'
 
 
@@ -19,8 +19,10 @@ export default function GroupInfo() {
 
     const currentUser = useSelector(state => state.session.user)
     const oldMembers = useSelector(state => state.member.members)
+    const oldRequestedMember = useSelector(state => state.member.requestedMember)
 
-    const members = {...oldMembers}
+    const requestedMember = { ...oldRequestedMember }
+    const members = { ...oldMembers }
 
     useEffect(() => {
         dispatch(groupActions.loadGroup(params.id))
@@ -33,7 +35,7 @@ export default function GroupInfo() {
         })
         const groupId = params.id
 
-    dispatch(memberActions.getAllMembers(groupId))
+        dispatch(memberActions.getAllMembers(groupId))
 
     }, [dispatch, params.id])
     const group = useSelector(state => state.group.group)
@@ -47,7 +49,7 @@ export default function GroupInfo() {
 
     }
 
-    if (!group) {
+    if (!group || !members) {
         return null
     }
 
@@ -78,9 +80,13 @@ export default function GroupInfo() {
                                     <div id='organizer-buttons-container'>
                                         <button
                                             className="group-buttons"
-                                            onClick={(e) => window.alert("Feature coming soon!")}
-                                            hidden={!currentUser || members[currentUser.id]}
+                                            hidden={!currentUser || (members[currentUser.id] && Object.values(members[currentUser.id]).length)}
+                                            onclick={() => dispatch(memberActions.requestMembership())}
                                         >Join this group</button>
+                                        {
+                                            ((requestedMember && requestedMember.status === 'pending')) || (members[currentUser.id] && members[currentUser.id].Membership.status === 'pending') && <p>Requested Membership</p>
+                                        }
+
                                         <div
                                             hidden={!currentUser || currentUser.id !== group.organizerId}
                                             id='organizerButtons'
@@ -109,23 +115,28 @@ export default function GroupInfo() {
                                             }}>Delete</button> */}
                                             {
                                                 currentUser && currentUser.id === group.organizerId && <OpenModalButton
-                                                        hidden={!currentUser || currentUser.id !== group.organizerId}
-                                                        className="group-buttons"
-                                                        buttonText="Delete"
-                                                        modalComponent={<DeleteGroupModal />}
-                                                    />
+                                                    hidden={!currentUser || currentUser.id !== group.organizerId}
+                                                    className="group-buttons"
+                                                    buttonText="Delete"
+                                                    modalComponent={<DeleteGroupModal />}
+                                                />
                                             }
 
-                                            { ((currentUser && members[currentUser.id] ) || currentUser.id === group.organizerId) &&
+                                            {((currentUser && members[currentUser.id]) || currentUser.id === group.organizerId) &&
                                                 <OpenModalButton
-
-
-                                                className=""
-                                                buttonText="Members"
-                                                modalComponent={<MembersModal members={members} currentUser={currentUser} organizerId={group.organizerId} groupId={params.id}/>}
-                                            />
+                                                    className=""
+                                                    buttonText="Members"
+                                                    modalComponent={<MembersModal members={members} currentUser={currentUser} organizerId={group.organizerId} groupId={params.id} />}
+                                                />
                                             }
-
+                                            {
+                                                currentUser && members[currentUser.id] && (currentUser.id === group.organizerId || members[currentUser.id].Membership.status === 'co-host') &&
+                                                <OpenModalButton
+                                                    className=""
+                                                    buttonText="Venues"
+                                                    modalComponent={<VenueListModal groupId={params.id} />}
+                                                />
+                                            }
 
 
 
@@ -152,7 +163,7 @@ export default function GroupInfo() {
 
             </div>
 
-            
+
         </div>
     )
 }

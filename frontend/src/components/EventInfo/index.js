@@ -27,7 +27,6 @@ export default function EventInfo() {
     const event = {...oldEvent}
     const attendees = oldAttendees
     const user = oldUser
-    console.log('YO THESE ARE ATTEDANCES',attendees)
     //const img = useSelector(state => state.event.EventImages)[0].url
 
     if (!event || !attendees) {

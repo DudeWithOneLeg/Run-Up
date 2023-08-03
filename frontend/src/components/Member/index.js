@@ -4,19 +4,17 @@ import {useDispatch} from 'react-redux'
 import OpenModalImage from '../OpenModalImage'
 import DeleteMemberModal from '../DeleteMemberModal'
 
-export default function Member({member, currentUser, groupId, organizerId, members}) {
+export default function Member({member, currentUser, groupId, organizerId, members, deleted, setDeleted}) {
     const [edit, setEdit] = useState(false)
     const [status, setStatus] = useState(member.Membership.status)
     const dispatch = useDispatch()
 
-    console.log(member)
 
     const handleUpdate = () => {
         const newMember = {
             memberId: member.id,
             status
         }
-        console.log(newMember)
         dispatch(memberActions.sendUpdate(newMember, groupId))
         setEdit(false)
     }
@@ -25,10 +23,11 @@ export default function Member({member, currentUser, groupId, organizerId, membe
         <div className='member-div'>
                         <h3 className="member-name">{member.firstName} {member.lastName}</h3>
                         <div className='member-status-div'>
+                            <p hidden={!deleted.includes(member.id)}>Removed</p>
                             {
                                 (!currentUser ||
                                     members[currentUser.id].Membership.status === 'co-host' ||
-                                    currentUser.id === organizerId) &&
+                                    currentUser.id === organizerId) && !deleted.includes(member.id) &&
                                 <div hidden={member.id === organizerId}>
                                     <p
                                         className='member-edit'
@@ -60,7 +59,7 @@ export default function Member({member, currentUser, groupId, organizerId, membe
                                 </div>
 
                             }
-                            <div hidden={member.id === organizerId}>
+                            <div hidden={member.id === organizerId || deleted.includes(member.id)}>
                                 {
                                 !edit && status === 'member' && <p>
                                     Member
@@ -115,7 +114,7 @@ export default function Member({member, currentUser, groupId, organizerId, membe
                                 className="group-buttons"
                                 buttonText="Delete"
                                 imgsrc='/images/trash.png'
-                                modalComponent={<DeleteMemberModal memberId={member.id}/>}
+                                modalComponent={<DeleteMemberModal memberId={member.id} members={members} currentUser={currentUser} organizerId={organizerId} groupId={groupId} setDeleted={setDeleted}/>}
                             />
                             }
                         </div>

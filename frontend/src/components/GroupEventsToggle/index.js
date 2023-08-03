@@ -113,7 +113,6 @@ export default function GroupEventsToggle() {
       arr.push(slice)
     }
     currentEvents = arr[page - 1]
-    console.log('CURRENT EVENTS', currentEvents)
     return (
       <div id='pages'>
         {page > 1 && <Link className='notActive' to={`/events/${page - 1}/${size}`}>&lt;</Link>}
