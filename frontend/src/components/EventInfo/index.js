@@ -56,8 +56,7 @@ export default function EventInfo() {
     }
 
 
-    event.startDate = event.startDate.split('T').join(' · ')
-    event.endDate = event.endDate.split('T').join(' · ')
+   
 
 
     event.startDate = event.startDate.split('T').join(' · ').split(':00.000Z').join('')

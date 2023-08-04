@@ -105,6 +105,7 @@ export default function EventForm() {
 
 
         const event = { name, price, description: about, type: onlineOrInperson, private: publicOrPrivate, startDate, endDate, capacity, venueId: venue.id }
+        console.log(event)
         dispatch(eventActions.requestNewEvent(event, params.groupId)).catch(async (res) => {
             const data = await res.json()
             if (data && data.errors) {
@@ -175,7 +176,7 @@ export default function EventForm() {
                     errors={errors}
                     setErrors={setErrors}
                 />
-                        
+
                     }
 
                     <p>
