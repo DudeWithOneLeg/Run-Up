@@ -77,52 +77,49 @@ export default function GroupInfo() {
                                         {group.private ? <p className='bold'>{'(' + numEvents + ') Events'} · Private</p> : <p className='bold'>{'(' + numEvents + ') Events'} · Public</p>}
                                         <p className='bold'>Ogranized by {group.Organizer.firstName} {group.Organizer.lastName}</p>
                                     </div>
-                                    <div id='organizer-buttons-container'>
-                                        <button
-                                            className="group-buttons"
-                                            hidden={!currentUser || (members[currentUser.id] && Object.values(members[currentUser.id]).length)}
-                                            onclick={() => dispatch(memberActions.requestMembership())}
-                                        >Join this group</button>
+
+                                    { currentUser &&
+                                         <div id='organizer-buttons-container'>
                                         {
-                                            ((requestedMember && requestedMember.status === 'pending')) || (members[currentUser.id] && members[currentUser.id].Membership.status === 'pending') && <p>Requested Membership</p>
+                                            currentUser && (!members[currentUser.id]) && <button
+                                            className="group-buttons"
+                                            onclick={() => dispatch(memberActions.requestMembership(group.id))}
+                                        >Join this group</button>
                                         }
 
-                                        <div
-                                            hidden={!currentUser || currentUser.id !== group.organizerId}
+                                        {
+                                            currentUser && ((requestedMember && requestedMember.status === 'pending')) || (members[currentUser.id] && members[currentUser.id].Membership.status === 'pending') && <p>Requested Membership</p>
+                                        }
+
+                                        {
+                                            currentUser && <div
+                                            hidden={currentUser.id !== group.organizerId}
                                             id='organizerButtons'
                                         >
 
                                             <button
                                                 id='group-create-event-button'
                                                 className="group-buttons"
-                                                hidden={!currentUser || currentUser.id !== group.organizerId}
+                                                hidden={currentUser.id !== group.organizerId}
                                                 onClick={() => history.push(`/groups/${group.id}/events/new`)}
                                             >Create Event</button>
                                             <button
                                                 className="group-buttons"
-                                                hidden={!currentUser || currentUser.id !== group.organizerId}
+                                                hidden={currentUser.id !== group.organizerId}
                                                 onClick={() => history.push(`/groups/${group.id}/edit`)}
                                             >Update</button>
 
-                                            {/* <button
-                                            hidden={!currentUser || currentUser.id !== group.organizerId}
-                                            onClick={() => {
 
-                                                dispatch(groupActions.removeGroup(group.id))
-                                                history.push('/groups')
-
-
-                                            }}>Delete</button> */}
                                             {
-                                                currentUser && currentUser.id === group.organizerId && <OpenModalButton
-                                                    hidden={!currentUser || currentUser.id !== group.organizerId}
+                                                <OpenModalButton
+                                                    hidden={currentUser.id !== group.organizerId}
                                                     className="group-buttons"
                                                     buttonText="Delete"
                                                     modalComponent={<DeleteGroupModal />}
                                                 />
                                             }
 
-                                            {((currentUser && members[currentUser.id]) || currentUser.id === group.organizerId) &&
+                                            {(members[currentUser.id] || currentUser.id === group.organizerId) &&
                                                 <OpenModalButton
                                                     className=""
                                                     buttonText="Members"
@@ -130,7 +127,7 @@ export default function GroupInfo() {
                                                 />
                                             }
                                             {
-                                                currentUser && members[currentUser.id] && (currentUser.id === group.organizerId || members[currentUser.id].Membership.status === 'co-host') &&
+                                                members[currentUser.id] && (currentUser.id === group.organizerId || members[currentUser.id].Membership.status === 'co-host') &&
                                                 <OpenModalButton
                                                     className=""
                                                     buttonText="Venues"
@@ -141,8 +138,10 @@ export default function GroupInfo() {
 
 
                                         </div>
+                                        }
 
                                     </div>
+                                    }
 
                                 </div>
 

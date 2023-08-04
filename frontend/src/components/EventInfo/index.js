@@ -29,6 +29,28 @@ export default function EventInfo() {
     const user = oldUser
     //const img = useSelector(state => state.event.EventImages)[0].url
 
+    const containerStyle = {
+        width: '100%',
+        height: '100%',
+        borderRadius: '0px 0px 10px 10px',
+        marginBottom: '0px',
+        zIndex: '0'
+    }
+
+    const mapOptions = {
+
+        mapTypeId: 'hybrid',
+        scrollwheel: false,
+        draggable: false,
+        mapTypeControlOptions: {
+            style: window.google.maps.MapTypeControlStyle.HORIZONTAL_BAR,
+            position: window.google.maps.ControlPosition.LEFT_TOP,
+        },
+        fullscreenControlOptions: {
+            position: window.google.maps.ControlPosition.RIGHT_TOP,
+        }
+    }
+
     if (!event || !attendees) {
         return null
     }
@@ -68,6 +90,8 @@ export default function EventInfo() {
 
             event.endDate += ' AM'
           }
+
+
 
 
     return (
@@ -132,7 +156,7 @@ export default function EventInfo() {
                 <p>{event.description}</p>
             </div>
             {
-                event.Venue.id && <Venue address={event.Venue.address} city={event.Venue.city} state={event.Venue.state} coord={{lat: event.Venue.lat, lng: event.Venue.lng}}/>
+                event.Venue.id && <Venue address={event.Venue.address} city={event.Venue.city} state={event.Venue.state} coord={{lat: event.Venue.lat, lng: event.Venue.lng}} stylingId={'event-venue-component'} containerStyle={containerStyle} mapOptions={mapOptions}/>
             }
         </div>
     )

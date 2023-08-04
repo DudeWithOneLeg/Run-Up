@@ -46,11 +46,16 @@
   display: flex;
   flex-direction: row;
   align-items: center;
+  height: fit-content;
 }
 
-#map {
+.event-location-info > p {
+  padding-left: 5px;
+}
+
+#map1 {
   width: 600px;
-  height: 300px;
+  height: 450px;
 }
 
 @media screen and (max-width: 900px) {
@@ -67,20 +72,19 @@
     padding: 10px;
   } */
 
-  #location-div {
+  /* #location-div {
     flex-direction: column;
     align-items: flex-start;
-  }
+  } */
 
-  #position {
+  /* #position {
     padding: 5px 0px 0px ;
-  }
+  } */
 
-  #map {
+  /* #map {
     width: 100%;
     height: 100%;
-    z-index: 0;
-  }
+  } */
 
 }
 

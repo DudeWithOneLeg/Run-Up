@@ -7,7 +7,7 @@ import './index.css'
 
 const libraries = ['places']
 
-export default function Venue({address, city, state, coord}) {
+export default function Venue({address, city, state, coord, stylingId, containerStyle, mapOptions}) {
     // const [address, setAddress] = useState('Address')
     // const [city, setCity] = useState('City')
     // const [state, setState] = useState('State')
@@ -76,13 +76,7 @@ export default function Venue({address, city, state, coord}) {
     //     }
     // }, [placeDetails])
 
-    const containerStyle = {
-        width: '100%',
-        height: '100%',
-        borderRadius: '0px 0px 10px 10px',
-        marginBottom: '0px',
-        zIndex: '0'
-    };
+
 
     const { isLoaded } = useLoadScript({
         id: 'google-map-script',
@@ -208,13 +202,13 @@ export default function Venue({address, city, state, coord}) {
 
 
     return (
-        <div id='event-venue-component'>
+        <div id={stylingId}>
             <div>
             <script
                 defer
                 src={`https://maps.googleapis.com/maps/api/js?key=${process.env.REACT_APP_GOOGLE_API_KEY}&libraries=places`}
             ></script>
-            <div>
+            <div id='location-info'>
                 <div className='event-location-info'>
                     <h2>Address: </h2>
                     <p>{address}</p>
@@ -228,7 +222,7 @@ export default function Venue({address, city, state, coord}) {
                     <p>{state}</p>
                 </div>
             </div>
-            <div id='map'>
+            <div id='map1'>
                 {
                     isLoaded ? (
                         <GoogleMap
@@ -236,18 +230,7 @@ export default function Venue({address, city, state, coord}) {
                             center={position}
                             zoom={zoom}
 
-                            options={{
-
-                                mapTypeId: 'hybrid',
-                                scrollwheel: true,
-                                mapTypeControlOptions: {
-                                    style: window.google.maps.MapTypeControlStyle.HORIZONTAL_BAR,
-                                    position: window.google.maps.ControlPosition.LEFT_TOP,
-                                },
-                                fullscreenControlOptions: {
-                                    position: window.google.maps.ControlPosition.RIGHT_TOP,
-                                }
-                            }}
+                            options={mapOptions}
                             //onClick={(e) => handleMapClick(e)}
                             //onLoad={(map) => mapRef.current = map
 
