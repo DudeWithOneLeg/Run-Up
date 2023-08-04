@@ -10,7 +10,8 @@ import './index.css'
 export default function EventForm() {
     const history = useHistory()
     const user = useSelector(state => state.session.user)
-    const venue = useSelector(state => state.venue.newVenue)
+    const oldVenue = useSelector(state => state.venue.newVenue)
+    const venue = {...oldVenue}
 
 
 
