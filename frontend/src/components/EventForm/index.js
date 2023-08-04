@@ -46,7 +46,8 @@ export default function EventForm() {
     }, [dispatch, params.groupId])
 
     const group = useSelector(state => state.group.group)
-    const newEvent = useSelector(state => state.event.event)
+    const oldEvent = useSelector(state => state.event.event)
+    const newEvent = {...oldEvent}
 
 
     useEffect(() => {
@@ -54,26 +55,26 @@ export default function EventForm() {
         console.log("Errors:", errors)
     }, [name, price, about, onlineOrInperson, publicOrPrivate, startDate, endDate, capacity, errors])
 
-    useEffect(() => {
-        if (newEvent) {
-            const image = {
-                url: imgUrl,
-                preview: true
-            }
-            dispatch(eventActions.loadEvents()).then(() => {
-                dispatch(eventActions.postEventImg(newEvent.id, image)).catch(async (res) => {
-                    const data = await res.json()
-                    if (data.errors || data.message) {
-                        console.log(data)
-                    }
-                })
-            }).then(() => {
-                history.push(`/events/${newEvent.id}`)
-            })
+    // useEffect(() => {
+    //     if (newEvent) {
+    //         const image = {
+    //             url: imgUrl,
+    //             preview: true
+    //         }
+    //         dispatch(eventActions.loadEvents()).then(() => {
+    //             dispatch(eventActions.postEventImg(newEvent.id, image)).catch(async (res) => {
+    //                 const data = await res.json()
+    //                 if (data.errors || data.message) {
+    //                     console.log(data)
+    //                 }
+    //             })
+    //         }).then(() => {
+    //             history.push(`/events/${newEvent.id}`)
+    //         })
 
 
-        }
-    }, [newEvent, dispatch, history, imgUrl])
+    //     }
+    // }, [newEvent, dispatch, history, imgUrl])
 
     const handleSumbit = (e) => {
 
@@ -114,6 +115,19 @@ export default function EventForm() {
                 return setErrors(data.errors)
             }
         })
+
+        const image = {
+            url: imgUrl,
+            preview: true
+        }
+
+        dispatch(eventActions.postEventImg(newEvent.id, image)).catch(async (res) => {
+            const data = await res.json()
+            if (data.errors || data.message) {
+                console.log(data)
+            }
+        })
+        history.push(`/events/${newEvent.id}`)
         console.log("NEW EVENT", newEvent)
 
     }
