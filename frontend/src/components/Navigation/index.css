@@ -20,7 +20,7 @@
     font-size: 15px;
 }
 
-#login-signup>* {
+#login-signup > * {
     padding-right: 20px;
 }
 
@@ -72,7 +72,6 @@
     padding-right: 10px;
     padding-top: 10px;
     padding-bottom: 15px;
-
 }
 
 .profile-info {
@@ -80,7 +79,7 @@
     margin: 0px;
 }
 
-.profile-dropdown>a:hover {
+.profile-dropdown > a:hover {
     background-color: black;
     border-radius: 5px;
     cursor: pointer;
@@ -131,8 +130,8 @@
         border: solid black 1px;
     }
 
-    .profile-dropdown>a,
-    .profile-dropdown>p {
+    .profile-dropdown > a,
+    .profile-dropdown > p {
         border-top: solid white 1px;
         width: 100%;
         text-align: center;
