@@ -42,7 +42,7 @@ export default function ProfileButton({ user }) {
       <img id='profile-img' src={'/images/profile-icon.png'} onClick={openMenu} />
       {showMenu && <>
 
-      <div className={ulClassName}>
+      <div className={ulClassName} onClick={() => setShowMenu(true)}>
         <p className="profile-info">Hello, {user.firstName}!</p>
         <a className="profile-info" href='/groups/1/10'>View groups</a>
         <a className="profile-info" href='/events/1/10'>View events</a>
@@ -50,7 +50,7 @@ export default function ProfileButton({ user }) {
         <p className="profile-info">{showMenu && user.firstName} {showMenu && user.lastName}</p>
         <p className="profile-info">{showMenu && user.email}</p>
         <div id='logout-div'>
-          <p onClick={() => setModalContent()}>My Groups</p>
+          {/* <p onClick={() => setModalContent()}>My Groups</p> */}
           <a id='logout-link'onClick={logout}>Log Out</a>
         </div>
 
