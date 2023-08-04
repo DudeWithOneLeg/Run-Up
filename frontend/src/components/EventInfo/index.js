@@ -56,7 +56,7 @@ export default function EventInfo() {
     }
 
 
-   
+
 
 
     event.startDate = event.startDate.split('T').join(' · ').split(':00.000Z').join('')
@@ -106,7 +106,7 @@ export default function EventInfo() {
             </div>
             <div id='event-comp-second'>
                 <div id='event-comp-top'>
-                    <img src={event.EventImages[0].url} alt='event'></img>
+                    <img src={event.EventImages[0] && event.EventImages[0].url} alt='event'></img>
                     <div>
                         <div id='event-comp-group'>
                             <h1>{event.Group.name}</h1>
@@ -155,7 +155,7 @@ export default function EventInfo() {
                 <p>{event.description}</p>
             </div>
             {
-                event.Venue.id && <Venue address={event.Venue.address} city={event.Venue.city} state={event.Venue.state} coord={{lat: event.Venue.lat, lng: event.Venue.lng}} stylingId={'event-venue-component'} containerStyle={containerStyle} mapOptions={mapOptions}/>
+                event.Venue && <Venue address={event.Venue.address} city={event.Venue.city} state={event.Venue.state} coord={{lat: event.Venue.lat, lng: event.Venue.lng}} stylingId={'event-venue-component'} containerStyle={containerStyle} mapOptions={mapOptions}/>
             }
         </div>
     )
