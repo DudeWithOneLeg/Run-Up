@@ -19,6 +19,7 @@ export function ModalProvider({ children }) {
     }
   };
 
+
   const contextValue = {
     modalRef, // reference to modal div
     modalContent, // React component to render inside modal
@@ -38,7 +39,7 @@ export function ModalProvider({ children }) {
 }
 
 export function Modal() {
-  const { modalRef, modalContent, closeModal } = useContext(ModalContext);
+  const { modalRef, modalContent, closeModal, setModalContent } = useContext(ModalContext);
   // If there is no div referenced by the modalRef or modalContent is not a
   // truthy value, render nothing:
   if (!modalRef || !modalRef.current || !modalContent) return null;

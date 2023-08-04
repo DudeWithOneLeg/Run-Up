@@ -2,6 +2,14 @@ import { csrfFetch } from "./csrf"
 
 const GET_PLACE_DETAILS = 'venues/getDetails'
 const CREATE_VENUE = 'venue/create'
+const GROUP_VENUES = 'group/venues'
+
+const groupVenues = (venues) => {
+    return {
+        type: GROUP_VENUES,
+        payload: venues
+    }
+}
 
 const createVenue = (venue) => {
     return {
@@ -15,6 +23,16 @@ const loadDetails = (placeDetails) => {
         type: GET_PLACE_DETAILS,
         payload: placeDetails
     }
+}
+
+export const getGroupVenues = (groupId) => async (dispatch) => {
+    const res = await csrfFetch(`/api/groups/${groupId}/venues`)
+    const data = await res.json()
+    if (data && data.errors) {
+        return console.log(data)
+    }
+    dispatch(groupVenues(data.Venues))
+    return res
 }
 
 export const sendVenue = (venue, groupId) => async (dispatch) => {
@@ -74,6 +92,13 @@ export const venueReducer = (state = initialState, action) => {
             return newState;
         case CREATE_VENUE:
             newState = {...state, newVenue: {...action.payload}}
+            return newState
+        case GROUP_VENUES:
+            const venueObj = {}
+            action.payload.map(venue => {
+                venueObj[venue.id] = venue
+            })
+            newState = {...state, groupVenues: {...venueObj}}
             return newState
         default:
             return state

@@ -5,6 +5,7 @@ import { Link, useParams, useHistory } from "react-router-dom"
 import OpenModalButton from "../OpenModalButton"
 import DeleteEventModal from "../DeleteEventModal"
 import * as groupActions from '../../store/groups'
+import Venue from "../Venue"
 import './index.css'
 
 
@@ -26,8 +27,29 @@ export default function EventInfo() {
     const event = {...oldEvent}
     const attendees = oldAttendees
     const user = oldUser
-    console.log('YO THESE ARE ATTEDANCES',attendees)
     //const img = useSelector(state => state.event.EventImages)[0].url
+
+    const containerStyle = {
+        width: '100%',
+        height: '100%',
+        borderRadius: '0px 0px 10px 10px',
+        marginBottom: '0px',
+        zIndex: '0'
+    }
+
+    const mapOptions = {
+
+        mapTypeId: 'hybrid',
+        scrollwheel: false,
+        draggable: false,
+        mapTypeControlOptions: {
+            style: window.google.maps.MapTypeControlStyle.HORIZONTAL_BAR,
+            position: window.google.maps.ControlPosition.LEFT_TOP,
+        },
+        fullscreenControlOptions: {
+            position: window.google.maps.ControlPosition.RIGHT_TOP,
+        }
+    }
 
     if (!event || !attendees) {
         return null
@@ -70,6 +92,8 @@ export default function EventInfo() {
           }
 
 
+
+
     return (
         <div id='event-component'>
             <div id='event-info'>
@@ -90,7 +114,7 @@ export default function EventInfo() {
                         </div>
                         <div id='event-comp-top-info'>
                             <div className='time-price'>
-                                <img src='/images/clock.png' alt='clock'/>
+                                <img src='/images/clock.svg' alt='clock'/>
                                 <div>
                                   <h3>START DATE {event.startDate}</h3>
                                   <h3>END DATE {event.endDate}</h3>
@@ -98,12 +122,12 @@ export default function EventInfo() {
 
                             </div>
                             <div className='time-price'>
-                                <img src='/images/money.png' alt='dollar sign'/>
+                                <img src='/images/money.svg' alt='dollar sign'/>
                                 {event.price == 0 && <h3>FREE</h3>}
                                 {event.price > 0 && <h3>{event.price}</h3>}
                             </div>
                             <div className='time-price'>
-                                <img src='/images/map.png' alt='map-pin'/>
+                                <img src='/images/map.svg' alt='map-pin'/>
                                 <h3>{event.type}</h3>
                             </div>
 
@@ -131,7 +155,9 @@ export default function EventInfo() {
                 <h1>Details</h1>
                 <p>{event.description}</p>
             </div>
-            <img id='background-img' src={event.EventImages[0].url}/>
+            {
+                event.Venue.id && <Venue address={event.Venue.address} city={event.Venue.city} state={event.Venue.state} coord={{lat: event.Venue.lat, lng: event.Venue.lng}} stylingId={'event-venue-component'} containerStyle={containerStyle} mapOptions={mapOptions}/>
+            }
         </div>
     )
 }

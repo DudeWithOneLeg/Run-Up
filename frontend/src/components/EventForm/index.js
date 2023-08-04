@@ -2,12 +2,17 @@ import { useState, useEffect } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import * as eventActions from '../../store/events'
 import * as groupActions from '../../store/groups'
+import * as placeActions from '../../store/venue';
 import { useHistory, useParams } from "react-router-dom"
+import VenueFormModal from '../VenueFormModal'
 import './index.css'
 
 export default function EventForm() {
     const history = useHistory()
     const user = useSelector(state => state.session.user)
+    const venue = useSelector(state => state.venue.newVenue)
+
+
 
     if (!user) {
         history.push('/')
@@ -23,6 +28,14 @@ export default function EventForm() {
     const [errors, setErrors] = useState({})
     const [capacity, setCapacity] = useState(0)
     const [imgUrl, setImgUrl] = useState('')
+    const [address, setAddress] = useState('Address')
+    const [city, setCity] = useState('City')
+    const [state, setState] = useState('State')
+    const [showVenue, setShowVenue] = useState(false)
+    const [position, setPosition] = useState({
+        lat: 40.299493,
+        lng: -101.950516
+    })
 
     const params = useParams()
     const dispatch = useDispatch()
@@ -47,14 +60,14 @@ export default function EventForm() {
                 preview: true
             }
             dispatch(eventActions.loadEvents()).then(() => {
-               dispatch(eventActions.postEventImg(newEvent.id, image)).catch(async (res) => {
-                const data = await res.json()
-                if (data.errors || data.message) {
-                    console.log(data)
-                }
-            })
+                dispatch(eventActions.postEventImg(newEvent.id, image)).catch(async (res) => {
+                    const data = await res.json()
+                    if (data.errors || data.message) {
+                        console.log(data)
+                    }
+                })
             }).then(() => {
-               history.push(`/events/${newEvent.id}`)
+                history.push(`/events/${newEvent.id}`)
             })
 
 
@@ -65,17 +78,41 @@ export default function EventForm() {
 
         e.preventDefault()
 
-        const event = { name, price, description: about, type: onlineOrInperson, private: publicOrPrivate, startDate, endDate, capacity }
-        console.log(event)
+        const { lat, lng } = position
+        console.log({
+            groupId: Number(params.groupId), address, city, state, lat, lng
+        })
+
+        if (city !== 'City' || address !== 'Address' || state !== 'State') {
+            console.log('YO')
+            const errs = {}
+
+
+            if (address === 'Address') errs.address = "Street address is required"
+            if (city === 'City') errs.city = "City is required"
+            if (state === 'State') errs.state = "State is required"
+            console.log(errs)
+            if (Object.values(errs).length) return setErrors(errs)
+
+        }
+        setErrors({})
+        console.log(errors)
+        if (address !== 'Address' && city !== 'City' && state !== 'State') {
+            dispatch(placeActions.sendVenue({
+                groupId: params.groupId, address, city, state, lat, lng
+            }, params.groupId))
+        }
+
+
+        const event = { name, price, description: about, type: onlineOrInperson, private: publicOrPrivate, startDate, endDate, capacity, venueId: venue.id }
         dispatch(eventActions.requestNewEvent(event, params.groupId)).catch(async (res) => {
             const data = await res.json()
             if (data && data.errors) {
-                console.log('YO THERES ERRORS',data)
+                console.log('YO THERES ERRORS', data)
                 return setErrors(data.errors)
             }
-            console.log('event???????',data)
         })
-        console.log("NEW EVENT",newEvent)
+        console.log("NEW EVENT", newEvent)
 
     }
     if (!group) {
@@ -96,7 +133,7 @@ export default function EventForm() {
                         What is the name of your event?
                     </p>
                     <input
-                    className='event-input'
+                        className='event-input'
                         required
                         onChange={(e) => setName(e.target.value)}
                     >
@@ -124,11 +161,28 @@ export default function EventForm() {
                         errors.type && <p className="errors">Event type is required</p>
                     }
 
+                    {
+                        onlineOrInperson === 'In person' &&
+                            <VenueFormModal
+                    address={address}
+                    setAddress={setAddress}
+                    city={city}
+                    setCity={setCity}
+                    state={state}
+                    setState={setState}
+                    position={position}
+                    setPosition={setPosition}
+                    errors={errors}
+                    setErrors={setErrors}
+                />
+                        
+                    }
+
                     <p>
                         Is this event private or public?
                     </p>
                     <select
-                    className="event-select-choose"
+                        className="event-select-choose"
                         onChange={(e) => {
                             if (e.target.value === 'Private') setPublicOrPrivate(true)
                             if (e.target.value === 'Public') setPublicOrPrivate(false)
@@ -143,9 +197,9 @@ export default function EventForm() {
                     }
                     <p>How many people are you expecting?</p>
                     <input
-                    className="event-input"
-                    id='event-capacity'
-                    onChange={(e) => setCapacity(e.target.value)}
+                        className="event-input"
+                        id='event-capacity'
+                        onChange={(e) => setCapacity(e.target.value)}
                     >
                     </input>
                     <p>
@@ -153,7 +207,7 @@ export default function EventForm() {
                     </p>
                     <div>
                         <input
-                        className='event-input'
+                            className='event-input'
                             onClick={(e) => e.preventDefault()}
                             placeholder="$"
 
@@ -171,56 +225,56 @@ export default function EventForm() {
 
                 <div className='event-div'>
                     <p>
-                    When does your event start?
-                </p>
-                <input
-                className="calendar"
-                    onChange={(e) => setStartDate(e.target.value)}
-                    type='datetime-local' />
-                {
-                    errors.startDate && <p className="errors">{errors.startDate}</p>
-                }
-                <p>
-                    When does your event end?
-                </p>
-                <input
-                className="calendar"
-                    onChange={(e) => setEndDate(e.target.value)}
-                    type='datetime-local'
-                >
-                </input>
-                {
-                    errors.endDateBool && <p className='errors'>{errors.endDateBool}</p>
-                }
+                        When does your event start?
+                    </p>
+                    <input
+                        className="calendar"
+                        onChange={(e) => setStartDate(e.target.value)}
+                        type='datetime-local' />
+                    {
+                        errors.startDate && <p className="errors">{errors.startDate}</p>
+                    }
+                    <p>
+                        When does your event end?
+                    </p>
+                    <input
+                        className="calendar"
+                        onChange={(e) => setEndDate(e.target.value)}
+                        type='datetime-local'
+                    >
+                    </input>
+                    {
+                        errors.endDateBool && <p className='errors'>{errors.endDateBool}</p>
+                    }
                 </div>
 
                 <div className='event-div'>
-                   <p>
-                    Please add in image url for your event below:
-                </p>
+                    <p>
+                        Please add in image url for your event below:
+                    </p>
 
-                <input
-                className='event-input'
-                placeholder='Image URL'
-                    onChange={(e) => {
-                        const extensions = ['png', 'jpg', 'jpeg']
-                        let urlExtension = e.target.value.split('.')
-                        urlExtension = urlExtension[urlExtension.length - 1]
-                        console.log(urlExtension)
+                    <input
+                        className='event-input'
+                        placeholder='Image URL'
+                        onChange={(e) => {
+                            const extensions = ['png', 'jpg', 'jpeg']
+                            let urlExtension = e.target.value.split('.')
+                            urlExtension = urlExtension[urlExtension.length - 1]
+                            console.log(urlExtension)
 
-                        if (!extensions.includes(urlExtension)) {
-                            console.log(!extensions.includes(urlExtension))
-                            return setErrors({ imgUrl: "Image URL must end in .png, .jpg, or .jpeg" })
-                        }
-                        else {
-                            setErrors({})
-                        }
-                        setImgUrl(e.target.value)
-                    }}
-                />
-                {
-                    errors.imgUrl && <p className='errors'>{errors.imgUrl}</p>
-                }
+                            if (!extensions.includes(urlExtension)) {
+                                console.log(!extensions.includes(urlExtension))
+                                return setErrors({ imgUrl: "Image URL must end in .png, .jpg, or .jpeg" })
+                            }
+                            else {
+                                setErrors({})
+                            }
+                            setImgUrl(e.target.value)
+                        }}
+                    />
+                    {
+                        errors.imgUrl && <p className='errors'>{errors.imgUrl}</p>
+                    }
                 </div>
 
 
@@ -228,16 +282,17 @@ export default function EventForm() {
                     Please describe your event:
                 </p>
                 <textarea
-                className='event-input'
-                id='event-form-about'
-                placeholder='Please include art least 30 characters'
+                    className='event-input'
+                    id='event-form-about'
+                    placeholder='Please include art least 30 characters'
                     onChange={(e) => setAbout(e.target.value)}
                 />
                 {
                     errors.description && <p className="errors">{errors.description}</p>
                 }
+
                 <button
-                id='event-button'
+                    id='event-button'
                     type='submit'
                 >Create Event</button>
             </form>

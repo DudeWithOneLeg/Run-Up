@@ -17,7 +17,6 @@ export default function GroupEvents() {
 
     const events = {...oldEvents}
 
-    console.log("YO THESE R EVENTS FROM GROUP EVENTS", events)
 const sortedEvents = [[], []]
 const date = new Date()
 
@@ -33,7 +32,6 @@ const date = new Date()
         }
     })
 
-    console.log('DATE:', date, 'SORTED EVENTS:', sortedEvents)
     }
 
 

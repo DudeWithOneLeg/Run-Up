@@ -30,66 +30,66 @@ module.exports = {
         hashedPassword: bcrypt.hashSync('password')
       },
       {
-        firstName: 'John2',
-        lastName: 'Doe2',
-        username: 'JohnDoe2',
-        email: 'john2@doe.com',
+        firstName: 'Michael',
+        lastName: 'Scott',
+        username: 'TheOfficeFanatic',
+        email: 'michael.scott@dundermifflin.com',
         hashedPassword: bcrypt.hashSync('password')
       },
       {
-        firstName: 'John3',
-        lastName: 'Doe3',
-        username: 'JohnDoe3',
-        email: 'john3@doe.com',
+        firstName: 'Leonardo',
+        lastName: 'DiCaprio',
+        username: 'LeoTheGreat',
+        email: 'hollywood_star@oscarsaremylife.com',
         hashedPassword: bcrypt.hashSync('password')
       },
       {
-        firstName: 'John4',
-        lastName: 'Doe4',
-        username: 'JohnDoe4',
-        email: 'john4@doe.com',
+        firstName: 'Jennifer',
+        lastName: 'Lawrence',
+        username: 'JLawFanatic',
+        email: 'lawrence_of_laughter@funnyactress.com',
         hashedPassword: bcrypt.hashSync('password')
       },
       {
-        firstName: 'John5',
-        lastName: 'Doe5',
-        username: 'JohnDoe5',
-        email: 'john5@doe.com',
+        firstName: 'Johnny',
+        lastName: 'Depp',
+        username: 'CaptainSparrow',
+        email: 'pirate_johnny@rum_and_movies.com',
         hashedPassword: bcrypt.hashSync('password')
       },
       {
-        firstName: 'John6',
-        lastName: 'Doe6',
-        username: 'JohnDoe6',
-        email: 'john6@doe.com',
+        firstName: 'Meryl',
+        lastName: 'Streep',
+        username: 'MerylMagic',
+        email: 'award_queen@merylsmania.com',
         hashedPassword: bcrypt.hashSync('password')
       },
       {
-        firstName: 'John7',
-        lastName: 'Doe7',
-        username: 'JohnDoe7',
-        email: 'john7@doe.com',
+        firstName: 'Beyoncé',
+        lastName: 'Knowles',
+        username: 'QueenBee',
+        email: 'beyhive_ruler@musicbuzz.com',
         hashedPassword: bcrypt.hashSync('password')
       },
       {
-        firstName: 'John8',
-        lastName: 'Doe8',
-        username: 'JohnDoe8',
-        email: 'john8@doe.com',
+        firstName: 'Brad',
+        lastName: 'Pitt',
+        username: 'BradStar',
+        email: 'hollywood_heartthrob@funnyflicks.com',
         hashedPassword: bcrypt.hashSync('password')
       },
       {
-        firstName: 'John9',
-        lastName: 'Doe9',
-        username: 'JohnDoe9',
-        email: 'john9@doe.com',
+        firstName: 'Taylor',
+        lastName: 'Swift',
+        username: 'SwiftieForever',
+        email: 'pop_princess@shakingitoff.com',
         hashedPassword: bcrypt.hashSync('password')
       },
       {
-        firstName: 'John10',
-        lastName: 'Doe10',
-        username: 'JohnDoe10',
-        email: 'john10@doe.com',
+        firstName: 'Tom',
+        lastName: 'Hanks',
+        username: 'TomTheActor',
+        email: 'hanks_for_laughing@comedymovies.com',
         hashedPassword: bcrypt.hashSync('password')
       }
     ]

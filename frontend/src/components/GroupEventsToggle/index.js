@@ -25,11 +25,9 @@ export default function GroupEventsToggle() {
   const events = useSelector((state) => state.event.events);
   useEffect(() => {
     if (path.startsWith('/groups')) {
-      console.log("DISPATCHING GROUPS")
       dispatch(groupActions.loadGroups())
     }
     if (path.startsWith('/events')) {
-      console.log("DISPATCHING EVENTS")
       dispatch(eventActions.loadEvents())
     }
   }, [dispatch])
@@ -53,16 +51,16 @@ export default function GroupEventsToggle() {
     currentGroups = arr[page - 1]
     return (
       <div id='pages'>
-        {page > 1 && <Link className='notActive' to={`/groups/${page - 1}/10`}>&lt;</Link>}
+        {page > 1 && <Link className='notActive' to={`/groups/${page - 1}/${size}`}>&lt;</Link>}
 
         {
           arr.map((data) => {
             return (
-              <Link className={page == arr.indexOf(data) + 1 ? 'activePage' : 'notActive'} to={`/groups/${arr.indexOf(data) + 1}/10`}>{arr.indexOf(data) + 1}</Link>
+              <Link className={page == arr.indexOf(data) + 1 ? 'activePage' : 'notActive'} to={`/groups/${arr.indexOf(data) + 1}/${size}`}>{arr.indexOf(data) + 1}</Link>
             )
           })
         }
-        {page < arr.length && <Link className='notActive' to={`/groups/${page + 1}/10`}>&gt;</Link>}
+        {page < arr.length && <Link className='notActive' to={`/groups/${page + 1}/${size}`}>&gt;</Link>}
 
         <p className='results'>Results:</p>
 
@@ -115,19 +113,18 @@ export default function GroupEventsToggle() {
       arr.push(slice)
     }
     currentEvents = arr[page - 1]
-    console.log('CURRENT EVENTS', currentEvents)
     return (
       <div id='pages'>
-        {page > 1 && <Link className='notActive' to={`/events/${page - 1}/10`}>&lt;</Link>}
+        {page > 1 && <Link className='notActive' to={`/events/${page - 1}/${size}`}>&lt;</Link>}
 
         {
           arr.map((data) => {
             return (
-              <Link className={page == arr.indexOf(data) + 1 ? 'activePage' : 'notActive'} to={`/events/${arr.indexOf(data) + 1}/10`}>{arr.indexOf(data) + 1}</Link>
+              <Link className={page == arr.indexOf(data) + 1 ? 'activePage' : 'notActive'} to={`/events/${arr.indexOf(data) + 1}/${size}`}>{arr.indexOf(data) + 1}</Link>
             )
           })
         }
-        {page < arr.length && <Link className='notActive' to={`/events/${page + 1}/10`}>&gt;</Link>}
+        {page < arr.length && <Link className='notActive' to={`/events/${page + 1}/${size}`}>&gt;</Link>}
 
         <p className='results'>Results:</p>
 
@@ -189,7 +186,7 @@ export default function GroupEventsToggle() {
       </div>
       <div className='toggle-subhead'>
         {path.startsWith('/groups') && <p >Groups in Run Up</p>}
-        {path.startsWith('/events') && <p className='toggle-subhead'>Events in Run Up</p>}
+        {path.startsWith('/events') && <p >Events in Run Up</p>}
       </div>
       <div id='list'>
         {/* <input

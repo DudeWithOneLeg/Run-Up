@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch } from 'react-redux';
 import * as sessionActions from '../../store/session';
-import { useHistory, Link } from "react-router-dom";
+import { useHistory } from "react-router-dom";
+import { useModal } from "../../context/Modal";
 import './profileButton.css'
 
 export default function ProfileButton({ user }) {
+  const {setModalContent} = useModal()
   const history = useHistory()
   const dispatch = useDispatch();
   const [showMenu, setShowMenu] = useState(false);
@@ -48,6 +50,7 @@ export default function ProfileButton({ user }) {
         <p className="profile-info">{showMenu && user.firstName} {showMenu && user.lastName}</p>
         <p className="profile-info">{showMenu && user.email}</p>
         <div id='logout-div'>
+          <p onClick={() => setModalContent()}>My Groups</p>
           <a id='logout-link'onClick={logout}>Log Out</a>
         </div>
 
