@@ -1,51 +1,45 @@
 import { useSelector, useDispatch } from "react-redux"
 import * as groupEventsActions from '../../store/events'
-import { useEffect } from "react"
+import { useEffect, useState } from "react"
 import { useParams, useHistory } from "react-router-dom"
-
 import './index.css'
-
 
 export default function GroupEvents() {
 
     const params = useParams()
     const history = useHistory()
-
     const dispatch = useDispatch()
+    const [events, setEvents] = useState({})
 
-    const oldEvents = useSelector(state => state.event.groupEvents)
-
-    const events = {...oldEvents}
-
-const sortedEvents = [[], []]
-const date = new Date()
+    const sortedEvents = [[], []]
+    const date = new Date()
 
     if (events) {
 
-    Object.values(events).map((event) => {
+        Object.values(events).map((event) => {
 
-        if (new Date(event.startDate) > date) {
-             sortedEvents[0].push(event)
-        }
-        else {
-             sortedEvents[1].push(event)
-        }
-    })
+            if (new Date(event.startDate) > date) {
+                sortedEvents[0].push(event)
+            }
+            else {
+                sortedEvents[1].push(event)
+            }
+        })
 
     }
 
-
-
     useEffect(() => {
-       dispatch(groupEventsActions.loadGroupEvents(params.id)).catch( async (res) => {
-        const data = await res.json()
-        if (data && data.errors) {
-            console.log(data)
-        }
-       })
-    },[dispatch, params.id])
+        asyncFunc()
 
+    }, [dispatch, params.id])
 
+    const asyncFunc = async () => {
+
+        const res = dispatch(groupEventsActions.loadGroupEvents(params.id))
+        const data = await res
+        setEvents(data)
+        console.log(data)
+    }
 
     if (!events) return null
     return (
@@ -55,24 +49,24 @@ const date = new Date()
                 sortedEvents[0] && sortedEvents[0].map((event) => {
                     event.startDate = event.startDate.split('T').join(' · ').split(':00.000Z').join('')
 
-          let hour = event.startDate.split(' · ')[1].split(':')[0]
+                    let hour = event.startDate.split(' · ')[1].split(':')[0]
 
-          if (hour > 12 && !event.startDate.includes('PM') && !event.startDate.includes('AM')) {
+                    if (hour > 12 && !event.startDate.includes('PM') && !event.startDate.includes('AM')) {
 
-            const oldHour = hour
-            hour -= 12
-            event.startDate = event.startDate.replace(oldHour, hour)
-            event.startDate += ' PM'
-          }
-          else if (hour < 12 && !event.startDate.includes('AM') && !event.startDate.includes('PM')) {
+                        const oldHour = hour
+                        hour -= 12
+                        event.startDate = event.startDate.replace(oldHour, hour)
+                        event.startDate += ' PM'
+                    }
+                    else if (hour < 12 && !event.startDate.includes('AM') && !event.startDate.includes('PM')) {
 
-            event.startDate += ' AM'
-          }
+                        event.startDate += ' AM'
+                    }
                     return (<div
                         onClick={() => {
                             history.push(`/events/${event.id}`)
                         }}
-                    className='group-events-card more-info'>
+                        className='group-events-card more-info'>
                         <div id='group-events-card-inner-info'>
                             <img className='group-events-img' src={event.previewImage} alt=''></img>
                             <div id='group-events-card-info'>
@@ -82,7 +76,7 @@ const date = new Date()
 
                             </div>
                         </div>
-                            <p className='group-events-about'>{event.description}</p>
+                        <p className='group-events-about'>{event.description}</p>
                     </div>)
 
                 })
@@ -92,24 +86,24 @@ const date = new Date()
                 sortedEvents[1] && sortedEvents[1].map((event) => {
                     event.startDate = event.startDate.split('T').join(' · ').split(':00.000Z').join('')
 
-          let hour = event.startDate.split(' · ')[1].split(':')[0]
+                    let hour = event.startDate.split(' · ')[1].split(':')[0]
 
-          if (hour > 12 && !event.startDate.includes('PM') && !event.startDate.includes('AM')) {
+                    if (hour > 12 && !event.startDate.includes('PM') && !event.startDate.includes('AM')) {
 
-            const oldHour = hour
-            hour -= 12
-            event.startDate = event.startDate.replace(oldHour, hour)
-            event.startDate += ' PM'
-          }
-          else if (hour < 12 && !event.startDate.includes('AM') && !event.startDate.includes('PM')) {
+                        const oldHour = hour
+                        hour -= 12
+                        event.startDate = event.startDate.replace(oldHour, hour)
+                        event.startDate += ' PM'
+                    }
+                    else if (hour < 12 && !event.startDate.includes('AM') && !event.startDate.includes('PM')) {
 
-            event.startDate += ' AM'
-          }
+                        event.startDate += ' AM'
+                    }
                     return (<div
                         onClick={() => {
                             history.push(`/events/${event.id}`)
                         }}
-                    className='group-events-card more-info'>
+                        className='group-events-card more-info'>
                         <div id='group-events-card-inner-info'>
                             <img className='group-events-img' src={event.previewImage} alt=''></img>
                             <div id='group-events-card-info'>
@@ -119,7 +113,7 @@ const date = new Date()
 
                             </div>
                         </div>
-                            <p className='group-events-about'>{event.description}</p>
+                        <p className='group-events-about'>{event.description}</p>
                     </div>)
 
                 })

@@ -1,6 +1,6 @@
 import { useSelector, useDispatch } from "react-redux"
 import * as eventActions from '../../store/events'
-import { useEffect } from "react"
+import { useEffect, useState } from "react"
 import { Link, useParams, useHistory } from "react-router-dom"
 import OpenModalButton from "../OpenModalButton"
 import DeleteEventModal from "../DeleteEventModal"
@@ -14,20 +14,30 @@ export default function EventInfo() {
     const dispatch = useDispatch()
     const params = useParams()
     const history = useHistory()
+    const [event, setEvent] = useState({})
+    const [attendees, setAttendees] = useState({})
+const user = useSelector(state => state.session.user)
 
-    useEffect(() => {
-        dispatch(eventActions.loadEvent(params.eventId))
-        dispatch(eventActions.getAttendances(params.eventId))
-    }, [dispatch, params.eventId])
 
-    const oldEvent = useSelector(state => state.event.eventInfo)
-    const oldAttendees = useSelector(state => state.event.eventAttend)
-    const oldUser = useSelector(state => state.session.user)
+useEffect(() => {
 
-    const event = {...oldEvent}
-    const attendees = oldAttendees
-    const user = oldUser
-    //const img = useSelector(state => state.event.EventImages)[0].url
+
+        fetchData()
+    },[dispatch, params.id])
+
+    const fetchData = async () => {
+        console.log('yoooo')
+    const eventData = dispatch(eventActions.loadEvent(params.eventId))
+     const newEvent = await eventData
+    if (newEvent && newEvent.errors) return console.log(newEvent)
+    setEvent(newEvent)
+
+    const attendanceData = dispatch(eventActions.getAttendances(params.eventId))
+     const newAttendees = await attendanceData
+     console.log('Attendeeesss', attendees)
+    if (newAttendees && newAttendees.errors) return console.log(newAttendees.errors)
+    setAttendees(newAttendees)
+    }
 
     const containerStyle = {
         width: '100%',
@@ -37,26 +47,14 @@ export default function EventInfo() {
         zIndex: '0'
     }
 
-    const mapOptions = {
 
-        mapTypeId: 'hybrid',
-        scrollwheel: false,
-        draggable: false,
-        mapTypeControlOptions: {
-            style: window.google.maps.MapTypeControlStyle.HORIZONTAL_BAR,
-            position: window.google.maps.ControlPosition.LEFT_TOP,
-        },
-        fullscreenControlOptions: {
-            position: window.google.maps.ControlPosition.RIGHT_TOP,
-        }
-    }
 
-    if (!event || !attendees) {
+    if (!event.id || !Object.values(attendees).length) {
         return null
     }
 
 
-
+console.log('eveeennttt',event)
 
 
     event.startDate = event.startDate.split('T').join(' · ').split(':00.000Z').join('')
@@ -91,8 +89,6 @@ export default function EventInfo() {
           }
 
 
-
-
     return (
         <div id='event-component'>
             <div id='event-info'>
@@ -102,7 +98,7 @@ export default function EventInfo() {
                     </Link>
                     </p>
                 <h1>{event.name}</h1>
-                <p>Hosted by {attendees[0].firstName} {attendees[0].lastName}</p>
+                <p>Hosted by {Object.values(attendees)[0].firstName} {Object.values(attendees)[0].lastName}</p>
             </div>
             <div id='event-comp-second'>
                 <div id='event-comp-top'>
@@ -133,7 +129,7 @@ export default function EventInfo() {
 
 
 
-                            {(!user || user.id === attendees[0].id) && <div>
+                            {!user && <div>
                                 <button className='group-buttons'
                                 onClick={() => {
                                     dispatch(groupActions.loadGroup(event.groupId)).then(() => history.push(`/events/${event.id}/edit`))
@@ -155,7 +151,19 @@ export default function EventInfo() {
                 <p>{event.description}</p>
             </div>
             {
-                event.Venue && <Venue address={event.Venue.address} city={event.Venue.city} state={event.Venue.state} coord={{lat: event.Venue.lat, lng: event.Venue.lng}} stylingId={'event-venue-component'} containerStyle={containerStyle} mapOptions={mapOptions}/>
+                event.Venue && <Venue address={event.Venue.address} city={event.Venue.city} state={event.Venue.state} coord={{lat: event.Venue.lat, lng: event.Venue.lng}} stylingId={'event-venue-component'} containerStyle={containerStyle} mapOptions={{
+
+                    mapTypeId: 'hybrid',
+                    scrollwheel: false,
+                    draggable: false,
+                        mapTypeControlOptions: {
+                            style: window.google.maps.MapTypeControlStyle.HORIZONTAL_BAR,
+                            position: window.google.maps.ControlPosition.LEFT_TOP,
+                        },
+                        fullscreenControlOptions: {
+                            position: window.google.maps.ControlPosition.RIGHT_TOP,
+                        }
+                    }}/>
             }
         </div>
     )
