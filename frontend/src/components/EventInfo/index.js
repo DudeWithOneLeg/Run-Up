@@ -155,7 +155,7 @@ console.log('eveeennttt',event)
                 <p>{event.description}</p>
             </div>
             {
-                event.Venue && <Venue address={event.Venue.address} city={event.Venue.city} state={event.Venue.state} coord={{lat: event.Venue.lat, lng: event.Venue.lng}} stylingId={'event-venue-component'} containerStyle={containerStyle} mapOptions={{
+                event.Venue && <Venue address={event.Venue.address} city={event.Venue.city} state={event.Venue.state} coord={{lat: Number(event.Venue.lat), lng: Number(event.Venue.lng)}} stylingId={'event-venue-component'} containerStyle={containerStyle} mapOptions={{
 
                     mapTypeId: 'hybrid',
                     scrollwheel: false,
