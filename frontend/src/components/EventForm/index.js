@@ -10,8 +10,6 @@ import './index.css'
 export default function EventForm() {
     const history = useHistory()
     const user = useSelector(state => state.session.user)
-    const oldVenue = useSelector(state => state.venue.newVenue)
-    const venue = {...oldVenue}
 
 
 
@@ -45,8 +43,7 @@ export default function EventForm() {
     }, [dispatch, params.groupId])
 
     const group = useSelector(state => state.group.group)
-    const oldEvent = useSelector(state => state.event.event)
-    const newEvent = {...oldEvent}
+    
 
 
     useEffect(() => {
@@ -54,30 +51,11 @@ export default function EventForm() {
         console.log("Errors:", errors)
     }, [name, price, about, onlineOrInperson, publicOrPrivate, startDate, endDate, capacity, errors])
 
-    // useEffect(() => {
-    //     if (newEvent) {
-    //         const image = {
-    //             url: imgUrl,
-    //             preview: true
-    //         }
-    //         dispatch(eventActions.loadEvents()).then(() => {
-    //             dispatch(eventActions.postEventImg(newEvent.id, image)).catch(async (res) => {
-    //                 const data = await res.json()
-    //                 if (data.errors || data.message) {
-    //                     console.log(data)
-    //                 }
-    //             })
-    //         }).then(() => {
-    //             history.push(`/events/${newEvent.id}`)
-    //         })
-
-
-    //     }
-    // },[newEvent])
 
 
 
-    const handleSumbit = (e) => {
+
+    const handleSumbit = async (e) => {
 
         e.preventDefault()
 
@@ -99,46 +77,46 @@ export default function EventForm() {
 
         }
         setErrors({})
-        console.log(errors)
+        let venue
         if (address !== 'Address' && city !== 'City' && state !== 'State') {
-            dispatch(placeActions.sendVenue({
+            const newVenue = dispatch(placeActions.sendVenue({
                 groupId: params.groupId, address, city, state, lat, lng
             }, params.groupId))
+
+            venue = await newVenue
+            console.log('RES', venue)
             console.log(venue)
         }
 
 
         const event = { name, price, description: about, type: onlineOrInperson, private: publicOrPrivate, startDate, endDate, capacity }
         if (venue && venue.id) {
-            console.log('yo')
             event.venueId = venue.id
         }
-        dispatch(eventActions.requestNewEvent(event, params.groupId)).catch(async (res) => {
-            const data = await res.json()
-            if (data && data.errors) {
-                console.log('YO THERES ERRORS', data)
-                return setErrors(data.errors)
-            }
-        })
-        if (newEvent) {
+
+        const newEvent = dispatch(eventActions.requestNewEvent(event, params.groupId))
+        const requestedEvent = await newEvent
+        console.log(requestedEvent)
+
+        if (requestedEvent) {
             const image = {
                 url: imgUrl,
                 preview: true
             }
             dispatch(eventActions.loadEvents()).then(() => {
-                dispatch(eventActions.postEventImg(newEvent.id, image)).catch(async (res) => {
+                dispatch(eventActions.postEventImg(requestedEvent.id, image)).catch(async (res) => {
                     const data = await res.json()
                     if (data.errors || data.message) {
                         console.log(data)
                     }
                 })
             }).then(() => {
-                history.push(`/events/${newEvent.id}`)
+                history.push(`/events/${requestedEvent.id}`)
             })
 
 
         }
-        console.log("NEW EVENT", newEvent)
+        // console.log("NEW EVENT", newEvent)
 
     }
     if (!group) {

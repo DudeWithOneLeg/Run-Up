@@ -67,14 +67,15 @@ export const postEventImg = (eventId, image) => async (dispatch) => {
         return console.log(data.errors)
     }
     dispatch(addEventImg(data))
-    return res
+    return data
 }
 
 export const removeEvent = (eventId) => async (dispatch) => {
     const res = await csrfFetch(`/api/events/${eventId}`, {
         method: 'DELETE'
     })
-    return res
+    const data = await res.json()
+    return data
 }
 
 export const getAttendances = (eventId) => async (dispatch) => {
@@ -88,7 +89,7 @@ export const getAttendances = (eventId) => async (dispatch) => {
             return normal[attend.id] = attend
         })
     dispatch(getHost(normal))
-    return res
+    return normal
 }
 
 export const loadEvent = (eventId) => async (dispatch) => {
@@ -101,7 +102,7 @@ export const loadEvent = (eventId) => async (dispatch) => {
 
         dispatch(getOneEvent(data))
     }
-    return res
+    return data
 }
 
 export const requestNewEvent = (event, groupId) => async (dispatch) => {
@@ -117,7 +118,7 @@ export const requestNewEvent = (event, groupId) => async (dispatch) => {
         dispatch(createEvent(data))
 
 
-    return res
+    return data
 }
 
 export const loadEvents = () => async (dispatch) => {
