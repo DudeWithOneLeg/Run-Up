@@ -461,6 +461,8 @@ router.post('/:groupId/events', [venueExists, eventDateBool, validateEvent, grou
 
     req.body.groupId = req.params.groupId
 
+    console.log(req.body)
+
     let event = await Event.create(req.body)
 
     event = event.toJSON()
@@ -474,7 +476,7 @@ router.post('/:groupId/events', [venueExists, eventDateBool, validateEvent, grou
     delete event.createdAt
     delete event.updatedAt
 
-    console.log('EVENT HOSTT=======================================', host)
+    console.log()
 
 
     return res.json(event)

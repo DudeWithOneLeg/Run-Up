@@ -281,19 +281,7 @@ router.get('/', [queryValidator], async (req, res) => {
         attributes: ['id', 'groupId', 'venueId', 'name', 'type', 'startDate', 'endDate', 'description']
     }
 
-    if (!req.query.page) {
-        req.query.page = 1
-    }
-    else if (req.query.page > 10) {
-        req.query.page = 10
-    }
 
-    if (!req.query.size) {
-        req.query.size = 20
-    }
-    else if (req.query.size > 20) {
-        req.query.size = 20
-    }
 
     if (req.query.name) {
         console.log(req.query)
@@ -317,8 +305,7 @@ router.get('/', [queryValidator], async (req, res) => {
         options.where.startDate = req.query.startDate
     }
 
-    options.limit = req.query.size
-    options.offset = (req.query.page - 1) * req.query.size
+   
 
     const events = await Event.findAll(options)
 
@@ -361,7 +348,7 @@ router.get('/', [queryValidator], async (req, res) => {
         event.numAttending = numAttending
         events[index] = event
     }
-
+console.log(events)
     res.json(events)
 })
 

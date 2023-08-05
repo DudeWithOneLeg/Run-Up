@@ -65,16 +65,16 @@ export default function GroupForm() {
             console.log('NEW GROUP',newGroup)
 
         }).then(() => {
-            if (!groupState.id) return
+            if (!newGroup.id) return
             const image = {
             url: imgUrl,
             preview: true
         }
 
 
-            const id = groupState.id
+            const id = newGroup.id
             dispatch(groupActions.postImage(id, image))
-            history.push(`/groups/${groupState.id}`)
+            history.push(`/groups/${newGroup.id}`)
         })
 
 
