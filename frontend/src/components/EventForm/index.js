@@ -32,7 +32,6 @@ export default function EventForm() {
     const [address, setAddress] = useState('Address')
     const [city, setCity] = useState('City')
     const [state, setState] = useState('State')
-    const [showVenue, setShowVenue] = useState(false)
     const [position, setPosition] = useState({
         lat: 40.299493,
         lng: -101.950516
@@ -74,7 +73,9 @@ export default function EventForm() {
 
 
     //     }
-    // }, [newEvent, dispatch, history, imgUrl])
+    // },[newEvent])
+
+
 
     const handleSumbit = (e) => {
 
@@ -103,11 +104,15 @@ export default function EventForm() {
             dispatch(placeActions.sendVenue({
                 groupId: params.groupId, address, city, state, lat, lng
             }, params.groupId))
+            console.log(venue)
         }
 
 
-        const event = { name, price, description: about, type: onlineOrInperson, private: publicOrPrivate, startDate, endDate, capacity, venueId: venue.id }
-        console.log(event)
+        const event = { name, price, description: about, type: onlineOrInperson, private: publicOrPrivate, startDate, endDate, capacity }
+        if (venue && venue.id) {
+            console.log('yo')
+            event.venueId = venue.id
+        }
         dispatch(eventActions.requestNewEvent(event, params.groupId)).catch(async (res) => {
             const data = await res.json()
             if (data && data.errors) {
@@ -115,19 +120,24 @@ export default function EventForm() {
                 return setErrors(data.errors)
             }
         })
-
-        const image = {
-            url: imgUrl,
-            preview: true
-        }
-
-        dispatch(eventActions.postEventImg(newEvent.id, image)).catch(async (res) => {
-            const data = await res.json()
-            if (data.errors || data.message) {
-                console.log(data)
+        if (newEvent) {
+            const image = {
+                url: imgUrl,
+                preview: true
             }
-        })
-        history.push(`/events/${newEvent.id}`)
+            dispatch(eventActions.loadEvents()).then(() => {
+                dispatch(eventActions.postEventImg(newEvent.id, image)).catch(async (res) => {
+                    const data = await res.json()
+                    if (data.errors || data.message) {
+                        console.log(data)
+                    }
+                })
+            }).then(() => {
+                history.push(`/events/${newEvent.id}`)
+            })
+
+
+        }
         console.log("NEW EVENT", newEvent)
 
     }

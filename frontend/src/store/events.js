@@ -115,7 +115,7 @@ export const requestNewEvent = (event, groupId) => async (dispatch) => {
     }
 
         dispatch(createEvent(data))
-    
+
 
     return res
 }
@@ -129,6 +129,7 @@ export const loadEvents = () => async (dispatch) => {
         data.map((event) => {
             return normal[event.id] = event
         })
+        console.log(normal)
         dispatch(getAllEvents(normal));
     }
 
@@ -138,6 +139,7 @@ export const loadEvents = () => async (dispatch) => {
 
 export const loadGroupEvents = (id) => async (dispatch) => {
     const res = await csrfFetch(`/api/groups/${id}/events`)
+
     const data = await res.json()
     if (res.ok) {
         let normal = {}
@@ -145,6 +147,7 @@ export const loadGroupEvents = (id) => async (dispatch) => {
             return normal[event.id] = event
         })
         dispatch(getGroupEvents(normal))
+        console.log(normal)
     }
     return data
 }
