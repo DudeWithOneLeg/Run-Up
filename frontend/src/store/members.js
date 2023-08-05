@@ -40,7 +40,7 @@ export const requestMembership = () => async (dispatch) => {
     const data = await res.json()
     if (data && data.errors) return console.log(data)
     dispatch(requestMember(data))
-    return res
+    return data
 }
 
 export const deleteMember = (groupId, memberId) => async(dispatch) => {
@@ -55,7 +55,7 @@ export const deleteMember = (groupId, memberId) => async(dispatch) => {
     if (data.message = "Successfully deleted membership from group") {
         dispatch(removeMember(memberId))
     }
-    return res
+    return data
 }
 
 export const getAllMembers = (groupId) => async (dispatch) => {
@@ -65,7 +65,7 @@ export const getAllMembers = (groupId) => async (dispatch) => {
         return console.log(data)
     }
     dispatch(loadMembers(data))
-    return res
+    return data
 
 }
 
@@ -80,7 +80,7 @@ export const sendUpdate = (member, groupId) => async (dispatch) => {
     }
     dispatch(updateMember(data))
     console.log(data)
-    return res
+    return data
 }
 
 

@@ -32,7 +32,7 @@ export const getGroupVenues = (groupId) => async (dispatch) => {
         return console.log(data)
     }
     dispatch(groupVenues(data.Venues))
-    return res
+    return data.Venues
 }
 
 export const sendVenue = (venue, groupId) => async (dispatch) => {
@@ -45,6 +45,7 @@ export const sendVenue = (venue, groupId) => async (dispatch) => {
         return console.log(data.errors)
     }
     dispatch(createVenue(data))
+    return data
 }
 
 export const fetchDetails = (placeId) => async (dispatch)  =>{

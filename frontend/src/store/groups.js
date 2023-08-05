@@ -53,9 +53,10 @@ export const removeGroup = (groupId) => async (dispatch) => {
     const res = await csrfFetch(`/api/groups/${groupId}`, {
         method: "DELETE"
     })
-    
+    const data = await res.json()
+
     dispatch(deleteGroup(groupId))
-    return res
+    return data
 }
 
 export const updateGroupDetails = (group, groupId) => async (dispatch) => {
@@ -68,7 +69,7 @@ export const updateGroupDetails = (group, groupId) => async (dispatch) => {
         return console.log(data.errors)
     }
     dispatch(updateGroup(data))
-    return res
+    return data
 }
 
 export const postImage = (groupId, image) => async (dispatch) => {
@@ -81,7 +82,7 @@ export const postImage = (groupId, image) => async (dispatch) => {
         return console.log(data.errors)
     }
     dispatch(createGroupImage(data))
-    return res
+    return data
 }
 
 export const requestNewGroup = (group) => async (dispatch) => {
@@ -96,7 +97,7 @@ export const requestNewGroup = (group) => async (dispatch) => {
     }
         dispatch(createGroup(data))
 
-    return res
+    return data
 }
 
 export const loadGroups = () => async (dispatch) => {
@@ -127,7 +128,7 @@ export const loadGroup = (id) => async (dispatch) => {
     }
     dispatch(getOneGroup(data))
 
-    return res
+    return data
 }
 const initialState = {}
 
