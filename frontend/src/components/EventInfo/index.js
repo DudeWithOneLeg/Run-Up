@@ -91,6 +91,10 @@ console.log('eveeennttt',event)
 
     return (
         <div id='event-component'>
+            <script
+                defer
+                src={`https://maps.googleapis.com/maps/api/js?key=${process.env.REACT_APP_GOOGLE_API_KEY}&libraries=places`}
+            ></script>
             <div id='event-info'>
                 <p className="back-button">&lt;
                     <Link to='/events/1/10'>
