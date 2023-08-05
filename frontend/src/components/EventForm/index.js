@@ -43,7 +43,7 @@ export default function EventForm() {
     }, [dispatch, params.groupId])
 
     const group = useSelector(state => state.group.group)
-    
+
 
 
     useEffect(() => {
@@ -84,8 +84,6 @@ export default function EventForm() {
             }, params.groupId))
 
             venue = await newVenue
-            console.log('RES', venue)
-            console.log(venue)
         }
 
 
@@ -96,7 +94,6 @@ export default function EventForm() {
 
         const newEvent = dispatch(eventActions.requestNewEvent(event, params.groupId))
         const requestedEvent = await newEvent
-        console.log(requestedEvent)
 
         if (requestedEvent) {
             const image = {
@@ -116,7 +113,6 @@ export default function EventForm() {
 
 
         }
-        // console.log("NEW EVENT", newEvent)
 
     }
     if (!group) {
