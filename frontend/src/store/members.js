@@ -64,8 +64,12 @@ export const getAllMembers = (groupId) => async (dispatch) => {
     if (data && data.errors) {
         return console.log(data)
     }
-    dispatch(loadMembers(data))
-    return data
+    const newData = {}
+    data["Members"].map(member => {
+        return newData[member.id] = member
+    })
+    dispatch(loadMembers(newData))
+    return newData
 
 }
 
@@ -79,7 +83,6 @@ export const sendUpdate = (member, groupId) => async (dispatch) => {
         return console.log(data.errors)
     }
     dispatch(updateMember(data))
-    console.log(data)
     return data
 }
 
@@ -87,15 +90,11 @@ export const sendUpdate = (member, groupId) => async (dispatch) => {
 const initialState = {}
 
 export const memberReducer = (state = initialState, action) => {
-    console.log(state)
     let newState
     switch (action.type) {
         case GET_ALL_MEMBERS:
-            const newData = {}
-            action.payload["Members"].map(member => {
-                return newData[member.id] = member
-            })
-            newState = {...state, members: newData}
+
+            newState = {...state, members: action.payload}
             return newState
         case UPDATE_MEMBERSHIP:
             const members = {...state.members} //normalized obj

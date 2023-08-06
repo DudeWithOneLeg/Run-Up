@@ -19,7 +19,7 @@ export default function EventForm() {
 
     const [name, setName] = useState("")
     const [price, setPrice] = useState(0)
-    const [about, setAbout] = useState("")
+    const [description, setdescription] = useState("")
     const [onlineOrInperson, setOnlineOrInperson] = useState("")
     const [publicOrPrivate, setPublicOrPrivate] = useState("")
     const [startDate, setStartDate] = useState("")
@@ -47,9 +47,11 @@ export default function EventForm() {
 
 
     useEffect(() => {
-        console.log({ name, price, about, onlineOrInperson, publicOrPrivate, capacity, startDate, endDate })
+        console.log({ name, price, description, onlineOrInperson, publicOrPrivate, capacity, startDate, endDate })
+        if (description.length < 30 && description !== '') setErrors({description: "Description must be at least 30 characters long"})
+        else setErrors({})
         console.log("Errors:", errors)
-    }, [name, price, about, onlineOrInperson, publicOrPrivate, startDate, endDate, capacity, errors])
+    }, [name, price, description, onlineOrInperson, publicOrPrivate, startDate, endDate, capacity])
 
 
 
@@ -58,6 +60,7 @@ export default function EventForm() {
     const handleSumbit = async (e) => {
 
         e.preventDefault()
+        if (Object.values(errors).length) return
 
         const { lat, lng } = position
         console.log({
@@ -87,15 +90,16 @@ export default function EventForm() {
         }
 
 
-        const event = { name, price, description: about, type: onlineOrInperson, private: publicOrPrivate, startDate, endDate, capacity }
+        const event = { name, price, description: description, type: onlineOrInperson, private: publicOrPrivate, startDate, endDate, capacity }
         if (venue && venue.id) {
             event.venueId = venue.id
         }
+        let requestedEvent
 
-        const newEvent = dispatch(eventActions.requestNewEvent(event, params.groupId))
-        const requestedEvent = await newEvent
+        dispatch(eventActions.createNewEvent(event, params.groupId)).then(async (res) => {
 
-        if (requestedEvent) {
+            requestedEvent = res;
+            console.log(requestedEvent);
             const image = {
                 url: imgUrl,
                 preview: true
@@ -110,9 +114,15 @@ export default function EventForm() {
             }).then(() => {
                 history.push(`/events/${requestedEvent.id}`)
             })
+        })
+        .catch(async (res) => {
+            const data = await res.json();
+            if (data && data.errors) {
+                setErrors(data.errors);
+            }
+        });
 
 
-        }
 
     }
     if (!group) {
@@ -264,7 +274,7 @@ export default function EventForm() {
 
                             if (!extensions.includes(urlExtension)) {
                                 console.log(!extensions.includes(urlExtension))
-                                return setErrors({ imgUrl: "Image URL must end in .png, .jpg, or .jpeg" })
+                                setErrors({ imgUrl: "Image URL must end in .png, .jpg, or .jpeg" })
                             }
                             else {
                                 setErrors({})
@@ -275,6 +285,12 @@ export default function EventForm() {
                     {
                         errors.imgUrl && <p className='errors'>{errors.imgUrl}</p>
                     }
+                {
+                    imgUrl && <>
+                    <p>Preview: </p>
+                    <img id='preview' src={imgUrl}/>
+                    </>
+                }
                 </div>
 
 
@@ -285,7 +301,7 @@ export default function EventForm() {
                     className='event-input'
                     id='event-form-about'
                     placeholder='Please include art least 30 characters'
-                    onChange={(e) => setAbout(e.target.value)}
+                    onChange={(e) => setdescription(e.target.value)}
                 />
                 {
                     errors.description && <p className="errors">{errors.description}</p>

@@ -7,52 +7,70 @@ const GET_ONE_EVENT = 'events/getOneEvent'
 const GET_EVENT_HOST = 'events/getHost'
 const DELETE_EVENT = 'event/delete'
 const POST_EVENT_IMAGE = 'event/addEventImage'
+const UPDATE_EVENT = 'event/update'
 
-export const addEventImg = () => {
+const updateEvent = (event) => {
+    return {
+        type: UPDATE_EVENT,
+        payload: event
+    }
+}
+
+const addEventImg = () => {
     return {
         type: POST_EVENT_IMAGE,
     }
 }
 
-export const deleteEvent = () => {
+const deleteEvent = () => {
     return {
         type: DELETE_EVENT
     }
 }
 
-export const getHost = (attendances) => {
+const getHost = (attendances) => {
     return {
         type: GET_EVENT_HOST,
         payload: attendances
     }
 }
 
-export const getOneEvent = (event) => {
+const getOneEvent = (event) => {
     return {
         type: GET_ONE_EVENT,
         payload: event
     }
 }
 
-export const createEvent = (event) => {
+const createEvent = (event) => {
     return {
         type: CREATE_EVENT,
         payload: event
     }
 }
 
-export const getAllEvents = (events) => {
+const getAllEvents = (events) => {
     return {
         type: GET_ALL_EVENTS,
         payload: events
     }
 }
 
-export const getGroupEvents = (events) => {
+const getGroupEvents = (events) => {
     return {
         type: GET_GROUP_EVENTS,
         payload: events
     }
+}
+
+export const createNewEvent = (event, eventId) => async (dispatch) => {
+    const res = await csrfFetch(`/api/events/${eventId}`, {
+        method: 'PUT',
+        body: JSON.stringify(event)
+    })
+    const data = await res.json()
+    dispatch(updateEvent(data))
+    return data
 }
 
 export const postEventImg = (eventId, image) => async (dispatch) => {
@@ -105,20 +123,20 @@ export const loadEvent = (eventId) => async (dispatch) => {
     return data
 }
 
-export const requestNewEvent = (event, groupId) => async (dispatch) => {
-    const res = await csrfFetch(`/api/groups/${groupId}/events`, {
-        method: 'POST',
+export const requestUpdateEvent = (event, eventId) => async (dispatch) => {
+    const res = await csrfFetch(`/api/events/${eventId}`, {
+        method: 'PUT',
         body: JSON.stringify(event)
     })
+console.log(res)
     const data = await res.json()
-    if (data.errors) {
-        return console.log(data.errors)
-    }
+    console.log(data)
+    if (data && data.errors) return console.log('yo')
+
 
         dispatch(createEvent(data))
 
-
-    return data
+    return res
 }
 
 export const loadEvents = () => async (dispatch) => {
@@ -130,7 +148,6 @@ export const loadEvents = () => async (dispatch) => {
         data.map((event) => {
             return normal[event.id] = event
         })
-        console.log(normal)
         dispatch(getAllEvents(normal));
     }
 
