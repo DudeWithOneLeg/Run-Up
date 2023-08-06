@@ -81,3 +81,8 @@ form > .event-div {
 #event-form-about {
     height: 100px;
 }
+
+#preview {
+    width: 300px;
+    border-radius: 10px;
+}

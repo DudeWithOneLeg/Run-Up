@@ -5,10 +5,9 @@ import { Link, useParams, useHistory } from "react-router-dom"
 import OpenModalButton from "../OpenModalButton"
 import DeleteEventModal from "../DeleteEventModal"
 import * as groupActions from '../../store/groups'
+import * as memberActions from '../../store/members'
 import Venue from "../Venue"
 import './index.css'
-
-
 
 export default function EventInfo() {
     const dispatch = useDispatch()
@@ -16,28 +15,48 @@ export default function EventInfo() {
     const history = useHistory()
     const [event, setEvent] = useState({})
     const [attendees, setAttendees] = useState({})
-const user = useSelector(state => state.session.user)
-
-
-useEffect(() => {
-
-
-        fetchData()
-    },[dispatch, params.id])
+    const [members, setMembers] = useState({})
+    const [group, setGroup] = useState({})
+    const user = useSelector(state => state.session.user)
 
     const fetchData = async () => {
-        console.log('yoooo')
-    const eventData = dispatch(eventActions.loadEvent(params.eventId))
-     const newEvent = await eventData
-    if (newEvent && newEvent.errors) return console.log(newEvent)
-    setEvent(newEvent)
+        dispatch(eventActions.loadEvent(params.eventId)).then(data => {
 
-    const attendanceData = dispatch(eventActions.getAttendances(params.eventId))
-     const newAttendees = await attendanceData
-     console.log('Attendeeesss', attendees)
-    if (newAttendees && newAttendees.errors) return console.log(newAttendees.errors)
-    setAttendees(newAttendees)
+            if (data && data.errors) return console.log(data);
+            setEvent(data)
+        })
+        dispatch(eventActions.getAttendances(params.eventId)).then(data => {
+
+            if (data && data.errors) return console.log(data);
+            setAttendees(data)
+        })
     }
+
+    useEffect(() => {
+        fetchData()
+    },[])
+
+    useEffect(() => {
+        if (event.groupId) {
+
+            dispatch(memberActions.getAllMembers(event.groupId)).then(data => {
+
+                if (data && data.errors) return console.log(data);
+
+                setMembers(data)
+            })
+
+
+            dispatch(groupActions.loadGroup(event.groupId)).then(data => {
+                if (data && data.errors) return console.log(data);
+
+                setGroup(data)
+            })
+        }
+
+    },[event])
+
+
 
     const containerStyle = {
         width: '100%',
@@ -46,47 +65,40 @@ useEffect(() => {
         marginBottom: '0px',
         zIndex: '0'
     }
-
-
-
-    if (!event.id || !Object.values(attendees).length) {
+    if (!event.id || !group.id) {
         return null
     }
 
-
-console.log('eveeennttt',event)
-
-
     event.startDate = event.startDate.split('T').join(' · ').split(':00.000Z').join('')
 
-          let hour = event.startDate.split(' · ')[1].split(':')[0]
+    let hour = event.startDate.split(' · ')[1].split(':')[0]
 
-          if (hour > 12 && !event.startDate.includes('PM') && !event.startDate.includes('AM')) {
+    if (hour > 12 && !event.startDate.includes('PM') && !event.startDate.includes('AM')) {
 
-            const oldHour = hour
-            hour -= 12
-            event.startDate = event.startDate.replace(oldHour, hour)
-            event.startDate += ' PM'
-          }
-          else if (hour < 12 && !event.startDate.includes('AM') && !event.startDate.includes('PM')) {
+        const oldHour = hour
+        hour -= 12
+        event.startDate = event.startDate.replace(oldHour, hour)
+        event.startDate += ' PM'
+    }
+    else if (hour < 12 && !event.startDate.includes('AM') && !event.startDate.includes('PM')) {
 
-            event.startDate += ' AM'
-          }
-          event.endDate = event.endDate.split('T').join(' · ').split(':00.000Z').join('')
+        event.startDate += ' AM'
+    }
+    event.endDate = event.endDate.split('T').join(' · ').split(':00.000Z').join('')
 
-          let hour2 = event.endDate.split(' · ')[1].split(':')[0]
+    let hour2 = event.endDate.split(' · ')[1].split(':')[0]
 
-          if (hour2 > 12 && !event.endDate.includes('PM') && !event.endDate.includes('AM')) {
+    if (hour2 > 12 && !event.endDate.includes('PM') && !event.endDate.includes('AM')) {
 
-            const oldHour = hour2
-            hour2 -= 12
-            event.endDate = event.endDate.replace(oldHour, hour2)
-            event.endDate += ' PM'
-          }
-          else if (hour2 < 12 && !event.endDate.includes('AM') && !event.endDate.includes('PM')) {
+        const oldHour = hour2
+        hour2 -= 12
+        event.endDate = event.endDate.replace(oldHour, hour2)
+        event.endDate += ' PM'
+    }
+    else if (hour2 < 12 && !event.endDate.includes('AM') && !event.endDate.includes('PM')) {
 
-            event.endDate += ' AM'
-          }
+        event.endDate += ' AM'
+    }
 
 
     return (
@@ -100,7 +112,7 @@ console.log('eveeennttt',event)
                     <Link to='/events/1/10'>
                         Events
                     </Link>
-                    </p>
+                </p>
                 <h1>{event.name}</h1>
                 <p>Hosted by {Object.values(attendees)[0].firstName} {Object.values(attendees)[0].lastName}</p>
             </div>
@@ -113,32 +125,32 @@ console.log('eveeennttt',event)
                         </div>
                         <div id='event-comp-top-info'>
                             <div className='time-price'>
-                                <img src='/images/clock.svg' alt='clock'/>
+                                <img src='/images/clock.svg' alt='clock' />
                                 <div>
-                                  <h3>START DATE {event.startDate}</h3>
-                                  <h3>END DATE {event.endDate}</h3>
+                                    <h3>START DATE {event.startDate}</h3>
+                                    <h3>END DATE {event.endDate}</h3>
                                 </div>
 
                             </div>
                             <div className='time-price'>
-                                <img src='/images/money.svg' alt='dollar sign'/>
+                                <img src='/images/money.svg' alt='dollar sign' />
                                 {event.price == 0 && <h3>FREE</h3>}
                                 {event.price > 0 && <h3>{event.price}</h3>}
                             </div>
                             <div className='time-price'>
-                                <img src='/images/map.svg' alt='map-pin'/>
+                                <img src='/images/map.svg' alt='map-pin' />
                                 <h3>{event.type}</h3>
                             </div>
 
 
 
 
-                            {!user && <div>
+                            {user && members && members[user.id] && (members[user.id].Membership.status === 'co-host' || group.organizerId === user.id) && <div>
                                 <button className='group-buttons'
-                                onClick={() => {
-                                    dispatch(groupActions.loadGroup(event.groupId)).then(() => history.push(`/events/${event.id}/edit`))
+                                    onClick={() => {
+                                        dispatch(groupActions.loadGroup(event.groupId)).then(() => history.push(`/events/${event.id}/edit`))
 
-                                }}
+                                    }}
                                 >Update</button>
                                 <OpenModalButton
                                     id='login'
@@ -155,19 +167,19 @@ console.log('eveeennttt',event)
                 <p>{event.description}</p>
             </div>
             {
-                event.Venue && <Venue address={event.Venue.address} city={event.Venue.city} state={event.Venue.state} coord={{lat: Number(event.Venue.lat), lng: Number(event.Venue.lng)}} stylingId={'event-venue-component'} containerStyle={containerStyle} mapOptions={{
+                event.Venue && <Venue address={event.Venue.address} city={event.Venue.city} state={event.Venue.state} coord={{ lat: Number(event.Venue.lat), lng: Number(event.Venue.lng) }} stylingId={'event-venue-component'} containerStyle={containerStyle} mapOptions={{
 
                     mapTypeId: 'hybrid',
                     scrollwheel: false,
                     draggable: false,
-                        mapTypeControlOptions: {
-                            style: window.google.maps.MapTypeControlStyle.HORIZONTAL_BAR,
-                            position: window.google.maps.ControlPosition.LEFT_TOP,
-                        },
-                        fullscreenControlOptions: {
-                            position: window.google.maps.ControlPosition.RIGHT_TOP,
-                        }
-                    }}/>
+                    mapTypeControlOptions: {
+                        style: window.google.maps.MapTypeControlStyle.HORIZONTAL_BAR,
+                        position: window.google.maps.ControlPosition.LEFT_TOP,
+                    },
+                    fullscreenControlOptions: {
+                        position: window.google.maps.ControlPosition.RIGHT_TOP,
+                    }
+                }} />
             }
         </div>
     )

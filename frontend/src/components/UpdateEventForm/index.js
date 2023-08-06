@@ -8,95 +8,96 @@ import './index.css'
 export default function UpdateEventForm() {
     const history = useHistory()
     const user = useSelector(state => state.session.user)
+    const params = useParams()
+    const dispatch = useDispatch()
 
     if (!user) {
         history.push('/')
     }
 
-    const [name, setName] = useState("")
-    const [price, setPrice] = useState(0)
-    const [about, setAbout] = useState("")
-    const [onlineOrInperson, setOnlineOrInperson] = useState("")
-    const [publicOrPrivate, setPublicOrPrivate] = useState("")
-    const [startDate, setStartDate] = useState("")
-    const [endDate, setEndDate] = useState("")
-    const [errors, setErrors] = useState({})
-    const [capacity, setCapacity] = useState(0)
+    const [event, setEvent] = useState({})
     // const [imgUrl, setImgUrl] = useState('')
 
-    const params = useParams()
-    const dispatch = useDispatch()
-
-    const event = useSelector(state => state.event.eventInfo)
-    const oldEvent = { ...event }
     const oldGroup = useSelector(state => state.group.group)
     const group = { ...oldGroup }
 
     useEffect(() => {
-        dispatch(eventActions.loadEvent(params.eventId));
-        if (oldEvent.groupId) {
-            console.log('IS THIS THE LINE?')
-            dispatch(groupActions.loadGroup(oldEvent.groupId))
+        const fetchData = async () => {
+            const eventData = dispatch(eventActions.loadEvent(params.eventId));
+            const eventResponse = await eventData
+            if (eventResponse && eventResponse.errors) return console.log(eventResponse.errors)
+            setEvent(eventResponse)
+        if (event.groupId) {
+            dispatch(groupActions.loadGroup(event.groupId))
         }
 
-    }, [dispatch, oldEvent.groupId, params.eventId]);
+    }
+    fetchData()
+    setName(event.name)
+    setAbout(event.description)
+    setPrice(event.price)
+    setOnlineOrInperson(event.type)
+    setPublicOrPrivate(event.private ? 'Private' : 'Public')
+    setStartDate(event.startDate)
+    setEndDate(event.endDate)
+    setCapacity(event.capacity)
+    console.log('Evennntt', event)
+
+}, [dispatch, event.groupId, params.eventId]);
+
+
+const [name, setName] = useState(event.name ? event.name : '')
+const [price, setPrice] = useState(event.price ? event.price : '')
+const [about, setAbout] = useState(event.description ? event.description : '')
+const [onlineOrInperson, setOnlineOrInperson] = useState(event.type ? event.type : '')
+const [publicOrPrivate, setPublicOrPrivate] = useState(event.private)
+const [startDate, setStartDate] = useState(event.startDate ? event.startDate : '')
+const [endDate, setEndDate] = useState(event.endDate ? event.endDate : '')
+const [errors, setErrors] = useState({})
+const [capacity, setCapacity] = useState(event.capacity ? event.capacity : '')
 
     useEffect(() => {
-        console.log({ name, price, about, onlineOrInperson, publicOrPrivate, startDate, endDate })
+        console.log({ name, price, about, onlineOrInperson, capacity, publicOrPrivate, startDate, endDate })
         console.log("Errors:", errors)
-    }, [name, price, about, onlineOrInperson, publicOrPrivate, startDate, endDate, errors])
+    }, [name, price, about, onlineOrInperson, publicOrPrivate, startDate, endDate, capacity, errors])
 
 
 
-    const handleSumbit = (e) => {
+
+
+    const handleSumbit = async (e) => {
+
+
         e.preventDefault()
 
-        const newEvent = {}
+        const newEvent = {name,price, description: about, type: onlineOrInperson, capacity, startDate, endDate, venueId: event.venueId }
 
-        if (name) {
-            newEvent.name = name
-        }
-        if (price) {
-            newEvent.price = price
-        }
-        if (about) {
-            newEvent.description = about
-        }
-        if (onlineOrInperson) {
-            newEvent.onlineOrInperson = onlineOrInperson
-        }
-        if (publicOrPrivate) {
-            newEvent.publicOrPrivate = publicOrPrivate
-        }
-        if (capacity) {
-            newEvent.capacity = capacity
-        }
-        if (startDate) {
-            newEvent.startDate = startDate
-        }
-        if (endDate) {
-            newEvent.endDate = endDate
-        }
-
-        console.log(newEvent)
-        dispatch(eventActions.requestNewEvent(newEvent, oldEvent.groupId)).catch(async (res) => {
-            const data = await res.json()
-            if (data && data.errors) {
-                console.log(data)
-                return setErrors(data.errors)
-            }
-        })
+        console.log('new event',newEvent)
+        dispatch(eventActions.requestUpdateEvent(newEvent, event.id)).then(() => {
+            
         dispatch(eventActions.loadEvents())
 
-        history.push(`/events/${oldEvent.id}`)
+        history.push(`/events/${event.id}`)
+
+        }).catch(async (res) => {
+            const data = await res.json()
+            if (data && data.errors) {
+                console.log(data.errors)
+                return setErrors({...data.errors})
+
+            }
+        })
+
+
+
     }
 
-    if (!oldEvent || !group) {
+    if (!Object.values(event).length || !Object.values(group).length) {
         return null
     }
-    if (oldEvent.id) {
-        oldEvent.startDate = oldEvent.startDate.split(':00.000Z').join('')
-        oldEvent.endDate = oldEvent.endDate.split(':00.000Z').join('')
+    if (event.id) {
+        event.startDate = event.startDate.split(':00.000Z').join('')
+        event.endDate = event.endDate.split(':00.000Z').join('')
     }
 
     return (
@@ -115,7 +116,7 @@ export default function UpdateEventForm() {
                     </p>
                     <input
                         id='event-name'
-                        defaultValue={oldEvent.name}
+                        defaultValue={name}
                         className='event-input'
                         required
                         onChange={(e) => setName(e.target.value)}
@@ -134,9 +135,10 @@ export default function UpdateEventForm() {
                     <select
                         className="update-event-select"
                         onChange={(e) => setOnlineOrInperson(e.target.value)}
+                        defaultValue={onlineOrInperson}
                     >
-                        <option selected={oldEvent.type === 'In person'}>In person</option>
-                        <option selected={oldEvent.type === 'Online'}>Online</option>
+                        <option>In person</option>
+                        <option>Online</option>
                     </select>
 
                     {
@@ -153,8 +155,8 @@ export default function UpdateEventForm() {
                             if (e.target.value === 'Public') setPublicOrPrivate(false)
                         }}
                     >
-                        <option selected={oldEvent.private === false}>Public</option>
-                        <option selected={oldEvent.private === false}>Private</option>
+                        <option selected={!publicOrPrivate}>Public</option>
+                        <option selected={publicOrPrivate}>Private</option>
                     </select>
                     {
                         errors.private && <p className="errors">{errors.private}</p>
@@ -163,7 +165,7 @@ export default function UpdateEventForm() {
                     <input
                         id='capacity'
                         className='event-input'
-                        defaultValue={oldEvent.capacity}
+                        defaultValue={capacity}
                         onChange={(e) => setCapacity(e.target.value)}
                     >
                     </input>
@@ -172,7 +174,7 @@ export default function UpdateEventForm() {
                     </p>
                     <div>
                         <input
-                            defaultValue={oldEvent.price}
+                            defaultValue={price}
                             className='event-input'
                             onClick={(e) => e.preventDefault()}
                             placeholder="$"
@@ -194,7 +196,7 @@ export default function UpdateEventForm() {
                         When does your event start?
                     </p>
                     <input
-                        defaultValue={oldEvent.startDate}
+                        value={startDate}
                         className="update-calendar event-input"
                         onChange={(e) => setStartDate(e.target.value)}
                         type='datetime-local' />
@@ -205,7 +207,7 @@ export default function UpdateEventForm() {
                         When does your event end?
                     </p>
                     <input
-                        value={oldEvent.endDate}
+                        value={endDate}
                         className="update-calendar event-input"
                         onChange={(e) => setEndDate(e.target.value)}
                         type='datetime-local'
@@ -251,7 +253,7 @@ export default function UpdateEventForm() {
                         Please describe your event:
                     </p>
                     <textarea
-                        defaultValue={oldEvent.description}
+                        defaultValue={about}
                         id='event-form-textarea'
                         className='event-input'
                         placeholder='Please include art least 30 characters'
@@ -265,7 +267,6 @@ export default function UpdateEventForm() {
                 <button
                     id='event-button'
                     type='submit'
-                    disabled={Object.values(errors).length}
                 >Update Event</button>
             </form>
         </div>

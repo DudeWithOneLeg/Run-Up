@@ -305,7 +305,7 @@ router.get('/', [queryValidator], async (req, res) => {
         options.where.startDate = req.query.startDate
     }
 
-   
+
 
     const events = await Event.findAll(options)
 
@@ -356,6 +356,8 @@ router.get('/:eventId', eventExists, async (req, res) => {
     if (req.err) {
         return res.json(req.err)
     }
+
+    console.log()
 
     const attend = await Attendance.findOne({
         where: {
@@ -428,14 +430,15 @@ router.put('/:eventId', [eventDateBool, validateEvent, requireAuth], async (req,
         }
     })
 
-    const host = await Group.findByPk(event.groupId)
+    const group = await Group.findByPk(event.groupId)
 
-    if (!member && host.organizerId !== req.user.id) {
-        res.status(404)
+    if (!member && group.organizerId !== req.user.id) {
+        res.status(403)
         return res.json({
             message: "Forbidden"
         })
     }
+if (req.body.venueId) {
 
     const venue = await Venue.findByPk(req.body.venueId)
 
@@ -445,10 +448,13 @@ router.put('/:eventId', [eventDateBool, validateEvent, requireAuth], async (req,
             message: "Venue couldn't be found"
           })
     }
+}
+console.log('yo')
 
 
     let newEvent = event.set(req.body)
     newEvent = newEvent.toJSON()
+    console.log(newEvent)
 
     await event.save()
 
