@@ -10,12 +10,16 @@ import './index.css'
 export default function EventForm() {
     const history = useHistory()
     const user = useSelector(state => state.session.user)
+    const params = useParams()
+    const dispatch = useDispatch()
+    const group = useSelector(state => state.group.group)
+
+    useEffect(() => {
+        dispatch(groupActions.loadGroup(params.groupId))
+    }, [dispatch, params.groupId])
 
 
 
-    if (!user) {
-        history.push('/')
-    }
 
     const [name, setName] = useState("")
     const [price, setPrice] = useState(0)
@@ -35,14 +39,7 @@ export default function EventForm() {
         lng: -101.950516
     })
 
-    const params = useParams()
-    const dispatch = useDispatch()
 
-    useEffect(() => {
-        dispatch(groupActions.loadGroup(params.groupId))
-    }, [dispatch, params.groupId])
-
-    const group = useSelector(state => state.group.group)
 
 
 
@@ -50,20 +47,20 @@ export default function EventForm() {
         console.log({ name, price, description, onlineOrInperson, publicOrPrivate, capacity, startDate, endDate })
         if (description.length < 30 && description !== '') setErrors({description: "Description must be at least 30 characters long"})
         else setErrors({})
-        console.log("Errors:", errors)
-    }, [name, price, description, onlineOrInperson, publicOrPrivate, startDate, endDate, capacity])
+    console.log("Errors:", errors)
+}, [name, price, description, onlineOrInperson, publicOrPrivate, startDate, endDate, capacity])
 
 
 
 
 
-    const handleSumbit = async (e) => {
+const handleSumbit = async (e) => {
 
-        e.preventDefault()
-        if (Object.values(errors).length) return
+    e.preventDefault()
+    if (Object.values(errors).length) return
 
-        const { lat, lng } = position
-        console.log({
+    const { lat, lng } = position
+    console.log({
             groupId: Number(params.groupId), address, city, state, lat, lng
         })
 
@@ -106,8 +103,8 @@ export default function EventForm() {
             }
             dispatch(eventActions.loadEvents()).then(() => {
                 dispatch(eventActions.postEventImg(requestedEvent.id, image)).then(() => {
-                history.push(`/events/${requestedEvent.id}`)
-            }).catch(async (res) => {
+                    history.push(`/events/${requestedEvent.id}`)
+                }).catch(async (res) => {
                     const data = await res.json()
                     if (data.errors || data.message) {
                         console.log(data)
@@ -128,6 +125,9 @@ export default function EventForm() {
     if (!group) {
         return null
     }
+    if (!user || user.id !== group.organizerId) {
+        history.push('/')
+    }
     return (
         <div className="event-form-container">
 
@@ -137,16 +137,17 @@ export default function EventForm() {
             <form
                 id='event-form'
                 onSubmit={handleSumbit}
-            >
+                >
                 <div className='event-div'>
                     <p>
                         What is the name of your event?
                     </p>
                     <input
                         className='event-input'
+                        placeholder='Event Name'
                         required
                         onChange={(e) => setName(e.target.value)}
-                    >
+                        >
                     </input>
                     {
 
@@ -161,7 +162,7 @@ export default function EventForm() {
                     <select
                         className="event-select-choose"
                         onChange={(e) => setOnlineOrInperson(e.target.value)}
-                    >
+                        >
                         <option disabled selected>	&#40;choose one	&#41;</option>
                         <option>In person</option>
                         <option>Online</option>
@@ -173,20 +174,20 @@ export default function EventForm() {
 
                     {
                         onlineOrInperson === 'In person' &&
-                            <VenueFormModal
-                    address={address}
-                    setAddress={setAddress}
-                    city={city}
-                    setCity={setCity}
-                    state={state}
-                    setState={setState}
+                        <VenueFormModal
+                        address={address}
+                        setAddress={setAddress}
+                        city={city}
+                        setCity={setCity}
+                        state={state}
+                        setState={setState}
                     position={position}
                     setPosition={setPosition}
                     errors={errors}
                     setErrors={setErrors}
-                />
+                    />
 
-                    }
+                }
 
                     <p>
                         Is this event private or public?
@@ -210,7 +211,7 @@ export default function EventForm() {
                         className="event-input"
                         id='event-capacity'
                         onChange={(e) => setCapacity(e.target.value)}
-                    >
+                        >
                     </input>
                     <p>
                         What is the price for your event?
