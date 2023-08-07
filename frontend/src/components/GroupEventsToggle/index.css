@@ -40,14 +40,14 @@
 .toggle-active {
     padding-top: 20px;
     margin-right: 5%;
-    color: green;
+    color: teal;
     text-decoration: underline;
     background-color: rgb(37, 37, 37);
 }
 
 .toggle:active {
     text-decoration: underline;
-    color: green;
+    color: teal;
     background-color: rgb(37, 37, 37);
 }
 
