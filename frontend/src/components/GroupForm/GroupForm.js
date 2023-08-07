@@ -57,16 +57,16 @@ export default function GroupForm() {
         dispatch(groupActions.requestNewGroup(group)).then(async(res) => {
             const data = await res
             console.log(data)
-            if (!newGroup.id) return
+            if (!data.id) return
             const image = {
             url: imgUrl,
             preview: true
         }
 
 
-            const id = newGroup.id
+            const id = data.id
             dispatch(groupActions.postImage(id, image))
-            history.push(`/groups/${newGroup.id}`)
+            history.push(`/groups/${data.id}`)
         }).catch(async (res) => {
 
             const data = await res.json()
