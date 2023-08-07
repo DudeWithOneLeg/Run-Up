@@ -105,14 +105,14 @@ export default function EventForm() {
                 preview: true
             }
             dispatch(eventActions.loadEvents()).then(() => {
-                dispatch(eventActions.postEventImg(requestedEvent.id, image)).catch(async (res) => {
+                dispatch(eventActions.postEventImg(requestedEvent.id, image)).then(() => {
+                history.push(`/events/${requestedEvent.id}`)
+            }).catch(async (res) => {
                     const data = await res.json()
                     if (data.errors || data.message) {
                         console.log(data)
                     }
                 })
-            }).then(() => {
-                history.push(`/events/${requestedEvent.id}`)
             })
         })
         .catch(async (res) => {
