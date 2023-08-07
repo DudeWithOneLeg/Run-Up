@@ -63,8 +63,8 @@ const getGroupEvents = (events) => {
     }
 }
 
-export const createNewEvent = (event, eventId) => async (dispatch) => {
-    const res = await csrfFetch(`/api/events/${eventId}`, {
+export const createNewEvent = (event) => async (dispatch) => {
+    const res = await csrfFetch(`/api/events`, {
         method: 'POST',
         body: JSON.stringify(event)
     })
