@@ -13,7 +13,7 @@ export default function GroupEvents() {
 
     const sortedEvents = [[], []]
     const date = new Date()
-
+console.log(events)
     if (events) {
 
         Object.values(events).map((event) => {
@@ -35,13 +35,16 @@ export default function GroupEvents() {
 
     const asyncFunc = async () => {
 
-        dispatch(groupEventsActions.loadGroupEvents(params.id)).catch(async res => {
+        dispatch(groupEventsActions.loadGroupEvents(params.id)).then(async (res) => {
+            const data = await res
+            console.log(data)
+            setEvents(data)
+        }).catch(async res => {
             const data = await res.json()
             if (data && data.message) {
                 return console.log(data.message)
             }
             console.log(data)
-            setEvents(data)
         })
 
     }

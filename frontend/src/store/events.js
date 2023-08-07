@@ -169,7 +169,7 @@ export const loadGroupEvents = (id) => async (dispatch) => {
         dispatch(getGroupEvents(normal))
         console.log(normal)
 
-    return res
+    return data
 }
 
 
