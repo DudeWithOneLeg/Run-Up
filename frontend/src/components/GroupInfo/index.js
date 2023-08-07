@@ -28,9 +28,9 @@ export default function GroupInfo() {
         dispatch(groupActions.loadGroup(params.id))
         dispatch(eventActions.loadGroupEvents(params.id)).catch(async (res) => {
             const data = await res.json()
-            if (data && (data.errors || data.message)) {
-                console.log(data)
-                console.log(data.message)
+            if (data && data.errors) {
+                return console.log(data)
+
             }
         })
         const groupId = params.id

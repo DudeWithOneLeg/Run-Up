@@ -54,17 +54,7 @@ export default function GroupForm() {
 
         console.log("FINAL GROUP PARSE", group)
 
-        dispatch(groupActions.requestNewGroup(group)).catch(async (res) => {
-
-            const data = await res.json()
-            if (data && data.errors) {
-                console.log("DATA", data)
-                return setErrors(data.errors);
-            }
-
-            console.log('NEW GROUP',newGroup)
-
-        }).then(() => {
+        dispatch(groupActions.requestNewGroup(group)).then(() => {
             if (!newGroup.id) return
             const image = {
             url: imgUrl,
@@ -75,6 +65,16 @@ export default function GroupForm() {
             const id = newGroup.id
             dispatch(groupActions.postImage(id, image))
             history.push(`/groups/${newGroup.id}`)
+        }).catch(async (res) => {
+
+            const data = await res.json()
+            if (data && data.errors) {
+                console.log("DATA", data)
+                return setErrors(data.errors);
+            }
+
+            console.log('NEW GROUP',newGroup)
+
         })
 
 
