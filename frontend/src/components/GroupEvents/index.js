@@ -35,10 +35,15 @@ export default function GroupEvents() {
 
     const asyncFunc = async () => {
 
-        const res = dispatch(groupEventsActions.loadGroupEvents(params.id))
-        const data = await res
-        setEvents(data)
-        console.log(data)
+        dispatch(groupEventsActions.loadGroupEvents(params.id)).catch(async res => {
+            const data = await res.json()
+            if (data && data.message) {
+                return console.log(data.message)
+            }
+            console.log(data)
+            setEvents(data)
+        })
+
     }
 
     if (!events) return null

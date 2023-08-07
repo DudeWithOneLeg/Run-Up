@@ -159,15 +159,17 @@ export const loadGroupEvents = (id) => async (dispatch) => {
     const res = await csrfFetch(`/api/groups/${id}/events`)
 
     const data = await res.json()
-    if (res.ok) {
+    if (data && data.errors) {
+        return console.log(data)
+    }
         let normal = {}
         data.map((event) => {
             return normal[event.id] = event
         })
         dispatch(getGroupEvents(normal))
         console.log(normal)
-    }
-    return data
+
+    return res
 }
 
 
