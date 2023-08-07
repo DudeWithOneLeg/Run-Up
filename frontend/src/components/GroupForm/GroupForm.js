@@ -54,7 +54,9 @@ export default function GroupForm() {
 
         console.log("FINAL GROUP PARSE", group)
 
-        dispatch(groupActions.requestNewGroup(group)).then(() => {
+        dispatch(groupActions.requestNewGroup(group)).then(async(res) => {
+            const data = await res
+            console.log(data)
             if (!newGroup.id) return
             const image = {
             url: imgUrl,
