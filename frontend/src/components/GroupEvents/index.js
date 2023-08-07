@@ -13,7 +13,6 @@ export default function GroupEvents() {
 
     const sortedEvents = [[], []]
     const date = new Date()
-console.log(events)
     if (events) {
 
         Object.values(events).map((event) => {
@@ -37,14 +36,12 @@ console.log(events)
 
         dispatch(groupEventsActions.loadGroupEvents(params.id)).then(async (res) => {
             const data = await res
-            console.log(data)
             setEvents(data)
         }).catch(async res => {
             const data = await res.json()
             if (data && data.message) {
                 return console.log(data.message)
             }
-            console.log(data)
         })
 
     }
@@ -74,7 +71,9 @@ console.log(events)
                         onClick={() => {
                             history.push(`/events/${event.id}`)
                         }}
-                        className='group-events-card more-info'>
+                        className='group-events-card more-info'
+                        key={event.id}
+                        >
                         <div id='group-events-card-inner-info'>
                             <img className='group-events-img' src={event.previewImage} alt=''></img>
                             <div id='group-events-card-info'>
@@ -111,7 +110,9 @@ console.log(events)
                         onClick={() => {
                             history.push(`/events/${event.id}`)
                         }}
-                        className='group-events-card more-info'>
+                        className='group-events-card more-info'
+                        key={event.id}
+                        >
                         <div id='group-events-card-inner-info'>
                             <img className='group-events-img' src={event.previewImage} alt=''></img>
                             <div id='group-events-card-info'>

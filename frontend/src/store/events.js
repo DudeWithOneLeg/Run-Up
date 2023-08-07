@@ -167,7 +167,6 @@ export const loadGroupEvents = (id) => async (dispatch) => {
             return normal[event.id] = event
         })
         dispatch(getGroupEvents(normal))
-        console.log(normal)
 
     return data
 }
