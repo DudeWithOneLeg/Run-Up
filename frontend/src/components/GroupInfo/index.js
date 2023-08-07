@@ -78,14 +78,14 @@ export default function GroupInfo() {
                                         <p className='bold'>Ogranized by {group.Organizer.firstName} {group.Organizer.lastName}</p>
                                     </div>
 
+                                    {
+                                        !currentUser && <div><button
+                                        className="group-buttons"
+                                        onClick={() => alert('Feature coming soon!')}
+                                    >Join this group</button></div>
+                                    }
                                     { currentUser &&
                                          <div id='organizer-buttons-container'>
-                                        {
-                                            currentUser && (!members[currentUser.id]) && <button
-                                            className="group-buttons"
-                                            onclick={() => dispatch(memberActions.requestMembership(group.id))}
-                                        >Join this group</button>
-                                        }
 
                                         {
                                             currentUser && ((requestedMember && requestedMember.status === 'pending')) || (members[currentUser.id] && members[currentUser.id].Membership.status === 'pending') && <p>Requested Membership</p>
