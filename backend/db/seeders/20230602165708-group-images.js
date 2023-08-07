@@ -440,7 +440,7 @@ module.exports = {
     },
     {
       groupId: 85,
-      url: 'https://media.istockphoto.com/id/1061713622/photo/full-length-of-marathon-runners-having-a-race-through-nature.jpg?s=612x612&w=0&k=20&c=D8Eu5HmcZYAIbDDrePfVCGBXCNoaDoSzmjjA02gKi7E=',
+      url: 'https://st2.depositphotos.com/3343629/12151/i/450/depositphotos_121510712-stock-photo-competition-of-five-runners-athletes.jpg',
       preview: true
     },
     {
@@ -455,7 +455,7 @@ module.exports = {
     },
     {
       groupId: 88,
-      url: 'https://i.guim.co.uk/img/static/sys-images/Guardian/Pix/pictures/2013/5/7/1367930926942/A-running-group-training--008.jpg?width=465&dpr=1&s=none',
+      url: 'https://st2.depositphotos.com/3343629/12151/i/450/depositphotos_121510712-stock-photo-competition-of-five-runners-athletes.jpg',
       preview: true
     },
     {
@@ -490,7 +490,7 @@ module.exports = {
     },
     {
       groupId: 95,
-      url: 'https://6amcity.brightspotcdn.com/dims4/default/5c94bdb/2147483647/strip/true/crop/1080x608+0+236/resize/1000x563!/quality/90/?url=https%3A%2F%2Fk1-prod-sixam-city.s3.amazonaws.com%2Fbrightspot%2Fec%2Fc5%2F1aa5bfa2c2e8d8f8e813c3dbef19%2F222710284-507429097192863-2181088599597377870-n.jpg',
+      url: 'https://st2.depositphotos.com/3343629/12151/i/450/depositphotos_121510712-stock-photo-competition-of-five-runners-athletes.jpg',
       preview: true
     },
     {
@@ -500,12 +500,12 @@ module.exports = {
     },
     {
       groupId: 97,
-      url: 'https://static.wixstatic.com/media/e274f7_9ca75b37067249e8ad98d431ace044cd~mv2.jpeg/v1/fill/w_560,h_400,al_c,q_80,usm_0.66_1.00_0.01,enc_auto/e274f7_9ca75b37067249e8ad98d431ace044cd~mv2.jpeg',
+      url: 'https://st2.depositphotos.com/3343629/12151/i/450/depositphotos_121510712-stock-photo-competition-of-five-runners-athletes.jpg',
       preview: true
     },
     {
       groupId: 98,
-      url: 'https://6amcity.brightspotcdn.com/dims4/default/c3be78f/2147483647/strip/true/crop/1440x811+0+140/resize/1000x563!/quality/90/?url=https%3A%2F%2Fk1-prod-sixam-city.s3.amazonaws.com%2Fbrightspot%2Fe2%2F92%2F881b8a8e4e28862b232c190ff243%2Ffleet-feet-run-club.jpeg',
+      url: 'https://st2.depositphotos.com/3343629/12151/i/450/depositphotos_121510712-stock-photo-competition-of-five-runners-athletes.jpg',
       preview: true
     },
     {
@@ -531,9 +531,7 @@ module.exports = {
      * await queryInterface.bulkDelete('People', null, {});
      */
     await queryInterface.bulkDelete(options, {
-      id: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 79, 80,
-        81, 82, 83, 84, 85, 86, 87, 88, 89, 90,
-        91, 92, 93, 94, 95, 96, 97, 98, 99, 100]
+      id: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 79, 80, 81, 82, 83, 84, 85, 86, 87, 88, 89, 90, 91, 92, 93, 94, 95, 96, 97, 98, 99, 100]
     })
   }
 };
