@@ -74,7 +74,7 @@ const [capacity, setCapacity] = useState(event.capacity ? event.capacity : '')
 
         console.log('new event',newEvent)
         dispatch(eventActions.requestUpdateEvent(newEvent, event.id)).then(() => {
-            
+
         dispatch(eventActions.loadEvents())
 
         history.push(`/events/${event.id}`)
@@ -99,6 +99,12 @@ const [capacity, setCapacity] = useState(event.capacity ? event.capacity : '')
         event.startDate = event.startDate.split(':00.000Z').join('')
         event.endDate = event.endDate.split(':00.000Z').join('')
     }
+
+    if (!user || user.id !== group.organizerId) {
+        history.push('/')
+    }
+
+    console.log(user.id, group.organizerId)
 
     return (
         <div className="event-form-container">

@@ -11,9 +11,6 @@ export default function UpdateGroupForm() {
     const params = useParams()
     const user = useSelector(state => state.session.user)
 
-    if (!user) {
-        history.push('/')
-    }
 
     //dispatch old group
     useEffect(() => {
@@ -74,9 +71,9 @@ export default function UpdateGroupForm() {
 
         //parse public or private useState
         // if (publicOrPrivate === 'Private') {
-        //     setPublicOrPrivate(true)
-        // }
-        // else {
+            //     setPublicOrPrivate(true)
+            // }
+            // else {
         //     setPublicOrPrivate(false)
         // }
 
@@ -137,12 +134,12 @@ export default function UpdateGroupForm() {
 
         // })
         //     const image = {
-        //     url: imgUrl,
-        //     preview: true
-        // }
-        // const id = groupState.id
-        // if (id) {
-        //     dispatch(groupActions.postImage(id, image))
+            //     url: imgUrl,
+            //     preview: true
+            // }
+            // const id = groupState.id
+            // if (id) {
+                //     dispatch(groupActions.postImage(id, image))
         // }
 
 
@@ -153,6 +150,9 @@ export default function UpdateGroupForm() {
 
     if (!oldGroup || !user) {
         return null
+    }
+    if (!user || user.id !== oldGroup.organizerId) {
+        history.push('/')
     }
     return (
         <div className="group-form-container">
