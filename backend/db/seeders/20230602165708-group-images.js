@@ -90,7 +90,7 @@ module.exports = {
     },
     {
       groupId: 15,
-      url: 'https://media.istockphoto.com/id/1061713622/photo/full-length-of-marathon-runners-having-a-race-through-nature.jpg?s=612x612&w=0&k=20&c=D8Eu5HmcZYAIbDDrePfVCGBXCNoaDoSzmjjA02gKi7E=',
+      url: 'https://www.statecollege.com/wp-content/uploads/2021/01/1476531_38093.jpg',
       preview: true
     },
     {
@@ -140,7 +140,7 @@ module.exports = {
     },
     {
       groupId: 25,
-      url: 'https://6amcity.brightspotcdn.com/dims4/default/5c94bdb/2147483647/strip/true/crop/1080x608+0+236/resize/1000x563!/quality/90/?url=https%3A%2F%2Fk1-prod-sixam-city.s3.amazonaws.com%2Fbrightspot%2Fec%2Fc5%2F1aa5bfa2c2e8d8f8e813c3dbef19%2F222710284-507429097192863-2181088599597377870-n.jpg',
+      url: 'https://www.statecollege.com/wp-content/uploads/2021/01/1476531_38093.jpg',
       preview: true
     },
     {
@@ -150,12 +150,12 @@ module.exports = {
     },
     {
       groupId: 27,
-      url: 'https://static.wixstatic.com/media/e274f7_9ca75b37067249e8ad98d431ace044cd~mv2.jpeg/v1/fill/w_560,h_400,al_c,q_80,usm_0.66_1.00_0.01,enc_auto/e274f7_9ca75b37067249e8ad98d431ace044cd~mv2.jpeg',
+      url: 'https://www.statecollege.com/wp-content/uploads/2021/01/1476531_38093.jpg',
       preview: true
     },
     {
       groupId: 28,
-      url: 'https://6amcity.brightspotcdn.com/dims4/default/c3be78f/2147483647/strip/true/crop/1440x811+0+140/resize/1000x563!/quality/90/?url=https%3A%2F%2Fk1-prod-sixam-city.s3.amazonaws.com%2Fbrightspot%2Fe2%2F92%2F881b8a8e4e28862b232c190ff243%2Ffleet-feet-run-club.jpeg',
+      url: 'https://www.statecollege.com/wp-content/uploads/2021/01/1476531_38093.jpg',
       preview: true
     },
     {
@@ -215,7 +215,7 @@ module.exports = {
     },
     {
       groupId: 40,
-      url: 'https://static.wixstatic.com/media/1273a9_03498a8ec93d45e89d089e2aa19575f3~mv2.jpg/v1/fill/w_640,h_400,al_c,q_80,usm_0.66_1.00_0.01,enc_auto/1273a9_03498a8ec93d45e89d089e2aa19575f3~mv2.jpg',
+      url: 'https://www.statecollege.com/wp-content/uploads/2021/01/1476531_38093.jpg',
       preview: true
     },
     {
