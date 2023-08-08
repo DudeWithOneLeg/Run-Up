@@ -152,8 +152,8 @@ export default function UpdateGroupForm() {
         return null
     }
     //fiiixxx
-    if (!user || user.id !== oldGroup.organizerId) {
-        console.log(user.id, oldGroup.organizerId)
+    if (!user || user.id !== group.organizerId) {
+        console.log(user.id, group.organizerId)
         history.push('/')
     }
     return (

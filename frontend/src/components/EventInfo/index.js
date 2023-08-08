@@ -145,7 +145,7 @@ export default function EventInfo() {
 
 
 
-                            {user && members && members[user.id] && (members[user.id].Membership.status === 'co-host' || group.organizerId === user.id) && <div>
+                            {group.organizerId === user.id && <div>
                                 <button className='group-buttons'
                                     onClick={() => {
                                         dispatch(groupActions.loadGroup(event.groupId)).then(() => history.push(`/events/${event.id}/edit`))
@@ -155,7 +155,7 @@ export default function EventInfo() {
                                 <OpenModalButton
                                     id='login'
                                     buttonText="Delete"
-                                    modalComponent={<DeleteEventModal />} />
+                                    modalComponent={<DeleteEventModal eventId={event.id}/>} />
                             </div>}
 
                         </div>

@@ -216,6 +216,7 @@ const handleSumbit = async (e) => {
                     <p>
                         What is the price for your event?
                     </p>
+                    {errors.capacity && <p className="errors">{errors.capacity}</p>}
                     <div>
                         <input
                             className='event-input'
