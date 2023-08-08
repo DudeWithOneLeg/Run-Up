@@ -125,7 +125,7 @@ const { closeModal } = useModal();
         </label>
         {errors.confirmPassword && <p className="errors">{errors.confirmPassword}</p>}
         <button
-        disabled={!email || !username || !firstName || !lastName || !password || !confirmPassword}
+        disabled={!email || !username || !firstName || !lastName || !password || !confirmPassword || username.length < 4 || password.length < 6}
         id={!email || !username || !firstName || !lastName || !password || !confirmPassword || username.length < 4 || password.length < 6 ? 'disabled-signup-button' : 'signup-button'}
         type="submit">Sign Up</button>
       </form>

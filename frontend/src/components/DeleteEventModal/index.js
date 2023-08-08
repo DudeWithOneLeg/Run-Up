@@ -5,7 +5,7 @@ import { useHistory } from "react-router-dom";
 import './index.css'
 
 
-export default function DeleteEventModal() {
+export default function DeleteEventModal({eventId}) {
     const dispatch = useDispatch()
     const { closeModal } = useModal();
     const history = useHistory()
@@ -22,7 +22,7 @@ export default function DeleteEventModal() {
             id='confirm'
                 onClick={(e) => {
                     e.preventDefault()
-                    dispatch(eventActions.removeEvent(event.id)).then(closeModal)
+                    dispatch(eventActions.removeEvent(eventId)).then(closeModal)
                     history.push('/events/1/10')
 
                 }}
