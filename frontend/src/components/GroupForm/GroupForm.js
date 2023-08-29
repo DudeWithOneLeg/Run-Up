@@ -131,6 +131,7 @@ export default function GroupForm() {
                     Choose a name that will give people a clear idea of what the group is about.
                     Feel free to get creative! You can edit this later if you change your mind.
                 </p>
+                {errors.name && <p className="errors">{errors.name}</p>}
                 <input
                 id='group-name'
                 className='group-input'
